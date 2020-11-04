@@ -6,7 +6,6 @@ use Ramsey\Uuid\Uuid;
 use Spatie\Timber\Messages\ClearScreenPayload;
 use Spatie\Timber\Messages\ColorPayload;
 use Spatie\Timber\Messages\LogPayload;
-use Spatie\Timber\Messages\Payload;
 use Spatie\Timber\Messages\SizePayload;
 
 class Timber

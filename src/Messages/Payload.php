@@ -2,9 +2,6 @@
 
 namespace Spatie\Timber\Messages;
 
-use Symfony\Component\VarDumper\Cloner\VarCloner;
-use Symfony\Component\VarDumper\Dumper\HtmlDumper;
-
 abstract class Payload
 {
     abstract public function getType(): string;
@@ -29,6 +26,4 @@ abstract class Payload
     {
         return json_encode($this->toArray());
     }
-
-
 }
