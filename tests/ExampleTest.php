@@ -1,6 +1,6 @@
 <?php
 
-namespace Spatie\Skeleton\Tests;
+namespace Spatie\Timber\Tests;
 
 use PHPUnit\Framework\TestCase;
 
