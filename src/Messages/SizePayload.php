@@ -2,14 +2,14 @@
 
 namespace Spatie\Timber\Messages;
 
-class ColorMessage extends Message
+class SizePayload extends Payload
 {
     /** @var mixed */
-    private $color;
+    protected $size;
 
-    public function __construct(string $color)
+    public function __construct(string $size)
     {
-        $this->color = $color;
+        $this->size = $size;
     }
 
     public function getType(): string
@@ -20,7 +20,7 @@ class ColorMessage extends Message
     public function getContent(): array
     {
         return [
-            'color' => json_encode($this->color),
+            'color' => json_encode($this->size),
         ];
     }
 }

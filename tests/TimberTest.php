@@ -3,6 +3,7 @@
 namespace Spatie\Timber\Tests;
 
 use PHPUnit\Framework\TestCase;
+use Spatie\Snapshots\Driver;
 use Spatie\Snapshots\MatchesSnapshots;
 use Spatie\Timber\Tests\TestClasses\FakeClient;
 use Spatie\Timber\Timber;
@@ -60,7 +61,7 @@ class TimberTest extends TestCase
     /** @test */
     public function it_can_send_a_color_and_a_size()
     {
-        $this->timber->send('test')->color('green')->size('big');
+        $this->timber->send('test', 'test2')->color('green')->size('big');
 
         $this->assertMatchesSnapshot($this->client->sentPayloads());
     }

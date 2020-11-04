@@ -3,65 +3,64 @@
 namespace Spatie\Timber;
 
 use Ramsey\Uuid\Uuid;
-use Spatie\Timber\Messages\ClearScreenMessage;
-use Spatie\Timber\Messages\ColorMessage;
-use Spatie\Timber\Messages\Message;
-use Spatie\Timber\Messages\SizeMessage;
+use Spatie\Timber\Messages\ClearScreenPayload;
+use Spatie\Timber\Messages\ColorPayload;
+use Spatie\Timber\Messages\LogPayload;
+use Spatie\Timber\Messages\Payload;
+use Spatie\Timber\Messages\SizePayload;
 
 class Timber
 {
     protected Client $client;
 
-    public string $chainUuid;
+    public string $uuid;
 
     public function __construct(Client $client, string $uuid = null)
     {
         $this->client = $client;
 
-        $this->chainUuid = $uuid ?? Uuid::uuid4()->toString();
+        $this->uuid = $uuid ?? Uuid::uuid4()->toString();
     }
 
     public function clearScreen(): self
     {
-        $message = new ClearScreenMessage();
+        $message = new ClearScreenPayload();
 
-        $this->sendMessages([$message]);
+        $this->sendRequest([$message]);
 
         return $this;
     }
 
     public function color(string $color): self
     {
-        $message = new ColorMessage($color);
+        $message = new ColorPayload($color);
 
-        $this->sendMessages([$message]);
+        $this->sendRequest([$message]);
 
         return $this;
     }
 
     public function size(string $size): self
     {
-        $message = new SizeMessage($size);
+        $message = new SizePayload($size);
 
-        $this->sendMessages([$message]);
+        $this->sendRequest([$message]);
 
         return $this;
     }
 
     public function send(...$arguments): self
     {
-        $messages = array_map(function($argument) {
-            return Message::createFromArgument($argument);
-        }, $arguments);
+        $payload = LogPayload::createForArguments($arguments);
 
-        return $this->sendMessages($messages);
+        return $this->sendRequest([$payload]);
     }
 
-    protected function sendMessages(array $messages): self
+    protected function sendRequest(array $payloads): self
     {
-        $payload = new Payload($this->chainUuid, $messages, );
+        $request = new Request($this->uuid, $payloads);
 
-        $this->client->send($payload);
+        $this->client->send($request);
 
         return $this;
     }

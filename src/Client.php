@@ -15,11 +15,11 @@ class Client
         $this->portNumber = $portNumber;
     }
 
-    public function send(Payload $payload)
+    public function send(Request $request)
     {
         $curlHandle = $this->getCurlHandle("{$this->baseUrl}:{$this->portNumber}");
 
-        curl_setopt($curlHandle, CURLOPT_POSTFIELDS, $payload->toJson());
+        curl_setopt($curlHandle, CURLOPT_POSTFIELDS, $request->toJson());
 
         curl_exec($curlHandle);
     }

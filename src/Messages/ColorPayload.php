@@ -2,14 +2,14 @@
 
 namespace Spatie\Timber\Messages;
 
-class JsonMessage extends Message
+class ColorPayload extends Payload
 {
     /** @var mixed */
-    private $value;
+    protected $color;
 
-    public function __construct($value)
+    public function __construct(string $color)
     {
-        $this->value = $value;
+        $this->color = $color;
     }
 
     public function getType(): string
@@ -20,7 +20,7 @@ class JsonMessage extends Message
     public function getContent(): array
     {
         return [
-            'value' => json_encode($this->value),
+            'color' => json_encode($this->color),
         ];
     }
 }

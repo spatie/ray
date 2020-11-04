@@ -2,9 +2,8 @@
 
 namespace Spatie\Timber\Messages;
 
-class ClearScreenMessage extends Message
+class ClearScreenPayload extends Payload
 {
-
     public function getType(): string
     {
         return 'clear_screen';

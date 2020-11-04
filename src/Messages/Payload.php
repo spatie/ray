@@ -3,9 +3,9 @@
 namespace Spatie\Timber\Messages;
 
 use Symfony\Component\VarDumper\Cloner\VarCloner;
-use Symfony\Component\VarDumper\Dumper\CliDumper;
+use Symfony\Component\VarDumper\Dumper\HtmlDumper;
 
-abstract class Message
+abstract class Payload
 {
     abstract public function getType(): string;
 
@@ -30,20 +30,5 @@ abstract class Message
         return json_encode($this->toArray());
     }
 
-    public static function createFromArgument($argument): Message
-    {
-        $cloner = new VarCloner();
 
-        $dumper = new CliDumper();
-
-        $clonedArgument = $cloner->cloneVar($argument);
-
-        $string = $dumper->dump($clonedArgument, true);
-
-        $string = rtrim($string, PHP_EOL);
-
-        $string = trim($string, '"');
-
-        return new LogMessage($string);
-    }
 }
