@@ -12,22 +12,30 @@ class LogPayload extends Payload
 
     public static function createForArguments(array $arguments): Payload
     {
+        $dumpedArguments = array_map(function ($argument) {
+            return self::convertToPrimitive($argument);
+        }, $arguments);
+
+        return new static($dumpedArguments);
+    }
+
+    protected static function convertToPrimitive($argument)
+    {
+        if (is_string($argument)) {
+            return $argument;
+        }
+
+        if (is_int($argument)) {
+            return $argument;
+        }
+
         $cloner = new VarCloner();
 
         $dumper = new HtmlDumper();
 
-        $dumpedArguments = array_map(function ($argument) use ($dumper, $cloner) {
-            $clonedArgument = $cloner->cloneVar($argument);
+        $clonedArgument = $cloner->cloneVar($argument);
 
-            $string = $dumper->dump($clonedArgument, true);
-
-            $string = rtrim($string, PHP_EOL);
-
-            return trim($string, '"');
-        }, $arguments);
-
-
-        return new static($dumpedArguments);
+        return $dumper->dump($clonedArgument, true);
     }
 
     public function __construct($values)
