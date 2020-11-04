@@ -2,8 +2,6 @@
 
 namespace Spatie\Timber;
 
-use Spatie\Timber\Messages\Message;
-
 class Client
 {
     protected string $baseUrl;
