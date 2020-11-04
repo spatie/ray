@@ -8,7 +8,7 @@ class Client
 
     protected int $portNumber;
 
-    public function __construct(string $baseUrl =  'http://localhost', int $portNumber = 23517)
+    public function __construct(string $baseUrl = 'http://localhost', int $portNumber = 23517)
     {
         $this->baseUrl = $baseUrl;
 

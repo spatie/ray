@@ -13,5 +13,4 @@ class ClearScreenPayload extends Payload
     {
         return [];
     }
-
 }
