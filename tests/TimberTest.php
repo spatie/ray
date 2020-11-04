@@ -65,4 +65,9 @@ class TimberTest extends TestCase
 
         $this->assertMatchesSnapshot($this->client->sentPayloads());
     }
+
+    public function it_has_a_helper_function()
+    {
+        $this->assertInstanceOf(Timber::class, timber());
+    }
 }

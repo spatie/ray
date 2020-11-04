@@ -15,9 +15,9 @@ class Timber
 
     public string $uuid;
 
-    public function __construct(Client $client, string $uuid = null)
+    public function __construct(Client $client = null, string $uuid = null)
     {
-        $this->client = $client;
+        $this->client = $client ?? new Client();
 
         $this->uuid = $uuid ?? Uuid::uuid4()->toString();
     }
@@ -51,6 +51,10 @@ class Timber
 
     public function send(...$arguments): self
     {
+        if (! count($arguments)) {
+            return $this;
+        }
+
         $payload = LogPayload::createForArguments($arguments);
 
         return $this->sendRequest([$payload]);
