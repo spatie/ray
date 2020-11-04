@@ -50,7 +50,7 @@ class Timber
 
     public function send(...$arguments): self
     {
-        $messages = array_map(function($argument) {
+        $messages = array_map(function ($argument) {
             return Message::createFromArgument($argument);
         }, $arguments);
 

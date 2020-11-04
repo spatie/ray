@@ -4,7 +4,6 @@ namespace Spatie\Timber\Messages;
 
 class ClearScreenMessage extends Message
 {
-
     public function getType(): string
     {
         return 'clear_screen';
@@ -14,5 +13,4 @@ class ClearScreenMessage extends Message
     {
         return [];
     }
-
 }

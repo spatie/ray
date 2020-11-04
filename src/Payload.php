@@ -19,7 +19,7 @@ class Payload
 
     public function toJson(): string
     {
-        $messages = array_map(function(Message $message) {
+        $messages = array_map(function (Message $message) {
             return $message->toArray();
         }, $this->messages);
 

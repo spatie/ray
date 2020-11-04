@@ -21,7 +21,7 @@ abstract class Message
         return [
             'type' => $this->getType(),
             'content' => $this->getContent(),
-            'frame' => $this->getFrame()
+            'frame' => $this->getFrame(),
         ];
     }
 
