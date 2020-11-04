@@ -16,7 +16,12 @@
         }
     ],
     "require": {
-        "php": "^7.4"
+        "php": "^7.4",
+        "ext-curl": "*",
+        "ext-json": "*",
+        "ramsey/uuid": "^4.1",
+        "spatie/phpunit-snapshot-assertions": "^4.2",
+        "symfony/var-dumper": "^5.1"
     },
     "require-dev": {
         "friendsofphp/php-cs-fixer": "^2.16",

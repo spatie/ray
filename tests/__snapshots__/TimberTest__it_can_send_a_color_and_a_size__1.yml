@@ -1,0 +1,3 @@
+- '{"chainUuid":"fakeUuid","messages":[{"type":"log","content":{"value":"test"},"frame":[]}]}'
+- '{"chainUuid":"fakeUuid","messages":[{"type":"json","content":{"color":"\"green\""},"frame":[]}]}'
+- '{"chainUuid":"fakeUuid","messages":[{"type":"json","content":{"color":"\"big\""},"frame":[]}]}'
