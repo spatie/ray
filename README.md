@@ -1,4 +1,4 @@
-# The PHP client
+# The Timber PHP client
 
 [![Latest Version on Packagist](https://img.shields.io/packagist/v/spatie/timber.svg?style=flat-square)](https://packagist.org/packages/spatie/timber)
 [![GitHub Tests Action Status](https://img.shields.io/github/workflow/status/spatie/timber/run-tests?label=tests)](https://github.com/spatie/timber/actions?query=workflow%3Arun-tests+branch%3Amaster)
