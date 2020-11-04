@@ -19,7 +19,7 @@ class Request
 
     public function toJson(): string
     {
-        $messages = array_map(function(Payload $payload) {
+        $messages = array_map(function (Payload $payload) {
             return $payload->toArray();
         }, $this->payloads);
 

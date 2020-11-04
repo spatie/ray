@@ -3,7 +3,6 @@
 namespace Spatie\Timber\Tests;
 
 use PHPUnit\Framework\TestCase;
-use Spatie\Snapshots\Driver;
 use Spatie\Snapshots\MatchesSnapshots;
 use Spatie\Timber\Tests\TestClasses\FakeClient;
 use Spatie\Timber\Timber;
