@@ -14,6 +14,11 @@ class Timber
 
     public string $uuid;
 
+    public static function create(Client $client = null, string $uuid = null): self
+    {
+        return new static($client, $uuid);
+    }
+
     public function __construct(Client $client = null, string $uuid = null)
     {
         $this->client = $client ?? new Client();
