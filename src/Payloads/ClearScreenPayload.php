@@ -1,6 +1,6 @@
 <?php
 
-namespace Spatie\Timber\Messages;
+namespace Spatie\Timber\Payloads;
 
 class ClearScreenPayload extends Payload
 {

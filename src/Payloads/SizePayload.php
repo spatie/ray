@@ -1,6 +1,6 @@
 <?php
 
-namespace Spatie\Timber\Messages;
+namespace Spatie\Timber\Payloads;
 
 class SizePayload extends Payload
 {

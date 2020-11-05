@@ -3,10 +3,10 @@
 namespace Spatie\Timber;
 
 use Ramsey\Uuid\Uuid;
-use Spatie\Timber\Messages\ClearScreenPayload;
-use Spatie\Timber\Messages\ColorPayload;
-use Spatie\Timber\Messages\LogPayload;
-use Spatie\Timber\Messages\SizePayload;
+use Spatie\Timber\Payloads\ClearScreenPayload;
+use Spatie\Timber\Payloads\ColorPayload;
+use Spatie\Timber\Payloads\LogPayload;
+use Spatie\Timber\Payloads\SizePayload;
 
 class Timber
 {

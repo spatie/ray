@@ -1,6 +1,6 @@
 <?php
 
-namespace Spatie\Timber\Messages;
+namespace Spatie\Timber\Payloads;
 
 use Symfony\Component\VarDumper\Cloner\VarCloner;
 use Symfony\Component\VarDumper\Dumper\HtmlDumper;

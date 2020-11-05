@@ -2,7 +2,7 @@
 
 namespace Spatie\Timber;
 
-use Spatie\Timber\Messages\Message;
+use Spatie\Timber\Payloads\Message;
 
 class Payload
 {
