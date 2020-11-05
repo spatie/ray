@@ -2,8 +2,8 @@
 
 namespace Spatie\Timber\Payloads;
 
-use Spatie\Timber\Origin\Origin;
 use Spatie\Timber\Origin\DefaultOriginFactory;
+use Spatie\Timber\Origin\Origin;
 
 abstract class Payload
 {
