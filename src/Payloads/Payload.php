@@ -7,7 +7,7 @@ use Spatie\Timber\Origin\Origin;
 
 abstract class Payload
 {
-    protected static string $originFactoryClass = DefaultOriginFactory::class;
+    public static string $originFactoryClass = DefaultOriginFactory::class;
 
     abstract public function getType(): string;
 

@@ -4,8 +4,11 @@
 [![GitHub Tests Action Status](https://img.shields.io/github/workflow/status/spatie/timber/run-tests?label=tests)](https://github.com/spatie/timber/actions?query=workflow%3Arun-tests+branch%3Amaster)
 [![Total Downloads](https://img.shields.io/packagist/dt/spatie/timber.svg?style=flat-square)](https://packagist.org/packages/spatie/timber)
 
+This package can be used to send item to Timber. Using the `send` method you can send anything you want to be displayed.
 
-This is where your description should go. Try and limit it to a paragraph or two. Consider adding a small example.
+```php
+\Spatie\Timber\Timber::create()->send('a string', ['an array'], new MyClass())
+```
 
 ## Support us
 
@@ -25,9 +28,36 @@ composer require spatie/timber
 
 ## Usage
 
-``` php
-$skeleton = new Spatie\Timber();
-echo $skeleton->echoPhrase('Hello, Spatie!');
+You can use `send` method you can send anything you want to be displayed.
+
+```php
+\Spatie\Timber\Timber::create()->send('a string', ['an array'], new MyClass())
+```
+
+### Setting the size and color
+
+You can use `color` and `size` to format a thing displayed in Timber.
+
+```php
+\Spatie\Timber\Timber::create()->send('a large green string')->color('green')->size('lg')
+```
+
+### Clear screen
+
+You can use `clearScreen` to clear the screen in Timber.
+
+```php
+\Spatie\Timber\Timber::create()->clearScreen())
+```
+
+### Customizing the endpoint
+
+You can use `clearScreen` to clear the screen in Timber.
+
+```php
+$client = new \Spatie\Timber\Client('https://otherdomain.com', $portNumber)
+
+\Spatie\Timber\Timber::create($client)->clearScreen())
 ```
 
 ## Testing
