@@ -23,27 +23,27 @@ class Timber
 
     public function clearScreen(): self
     {
-        $message = new ClearScreenPayload();
+        $payload = new ClearScreenPayload();
 
-        $this->sendRequest([$message]);
+        $this->sendRequest([$payload]);
 
         return $this;
     }
 
     public function color(string $color): self
     {
-        $message = new ColorPayload($color);
+        $payload = new ColorPayload($color);
 
-        $this->sendRequest([$message]);
+        $this->sendRequest([$payload]);
 
         return $this;
     }
 
     public function size(string $size): self
     {
-        $message = new SizePayload($size);
+        $payload = new SizePayload($size);
 
-        $this->sendRequest([$message]);
+        $this->sendRequest([$payload]);
 
         return $this;
     }
