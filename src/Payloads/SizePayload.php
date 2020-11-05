@@ -14,13 +14,13 @@ class SizePayload extends Payload
 
     public function getType(): string
     {
-        return 'json';
+        return 'size';
     }
 
     public function getContent(): array
     {
         return [
-            'color' => json_encode($this->size),
+            'size' => $this->size,
         ];
     }
 }

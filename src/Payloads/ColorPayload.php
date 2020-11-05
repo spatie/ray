@@ -14,13 +14,13 @@ class ColorPayload extends Payload
 
     public function getType(): string
     {
-        return 'json';
+        return 'color';
     }
 
     public function getContent(): array
     {
         return [
-            'color' => json_encode($this->color),
+            'color' => $this->color,
         ];
     }
 }
