@@ -6,7 +6,6 @@ use PHPUnit\Framework\TestCase;
 use Spatie\Snapshots\MatchesSnapshots;
 use Spatie\Timber\Tests\TestClasses\FakeClient;
 use Spatie\Timber\Timber;
-use StdClass;
 
 class TimberTest extends TestCase
 {
