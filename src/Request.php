@@ -10,7 +10,6 @@ class Request
 
     protected array $payloads;
 
-
     public function __construct(string $uuid, array $payloads)
     {
         $this->uuid = $uuid;
