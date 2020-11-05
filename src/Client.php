@@ -2,6 +2,8 @@
 
 namespace Spatie\Timber;
 
+use Exception;
+
 class Client
 {
     protected string $baseUrl;
@@ -21,7 +23,11 @@ class Client
 
         curl_setopt($curlHandle, CURLOPT_POSTFIELDS, $request->toJson());
 
-        curl_exec($curlHandle);
+        try {
+            curl_exec($curlHandle);
+        } catch (Exception $exception) {
+            throw new Exception("Timber seems not be running at {$this->baseUrl}:{$this->portNumber}");
+        }
     }
 
     protected function getCurlHandle(string $fullUrl)
