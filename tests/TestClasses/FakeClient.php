@@ -7,19 +7,30 @@ use Spatie\Timber\Request;
 
 class FakeClient extends Client
 {
-    protected array $sentPayloads = [];
+    protected array $sentRequests = [];
 
     public function send(Request $request)
     {
-        $json = $request->toJson();
+        $requestProperties = $request->toArray();
 
-        $canonicalizedJson = preg_replace('/sf-dump-[0-9]{1,10}/', 'sf-dump-xxxxxxxxxx', $json);
+        foreach ($requestProperties['payloads'] as &$payload) {
+            $payload['origin']['file'] = $payload['origin']['file'] = str_replace($this->baseDirectory(), '', $payload['origin']['file']);
 
-        $this->sentPayloads[] = $canonicalizedJson;
+            if (isset($payload['content']['values'])) {
+                $payload['content']['values'] = preg_replace('/sf-dump-[0-9]{1,10}/', 'sf-dump-xxxxxxxxxx', $payload['content']['values']);
+            }
+        }
+
+        $this->sentRequests[] = $requestProperties;
     }
 
     public function sentPayloads(): array
     {
-        return $this->sentPayloads;
+        return $this->sentRequests;
+    }
+
+    protected function baseDirectory(): string
+    {
+        return str_replace("/tests/TestClasses", '', __DIR__);
     }
 }

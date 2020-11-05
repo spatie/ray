@@ -4,11 +4,11 @@ namespace Spatie\Timber\Origin;
 
 class Origin
 {
-    protected string $file;
+    public ?string $file;
 
-    protected int $lineNumber;
+    public ?int $lineNumber;
 
-    public function __construct(string $file, int $lineNumber)
+    public function __construct(?string $file, ?int $lineNumber)
     {
         $this->file = $file;
 

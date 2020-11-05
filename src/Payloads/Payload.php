@@ -27,7 +27,7 @@ abstract class Payload
         return json_encode($this->toArray());
     }
 
-    private function getOrigin(): Origin
+    protected function getOrigin(): Origin
     {
         /** @var \Spatie\Timber\Origin\OriginFactory $originFactory */
         $originFactory = new self::$originFactoryClass;
