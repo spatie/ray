@@ -34,14 +34,6 @@ class TimberTest extends TestCase
     }
 
     /** @test */
-    public function it_can_send_an_object_to_timber()
-    {
-        $this->timber->send(new StdClass());
-
-        $this->assertMatchesSnapshot($this->client->sentPayloads());
-    }
-
-    /** @test */
     public function it_can_send_an_array_to_timber()
     {
         $this->timber->send(['a' => 1, 'b' => 2]);

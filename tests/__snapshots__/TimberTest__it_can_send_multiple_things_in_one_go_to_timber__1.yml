@@ -1,1 +1,1 @@
-- '{"uuid":"fakeUuid","messages":[{"type":"log","content":{"values":["first","second","third"]},"frame":[]}]}'
+- '{"uuid":"fakeUuid","payloads":[{"type":"log","content":{"values":["first","second","third"]},"origin":{"file":"file","line_number":1}}],"origin":[]}'

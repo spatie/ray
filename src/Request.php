@@ -10,6 +10,8 @@ class Request
 
     protected array $payloads;
 
+    protected array $origin = [];
+
     public function __construct(string $uuid, array $payloads)
     {
         $this->uuid = $uuid;
@@ -19,13 +21,14 @@ class Request
 
     public function toJson(): string
     {
-        $messages = array_map(function (Payload $payload) {
+        $payloads = array_map(function (Payload $payload) {
             return $payload->toArray();
         }, $this->payloads);
 
         return json_encode([
             'uuid' => $this->uuid,
-            'messages' => $messages,
+            'payloads' => $payloads,
+            'origin' => $this->origin,
         ]);
     }
 }

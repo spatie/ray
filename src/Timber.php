@@ -64,7 +64,7 @@ class Timber
         return $this->sendRequest([$payload]);
     }
 
-    protected function sendRequest(array $payloads): self
+    public function sendRequest(array $payloads): self
     {
         $request = new Request($this->uuid, $payloads);
 
