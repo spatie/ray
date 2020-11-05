@@ -37,7 +37,7 @@ class Client
 
         curl_setopt($curlHandle, CURLOPT_USERAGENT, 'Timber 1.0');
         curl_setopt($curlHandle, CURLOPT_RETURNTRANSFER, true);
-        curl_setopt($curlHandle, CURLOPT_TIMEOUT, 10);
+        curl_setopt($curlHandle, CURLOPT_TIMEOUT, 2);
         curl_setopt($curlHandle, CURLOPT_SSL_VERIFYPEER, true);
         curl_setopt($curlHandle, CURLOPT_HTTP_VERSION, CURL_HTTP_VERSION_1_0);
         curl_setopt($curlHandle, CURLOPT_ENCODING, '');
