@@ -3,6 +3,7 @@
 namespace Spatie\Timber;
 
 use Ramsey\Uuid\Uuid;
+use Spatie\Timber\Concerns\TimberColors;
 use Spatie\Timber\Payloads\ClearScreenPayload;
 use Spatie\Timber\Payloads\ColorPayload;
 use Spatie\Timber\Payloads\LogPayload;
@@ -10,6 +11,8 @@ use Spatie\Timber\Payloads\SizePayload;
 
 class Timber
 {
+    use TimberColors;
+
     protected Client $client;
 
     public string $uuid;
