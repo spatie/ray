@@ -3,9 +3,9 @@
 namespace Spatie\Ray\Tests;
 
 use PHPUnit\Framework\TestCase;
-use Spatie\Snapshots\MatchesSnapshots;
-use Spatie\Ray\Tests\TestClasses\FakeClient;
 use Spatie\Ray\Ray;
+use Spatie\Ray\Tests\TestClasses\FakeClient;
+use Spatie\Snapshots\MatchesSnapshots;
 
 class RayTest extends TestCase
 {
