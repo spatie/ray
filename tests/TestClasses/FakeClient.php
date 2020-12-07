@@ -1,9 +1,9 @@
 <?php
 
-namespace Spatie\Timber\Tests\TestClasses;
+namespace Spatie\Ray\Tests\TestClasses;
 
-use Spatie\Timber\Client;
-use Spatie\Timber\Request;
+use Spatie\Ray\Client;
+use Spatie\Ray\Request;
 
 class FakeClient extends Client
 {

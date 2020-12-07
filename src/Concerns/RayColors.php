@@ -1,9 +1,9 @@
 <?php
 
-namespace Spatie\Timber\Concerns;
+namespace Spatie\Ray\Concerns;
 
-/** @mixin \Spatie\Timber\Timber */
-trait TimberColors
+/** @mixin \Spatie\Ray\Ray */
+trait RayColors
 {
     public function green(): self
     {

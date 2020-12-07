@@ -1,11 +1,11 @@
 {
-    "name": "spatie/timber",
+    "name": "spatie/ray",
     "description": "The PHP client",
     "keywords": [
         "spatie",
-        "timber"
+        "ray"
     ],
-    "homepage": "https://github.com/spatie/timber",
+    "homepage": "https://github.com/spatie/ray",
     "license": "MIT",
     "authors": [
         {
@@ -28,12 +28,12 @@
     },
     "autoload": {
         "psr-4": {
-            "Spatie\\Timber\\": "src"
+            "Spatie\\Ray\\": "src"
         }
     },
     "autoload-dev": {
         "psr-4": {
-            "Spatie\\Timber\\Tests\\": "tests"
+            "Spatie\\Ray\\Tests\\": "tests"
         }
     },
     "scripts": {

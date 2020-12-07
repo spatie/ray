@@ -1,9 +1,0 @@
--
-    uuid: fakeUuid
-    payloads: [{ type: log, content: { values: [test, test2] }, origin: { file: /tests/TimberTest.php, line_number: 54 } }]
--
-    uuid: fakeUuid
-    payloads: [{ type: color, content: { color: green }, origin: { file: /tests/TimberTest.php, line_number: 54 } }]
--
-    uuid: fakeUuid
-    payloads: [{ type: size, content: { size: big }, origin: { file: /tests/TimberTest.php, line_number: 54 } }]

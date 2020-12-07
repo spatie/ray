@@ -1,6 +1,6 @@
 <?php
 
-namespace Spatie\Timber\Origin;
+namespace Spatie\Ray\Origin;
 
 interface OriginFactory
 {

@@ -1,9 +1,9 @@
 <?php
 
-namespace Spatie\Timber\Payloads;
+namespace Spatie\Ray\Payloads;
 
-use Spatie\Timber\Origin\DefaultOriginFactory;
-use Spatie\Timber\Origin\Origin;
+use Spatie\Ray\Origin\DefaultOriginFactory;
+use Spatie\Ray\Origin\Origin;
 
 abstract class Payload
 {
@@ -29,7 +29,7 @@ abstract class Payload
 
     protected function getOrigin(): Origin
     {
-        /** @var \Spatie\Timber\Origin\OriginFactory $originFactory */
+        /** @var \Spatie\Ray\Origin\OriginFactory $originFactory */
         $originFactory = new self::$originFactoryClass;
 
         return $originFactory->getOrigin();

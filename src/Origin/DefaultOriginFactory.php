@@ -1,8 +1,8 @@
 <?php
 
-namespace Spatie\Timber\Origin;
+namespace Spatie\Ray\Origin;
 
-use Spatie\Timber\Timber;
+use Spatie\Ray\Ray;
 
 class DefaultOriginFactory implements OriginFactory
 {
@@ -20,7 +20,7 @@ class DefaultOriginFactory implements OriginFactory
     {
         $trace = array_reverse(debug_backtrace(DEBUG_BACKTRACE_IGNORE_ARGS));
 
-        $frameIndex = $this->getIndexOfTimberCall($trace);
+        $frameIndex = $this->getIndexOfRayCall($trace);
 
         if (! $frameIndex) {
             return null;
@@ -29,10 +29,10 @@ class DefaultOriginFactory implements OriginFactory
         return $trace[$frameIndex] ?? null;
     }
 
-    protected function getIndexOfTimberCall(array $stackTrace): ?int
+    protected function getIndexOfRayCall(array $stackTrace): ?int
     {
         foreach ($stackTrace as $index => $frame) {
-            if (($frame['class'] ?? '') === Timber::class) {
+            if (($frame['class'] ?? '') === Ray::class) {
                 return $index;
             }
 

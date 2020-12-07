@@ -1,6 +1,6 @@
 <?php
 
-namespace Spatie\Timber;
+namespace Spatie\Ray;
 
 use Exception;
 
@@ -26,7 +26,7 @@ class Client
         try {
             curl_exec($curlHandle);
         } catch (Exception $exception) {
-            throw new Exception("Timber seems not be running at {$this->baseUrl}:{$this->portNumber}");
+            throw new Exception("Ray seems not be running at {$this->baseUrl}:{$this->portNumber}");
         }
     }
 
@@ -41,7 +41,7 @@ class Client
             'Content-Type: application/json',
         ]));
 
-        curl_setopt($curlHandle, CURLOPT_USERAGENT, 'Timber 1.0');
+        curl_setopt($curlHandle, CURLOPT_USERAGENT, 'Ray 1.0');
         curl_setopt($curlHandle, CURLOPT_RETURNTRANSFER, true);
         curl_setopt($curlHandle, CURLOPT_TIMEOUT, 2);
         curl_setopt($curlHandle, CURLOPT_SSL_VERIFYPEER, true);

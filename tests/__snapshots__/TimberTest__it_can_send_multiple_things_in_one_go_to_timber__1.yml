@@ -1,3 +1,0 @@
--
-    uuid: fakeUuid
-    payloads: [{ type: log, content: { values: [first, second, third] }, origin: { file: /tests/TimberTest.php, line_number: 46 } }]

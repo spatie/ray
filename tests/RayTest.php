@@ -1,19 +1,19 @@
 <?php
 
-namespace Spatie\Timber\Tests;
+namespace Spatie\Ray\Tests;
 
 use PHPUnit\Framework\TestCase;
 use Spatie\Snapshots\MatchesSnapshots;
-use Spatie\Timber\Tests\TestClasses\FakeClient;
-use Spatie\Timber\Timber;
+use Spatie\Ray\Tests\TestClasses\FakeClient;
+use Spatie\Ray\Ray;
 
-class TimberTest extends TestCase
+class RayTest extends TestCase
 {
     use MatchesSnapshots;
 
     private FakeClient $client;
 
-    private Timber $timber;
+    private Ray $ray;
 
     public function setUp(): void
     {
@@ -21,29 +21,29 @@ class TimberTest extends TestCase
 
         $this->client = new FakeClient();
 
-        $this->timber = new Timber($this->client, 'fakeUuid');
+        $this->ray = new Ray($this->client, 'fakeUuid');
     }
 
     /** @test */
-    public function it_can_send_a_string_to_timber()
+    public function it_can_send_a_string_to_ray()
     {
-        $this->timber->send('a');
+        $this->ray->send('a');
 
         $this->assertMatchesSnapshot($this->client->sentPayloads());
     }
 
     /** @test */
-    public function it_can_send_an_array_to_timber()
+    public function it_can_send_an_array_to_ray()
     {
-        $this->timber->send(['a' => 1, 'b' => 2]);
+        $this->ray->send(['a' => 1, 'b' => 2]);
 
         $this->assertMatchesSnapshot($this->client->sentPayloads());
     }
 
     /** @test */
-    public function it_can_send_multiple_things_in_one_go_to_timber()
+    public function it_can_send_multiple_things_in_one_go_to_ray()
     {
-        $this->timber->send('first', 'second', 'third');
+        $this->ray->send('first', 'second', 'third');
 
         $this->assertMatchesSnapshot($this->client->sentPayloads());
     }
@@ -51,13 +51,13 @@ class TimberTest extends TestCase
     /** @test */
     public function it_can_send_a_color_and_a_size()
     {
-        $this->timber->send('test', 'test2')->color('green')->size('big');
+        $this->ray->send('test', 'test2')->color('green')->size('big');
 
         $this->assertMatchesSnapshot($this->client->sentPayloads());
     }
 
     public function it_has_a_helper_function()
     {
-        $this->assertInstanceOf(Timber::class, timber());
+        $this->assertInstanceOf(Ray::class, ray());
     }
 }

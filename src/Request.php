@@ -1,8 +1,8 @@
 <?php
 
-namespace Spatie\Timber;
+namespace Spatie\Ray;
 
-use Spatie\Timber\Payloads\Payload;
+use Spatie\Ray\Payloads\Payload;
 
 class Request
 {

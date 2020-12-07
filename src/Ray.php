@@ -1,17 +1,17 @@
 <?php
 
-namespace Spatie\Timber;
+namespace Spatie\Ray;
 
 use Ramsey\Uuid\Uuid;
-use Spatie\Timber\Concerns\TimberColors;
-use Spatie\Timber\Payloads\ClearScreenPayload;
-use Spatie\Timber\Payloads\ColorPayload;
-use Spatie\Timber\Payloads\LogPayload;
-use Spatie\Timber\Payloads\SizePayload;
+use Spatie\Ray\Concerns\RayColors;
+use Spatie\Ray\Payloads\ClearScreenPayload;
+use Spatie\Ray\Payloads\ColorPayload;
+use Spatie\Ray\Payloads\LogPayload;
+use Spatie\Ray\Payloads\SizePayload;
 
-class Timber
+class Ray
 {
-    use TimberColors;
+    use RayColors;
 
     protected Client $client;
 
