@@ -7,11 +7,11 @@ trait RaySizes
 {
     public function small(): self
     {
-        return $this->color('sm');
+        return $this->size('sm');
     }
 
     public function large(): self
     {
-        return $this->color('lg');
+        return $this->size('lg');
     }
 }

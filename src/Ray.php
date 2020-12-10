@@ -21,6 +21,8 @@ class Ray
 
     public string $uuid;
 
+    protected $rayTimers;
+
     public static function create(Client $client = null, string $uuid = null): self
     {
         return new static($client, $uuid);
@@ -81,6 +83,11 @@ class Ray
         $this->sendRequest([$payload]);
 
         return $this;
+    }
+
+    public function time(): self
+    {
+
     }
 
     public function send(...$arguments): self
