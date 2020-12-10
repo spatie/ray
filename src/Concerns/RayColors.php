@@ -25,8 +25,13 @@ trait RayColors
         return $this->color('purple');
     }
 
+    public function blue(): self
+    {
+        return $this->color('blue');
+    }
+
     public function gray(): self
     {
-        return $this->color('grey');
+        return $this->color('gray');
     }
 }
