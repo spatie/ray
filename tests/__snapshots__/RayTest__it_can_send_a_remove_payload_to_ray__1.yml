@@ -1,0 +1,3 @@
+-
+    uuid: fakeUuid
+    payloads: [{ type: remove, content: {  }, origin: { file: /tests/RayTest.php, line_number: 75 } }]

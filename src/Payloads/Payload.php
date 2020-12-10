@@ -11,7 +11,10 @@ abstract class Payload
 
     abstract public function getType(): string;
 
-    abstract public function getContent(): array;
+    public function getContent(): array
+    {
+        return [];
+    }
 
     public function toArray(): array
     {

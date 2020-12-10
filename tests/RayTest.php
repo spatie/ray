@@ -60,4 +60,20 @@ class RayTest extends TestCase
     {
         $this->assertInstanceOf(Ray::class, ray());
     }
+
+    /** @test */
+    public function it_can_send_a_hide_payload_to_ray()
+    {
+        $this->ray->hide();
+
+        $this->assertMatchesSnapshot($this->client->sentPayloads());
+    }
+
+    /** @test */
+    public function it_can_send_a_remove_payload_to_ray()
+    {
+        $this->ray->remove();
+
+        $this->assertMatchesSnapshot($this->client->sentPayloads());
+    }
 }

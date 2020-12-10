@@ -6,8 +6,10 @@ use Ramsey\Uuid\Uuid;
 use Spatie\Ray\Concerns\RayColors;
 use Spatie\Ray\Concerns\RaySizes;
 use Spatie\Ray\Payloads\ColorPayload;
+use Spatie\Ray\Payloads\HidePayload;
 use Spatie\Ray\Payloads\LogPayload;
 use Spatie\Ray\Payloads\NewScreenPayload;
+use Spatie\Ray\Payloads\RemovePayload;
 use Spatie\Ray\Payloads\SizePayload;
 
 class Ray
@@ -57,6 +59,24 @@ class Ray
     public function size(string $size): self
     {
         $payload = new SizePayload($size);
+
+        $this->sendRequest([$payload]);
+
+        return $this;
+    }
+
+    public function remove(): self
+    {
+        $payload = new RemovePayload();
+
+        $this->sendRequest([$payload]);
+
+        return $this;
+    }
+
+    public function hide(): self
+    {
+        $payload = new HidePayload();
 
         $this->sendRequest([$payload]);
 
