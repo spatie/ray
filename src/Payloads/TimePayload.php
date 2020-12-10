@@ -27,7 +27,7 @@ class TimePayload extends Payload
         $periods = $stopwatchEvent->getPeriods();
 
         if ($lastPeriod = end($periods)) {
-            $this->timeSinceLastCall =  $lastPeriod->getDuration() ;
+            $this->timeSinceLastCall = $lastPeriod->getDuration() ;
             $this->maxMemoryUsageDuringTotalTime = $lastPeriod->getMemory();
         }
     }
