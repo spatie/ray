@@ -28,13 +28,17 @@ class TimePayload extends Payload
 
         if ($lastPeriod = end($periods)) {
             $this->timeSinceLastCall = $lastPeriod->getDuration() ;
-            $this->maxMemoryUsageDuringTotalTime = $lastPeriod->getMemory();
+            $this->maxMemoryUsageSinceLastCall = $lastPeriod->getMemory();
         }
     }
 
     public function concernsNewTimer(): self
     {
         $this->isNewTimer = true;
+        $this->totalTime = 0;
+        $this->maxMemoryUsageDuringTotalTime = 0;
+        $this->timeSinceLastCall = 0;
+        $this->maxMemoryUsageSinceLastCall = 0;
 
         return $this;
     }

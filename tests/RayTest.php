@@ -2,6 +2,7 @@
 
 namespace Spatie\Ray\Tests;
 
+use Illuminate\Support\Arr;
 use PHPUnit\Framework\TestCase;
 use Spatie\Ray\Ray;
 use Spatie\Ray\Tests\TestClasses\FakeClient;
@@ -82,15 +83,57 @@ class RayTest extends TestCase
     {
         $this->ray->time();
         $this->assertCount(1, $this->client->sentPayloads());
+        $this->assertTrue($this->getValueOfLastSentContent('is_new_timer'));
+        $this->assertEquals(0, $this->getValueOfLastSentContent('total_time'));
+        $this->assertEquals(0, $this->getValueOfLastSentContent('max_memory_usage_during_total_time'));
+        $this->assertEquals(0, $this->getValueOfLastSentContent('time_since_last_call'));
+        $this->assertEquals(0, $this->getValueOfLastSentContent('max_memory_usage_since_last_call'));
 
-        sleep(1);
+        usleep(1000);
 
         $this->ray->time();
         $this->assertCount(2, $this->client->sentPayloads());
+        $this->assertFalse($this->getValueOfLastSentContent('is_new_timer'));
+        $this->assertNotEquals(0, $this->getValueOfLastSentContent('total_time'));
+        $this->assertNotEquals(0, $this->getValueOfLastSentContent('max_memory_usage_during_total_time'));
+        $this->assertNotEquals(0, $this->getValueOfLastSentContent('time_since_last_call'));
+        $this->assertNotEquals(0, $this->getValueOfLastSentContent('max_memory_usage_since_last_call'));
+
+        usleep(1000);
+        $this->ray->time();
+        $this->assertCount(3, $this->client->sentPayloads());
+        $this->assertGreaterThan(
+            $this->getValueOfLastSentContent('time_since_last_call'),
+            $this->getValueOfLastSentContent('total_time'),
+    );
 
         $this->ray->stopTime();
 
         $this->ray->time();
-        dump($this->client->sentPayloads());
+        $this->assertTrue($this->getValueOfLastSentContent('is_new_timer'));
+        $this->assertEquals(0, $this->getValueOfLastSentContent('total_time'));
+        $this->assertEquals(0, $this->getValueOfLastSentContent('max_memory_usage_during_total_time'));
+        $this->assertEquals(0, $this->getValueOfLastSentContent('time_since_last_call'));
+        $this->assertEquals(0, $this->getValueOfLastSentContent('max_memory_usage_since_last_call'));
+    }
+
+    /** @test */
+    public function it_can_track_multiple_timers()
+    {
+        $this->ray->time('my-timer');
+        $this->assertEquals('my-timer', $this->getValueOfLastSentContent('name'));
+    }
+
+    protected function getValueOfLastSentContent(string $contentKey)
+    {
+        $payload = $this->client->sentPayloads();
+
+        if (! count($payload)) {
+            return null;
+        }
+
+        $lastPayload = end($payload);
+
+        return Arr::get($lastPayload, "payloads.0.content.{$contentKey}");
     }
 }

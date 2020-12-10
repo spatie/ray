@@ -91,7 +91,7 @@ class Ray
     public function time(string $stopwatchName = 'default'): self
     {
         if (! isset(static::$stopWatches[$stopwatchName])) {
-            $stopwatch = new Stopwatch();
+            $stopwatch = new Stopwatch(true);
             static::$stopWatches[$stopwatchName] = $stopwatch;
 
             $event = $stopwatch->start($stopwatchName);

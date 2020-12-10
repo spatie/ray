@@ -25,6 +25,7 @@
         "symfony/var-dumper": "^5.2"
     },
     "require-dev": {
+        "illuminate/support": "^8.18",
         "phpunit/phpunit": "^9.5"
     },
     "autoload": {
