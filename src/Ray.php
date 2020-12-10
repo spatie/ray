@@ -96,6 +96,7 @@ class Ray
 
             $event = $stopwatch->start($stopwatchName);
             $payload = new TimePayload($stopwatchName, $event);
+            $payload->concernsNewTimer();
 
             return $this->sendRequest([$payload]);
         }
