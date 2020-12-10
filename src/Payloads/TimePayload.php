@@ -16,7 +16,6 @@ class TimePayload extends Payload
     protected $timeSinceLastCall = 0;
     protected int $maxMemoryUsageSinceLastCall = 0;
 
-
     public function __construct(string $name, StopwatchEvent $stopwatchEvent)
     {
         $this->name = $name;
@@ -27,7 +26,7 @@ class TimePayload extends Payload
         $periods = $stopwatchEvent->getPeriods();
 
         if ($lastPeriod = end($periods)) {
-            $this->timeSinceLastCall =  $lastPeriod->getDuration() ;
+            $this->timeSinceLastCall = $lastPeriod->getDuration() ;
             $this->maxMemoryUsageDuringTotalTime = $lastPeriod->getMemory();
         }
     }
