@@ -49,8 +49,10 @@ class TimePayload extends Payload
         return [
             'name' => $this->name,
             'is_new_timer' => $this->isNewTimer,
+
             'total_time' => $this->totalTime,
             'max_memory_usage_during_total_time' => $this->maxMemoryUsageDuringTotalTime,
+
             'time_since_last_call' => $this->timeSinceLastCall,
             'max_memory_usage_since_last_call' => $this->maxMemoryUsageSinceLastCall,
         ];
