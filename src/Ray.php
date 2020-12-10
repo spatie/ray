@@ -87,7 +87,6 @@ class Ray
 
     public function time(): self
     {
-
     }
 
     public function send(...$arguments): self
