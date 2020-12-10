@@ -5,9 +5,9 @@ namespace Spatie\Ray;
 use Ramsey\Uuid\Uuid;
 use Spatie\Ray\Concerns\RayColors;
 use Spatie\Ray\Concerns\RaySizes;
-use Spatie\Ray\Payloads\NewScreenPayload;
 use Spatie\Ray\Payloads\ColorPayload;
 use Spatie\Ray\Payloads\LogPayload;
+use Spatie\Ray\Payloads\NewScreenPayload;
 use Spatie\Ray\Payloads\SizePayload;
 
 class Ray
