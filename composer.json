@@ -21,10 +21,11 @@
         "ext-json": "*",
         "ramsey/uuid": "^4.1",
         "spatie/phpunit-snapshot-assertions": "^4.2",
-        "symfony/var-dumper": "^5.1"
+        "symfony/stopwatch": "^5.2",
+        "symfony/var-dumper": "^5.2"
     },
     "require-dev": {
-        "phpunit/phpunit": "^9.3"
+        "phpunit/phpunit": "^9.5"
     },
     "autoload": {
         "psr-4": {

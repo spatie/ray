@@ -11,6 +11,8 @@ use Spatie\Ray\Payloads\LogPayload;
 use Spatie\Ray\Payloads\NewScreenPayload;
 use Spatie\Ray\Payloads\RemovePayload;
 use Spatie\Ray\Payloads\SizePayload;
+use Spatie\Ray\Payloads\TimePayload;
+use Symfony\Component\Stopwatch\Stopwatch;
 
 class Ray
 {
@@ -21,7 +23,8 @@ class Ray
 
     public string $uuid;
 
-    protected $rayTimers;
+    /** @var \Symfony\Component\Stopwatch\Stopwatch[] */
+    public static array $stopWatches = [];
 
     public static function create(Client $client = null, string $uuid = null): self
     {
@@ -85,9 +88,40 @@ class Ray
         return $this;
     }
 
-    public function time(): self
+    public function time(string $stopwatchName = 'default'): self
     {
+        if (! isset(static::$stopWatches[$stopwatchName])) {
+            $stopwatch = new Stopwatch();
+            static::$stopWatches[$stopwatchName] = $stopwatch;
 
+            $event = $stopwatch->start($stopwatchName);
+            $payload = new TimePayload($stopwatchName, $event);
+
+            return $this->sendRequest([$payload]);
+        }
+
+        $stopwatch = static::$stopWatches[$stopwatchName];
+        $event = $stopwatch->lap($stopwatchName);
+        $payload = new TimePayload($stopwatchName, $event);
+
+        return $this->sendRequest([$payload]);
+    }
+
+    public function stopTime(string $stopwatchName = ''): self
+    {
+        if ($stopwatchName === '') {
+            static::$stopWatches = [];
+
+            return $this;
+        }
+
+        if (isset(static::$stopWatches[$stopwatchName])) {
+            unset(static::$stopWatches[$stopwatchName]);
+
+            return $this;
+        }
+
+        return $this;
     }
 
     public function send(...$arguments): self

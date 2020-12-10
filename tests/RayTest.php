@@ -76,4 +76,21 @@ class RayTest extends TestCase
 
         $this->assertMatchesSnapshot($this->client->sentPayloads());
     }
+
+    /** @test */
+    public function it_can_measure_time()
+    {
+        $this->ray->time();
+        $this->assertCount(1, $this->client->sentPayloads());
+
+        sleep(1);
+
+        $this->ray->time();
+        $this->assertCount(2, $this->client->sentPayloads());
+
+        $this->ray->stopTime();
+
+        $this->ray->time();
+        dump($this->client->sentPayloads());
+    }
 }
