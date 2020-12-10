@@ -105,7 +105,7 @@ class RayTest extends TestCase
         $this->assertGreaterThan(
             $this->getValueOfLastSentContent('time_since_last_call'),
             $this->getValueOfLastSentContent('total_time'),
-    );
+        );
 
         $this->ray->stopTime();
 
