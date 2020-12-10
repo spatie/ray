@@ -4,7 +4,8 @@ namespace Spatie\Ray;
 
 use Ramsey\Uuid\Uuid;
 use Spatie\Ray\Concerns\RayColors;
-use Spatie\Ray\Payloads\ClearScreenPayload;
+use Spatie\Ray\Concerns\RaySizes;
+use Spatie\Ray\Payloads\NewScreenPayload;
 use Spatie\Ray\Payloads\ColorPayload;
 use Spatie\Ray\Payloads\LogPayload;
 use Spatie\Ray\Payloads\SizePayload;
@@ -12,6 +13,7 @@ use Spatie\Ray\Payloads\SizePayload;
 class Ray
 {
     use RayColors;
+    use RaySizes;
 
     protected Client $client;
 
@@ -29,13 +31,18 @@ class Ray
         $this->uuid = $uuid ?? Uuid::uuid4()->toString();
     }
 
-    public function clearScreen(): self
+    public function newScreen(string $name = ''): self
     {
-        $payload = new ClearScreenPayload();
+        $payload = new NewScreenPayload($name);
 
         $this->sendRequest([$payload]);
 
         return $this;
+    }
+
+    public function clearScreen()
+    {
+        return $this->newScreen();
     }
 
     public function color(string $color): self

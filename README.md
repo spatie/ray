@@ -47,7 +47,7 @@ You can use `color` and `size` to format a thing displayed in Ray.
 You can use `clearScreen` to clear the screen in Ray.
 
 ```php
-\Spatie\Ray\Ray::create()->clearScreen())
+\Spatie\Ray\Ray::create()->newScreen())
 ```
 
 ### Customizing the endpoint
@@ -57,7 +57,7 @@ You can use `clearScreen` to clear the screen in Ray.
 ```php
 $client = new \Spatie\Ray\Client('https://otherdomain.com', $portNumber)
 
-\Spatie\Ray\Ray::create($client)->clearScreen())
+\Spatie\Ray\Ray::create($client)->newScreen())
 ```
 
 ## Testing
