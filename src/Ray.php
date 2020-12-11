@@ -2,6 +2,7 @@
 
 namespace Spatie\Ray;
 
+use Closure;
 use Ramsey\Uuid\Uuid;
 use Spatie\Ray\Concerns\RayColors;
 use Spatie\Ray\Concerns\RaySizes;
@@ -11,7 +12,7 @@ use Spatie\Ray\Payloads\LogPayload;
 use Spatie\Ray\Payloads\NewScreenPayload;
 use Spatie\Ray\Payloads\RemovePayload;
 use Spatie\Ray\Payloads\SizePayload;
-use Spatie\Ray\Payloads\TimePayload;
+use Spatie\Ray\Payloads\MeasurePayload;
 use Symfony\Component\Stopwatch\Stopwatch;
 
 class Ray
@@ -88,14 +89,24 @@ class Ray
         return $this;
     }
 
-    public function time(string $stopwatchName = 'default'): self
+
+    /**
+     * @param string|callable $stopwatchName
+     *
+     * @return $this
+     */
+    public function measure($stopwatchName = 'default'): self
     {
+        if ($stopwatchName instanceof Closure) {
+            return $this->measureClosure($stopwatchName);
+        }
+
         if (! isset(static::$stopWatches[$stopwatchName])) {
             $stopwatch = new Stopwatch(true);
             static::$stopWatches[$stopwatchName] = $stopwatch;
 
             $event = $stopwatch->start($stopwatchName);
-            $payload = new TimePayload($stopwatchName, $event);
+            $payload = new MeasurePayload($stopwatchName, $event);
             $payload->concernsNewTimer();
 
             return $this->sendRequest([$payload]);
@@ -103,7 +114,22 @@ class Ray
 
         $stopwatch = static::$stopWatches[$stopwatchName];
         $event = $stopwatch->lap($stopwatchName);
-        $payload = new TimePayload($stopwatchName, $event);
+        $payload = new MeasurePayload($stopwatchName, $event);
+
+        return $this->sendRequest([$payload]);
+    }
+
+    protected function measureClosure(Closure $closure): self
+    {
+        $stopwatch = new Stopwatch(true);
+
+        $stopwatch->start('closure');
+
+        $closure();
+
+        $event = $stopwatch->stop('closure');
+
+        $payload = new MeasurePayload('closure', $event);
 
         return $this->sendRequest([$payload]);
     }

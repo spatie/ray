@@ -4,7 +4,7 @@ namespace Spatie\Ray\Payloads;
 
 use Symfony\Component\Stopwatch\StopwatchEvent;
 
-class TimePayload extends Payload
+class MeasurePayload extends Payload
 {
     protected string $name;
     protected bool $isNewTimer = false;
@@ -45,7 +45,7 @@ class TimePayload extends Payload
 
     public function getType(): string
     {
-        return 'time';
+        return 'measure';
     }
 
     public function getContent(): array
