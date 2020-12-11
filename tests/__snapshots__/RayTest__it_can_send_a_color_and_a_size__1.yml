@@ -1,9 +1,9 @@
 -
     uuid: fakeUuid
-    payloads: [{ type: log, content: { values: [test, test2] }, origin: { file: /tests/RayTest.php, line_number: 55 } }]
+    payloads: [{ type: log, content: { values: [test, test2] }, origin: { file: /tests/RayTest.php, line_number: 56 } }]
 -
     uuid: fakeUuid
-    payloads: [{ type: color, content: { color: green }, origin: { file: /tests/RayTest.php, line_number: 55 } }]
+    payloads: [{ type: color, content: { color: green }, origin: { file: /tests/RayTest.php, line_number: 56 } }]
 -
     uuid: fakeUuid
-    payloads: [{ type: size, content: { size: big }, origin: { file: /tests/RayTest.php, line_number: 55 } }]
+    payloads: [{ type: size, content: { size: big }, origin: { file: /tests/RayTest.php, line_number: 56 } }]

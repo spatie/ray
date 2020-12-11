@@ -4,6 +4,7 @@ namespace Spatie\Ray\Tests;
 
 use Illuminate\Support\Arr;
 use PHPUnit\Framework\TestCase;
+use Spatie\Backtrace\Frame;
 use Spatie\Ray\Ray;
 use Spatie\Ray\Tests\TestClasses\FakeClient;
 use Spatie\Snapshots\MatchesSnapshots;
@@ -138,6 +139,34 @@ class RayTest extends TestCase
         $this->assertNotEquals(0, $this->getValueOfLastSentContent('max_memory_usage_during_total_time'));
         $this->assertNotEquals(0, $this->getValueOfLastSentContent('time_since_last_call'));
         $this->assertNotEquals(0, $this->getValueOfLastSentContent('max_memory_usage_since_last_call'));
+    }
+
+    /** @test */
+    public function it_can_send_backtrace_to_ray()
+    {
+        $this->ray->trace();
+
+        $frames = $this->getValueOfLastSentContent('frames');
+
+        $this->assertGreaterThanOrEqual(10, count($frames));
+
+        $firstFrame = $frames[0];
+
+        $this->assertEquals('PHPUnit\Framework\TestCase', $firstFrame['class']);
+        $this->assertEquals('runTest', $firstFrame['method']);
+    }
+
+    /** @test */
+    public function it_can_send_backtrace_frames_starting_from_a_specific_frame()
+    {
+        $this->ray->trace(fn(Frame $frame) => $frame->class === 'PHPUnit\TextUI\TestRunner');
+
+        $frames = $this->getValueOfLastSentContent('frames');
+
+        $firstFrame = $frames[0];
+
+        $this->assertEquals('PHPUnit\TextUI\TestRunner', $firstFrame['class']);
+        $this->assertEquals('run', $firstFrame['method']);
     }
 
     protected function getValueOfLastSentContent(string $contentKey)

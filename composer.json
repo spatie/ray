@@ -20,6 +20,7 @@
         "ext-curl": "*",
         "ext-json": "*",
         "ramsey/uuid": "^4.1",
+        "spatie/backtrace": "^1.0",
         "spatie/phpunit-snapshot-assertions": "^4.2",
         "symfony/stopwatch": "^5.2",
         "symfony/var-dumper": "^5.2"

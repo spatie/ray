@@ -4,8 +4,10 @@ namespace Spatie\Ray;
 
 use Closure;
 use Ramsey\Uuid\Uuid;
+use Spatie\Backtrace\Backtrace;
 use Spatie\Ray\Concerns\RayColors;
 use Spatie\Ray\Concerns\RaySizes;
+use Spatie\Ray\Payloads\BacktracePayload;
 use Spatie\Ray\Payloads\ColorPayload;
 use Spatie\Ray\Payloads\HidePayload;
 use Spatie\Ray\Payloads\LogPayload;
@@ -114,6 +116,19 @@ class Ray
         $stopwatch = static::$stopWatches[$stopwatchName];
         $event = $stopwatch->lap($stopwatchName);
         $payload = new MeasurePayload($stopwatchName, $event);
+
+        return $this->sendRequest([$payload]);
+    }
+
+    public function trace(?Closure $startingFromFrame = null): self
+    {
+        $backtrace = Backtrace::create();
+
+        if($startingFromFrame){
+            $backtrace->startingFromFrame($startingFromFrame);
+        }
+
+        $payload = new BacktracePayload($backtrace->frames());
 
         return $this->sendRequest([$payload]);
     }
