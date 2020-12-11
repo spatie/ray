@@ -168,6 +168,14 @@ class RayTest extends TestCase
         $this->assertEquals('run', $firstFrame['method']);
     }
 
+    /** @test */
+    public function it_can_send_the_ban_payload()
+    {
+        $this->ray->ban();
+
+        $this->assertMatchesSnapshot($this->client->sentPayloads());
+    }
+
     protected function getValueOfLastSentContent(string $contentKey)
     {
         $payload = $this->client->sentPayloads();

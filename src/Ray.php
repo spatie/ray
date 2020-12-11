@@ -165,6 +165,13 @@ class Ray
         return $this;
     }
 
+    public function ban(): self
+    {
+        $this->send('🕶');
+
+        return $this;
+    }
+
     public function send(...$arguments): self
     {
         if (! count($arguments)) {
