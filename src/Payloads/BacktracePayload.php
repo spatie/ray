@@ -6,11 +6,11 @@ use Spatie\Backtrace\Frame;
 
 class BacktracePayload extends Payload
 {
-    private array $frames;
+    protected array $frames;
 
     public function __construct(array $frames)
     {
-        $this->frames = $frames;
+        $this->frames = $this->removeRayFrames($frames);
     }
 
     public function getType(): string
@@ -20,33 +20,38 @@ class BacktracePayload extends Payload
 
     public function getContent(): array
     {
-        $frames = array_filter(
-            $this->frames,
-            fn (Frame $frame) => $this->shouldIgnoreFrame($frame)
-        );
+        $frames = array_map(fn (Frame $frame) => [
+            'file_name' => $frame->file,
+            'line_number' => $frame->lineNumber,
+            'class' => $frame->class,
+            'method' => $frame->method,
+        ], $this->frames);
 
-        return [
-            'frames' => array_map(fn (Frame $frame) => [
-                'line_number' => $frame->lineNumber,
-                'file_name' => $frame->file,
-                'method' => $frame->method,
-                'class' => $frame->class,
-            ], array_values($frames)),
-        ];
+        return compact('frames');
     }
 
-    private function shouldIgnoreFrame(Frame $frame): bool
+    protected function removeRayFrames(array $frames): array
     {
-        foreach ($this->ignoredNamespaces() as $ignoredNamespace) {
-            if (substr($frame->class, 0, strlen($ignoredNamespace)) === $ignoredNamespace) {
-                return false;
+        $frames = array_filter(
+            $frames,
+            fn (Frame $frame) => ! $this->isRayFrame($frame)
+        );
+
+        return array_values($frames);
+    }
+
+    protected function isRayFrame(Frame $frame): bool
+    {
+        foreach ($this->rayNamespaces() as $rayNamespace) {
+            if (substr($frame->class, 0, strlen($rayNamespace)) === $rayNamespace) {
+                return true;
             }
         }
 
-        return true;
+        return false;
     }
 
-    private function ignoredNamespaces(): array
+    protected function rayNamespaces(): array
     {
         return [
             'Spatie\Ray',

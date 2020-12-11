@@ -145,7 +145,6 @@ class RayTest extends TestCase
     public function it_can_send_backtrace_to_ray()
     {
         $this->ray->trace();
-
         $frames = $this->getValueOfLastSentContent('frames');
 
         $this->assertGreaterThanOrEqual(10, count($frames));
