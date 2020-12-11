@@ -140,7 +140,7 @@ class RayTest extends TestCase
     /** @test */
     public function it_can_measure_a_closure()
     {
-        $closure = function() {
+        $closure = function () {
             sleep(1);
         };
 
