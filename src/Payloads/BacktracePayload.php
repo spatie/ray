@@ -22,11 +22,11 @@ class BacktracePayload extends Payload
     {
         $frames = array_filter(
             $this->frames,
-            fn(Frame $frame) => $this->shouldIgnoreFrame($frame)
+            fn (Frame $frame) => $this->shouldIgnoreFrame($frame)
         );
 
         return [
-            'frames' => array_map(fn(Frame $frame) => [
+            'frames' => array_map(fn (Frame $frame) => [
                 'line_number' => $frame->lineNumber,
                 'file_name' => $frame->file,
                 'method' => $frame->method,

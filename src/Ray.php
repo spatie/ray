@@ -124,7 +124,7 @@ class Ray
     {
         $backtrace = Backtrace::create();
 
-        if($startingFromFrame){
+        if ($startingFromFrame) {
             $backtrace->startingFromFrame($startingFromFrame);
         }
 
