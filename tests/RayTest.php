@@ -124,19 +124,6 @@ class RayTest extends TestCase
         $this->assertEquals('my-timer', $this->getValueOfLastSentContent('name'));
     }
 
-    protected function getValueOfLastSentContent(string $contentKey)
-    {
-        $payload = $this->client->sentPayloads();
-
-        if (! count($payload)) {
-            return null;
-        }
-
-        $lastPayload = end($payload);
-
-        return Arr::get($lastPayload, "payloads.0.content.{$contentKey}");
-    }
-
     /** @test */
     public function it_can_measure_a_closure()
     {
@@ -151,5 +138,18 @@ class RayTest extends TestCase
         $this->assertNotEquals(0, $this->getValueOfLastSentContent('max_memory_usage_during_total_time'));
         $this->assertNotEquals(0, $this->getValueOfLastSentContent('time_since_last_call'));
         $this->assertNotEquals(0, $this->getValueOfLastSentContent('max_memory_usage_since_last_call'));
+    }
+
+    protected function getValueOfLastSentContent(string $contentKey)
+    {
+        $payload = $this->client->sentPayloads();
+
+        if (! count($payload)) {
+            return null;
+        }
+
+        $lastPayload = end($payload);
+
+        return Arr::get($lastPayload, "payloads.0.content.{$contentKey}");
     }
 }
