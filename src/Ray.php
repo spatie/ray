@@ -9,10 +9,10 @@ use Spatie\Ray\Concerns\RaySizes;
 use Spatie\Ray\Payloads\ColorPayload;
 use Spatie\Ray\Payloads\HidePayload;
 use Spatie\Ray\Payloads\LogPayload;
+use Spatie\Ray\Payloads\MeasurePayload;
 use Spatie\Ray\Payloads\NewScreenPayload;
 use Spatie\Ray\Payloads\RemovePayload;
 use Spatie\Ray\Payloads\SizePayload;
-use Spatie\Ray\Payloads\MeasurePayload;
 use Symfony\Component\Stopwatch\Stopwatch;
 
 class Ray
@@ -88,7 +88,6 @@ class Ray
 
         return $this;
     }
-
 
     /**
      * @param string|callable $stopwatchName
