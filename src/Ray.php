@@ -7,7 +7,7 @@ use Ramsey\Uuid\Uuid;
 use Spatie\Backtrace\Backtrace;
 use Spatie\Ray\Concerns\RayColors;
 use Spatie\Ray\Concerns\RaySizes;
-use Spatie\Ray\Payloads\BacktracePayload;
+use Spatie\Ray\Payloads\TracePayload;
 use Spatie\Ray\Payloads\ColorPayload;
 use Spatie\Ray\Payloads\HidePayload;
 use Spatie\Ray\Payloads\LogPayload;
@@ -128,7 +128,7 @@ class Ray
             $backtrace->startingFromFrame($startingFromFrame);
         }
 
-        $payload = new BacktracePayload($backtrace->frames());
+        $payload = new TracePayload($backtrace->frames());
 
         return $this->sendRequest([$payload]);
     }

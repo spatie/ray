@@ -4,7 +4,7 @@ namespace Spatie\Ray\Payloads;
 
 use Spatie\Backtrace\Frame;
 
-class BacktracePayload extends Payload
+class TracePayload extends Payload
 {
     protected array $frames;
 
@@ -15,7 +15,7 @@ class BacktracePayload extends Payload
 
     public function getType(): string
     {
-        return 'backtrace';
+        return 'trace';
     }
 
     public function getContent(): array
