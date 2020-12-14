@@ -7,6 +7,7 @@ use Ramsey\Uuid\Uuid;
 use Spatie\Backtrace\Backtrace;
 use Spatie\Ray\Concerns\RayColors;
 use Spatie\Ray\Concerns\RaySizes;
+use Spatie\Ray\Payloads\NotifyPayload;
 use Spatie\Ray\Payloads\TracePayload;
 use Spatie\Ray\Payloads\ColorPayload;
 use Spatie\Ray\Payloads\HidePayload;
@@ -163,6 +164,13 @@ class Ray
         }
 
         return $this;
+    }
+
+    public function notify(string $text): self
+    {
+        $payload = new NotifyPayload($text);
+
+        return $this->send($payload);
     }
 
     public function ban(): self

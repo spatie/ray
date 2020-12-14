@@ -176,6 +176,14 @@ class RayTest extends TestCase
         $this->assertMatchesSnapshot($this->client->sentPayloads());
     }
 
+    /** @test */
+    public function it_can_send_the_notify_payload()
+    {
+        $this->ray->notify('notification text');
+
+        $this->assertMatchesSnapshot($this->client->sentPayloads());
+    }
+
     protected function getValueOfLastSentContent(string $contentKey)
     {
         $payload = $this->client->sentPayloads();
