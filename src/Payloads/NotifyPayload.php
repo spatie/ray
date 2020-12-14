@@ -19,7 +19,7 @@ class NotifyPayload extends Payload
     public function getContent(): array
     {
         return [
-            'value' => $this->text
+            'value' => $this->text,
         ];
     }
 }
