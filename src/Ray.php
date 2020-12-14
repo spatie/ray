@@ -170,7 +170,7 @@ class Ray
     {
         $payload = new NotifyPayload($text);
 
-        return $this->send($payload);
+        return $this->sendRequest([$payload]);
     }
 
     public function ban(): self
