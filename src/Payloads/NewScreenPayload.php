@@ -14,7 +14,7 @@ class NewScreenPayload extends Payload
 
     public function getType(): string
     {
-        return 'clear_screen';
+        return 'new_screen';
     }
 
     public function getContent(): array
