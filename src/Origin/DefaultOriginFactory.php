@@ -36,7 +36,7 @@ class DefaultOriginFactory implements OriginFactory
                 return $index;
             }
 
-            if ($this->startsWith($frame['file'], __DIR__)) {
+            if ($this->startsWith($frame['file'] ?? '', __DIR__)) {
                 return $index;
             }
         }
