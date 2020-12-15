@@ -173,6 +173,16 @@ class Ray
         return $this->sendRequest([$payload]);
     }
 
+    public function die()
+    {
+        return die();
+    }
+
+    public function className(object $object)
+    {
+        return $this->send(get_class($object));
+    }
+
     public function ban(): self
     {
         $this->send('🕶');
