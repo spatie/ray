@@ -19,6 +19,7 @@
         "php": "^7.4|^8.0",
         "ext-curl": "*",
         "ext-json": "*",
+        "illuminate/collections": "^8.19",
         "ramsey/uuid": "^4.1",
         "spatie/backtrace": "^1.0",
         "spatie/phpunit-snapshot-assertions": "^4.2",

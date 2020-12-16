@@ -2,6 +2,9 @@
 
 namespace Spatie\Ray\Origin;
 
+use Illuminate\Support\Str;
+use Spatie\Backtrace\Backtrace;
+use Spatie\Backtrace\Frame;
 use Spatie\Ray\Ray;
 
 class DefaultOriginFactory implements OriginFactory
@@ -11,37 +14,29 @@ class DefaultOriginFactory implements OriginFactory
         $frame = $this->getFrame();
 
         return new Origin(
-            $frame['file'] ?? null,
-            $frame['line'] ?? null,
+            $frame ? $frame->file : null,
+            $frame ? $frame->lineNumber : null
         );
     }
 
-    protected function getFrame(): ?array
+    protected function getFrame(): ?Frame
     {
-        $trace = array_reverse(debug_backtrace(DEBUG_BACKTRACE_IGNORE_ARGS));
+        $frames = collect(Backtrace::create()->frames())->reverse();
 
-        $frameIndex = $this->getIndexOfRayCall($trace);
+        $indexOfRay = $frames
+            ->search(function (Frame $frame) {
+                if ($frame->class === Ray::class) {
+                    return true;
+                }
 
-        if (! $frameIndex) {
-            return null;
-        }
+                if ($this->startsWith($frame->file, __DIR__ )) {
+                    return true;
+                }
 
-        return $trace[$frameIndex] ?? null;
-    }
+                return false;
+            });
 
-    protected function getIndexOfRayCall(array $stackTrace): ?int
-    {
-        foreach ($stackTrace as $index => $frame) {
-            if (($frame['class'] ?? '') === Ray::class) {
-                return $index;
-            }
-
-            if ($this->startsWith($frame['file'] ?? '', __DIR__)) {
-                return $index;
-            }
-        }
-
-        return null;
+        return $frames[$indexOfRay + 1] ?? null;
     }
 
     public function startsWith(string $hayStack, string $needle): bool
