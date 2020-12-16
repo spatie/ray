@@ -2,6 +2,7 @@
 
 namespace Spatie\Ray\Payloads;
 
+use Illuminate\Database\Eloquent\Model;
 use Symfony\Component\VarDumper\Cloner\VarCloner;
 use Symfony\Component\VarDumper\Dumper\HtmlDumper;
 
@@ -26,6 +27,10 @@ class LogPayload extends Payload
         }
 
         if (is_int($argument)) {
+            return $argument;
+        }
+
+        if (is_bool($argument)) {
             return $argument;
         }
 

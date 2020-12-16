@@ -17,7 +17,9 @@ class FakeClient extends Client
             $payload['origin']['file'] = $payload['origin']['file'] = str_replace($this->baseDirectory(), '', $payload['origin']['file']);
 
             if (isset($payload['content']['values'])) {
-                $payload['content']['values'] = preg_replace('/sf-dump-[0-9]{1,10}/', 'sf-dump-xxxxxxxxxx', $payload['content']['values']);
+                if (! is_bool($payload['content']['values'][0])) {
+                    $payload['content']['values'] = preg_replace('/sf-dump-[0-9]{1,10}/', 'sf-dump-xxxxxxxxxx', $payload['content']['values']);
+                }
             }
         }
 
