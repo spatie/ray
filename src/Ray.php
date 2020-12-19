@@ -134,6 +134,15 @@ class Ray
         return $this->sendRequest([$payload]);
     }
 
+    public function caller(): self
+    {
+        $backtrace = Backtrace::create();
+
+        $payload = (new TracePayload($backtrace->frames()))->limit(1);
+
+        return $this->sendRequest([$payload]);
+    }
+
     protected function measureClosure(Closure $closure): self
     {
         $stopwatch = new Stopwatch(true);

@@ -169,6 +169,19 @@ class RayTest extends TestCase
     }
 
     /** @test */
+    public function it_can_send_the_caller_to_ray()
+    {
+        $this->ray->caller();
+
+        $frames = $this->getValueOfLastSentContent('frames');
+
+        $this->assertCount(1, $frames);
+
+        $this->assertEquals('runTest', $frames[0]['method']);
+        $this->assertEquals(TestCase::class, $frames[0]['class']);
+    }
+
+    /** @test */
     public function it_can_send_the_ban_payload()
     {
         $this->ray->ban();

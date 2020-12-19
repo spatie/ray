@@ -8,9 +8,18 @@ class TracePayload extends Payload
 {
     protected array $frames;
 
+    protected ?int $limit = null;
+
     public function __construct(array $frames)
     {
         $this->frames = $this->removeRayFrames($frames);
+    }
+
+    public function limit(int $limit): self
+    {
+        $this->limit = $limit;
+
+        return $this;
     }
 
     public function getType(): string
@@ -26,6 +35,10 @@ class TracePayload extends Payload
             'class' => $frame->class,
             'method' => $frame->method,
         ], $this->frames);
+
+        if (! is_null($this->limit)) {
+            $frames = array_slice($frames, 0, $this->limit);
+        }
 
         return compact('frames');
     }
