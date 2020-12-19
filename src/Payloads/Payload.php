@@ -4,6 +4,7 @@ namespace Spatie\Ray\Payloads;
 
 use Spatie\Ray\Origin\DefaultOriginFactory;
 use Spatie\Ray\Origin\Origin;
+use Symfony\Component\Console\Output\ConsoleOutput;
 
 abstract class Payload
 {
@@ -36,5 +37,10 @@ abstract class Payload
         $originFactory = new self::$originFactoryClass;
 
         return $originFactory->getOrigin();
+    }
+
+    public function outputToConsole(ConsoleOutput $consoleOutput): void
+    {
+
     }
 }

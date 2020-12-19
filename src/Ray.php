@@ -5,6 +5,7 @@ namespace Spatie\Ray;
 use Closure;
 use Ramsey\Uuid\Uuid;
 use Spatie\Backtrace\Backtrace;
+use Spatie\Macroable\Macroable;
 use Spatie\Ray\Concerns\RayColors;
 use Spatie\Ray\Concerns\RaySizes;
 use Spatie\Ray\Payloads\ColorPayload;
@@ -22,6 +23,7 @@ class Ray
 {
     use RayColors;
     use RaySizes;
+    use Macroable;
 
     protected Client $client;
 

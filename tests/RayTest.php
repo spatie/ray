@@ -5,6 +5,7 @@ namespace Spatie\Ray\Tests;
 use Illuminate\Support\Arr;
 use PHPUnit\Framework\TestCase;
 use Spatie\Backtrace\Frame;
+use Spatie\Ray\Payloads\LogPayload;
 use Spatie\Ray\Ray;
 use Spatie\Ray\Tests\TestClasses\FakeClient;
 use Spatie\Snapshots\MatchesSnapshots;
@@ -211,6 +212,23 @@ class RayTest extends TestCase
         $this->ray->send(false);
 
         $this->assertMatchesSnapshot($this->client->sentPayloads());
+    }
+
+    /** @test */
+    public function it_is_macroable()
+    {
+        Ray::macro('myCustomFunction', function(string $value) {
+            $payload = new LogPayload($value . '-suffix');
+
+            $this->sendRequest([$payload]);
+
+            return $this;
+        });
+
+        $this->ray->myCustomFunction('my value');
+
+        $this->assertMatchesSnapshot($this->client->sentPayloads());
+
     }
 
     protected function getValueOfLastSentContent(string $contentKey)
