@@ -6,15 +6,15 @@ use Exception;
 
 class Client
 {
-    protected string $baseUrl;
-
     protected int $portNumber;
 
-    public function __construct(string $baseUrl = 'http://localhost', int $portNumber = 23517)
-    {
-        $this->baseUrl = $baseUrl;
+    protected string $baseUrl;
 
+    public function __construct(int $portNumber = 23517, string $baseUrl = 'http://localhost')
+    {
         $this->portNumber = $portNumber;
+
+        $this->baseUrl = $baseUrl;
     }
 
     public function send(Request $request)

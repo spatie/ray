@@ -44,13 +44,10 @@ class Ray
         static::$uuid = $uuid ?? static::$uuid ?? Uuid::uuid4()->toString();
     }
 
-    public function useClient(Client $client): self
+    public static function useClient(Client $client): void
     {
         self::$client = $client;
-
-        return $this;
     }
-
 
     public function newScreen(string $name = ''): self
     {
