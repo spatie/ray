@@ -2,10 +2,7 @@
 
 namespace Spatie\Ray\Payloads;
 
-use Illuminate\Database\Eloquent\Model;
 use Spatie\Ray\ArgumentConvertor;
-use Symfony\Component\VarDumper\Cloner\VarCloner;
-use Symfony\Component\VarDumper\Dumper\HtmlDumper;
 
 class LogPayload extends Payload
 {
