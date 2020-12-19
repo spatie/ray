@@ -25,9 +25,9 @@ class Ray
     use RaySizes;
     use Macroable;
 
-    protected Client $client;
+    protected static Client $client;
 
-    public string $uuid;
+    public static string $uuid;
 
     /** @var \Symfony\Component\Stopwatch\Stopwatch[] */
     public static array $stopWatches = [];
@@ -39,10 +39,18 @@ class Ray
 
     public function __construct(Client $client = null, string $uuid = null)
     {
-        $this->client = $client ?? new Client();
+        self::$client = $client ?? self::$client ?? new Client();
 
-        $this->uuid = $uuid ?? Uuid::uuid4()->toString();
+        static::$uuid = $uuid ?? static::$uuid ?? Uuid::uuid4()->toString();
     }
+
+    public function useClient(Client $client): self
+    {
+        self::$client = $client;
+
+        return $this;
+    }
+
 
     public function newScreen(string $name = ''): self
     {
@@ -214,9 +222,9 @@ class Ray
 
     public function sendRequest(array $payloads): self
     {
-        $request = new Request($this->uuid, $payloads);
+        $request = new Request(static::$uuid, $payloads);
 
-        $this->client->send($request);
+        self::$client->send($request);
 
         return $this;
     }

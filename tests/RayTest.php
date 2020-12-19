@@ -36,6 +36,16 @@ class RayTest extends TestCase
     }
 
     /** @test */
+    public function the_ray_function_also_works()
+    {
+        Ray::$uuid = 'fakeUuid';
+
+        ray('a');
+
+        $this->assertMatchesSnapshot($this->client->sentPayloads());
+    }
+
+    /** @test */
     public function it_can_send_an_array_to_ray()
     {
         $this->ray->send(['a' => 1, 'b' => 2]);
@@ -214,22 +224,21 @@ class RayTest extends TestCase
         $this->assertMatchesSnapshot($this->client->sentPayloads());
     }
 
-    /** @test */
-    public function it_is_macroable()
-    {
-        Ray::macro('myCustomFunction', function(string $value) {
-            $payload = new LogPayload($value . '-suffix');
+/** @test */
+public function it_is_macroable()
+{
+    Ray::macro('myCustomFunction', function(string $value) {
+        $payload = new LogPayload($value . '-suffix');
 
-            $this->sendRequest([$payload]);
+        $this->sendRequest([$payload]);
 
-            return $this;
-        });
+        return $this;
+    });
 
-        $this->ray->myCustomFunction('my value');
+    $this->ray->myCustomFunction('my value');
 
-        $this->assertMatchesSnapshot($this->client->sentPayloads());
-
-    }
+    $this->assertMatchesSnapshot($this->client->sentPayloads());
+}
 
     protected function getValueOfLastSentContent(string $contentKey)
     {
