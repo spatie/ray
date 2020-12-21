@@ -38,7 +38,7 @@ class RayTest extends TestCase
     /** @test */
     public function the_ray_function_also_works()
     {
-        Ray::$uuid = 'fakeUuid';
+        Ray::$fakeUuid = 'fakeUuid';
 
         ray('a');
 
@@ -169,7 +169,7 @@ class RayTest extends TestCase
     /** @test */
     public function it_can_send_backtrace_frames_starting_from_a_specific_frame()
     {
-        $this->ray->trace(fn (Frame $frame) => $frame->class === 'PHPUnit\TextUI\TestRunner');
+        $this->ray->trace(fn(Frame $frame) => $frame->class === 'PHPUnit\TextUI\TestRunner');
 
         $frames = $this->getValueOfLastSentContent('frames');
 
@@ -224,27 +224,35 @@ class RayTest extends TestCase
         $this->assertMatchesSnapshot($this->client->sentPayloads());
     }
 
-/** @test */
-public function it_is_macroable()
-{
-    Ray::macro('myCustomFunction', function(string $value) {
-        $payload = new LogPayload($value . '-suffix');
+    /** @test */
+    public function it_is_macroable()
+    {
+        Ray::macro('myCustomFunction', function (string $value) {
+            $payload = new LogPayload($value . '-suffix');
 
-        $this->sendRequest([$payload]);
+            $this->sendRequest([$payload]);
 
-        return $this;
-    });
+            return $this;
+        });
 
-    $this->ray->myCustomFunction('my value');
+        $this->ray->myCustomFunction('my value');
 
-    $this->assertMatchesSnapshot($this->client->sentPayloads());
-}
+        $this->assertMatchesSnapshot($this->client->sentPayloads());
+    }
+
+    /** @test */
+    public function when_ray_is_not_running_the_pause_call_will_not_blow_up()
+    {
+        $this->ray->pause();
+
+        $this->assertEquals('create_lock', $this->client->sentPayloads()[0]['payloads'][0]['type']);
+    }
 
     protected function getValueOfLastSentContent(string $contentKey)
     {
         $payload = $this->client->sentPayloads();
 
-        if (! count($payload)) {
+        if (!count($payload)) {
             return null;
         }
 

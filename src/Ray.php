@@ -9,6 +9,7 @@ use Spatie\Macroable\Macroable;
 use Spatie\Ray\Concerns\RayColors;
 use Spatie\Ray\Concerns\RaySizes;
 use Spatie\Ray\Payloads\ColorPayload;
+use Spatie\Ray\Payloads\CreateLockPayload;
 use Spatie\Ray\Payloads\HidePayload;
 use Spatie\Ray\Payloads\LogPayload;
 use Spatie\Ray\Payloads\MeasurePayload;
@@ -27,7 +28,9 @@ class Ray
 
     protected static Client $client;
 
-    public static string $uuid;
+    public static string $fakeUuid;
+
+    public string $uuid = '';
 
     /** @var \Symfony\Component\Stopwatch\Stopwatch[] */
     public static array $stopWatches = [];
@@ -41,7 +44,7 @@ class Ray
     {
         self::$client = $client ?? self::$client ?? new Client();
 
-        static::$uuid = $uuid ?? static::$uuid ?? Uuid::uuid4()->toString();
+        $this->uuid = $uuid ?? static::$fakeUuid ?? Uuid::uuid4()->toString();
     }
 
     public static function useClient(Client $client): void
@@ -206,6 +209,21 @@ class Ray
         return $this;
     }
 
+    public function pause(): self
+    {
+        $lockName = md5(time());
+
+        $payload = new CreateLockPayload($lockName);
+
+        $this->sendRequest([$payload]);
+
+        do {
+            sleep(1);
+        } while(self::$client->lockExists($lockName));
+
+        return $this;
+    }
+
     public function send(...$arguments): self
     {
         if (! count($arguments)) {
@@ -219,7 +237,7 @@ class Ray
 
     public function sendRequest(array $payloads): self
     {
-        $request = new Request(static::$uuid, $payloads);
+        $request = new Request($this->uuid, $payloads);
 
         self::$client->send($request);
 

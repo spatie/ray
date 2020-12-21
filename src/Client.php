@@ -17,9 +17,9 @@ class Client
         $this->baseUrl = $baseUrl;
     }
 
-    public function send(Request $request)
+    public function send(Request $request): void
     {
-        $curlHandle = $this->getCurlHandle("{$this->baseUrl}:{$this->portNumber}");
+        $curlHandle = $this->getCurlHandleForUrl('get', '');
 
         curl_setopt($curlHandle, CURLOPT_POSTFIELDS, $request->toJson());
 
@@ -30,7 +30,31 @@ class Client
         }
     }
 
-    protected function getCurlHandle(string $fullUrl)
+    public function lockExists(string $lockName): bool
+    {
+        $curlHandle = $this->getCurlHandleForUrl('get', "locks/{$lockName}");
+
+        try {
+            $curlResult = curl_exec($curlHandle);
+
+            if (! $curlResult) {
+                return false;
+            }
+
+            $response = json_decode($curlResult, true);
+
+            return $response['locked'] ?? false;
+        } catch (Exception $exception) {
+            throw new Exception("Ray seems not be running at {$this->baseUrl}:{$this->portNumber}");
+        }
+    }
+
+    protected function getCurlHandleForUrl(string $method, string $url)
+    {
+        return $this->getCurlHandle($method, "{$this->baseUrl}:{$this->portNumber}/{$url}");
+    }
+
+    protected function getCurlHandle(string $method, string $fullUrl)
     {
         $curlHandle = curl_init();
 
@@ -48,7 +72,10 @@ class Client
         curl_setopt($curlHandle, CURLOPT_HTTP_VERSION, CURL_HTTP_VERSION_1_0);
         curl_setopt($curlHandle, CURLOPT_ENCODING, '');
         curl_setopt($curlHandle, CURLINFO_HEADER_OUT, true);
-        curl_setopt($curlHandle, CURLOPT_POST, true);
+
+        if ($method === 'post') {
+            curl_setopt($curlHandle, CURLOPT_POST, true);
+        }
 
         return $curlHandle;
     }
