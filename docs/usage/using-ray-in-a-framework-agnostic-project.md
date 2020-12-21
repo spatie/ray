@@ -80,6 +80,18 @@ ray()->backtrace();
 
 ![screenshot](TODO: add screenshot)
 
+### Pausing execution
+
+You can pause execution of a script by using the `pause` method.
+
+```php
+ray()->pause();
+```
+
+If you press the `continue` button in Ray, execution will continue.
+
+![screenshot](TODO: add screenshot)
+
 ### Display the class name of an object
 
 To quickly send the class name of an object to ray, use the `className` function.
