@@ -9,7 +9,7 @@ if (! function_exists('ray')) {
      *
      * @return \Spatie\Ray\Ray|LaravelRay
      */
-    function ray(...$args): Ray
+    function ray(...$args)
     {
         if (class_exists(LaravelRay::class)) {
             return app(LaravelRay::class)->send(...$args);
