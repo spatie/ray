@@ -43,7 +43,7 @@ class Client
 
             $response = json_decode($curlResult, true);
 
-            return $response['locked'] ?? false;
+            return $response['active'] ?? false;
         } catch (Exception $exception) {
             throw new Exception("Ray seems not be running at {$this->baseUrl}:{$this->portNumber}");
         }
