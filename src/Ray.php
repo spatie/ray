@@ -3,6 +3,7 @@
 namespace Spatie\Ray;
 
 use Closure;
+use Composer\InstalledVersions;
 use Ramsey\Uuid\Uuid;
 use Spatie\Backtrace\Backtrace;
 use Spatie\Macroable\Macroable;
@@ -120,7 +121,7 @@ class Ray
             $event = $stopwatch->start($stopwatchName);
             $payload = new MeasurePayload($stopwatchName, $event);
             $payload->concernsNewTimer();
-      
+
             return $this->sendRequest([$payload]);
         }
 
@@ -234,9 +235,18 @@ class Ray
         return $this->sendRequest([$payload]);
     }
 
-    public function sendRequest(array $payloads): self
+    public function sendRequest(array $payloads, array $meta = []): self
     {
-        $request = new Request($this->uuid, $payloads);
+        if (class_exists(InstalledVersions::class)) {
+            $meta['ray_package_version'] = InstalledVersions::getVersion('spatie/ray');
+        }
+        
+        $allMeta = array_merge([
+            'php_version' => phpversion(),
+            'php_version_id' => PHP_VERSION_ID,
+        ], $meta);
+
+        $request = new Request($this->uuid, $payloads, $allMeta);
 
         self::$client->send($request);
 

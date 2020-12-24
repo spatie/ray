@@ -9,12 +9,16 @@ class Request
     protected string $uuid;
 
     protected array $payloads;
+    
+    protected array $meta;
 
-    public function __construct(string $uuid, array $payloads)
+    public function __construct(string $uuid, array $payloads, array $meta = [])
     {
         $this->uuid = $uuid;
 
         $this->payloads = $payloads;
+        
+        $this->meta = $meta;
     }
 
     public function toArray(): array
@@ -26,6 +30,7 @@ class Request
         return [
             'uuid' => $this->uuid,
             'payloads' => $payloads,
+            'meta' => $this->meta,
         ];
     }
 
