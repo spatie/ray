@@ -169,7 +169,7 @@ class RayTest extends TestCase
     /** @test */
     public function it_can_send_backtrace_frames_starting_from_a_specific_frame()
     {
-        $this->ray->trace(fn(Frame $frame) => $frame->class === 'PHPUnit\TextUI\TestRunner');
+        $this->ray->trace(fn (Frame $frame) => $frame->class === 'PHPUnit\TextUI\TestRunner');
 
         $frames = $this->getValueOfLastSentContent('frames');
 
@@ -252,7 +252,7 @@ class RayTest extends TestCase
     {
         $payload = $this->client->sentPayloads();
 
-        if (!count($payload)) {
+        if (! count($payload)) {
             return null;
         }
 

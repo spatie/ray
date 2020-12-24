@@ -2,7 +2,6 @@
 
 namespace Spatie\Ray\Origin;
 
-use Illuminate\Support\Str;
 use Spatie\Backtrace\Backtrace;
 use Spatie\Backtrace\Frame;
 use Spatie\Ray\Ray;
@@ -29,7 +28,7 @@ class DefaultOriginFactory implements OriginFactory
                     return true;
                 }
 
-                if ($this->startsWith($frame->file, __DIR__ )) {
+                if ($this->startsWith($frame->file, __DIR__)) {
                     return true;
                 }
 

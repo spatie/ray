@@ -41,6 +41,5 @@ abstract class Payload
 
     public function outputToConsole(ConsoleOutput $consoleOutput): void
     {
-
     }
 }
