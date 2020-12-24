@@ -105,6 +105,19 @@ ray()->mailable(new TestMailable());
 
 ![screenshot](TODO: add screenshot)
 
+### Displaying collections
+
+In a Laravel app, Ray will automatically register a `ray` collection macro to easily send collections to ray.
+
+```php
+collect(['a', 'b', 'c'])
+    ->ray('original collection') // displays the original collection
+    ->map(fn(string $letter) => strtoupper($letter))
+    ->ray('uppercased collection') // displays the modified collection
+```
+
+![screenshot](TODO: add screenshot)
+
 ### Enabling / disabling Ray
 
 You can enable and disable sending stuff to Ray with the `enable` and `disable` functions.
