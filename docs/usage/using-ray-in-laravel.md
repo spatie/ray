@@ -118,6 +118,16 @@ collect(['a', 'b', 'c'])
 
 ![screenshot](TODO: add screenshot)
 
+### Using Ray in Blade views
+
+You can use the `@ray` directive to easily send variables to Ray from inside a Blade view. You can pass as many things as you'd like.
+
+```blade
+{{-- side a view --}}
+
+@ray($variable, $anotherVariables)
+```
+
 ### Enabling / disabling Ray
 
 You can enable and disable sending stuff to Ray with the `enable` and `disable` functions.

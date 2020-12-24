@@ -174,7 +174,7 @@ ray($largeObject)->collapse()
 
 ![screenshot](TODO: add screenshot)
 
-### Display a notification
+### Displaying a notification
 
 You can use Ray to display a notification.
 
