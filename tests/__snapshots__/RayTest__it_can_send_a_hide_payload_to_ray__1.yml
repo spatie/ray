@@ -1,3 +1,4 @@
 -
     uuid: fakeUuid
     payloads: [{ type: hide, content: {  }, origin: { file: /tests/RayTest.php, line_number: 80 } }]
+    meta: {  }

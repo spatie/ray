@@ -1,3 +1,4 @@
 -
     uuid: fakeUuid
     payloads: [{ type: notify, content: { value: 'notification text' }, origin: { file: /tests/RayTest.php, line_number: 206 } }]
+    meta: {  }

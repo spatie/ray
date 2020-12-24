@@ -23,6 +23,8 @@ class FakeClient extends Client
             }
         }
 
+        $requestProperties['meta'] = [];
+
         $this->sentRequests[] = $requestProperties;
     }
 
