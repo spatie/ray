@@ -123,7 +123,7 @@ collect(['a', 'b', 'c'])
 You can use the `@ray` directive to easily send variables to Ray from inside a Blade view. You can pass as many things as you'd like.
 
 ```blade
-{{-- side a view --}}
+{{-- inside a view --}}
 
 @ray($variable, $anotherVariables)
 ```
