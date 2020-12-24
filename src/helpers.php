@@ -16,6 +16,5 @@ if (! function_exists('ray')) {
         }
 
         return (new Ray())->send(...$args);
-
     }
 }

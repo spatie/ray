@@ -220,7 +220,7 @@ class Ray
 
         do {
             sleep(1);
-        } while(self::$client->lockExists($lockName));
+        } while (self::$client->lockExists($lockName));
 
         return $this;
     }
@@ -232,6 +232,7 @@ class Ray
         }
 
         $payload = LogPayload::createForArguments($arguments);
+
         return $this->sendRequest([$payload]);
     }
 
