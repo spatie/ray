@@ -23,14 +23,14 @@
         "ramsey/uuid": "^4.1",
         "spatie/backtrace": "^1.0",
         "spatie/macroable": "^1.0",
-        "spatie/phpunit-snapshot-assertions": "^4.2",
-        "symfony/console": "^5.2",
-        "symfony/stopwatch": "^5.2",
-        "symfony/var-dumper": "^5.2"
+        "symfony/console": "^4.2|^5.2",
+        "symfony/stopwatch": "^4.2|^5.2",
+        "symfony/var-dumper": "^4.2|^5.2"
     },
     "require-dev": {
         "illuminate/support": "^8.18",
-        "phpunit/phpunit": "^9.5"
+        "phpunit/phpunit": "^9.5",
+        "spatie/phpunit-snapshot-assertions": "^4.2"
     },
     "autoload": {
         "psr-4": {
