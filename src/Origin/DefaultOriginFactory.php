@@ -20,20 +20,21 @@ class DefaultOriginFactory implements OriginFactory
 
     protected function getFrame(): ?Frame
     {
-        $frames = collect(Backtrace::create()->frames())->reverse();
+        $frames = Backtrace::create()->frames();
 
-        $indexOfRay = $frames
-            ->search(function (Frame $frame) {
-                if ($frame->class === Ray::class) {
-                    return true;
-                }
+        $frames = array_reverse($frames, true);
 
-                if ($this->startsWith($frame->file, __DIR__)) {
-                    return true;
-                }
+        $indexOfRay = $this->search(function (Frame $frame) {
+            if ($frame->class === Ray::class) {
+                return true;
+            }
 
-                return false;
-            });
+            if ($this->startsWith($frame->file, __DIR__)) {
+                return true;
+            }
+
+            return false;
+        }, $frames);
 
         return $frames[$indexOfRay + 1] ?? null;
     }
@@ -41,5 +42,16 @@ class DefaultOriginFactory implements OriginFactory
     public function startsWith(string $hayStack, string $needle): bool
     {
         return strpos($hayStack, $needle) === 0;
+    }
+
+    protected function search(callable $callable, array $items): ?int
+    {
+        foreach ($items as $key => $item) {
+            if ($callable($item, $key)) {
+                return $key;
+            }
+        }
+
+        return null;
     }
 }
