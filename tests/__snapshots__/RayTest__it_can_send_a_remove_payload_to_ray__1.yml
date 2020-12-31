@@ -1,4 +1,4 @@
 -
     uuid: fakeUuid
-    payloads: [{ type: remove, content: {  }, origin: { file: /tests/RayTest.php, line_number: 88 } }]
+    payloads: [{ type: remove, content: {  }, origin: { file: /tests/RayTest.php, line_number: xxx } }]
     meta: {  }

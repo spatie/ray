@@ -21,6 +21,8 @@ class FakeClient extends Client
                     $payload['content']['values'] = preg_replace('/sf-dump-[0-9]{1,10}/', 'sf-dump-xxxxxxxxxx', $payload['content']['values']);
                 }
             }
+
+            $payload['origin']['line_number'] = 'xxx';
         }
 
         $requestProperties['meta'] = [];

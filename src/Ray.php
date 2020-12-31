@@ -19,6 +19,7 @@ use Spatie\Ray\Payloads\NotifyPayload;
 use Spatie\Ray\Payloads\RemovePayload;
 use Spatie\Ray\Payloads\SizePayload;
 use Spatie\Ray\Payloads\TracePayload;
+use Spatie\Ray\Settings\Settings;
 use Symfony\Component\Stopwatch\Stopwatch;
 
 class Ray
@@ -26,6 +27,8 @@ class Ray
     use RayColors;
     use RaySizes;
     use Macroable;
+
+    public Settings $settings;
 
     protected static Client $client;
 
@@ -38,12 +41,16 @@ class Ray
 
     public static function create(Client $client = null, string $uuid = null): self
     {
-        return new static($client, $uuid);
+        $settings = Settings::load();
+
+        return new static($settings, $client, $uuid);
     }
 
-    public function __construct(Client $client = null, string $uuid = null)
+    public function __construct(Settings $settings, Client $client = null, string $uuid = null)
     {
-        self::$client = $client ?? self::$client ?? new Client();
+        $this->settings = $settings;
+
+        self::$client = $client ?? self::$client ?? new Client($settings->port, $settings->base_url);
 
         $this->uuid = $uuid ?? static::$fakeUuid ?? Uuid::uuid4()->toString();
     }
@@ -241,7 +248,7 @@ class Ray
         if (class_exists(InstalledVersions::class)) {
             $meta['ray_package_version'] = InstalledVersions::getVersion('spatie/ray');
         }
-        
+
         $allMeta = array_merge([
             'php_version' => phpversion(),
             'php_version_id' => PHP_VERSION_ID,

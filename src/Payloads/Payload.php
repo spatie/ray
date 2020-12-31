@@ -38,8 +38,4 @@ abstract class Payload
 
         return $originFactory->getOrigin();
     }
-
-    public function outputToConsole(ConsoleOutput $consoleOutput): void
-    {
-    }
 }

@@ -2,6 +2,8 @@
 
 use Spatie\LaravelRay\Ray as LaravelRay;
 use Spatie\Ray\Ray;
+use Spatie\Ray\Settings\Settings;
+use Spatie\Ray\Settings\SettingsFactory;
 
 if (! function_exists('ray')) {
     /**
@@ -15,6 +17,8 @@ if (! function_exists('ray')) {
             return app(LaravelRay::class)->send(...$args);
         }
 
-        return (new Ray())->send(...$args);
+        $settings = SettingsFactory::createFromConfigFile();
+
+        return (new Ray($settings))->send(...$args);
     }
 }

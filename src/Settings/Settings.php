@@ -1,0 +1,35 @@
+<?php
+
+namespace Spatie\Ray\Settings;
+
+class Settings
+{
+    protected array $settings = [];
+
+    protected array $defaultSettings = [
+        'base_url' => 'http://localhost',
+        'port' => 23517,
+    ];
+
+    public function __construct(array $settings)
+    {
+        $this->settings = array_merge($this->defaultSettings, $settings);
+    }
+
+    public function setDefaultSettings(array $defaults): self
+    {
+        $this->settings = array_merge($defaults, $this->settings);
+
+        return $this;
+    }
+
+    public function __set(string $name, $value)
+    {
+        $this->settings[$name] = $value;
+    }
+
+    public function __get(string $name)
+    {
+        return $this->settings[$name] ?? null;
+    }
+}

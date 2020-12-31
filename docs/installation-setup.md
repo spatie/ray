@@ -39,7 +39,7 @@ return [
      *  By default, this package will only try to transmit info to Ray
      *  when APP_DEBUG is set to `true`.
      */
-    'enable_ray' => (bool) env('APP_DEBUG', false),
+    'enable' => (bool) env('APP_DEBUG', false),
 
     /*
      * The port number to communicate with Ray.

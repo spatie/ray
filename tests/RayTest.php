@@ -7,6 +7,8 @@ use PHPUnit\Framework\TestCase;
 use Spatie\Backtrace\Frame;
 use Spatie\Ray\Payloads\LogPayload;
 use Spatie\Ray\Ray;
+use Spatie\Ray\Settings\Settings;
+use Spatie\Ray\Settings\SettingsFactory;
 use Spatie\Ray\Tests\TestClasses\FakeClient;
 use Spatie\Snapshots\MatchesSnapshots;
 
@@ -24,7 +26,9 @@ class RayTest extends TestCase
 
         $this->client = new FakeClient();
 
-        $this->ray = new Ray($this->client, 'fakeUuid');
+        $settings = SettingsFactory::createFromConfigFile();
+
+        $this->ray = new Ray($settings, $this->client, 'fakeUuid');
     }
 
     /** @test */

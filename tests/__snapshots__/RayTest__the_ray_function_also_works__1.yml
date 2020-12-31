@@ -1,4 +1,4 @@
 -
     uuid: fakeUuid
-    payloads: [{ type: log, content: { values: [a] }, origin: { file: /src/helpers.php, line_number: 18 } }]
+    payloads: [{ type: log, content: { values: [a] }, origin: { file: /src/helpers.php, line_number: xxx } }]
     meta: {  }
