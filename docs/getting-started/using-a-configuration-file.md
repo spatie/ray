@@ -46,13 +46,13 @@ return [
     'send_dumps_to_ray' => true,
     
     /*
+     *  The url used to communicate with the Ray app.
+     */
+    'host' => 'http://localhost',
+    
+    /*
      *  The port number used to communicate with the Ray app. 
      */
     'port' => 23517,
-    
-    /*
-     *  The url used to communicate with the Ray app.
-     */
-    'base_rul' => 'http://localhost',
 ];
 ```

@@ -1,5 +1,5 @@
 ---
-title: Adding your own function
+title: Adding your own function to Ray
 weight: 2
 ---
 
