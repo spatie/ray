@@ -200,9 +200,9 @@ class Ray
         return $this->sendRequest([$payload]);
     }
 
-    public function die()
+    public function die($status = '')
     {
-        return die();
+        die($status);
     }
 
     public function className(object $object)

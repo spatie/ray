@@ -181,3 +181,11 @@ You can use Ray to display a notification.
 ```php
 ray()->notify('This is my notification')
 ```
+
+### Halting the PHP process
+
+You can stop the PHP process by calling `die`.
+
+```php
+ray()->die();
+```
