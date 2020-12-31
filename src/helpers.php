@@ -2,7 +2,6 @@
 
 use Spatie\LaravelRay\Ray as LaravelRay;
 use Spatie\Ray\Ray;
-use Spatie\Ray\Settings\Settings;
 use Spatie\Ray\Settings\SettingsFactory;
 
 if (! function_exists('ray')) {
