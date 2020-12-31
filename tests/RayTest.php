@@ -7,7 +7,6 @@ use PHPUnit\Framework\TestCase;
 use Spatie\Backtrace\Frame;
 use Spatie\Ray\Payloads\LogPayload;
 use Spatie\Ray\Ray;
-use Spatie\Ray\Settings\Settings;
 use Spatie\Ray\Settings\SettingsFactory;
 use Spatie\Ray\Tests\TestClasses\FakeClient;
 use Spatie\Snapshots\MatchesSnapshots;
