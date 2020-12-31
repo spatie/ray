@@ -16,9 +16,9 @@ class RayTest extends TestCase
 {
     use MatchesSnapshots;
 
-    private FakeClient $client;
+    protected FakeClient $client;
 
-    private Ray $ray;
+    protected Ray $ray;
 
     public function setUp(): void
     {
