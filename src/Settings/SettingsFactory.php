@@ -6,7 +6,7 @@ class SettingsFactory
 {
     public static function createFromConfigFile(string $configDirectory = null): settings
     {
-        $settingValues =  (new static())->getSettingsFromConfigFile($configDirectory);
+        $settingValues = (new static())->getSettingsFromConfigFile($configDirectory);
 
         return new Settings($settingValues);
     }
