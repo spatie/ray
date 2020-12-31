@@ -16,8 +16,7 @@ ray()->logQueries($userModel);
 
 Here's how that looks like in Ray.
 
-
-[TO]
+[TODO: add screenshot]
 
 There are many other helper functions available on Ray that allow you to display things that can help you debug such as [runtime and memory usage](TODO: add link), [queries that were executed](TODO: add link), and much more. 
 
