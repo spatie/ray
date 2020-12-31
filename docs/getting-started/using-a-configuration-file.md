@@ -3,11 +3,15 @@ title: Using a configuration file
 weight: 3
 ---
 
-You can optionally configure Ray by creating a file named `ray.php` in your project directory or any of its parent directories.
+You can optionally configure Ray by creating a file named `ray.php` in your project directory.  We recommend putting `ray.php` in your `.gitignore` so your fellow developers can use their own configuration.
+
+Ray will also look for `ray.php` in all parent directories of your project. To configure multiple Ray for multiple projects in one go, you could create a `ray.php` file in the directory where all your projects reside in.
 
 In framework agnostic projects you can use this template.
 
 ```php
+// save this in a file called "ray.php"
+
 return [
     /*
      *  The host used to communicate with the Ray app.
@@ -25,6 +29,8 @@ return [
 For Laravel projects use this template:
 
 ```php
+// save this in a file called "ray.php"
+
 return [
     /*
      * This settings controls whether data should be sent to Ray.
