@@ -8,13 +8,13 @@ class Client
 {
     protected int $portNumber;
 
-    protected string $baseUrl;
+    protected string $host;
 
-    public function __construct(int $portNumber = 23517, string $baseUrl = 'http://localhost')
+    public function __construct(int $portNumber = 23517, string $host = 'localhost')
     {
         $this->portNumber = $portNumber;
 
-        $this->baseUrl = $baseUrl;
+        $this->host = $host;
     }
 
     public function send(Request $request): void
@@ -26,7 +26,7 @@ class Client
         try {
             curl_exec($curlHandle);
         } catch (Exception $exception) {
-            throw new Exception("Ray seems not be running at {$this->baseUrl}:{$this->portNumber}");
+            throw new Exception("Ray seems not be running at http://{$this->host}:{$this->portNumber}");
         }
     }
 
@@ -45,13 +45,13 @@ class Client
 
             return $response['active'] ?? false;
         } catch (Exception $exception) {
-            throw new Exception("Ray seems not be running at {$this->baseUrl}:{$this->portNumber}");
+            throw new Exception("Ray seems not be running at {$this->host}:{$this->portNumber}");
         }
     }
 
     protected function getCurlHandleForUrl(string $method, string $url)
     {
-        return $this->getCurlHandle($method, "{$this->baseUrl}:{$this->portNumber}/{$url}");
+        return $this->getCurlHandle($method, "http://{$this->host}:{$this->portNumber}/{$url}");
     }
 
     protected function getCurlHandle(string $method, string $fullUrl)

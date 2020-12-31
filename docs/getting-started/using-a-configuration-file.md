@@ -10,14 +10,14 @@ In framework agnostic projects you can use this template.
 ```php
 return [
     /*
+     *  The host used to communicate with the Ray app.
+     */
+    'host' => 'localhost',
+
+    /*
      *  The port number used to communicate with the Ray app. 
      */
     'port' => 23517,
-    
-    /*
-     *  The url used to communicate with the Ray app.
-     */
-    'base_rul' => 'http://localhost',
 ]
 ```
 

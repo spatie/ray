@@ -50,7 +50,7 @@ class Ray
     {
         $this->settings = $settings;
 
-        self::$client = $client ?? self::$client ?? new Client($settings->port, $settings->base_url);
+        self::$client = $client ?? self::$client ?? new Client($settings->port, $settings->host);
 
         $this->uuid = $uuid ?? static::$fakeUuid ?? Uuid::uuid4()->toString();
     }
