@@ -35,6 +35,13 @@ class FakeClient extends Client
         return $this->sentRequests;
     }
 
+    public function reset(): self
+    {
+        $this->sentRequests = [];
+
+        return $this;
+    }
+
     protected function baseDirectory(): string
     {
         return str_replace("/tests/TestClasses", '', __DIR__);

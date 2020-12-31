@@ -210,6 +210,24 @@ class Ray
         return $this->send(get_class($object));
     }
 
+    public function removeWhen($boolOrCallable): self
+    {
+        if (is_callable($boolOrCallable)) {
+            $boolOrCallable = (bool)$boolOrCallable();
+        }
+
+        if ($boolOrCallable) {
+            $this->remove();
+        }
+
+        return $this;
+    }
+
+    public function removeIf($boolOrCallable): self
+    {
+        return $this->removeWhen($boolOrCallable);
+    }
+
     public function ban(): self
     {
         $this->send('🕶');

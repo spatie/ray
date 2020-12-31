@@ -164,6 +164,18 @@ sleep(1);
 $ray->remove();
 ```
 
+You can also conditionally remove items with the `removeWhen` function (or the `removeIf` alias).
+
+```php
+ray('this one will be remove if the number is 2')->removeWhen($number === 2);
+```
+
+`removeWhen` also accepts a callable.
+
+```php
+ray('this one will be remove if the number is 2')->removeWhen(fn() => ... // return true to remove the item);
+```
+
 ### Collapsing items
 
 You can display something in ray and make it collapsed immediately.
