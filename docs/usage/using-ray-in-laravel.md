@@ -53,7 +53,7 @@ You can display all events that are executed by calling `showEvents`.
 ```php
 ray()->showEvents();
 
-event(new MyEvent())
+event(new MyEvent());
 ```
 
 ![screenshot](TODO: add screenshot)
@@ -63,11 +63,11 @@ To stop showing queries, call `stopLoggingQueries`
 ```php
 ray()->showEvents();
 
-event(new MyEvent()) // this event will be displayed
+event(new MyEvent()); // this event will be displayed
 
-ray()->stopShowingEvents()
+ray()->stopShowingEvents();
 
-event(new MyOtherEvent()) // this event won't be displayed.
+event(new MyOtherEvent()); // this event won't be displayed.
 ```
 
 ![Screenshot](TODO: add screenshot)
