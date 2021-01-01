@@ -50,7 +50,6 @@ class Client
             }
 
             return $response['active'] ?? false;
-
         } catch (Exception $exception) {
             if ($exception instanceof  StopExecutionRequested) {
                 throw $exception;
