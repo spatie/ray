@@ -3,6 +3,8 @@
 namespace Spatie\Ray;
 
 use Exception;
+use Spatie\Ray\Exceptions\CouldNotConnectToRay;
+use Spatie\Ray\Exceptions\StopExecutionRequested;
 
 class Client
 {
@@ -43,9 +45,18 @@ class Client
 
             $response = json_decode($curlResult, true);
 
+            if ($response['stop_execution'] ?? false) {
+                throw StopExecutionRequested::make();
+            }
+
             return $response['active'] ?? false;
+
         } catch (Exception $exception) {
-            throw new Exception("Ray seems not be running at {$this->host}:{$this->portNumber}");
+            if ($exception instanceof  StopExecutionRequested) {
+                throw $exception;
+            }
+
+            throw CouldNotConnectToRay::make($this->host, $this->portNumber);
         }
     }
 
