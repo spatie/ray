@@ -213,7 +213,7 @@ class RayTest extends TestCase
 
         $this->assertCount(1, $frames);
 
-        $this->assertEquals('runTest', $frames[0]['method']);
+        $this->assertEquals('runBare', $frames[0]['method']);
         $this->assertEquals(TestCase::class, $frames[0]['class']);
     }
 
