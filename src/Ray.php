@@ -156,7 +156,9 @@ class Ray
     {
         $backtrace = Backtrace::create();
 
-        $payload = (new TracePayload($backtrace->frames()))->limit(1);
+        $payload = (new TracePayload($backtrace->frames()))
+            ->startFromIndex(1)
+            ->limit(1);
 
         return $this->sendRequest([$payload]);
     }
