@@ -12,23 +12,23 @@ Additionally, you can use these Laravel specific methods.
 You can display all queries that are executed by calling `showQueries`.
 
 ```php
-ray()->showQueries();
+`ray()->showQueries();
 
-User::all(); // this query will be displayed in Ray.
+User::firstWhere('email', 'john@example.com');; // this query will be displayed in Ray.`
 ```
 
-![screenshot](TODO: add screenshot)
+![screenshot](image:query.jpg)
 
-To stop showing queries, call `stopLoggingQueries`
+To stop showing queries, call `stopLoggingQueries`.
 
 ```php
 ray()->showQueries();
 
-User::all(); // this query will be displayed.
+User::firstWhere('email', 'john@example.com'); // this query will be displayed.
 
-ray()->stopShowingQueries()
+ray()->stopShowingQueries();
 
-User::all(); // this query won't be displayed.
+User::firstWhere('email', 'jane@example.com'); // this query won't be displayed.
 ```
 
 ![Screenshot](TODO: add screenshot)
@@ -53,12 +53,14 @@ You can display all events that are executed by calling `showEvents`.
 ```php
 ray()->showEvents();
 
-event(new MyEvent());
+event(new TestEvent());
+
+event(new TestEventWithParameter('my argument'));
 ```
 
-![screenshot](TODO: add screenshot)
+![screenshot](image:event.jpg)
 
-To stop showing queries, call `stopLoggingQueries`
+To stop showing queries, call `stopLoggingQueries`.
 
 ```php
 ray()->showEvents();
@@ -69,8 +71,6 @@ ray()->stopShowingEvents();
 
 event(new MyOtherEvent()); // this event won't be displayed.
 ```
-
-![Screenshot](TODO: add screenshot)
 
 Alternatively, you can pass a callable to `showEvents`. Only the events fired inside that callable will be displayed in Ray.
 
@@ -93,7 +93,7 @@ Using the model function, you can display the attributes of relations of a model
 ray()->model($user)
 ```
 
-![screenshot](TODO: add screenshot)
+![screenshot](image:model.jpg)
 
 ### Displaying mailables
 
