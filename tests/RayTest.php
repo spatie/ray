@@ -209,12 +209,10 @@ class RayTest extends TestCase
     {
         $this->ray->caller();
 
-        $frames = $this->getValueOfLastSentContent('frames');
+        $frame = $this->getValueOfLastSentContent('frame');
 
-        $this->assertCount(1, $frames);
-
-        $this->assertEquals('runBare', $frames[0]['method']);
-        $this->assertEquals(TestCase::class, $frames[0]['class']);
+        $this->assertEquals('runBare', $frame['method']);
+        $this->assertEquals(TestCase::class, $frame['class']);
     }
 
     /** @test */

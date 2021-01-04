@@ -9,6 +9,7 @@ use Spatie\Backtrace\Backtrace;
 use Spatie\Macroable\Macroable;
 use Spatie\Ray\Concerns\RayColors;
 use Spatie\Ray\Concerns\RaySizes;
+use Spatie\Ray\Payloads\CallerPayload;
 use Spatie\Ray\Payloads\ColorPayload;
 use Spatie\Ray\Payloads\CreateLockPayload;
 use Spatie\Ray\Payloads\HidePayload;
@@ -156,9 +157,7 @@ class Ray
     {
         $backtrace = Backtrace::create();
 
-        $payload = (new TracePayload($backtrace->frames()))
-            ->startFromIndex(1)
-            ->limit(1);
+        $payload = (new CallerPayload($backtrace->frames()));
 
         return $this->sendRequest($payload);
     }
