@@ -11,12 +11,13 @@ Here's an example:
 ray('Hello world');
 ray(['a' => 1, 'b' => 2])->color('red');
 ray('multiple', 'argments', 'are', 'welcome');
-ray()->logQueries($userModel);
+ray()->showQueries();
+User::firstWhere('email', 'john@example.com');
 ```
 
 Here's how that looks like in Ray.
 
-[TODO: add screenshot]
+![screenshot](image:intro.jpg)
 
 There are many other helper functions available on Ray that allow you to display things that can help you debug such as [runtime and memory usage](TODO: add link), [queries that were executed](TODO: add link), and much more. 
 

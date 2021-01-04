@@ -6,12 +6,12 @@ weight: 2
 To display something in Ray use the `ray()` function. It accepts everything: strings, arrays, objects, ... you name it.
 
 ```php
-ray('a string')
-ray(['an array'])
-ray($anObject)
+ray('a string');
+ray(['an array']);
+ray($anObject);
 ```
 
-![screenshot](TODO: add screenshot)
+![screenshot](image:ray.jpg)
 
 `ray` accepts multiple arguments. Each argument will be displayed in the Ray app.
 
@@ -32,17 +32,19 @@ ray('this is purple')->purple();
 ray('this is gray')->gray();
 ```
 
+![screenshot](image:colors.jpg)
+
 ### Using sizes
 
 Ray can display things in different sizes
 
 ```php
-ray('small')->small()
+ray('small')->small();
 ray('regular');
 ray('large')->large();
 ```
 
-![screenshot](TODO: add screenshot)
+![screenshot](image:sizes.jpg)
 
 ### Creating a new screen
 
@@ -60,7 +62,7 @@ Optionally, you can give a screen a name:
 ray()->newScreen('My debug screen')
 ```
 
-![screenshot](TODO: add screenshot)
+![screenshot](image:screen.jpg)
 
 ### See the caller of a function
 
@@ -70,15 +72,15 @@ Sometimes you want to know where your code is being called. You can quickly dete
 ray()->caller();
 ```
 
-![screenshot](TODO: add screenshot)
+![screenshot](image:caller.jpg)
 
-If you want to see the entire backtrace, use the `backtrace`.
+If you want to see the entire backtrace, use the `trace`.
 
 ```php
-ray()->backtrace();
+ray()->trace();
 ```
 
-![screenshot](TODO: add screenshot)
+![screenshot](image:trace.jpg)
 
 ### Pausing execution
 
@@ -88,9 +90,9 @@ You can pause execution of a script by using the `pause` method.
 ray()->pause();
 ```
 
-If you press the `continue` button in Ray, execution will continue.
+![screenshot](image:pause.jpg)
 
-![screenshot](TODO: add screenshot)
+If you press the "Continue" button in Ray, execution will continue. When you press "Stop execution" Ray will thrown an exception in your app to halt execution.
 
 ### Display the class name of an object
 
@@ -99,8 +101,6 @@ To quickly send the class name of an object to ray, use the `className` function
 ```php
 ray()->className($anObject)
 ```
-
-![screenshot](TODO: add screenshot)
 
 ### Measuring performance and memory usage
 
@@ -112,20 +112,24 @@ ray()->measure();
 sleep(1);
 
 ray()->measure();
+
+sleep(2);
+
+ray()->measure();
+
 ```
 
-![screenshot](TODO: add screenshot)
-
+![screenshot](image:measure.jpg)
 
 The `measure` call optionally accepts a callable. Ray will output the time needed to run the callable and the maximum memory used.
 
 ```php
 ray()->measure(function() {
     sleep(5);
-})
+});
 ```
 
-![screenshot](TODO: add screenshot)
+![screenshot](image:measure-closure.jpg)
 
 ### Updating displayed items
 
@@ -176,23 +180,25 @@ ray('this one will be remove if the number is 2')->removeWhen($number === 2);
 ray('this one will be remove if the number is 2')->removeWhen(fn() => ... // return true to remove the item);
 ```
 
-### Collapsing items
+### Hiding items
 
-You can display something in ray and make it collapsed immediately.
+You can display something in ray and make it hidden immediately.
 
 ```php
-ray($largeObject)->collapse()
+ray($largeObject)->hide()
 ```
 
-![screenshot](TODO: add screenshot)
+![screenshot](image:hide.jpg)
 
 ### Displaying a notification
 
 You can use Ray to display a notification.
 
 ```php
-ray()->notify('This is my notification')
+ray()->notify('This is my notification');
 ```
+
+![screenshot](image:notification.jpg)
 
 ### Halting the PHP process
 

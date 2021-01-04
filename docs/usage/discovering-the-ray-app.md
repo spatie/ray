@@ -27,14 +27,19 @@ If you want Ray always to be on top, just toggle on the `Keep on top` toggle on 
 
 At the bottom of every item that displayed in Ray, you'll see a link that, when clicked, will take you to where this item was sent to ray. You can use this to, after debugging, quickly find locations where `ray()` calls are made, so you can remove them.
 
-![screenshot](TODO: add screenshot)
+![screenshot](image:clean.jpg)
+
 
 When a Ray screen is displaying many items, it might be bothersome to click each item. In this case, you can click "List files" to get a unique list of locations where a Ray call is in your source code.
 
-![screenshot](TODO: add screenshot)
+![screenshot](image:list-files.jpg)
 
 Should you forget to remove a `ray()` call in a Laravel app, and push your code to production, no worries. Ray will not try to transmit any info in a production environment.
 
 ## Hiding the app using the hotkey
 
-You can press `cmd+shift+2` to hide or show the app, no matter which application is the active on.
+You can press `cmd+shift+L` to hide or show the app, no matter which application is the active on.
+
+You can customize this key in the preferences.
+
+![screenshot](image:hotkeys.jpg)
