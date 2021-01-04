@@ -13,7 +13,7 @@ Spatie\Ray\Ray::macro('uppercase', function(string $value) {
 
     $payload = new Spatie\Ray\Payloads\LogPayload($uppercasedValue);
     
-    $this->sendRequest([$payload]);
+    $this->sendRequest($payload);
     
     return $this;
 });

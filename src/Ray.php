@@ -64,7 +64,7 @@ class Ray
     {
         $payload = new NewScreenPayload($name);
 
-        $this->sendRequest([$payload]);
+        $this->sendRequest($payload);
 
         return $this;
     }
@@ -78,7 +78,7 @@ class Ray
     {
         $payload = new ColorPayload($color);
 
-        $this->sendRequest([$payload]);
+        $this->sendRequest($payload);
 
         return $this;
     }
@@ -87,7 +87,7 @@ class Ray
     {
         $payload = new SizePayload($size);
 
-        $this->sendRequest([$payload]);
+        $this->sendRequest($payload);
 
         return $this;
     }
@@ -96,7 +96,7 @@ class Ray
     {
         $payload = new RemovePayload();
 
-        $this->sendRequest([$payload]);
+        $this->sendRequest($payload);
 
         return $this;
     }
@@ -105,7 +105,7 @@ class Ray
     {
         $payload = new HidePayload();
 
-        $this->sendRequest([$payload]);
+        $this->sendRequest($payload);
 
         return $this;
     }
@@ -129,14 +129,14 @@ class Ray
             $payload = new MeasurePayload($stopwatchName, $event);
             $payload->concernsNewTimer();
 
-            return $this->sendRequest([$payload]);
+            return $this->sendRequest($payload);
         }
 
         $stopwatch = static::$stopWatches[$stopwatchName];
         $event = $stopwatch->lap($stopwatchName);
         $payload = new MeasurePayload($stopwatchName, $event);
 
-        return $this->sendRequest([$payload]);
+        return $this->sendRequest($payload);
     }
 
     public function trace(?Closure $startingFromFrame = null): self
@@ -149,7 +149,7 @@ class Ray
 
         $payload = new TracePayload($backtrace->frames());
 
-        return $this->sendRequest([$payload]);
+        return $this->sendRequest($payload);
     }
 
     public function caller(): self
@@ -160,7 +160,7 @@ class Ray
             ->startFromIndex(1)
             ->limit(1);
 
-        return $this->sendRequest([$payload]);
+        return $this->sendRequest($payload);
     }
 
     protected function measureClosure(Closure $closure): self
@@ -175,7 +175,7 @@ class Ray
 
         $payload = new MeasurePayload('closure', $event);
 
-        return $this->sendRequest([$payload]);
+        return $this->sendRequest($payload);
     }
 
     public function stopTime(string $stopwatchName = ''): self
@@ -199,7 +199,7 @@ class Ray
     {
         $payload = new NotifyPayload($text);
 
-        return $this->sendRequest([$payload]);
+        return $this->sendRequest($payload);
     }
 
     public function die($status = '')
@@ -207,7 +207,7 @@ class Ray
         die($status);
     }
 
-    public function className(object $object)
+    public function className(object $object): self
     {
         return $this->send(get_class($object));
     }
@@ -243,7 +243,7 @@ class Ray
 
         $payload = new CreateLockPayload($lockName);
 
-        $this->sendRequest([$payload]);
+        $this->sendRequest($payload);
 
         do {
             sleep(1);
@@ -260,11 +260,22 @@ class Ray
 
         $payload = LogPayload::createForArguments($arguments);
 
-        return $this->sendRequest([$payload]);
+        return $this->sendRequest($payload);
     }
 
-    public function sendRequest(array $payloads, array $meta = []): self
+    /**
+     * @param \Spatie\Ray\Payloads\Payload|\Spatie\Ray\Payloads\Payload[]$payloads
+     * @param array $meta
+     *
+     * @return $this
+     * @throws \Exception
+     */
+    public function sendRequest($payloads, array $meta = []): self
     {
+        if (! is_array($payloads)) {
+            $payloads = [$payloads];
+        }
+
         if (class_exists(InstalledVersions::class)) {
             $meta['ray_package_version'] = InstalledVersions::getVersion('spatie/ray');
         }
