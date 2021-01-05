@@ -232,7 +232,6 @@ class Ray
     public function showIf($boolOrCallable): self
     {
         return $this->showWhen($boolOrCallable);
-
     }
 
     public function removeWhen($boolOrCallable): self
