@@ -12,7 +12,7 @@ Additionally, you can use these Laravel specific methods.
 You can display all queries that are executed by calling `showQueries` (or `queries`).
 
 ```php
-`ray()->showQueries();
+ray()->showQueries();
 
 User::firstWhere('email', 'john@example.com');; // this query will be displayed in Ray.
 ```
