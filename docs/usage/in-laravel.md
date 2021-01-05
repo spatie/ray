@@ -34,7 +34,6 @@ User::firstWhere('email', 'jane@example.com'); // this query won't be displayed.
 Alternatively, you can pass a callable to `showQueries`. Only the queries performed inside that callable will be displayed in Ray.
 
 ```php
-
 User::all(); // this query won't be displayed.
 
 ray()->showQueries(function() {
@@ -73,7 +72,6 @@ event(new MyOtherEvent()); // this event won't be displayed.
 Alternatively, you can pass a callable to `showEvents`. Only the events fired inside that callable will be displayed in Ray.
 
 ```php
-
 event(new MyEvent()); // this event won't be displayed.
 
 ray()->showEvents(function() {
