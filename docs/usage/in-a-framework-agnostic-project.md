@@ -1,5 +1,5 @@
 ---
-title: Using Ray in a framework agnostic project
+title: In a framework agnostic project
 weight: 2
 ---
 

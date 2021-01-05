@@ -1,5 +1,5 @@
 ---
-title: Using a configuration file
+title: Configuring Ray
 weight: 3
 ---
 

@@ -1,5 +1,5 @@
 ---
-title: Using Ray in Laravel
+title: In Laravel
 weight: 3
 ---
 

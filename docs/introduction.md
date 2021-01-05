@@ -9,9 +9,13 @@ Here's an example:
 
 ```
 ray('Hello world');
+
 ray(['a' => 1, 'b' => 2])->color('red');
+
 ray('multiple', 'argments', 'are', 'welcome');
+
 ray()->showQueries();
+
 User::firstWhere('email', 'john@example.com');
 ```
 

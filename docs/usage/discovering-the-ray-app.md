@@ -5,7 +5,7 @@ weight: 1
 
 Ray is a very simple app to use. You can use any of the `ray` calls that are documented on the [other](TODO:using-ray-in-a-framework-agnostic-project) [pages](TODO:using-ray-in-laravel) in this section.
 
-![](TODO add screenshot)
+![screenshot](/docs/ray/v1/images/empty.jpg)
 
 ## Clearing the screen
 
@@ -28,7 +28,6 @@ If you want Ray always to be on top, just toggle on the `Keep on top` toggle on 
 At the bottom of every item that displayed in Ray, you'll see a link that, when clicked, will take you to where this item was sent to ray. You can use this to, after debugging, quickly find locations where `ray()` calls are made, so you can remove them.
 
 ![screenshot](/docs/ray/v1/images/clean.jpg)
-
 
 When a Ray screen is displaying many items, it might be bothersome to click each item. In this case, you can click "List files" to get a unique list of locations where a Ray call is in your source code.
 
