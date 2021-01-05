@@ -153,6 +153,11 @@ class Ray
         return $this->sendRequest($payload);
     }
 
+    public function backtrace(?Closure $startingFromFrame = null): self
+    {
+        return $this->trace($startingFromFrame);
+    }
+
     public function caller(): self
     {
         $backtrace = Backtrace::create();

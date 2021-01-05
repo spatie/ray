@@ -205,6 +205,20 @@ class RayTest extends TestCase
     }
 
     /** @test */
+    public function it_has_a_backtrace_alias_for_trace()
+    {
+        $this->ray->backtrace();
+        $frames = $this->getValueOfLastSentContent('frames');
+
+        $this->assertGreaterThanOrEqual(10, count($frames));
+
+        $firstFrame = $frames[0];
+
+        $this->assertEquals('PHPUnit\Framework\TestCase', $firstFrame['class']);
+        $this->assertEquals('runTest', $firstFrame['method']);
+    }
+
+    /** @test */
     public function it_can_send_the_caller_to_ray()
     {
         $this->ray->caller();

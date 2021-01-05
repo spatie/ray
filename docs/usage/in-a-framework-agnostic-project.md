@@ -76,7 +76,7 @@ ray()->caller();
 
 ![screenshot](/docs/ray/v1/images/caller.jpg)
 
-If you want to see the entire backtrace, use the `trace`.
+If you want to see the entire backtrace, use the `trace` (or `backtrace`).
 
 ```php
 ray()->trace();
