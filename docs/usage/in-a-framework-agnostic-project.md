@@ -50,7 +50,7 @@ ray('large')->large();
 
 ### Creating a new screen
 
-You can use `ray` to programmatically create a new screen.
+You can use `newScreen` (or `clearScreen`) to programmatically create a new screen.
 
 ```php
 ray()->newScreen(); 
@@ -65,6 +65,10 @@ ray()->newScreen('My debug screen')
 ```
 
 ![screenshot](/docs/ray/v1/images/screen.jpg)
+
+You could opt to use `newScreen` very early on in a request so you'll only see items that were sent to Ray in the current request. In a Laravel app, a good place for this might be the service provider.
+
+When using PHPUnit to run tests, you might use `newScreen` to get a new screen each time your run a test to debug some code.
 
 ### See the caller of a function
 
