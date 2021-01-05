@@ -5,7 +5,7 @@ namespace Spatie\Ray;
 use Symfony\Component\VarDumper\Cloner\VarCloner;
 use Symfony\Component\VarDumper\Dumper\HtmlDumper;
 
-class ArgumentConvertor
+class ArgumentConverter
 {
     public static function convertToPrimitive($argument)
     {

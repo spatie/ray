@@ -2,7 +2,7 @@
 
 namespace Spatie\Ray\Payloads;
 
-use Spatie\Ray\ArgumentConvertor;
+use Spatie\Ray\ArgumentConverter;
 
 class LogPayload extends Payload
 {
@@ -11,7 +11,7 @@ class LogPayload extends Payload
     public static function createForArguments(array $arguments): Payload
     {
         $dumpedArguments = array_map(function ($argument) {
-            return ArgumentConvertor::convertToPrimitive($argument);
+            return ArgumentConverter::convertToPrimitive($argument);
         }, $arguments);
 
         return new static($dumpedArguments);
