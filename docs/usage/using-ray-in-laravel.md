@@ -17,7 +17,7 @@ You can display all queries that are executed by calling `showQueries`.
 User::firstWhere('email', 'john@example.com');; // this query will be displayed in Ray.`
 ```
 
-![screenshot](/docs/ray/v1/query.jpg)
+![screenshot](/docs/ray/v1/images/query.jpg)
 
 To stop showing queries, call `stopLoggingQueries`.
 
@@ -58,7 +58,7 @@ event(new TestEvent());
 event(new TestEventWithParameter('my argument'));
 ```
 
-![screenshot](/docs/ray/v1/event.jpg)
+![screenshot](/docs/ray/v1/images/event.jpg)
 
 To stop showing queries, call `stopLoggingQueries`.
 
@@ -93,7 +93,7 @@ Using the model function, you can display the attributes of relations of a model
 ray()->model($user)
 ```
 
-![screenshot](/docs/ray/v1/model.jpg)
+![screenshot](/docs/ray/v1/images/model.jpg)
 
 ### Displaying mailables
 
@@ -103,7 +103,7 @@ You can see the rendered version of mailable in Ray by passing a mailable to the
 ray()->mailable(new TestMailable());
 ```
 
-![screenshot](/docs/ray/v1/mailable.jpg)
+![screenshot](/docs/ray/v1/images/mailable.jpg)
 
 ### Displaying collections
 
@@ -116,7 +116,7 @@ collect(['a', 'b', 'c'])
     ->ray('uppercased collection'); // displays the modified collection
 ```
 
-![screenshot](/docs/ray/v1/collection.jpg)
+![screenshot](/docs/ray/v1/images/collection.jpg)
 
 ### Using Ray in Blade views
 
