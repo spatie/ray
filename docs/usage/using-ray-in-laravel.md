@@ -17,7 +17,7 @@ You can display all queries that are executed by calling `showQueries`.
 User::firstWhere('email', 'john@example.com');; // this query will be displayed in Ray.`
 ```
 
-![screenshot](image:query.jpg)
+![screenshot](/docs/ray/v1/query.jpg)
 
 To stop showing queries, call `stopLoggingQueries`.
 
@@ -58,7 +58,7 @@ event(new TestEvent());
 event(new TestEventWithParameter('my argument'));
 ```
 
-![screenshot](image:event.jpg)
+![screenshot](/docs/ray/v1/event.jpg)
 
 To stop showing queries, call `stopLoggingQueries`.
 
@@ -93,7 +93,7 @@ Using the model function, you can display the attributes of relations of a model
 ray()->model($user)
 ```
 
-![screenshot](image:model.jpg)
+![screenshot](/docs/ray/v1/model.jpg)
 
 ### Displaying mailables
 
@@ -103,7 +103,7 @@ You can see the rendered version of mailable in Ray by passing a mailable to the
 ray()->mailable(new TestMailable());
 ```
 
-![screenshot](TODO: add screenshot)
+![screenshot](/docs/ray/v1/mailable.jpg)
 
 ### Displaying collections
 
@@ -113,10 +113,10 @@ In a Laravel app, Ray will automatically register a `ray` collection macro to ea
 collect(['a', 'b', 'c'])
     ->ray('original collection') // displays the original collection
     ->map(fn(string $letter) => strtoupper($letter))
-    ->ray('uppercased collection') // displays the modified collection
+    ->ray('uppercased collection'); // displays the modified collection
 ```
 
-![screenshot](TODO: add screenshot)
+![screenshot](/docs/ray/v1/collection.jpg)
 
 ### Using Ray in Blade views
 
@@ -143,5 +143,3 @@ ray()->enable();
 
 ray('three') // will be displayed in ray
 ```
-
-

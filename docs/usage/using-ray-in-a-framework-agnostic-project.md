@@ -11,7 +11,7 @@ ray(['an array']);
 ray($anObject);
 ```
 
-![screenshot](image:ray.jpg)
+![screenshot](/docs/ray/v1/ray.jpg)
 
 `ray` accepts multiple arguments. Each argument will be displayed in the Ray app.
 
@@ -32,7 +32,7 @@ ray('this is purple')->purple();
 ray('this is gray')->gray();
 ```
 
-![screenshot](image:colors.jpg)
+![screenshot](/docs/ray/v1/colors.jpg)
 
 ### Using sizes
 
@@ -44,7 +44,7 @@ ray('regular');
 ray('large')->large();
 ```
 
-![screenshot](image:sizes.jpg)
+![screenshot](/docs/ray/v1/sizes.jpg)
 
 ### Creating a new screen
 
@@ -62,7 +62,7 @@ Optionally, you can give a screen a name:
 ray()->newScreen('My debug screen')
 ```
 
-![screenshot](image:screen.jpg)
+![screenshot](/docs/ray/v1/screen.jpg)
 
 ### See the caller of a function
 
@@ -72,7 +72,7 @@ Sometimes you want to know where your code is being called. You can quickly dete
 ray()->caller();
 ```
 
-![screenshot](image:caller.jpg)
+![screenshot](/docs/ray/v1/caller.jpg)
 
 If you want to see the entire backtrace, use the `trace`.
 
@@ -80,7 +80,7 @@ If you want to see the entire backtrace, use the `trace`.
 ray()->trace();
 ```
 
-![screenshot](image:trace.jpg)
+![screenshot](/docs/ray/v1/trace.jpg)
 
 ### Pausing execution
 
@@ -90,7 +90,7 @@ You can pause execution of a script by using the `pause` method.
 ray()->pause();
 ```
 
-![screenshot](image:pause.jpg)
+![screenshot](/docs/ray/v1/pause.jpg)
 
 If you press the "Continue" button in Ray, execution will continue. When you press "Stop execution" Ray will thrown an exception in your app to halt execution.
 
@@ -119,7 +119,7 @@ ray()->measure();
 
 ```
 
-![screenshot](image:measure.jpg)
+![screenshot](/docs/ray/v1/measure.jpg)
 
 The `measure` call optionally accepts a callable. Ray will output the time needed to run the callable and the maximum memory used.
 
@@ -129,7 +129,7 @@ ray()->measure(function() {
 });
 ```
 
-![screenshot](image:measure-closure.jpg)
+![screenshot](/docs/ray/v1/measure-closure.jpg)
 
 ### Updating displayed items
 
@@ -188,7 +188,7 @@ You can display something in ray and make it hidden immediately.
 ray($largeObject)->hide()
 ```
 
-![screenshot](image:hide.jpg)
+![screenshot](/docs/ray/v1/hide.jpg)
 
 ### Displaying a notification
 
@@ -198,7 +198,7 @@ You can use Ray to display a notification.
 ray()->notify('This is my notification');
 ```
 
-![screenshot](image:notification.jpg)
+![screenshot](/docs/ray/v1/notification.jpg)
 
 ### Halting the PHP process
 

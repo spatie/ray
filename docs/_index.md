@@ -1,6 +1,6 @@
 ---
 title: v1
-slogan: Professional dump debugging
+slogan: 
 githubUrl: https://github.com/spatie/ray
 branch: master
 ---
