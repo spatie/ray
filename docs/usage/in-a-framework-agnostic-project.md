@@ -162,7 +162,7 @@ sleep(1);
 $ray->red()->large()
 ```
 
-## Conditionally showing items
+### Conditionally showing items
 
 You can conditionally show things using the `showIf` method. If you pass a truthy value, the item will be displayed.
 
