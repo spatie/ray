@@ -94,6 +94,28 @@ class RayTest extends TestCase
     }
 
     /** @test */
+    public function it_can_conditionally_show_something_using_a_boolean()
+    {
+        $this->ray->send('hey')->showIf(true);
+        $this->assertCount(1, $this->client->sentPayloads());
+
+        $this->client->reset();
+        $this->ray->send('hey')->showIf(false);
+        $this->assertCount(2, $this->client->sentPayloads());
+    }
+
+    /** @test */
+    public function it_can_conditionally_show_something_using_a_callable()
+    {
+        $this->ray->send('hey')->showIf(fn () => true);
+        $this->assertCount(1, $this->client->sentPayloads());
+
+        $this->client->reset();
+        $this->ray->send('hey')->showIf(fn () => false);
+        $this->assertCount(2, $this->client->sentPayloads());
+    }
+
+    /** @test */
     public function it_can_conditionally_remove_something_using_a_boolean()
     {
         $this->ray->send('hey')->removeWhen(true);

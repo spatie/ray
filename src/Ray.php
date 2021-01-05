@@ -216,6 +216,25 @@ class Ray
         return $this->send(get_class($object));
     }
 
+    public function showWhen($boolOrCallable): self
+    {
+        if (is_callable($boolOrCallable)) {
+            $boolOrCallable = (bool)$boolOrCallable();
+        }
+
+        if (! $boolOrCallable) {
+            $this->remove();
+        }
+
+        return $this;
+    }
+
+    public function showIf($boolOrCallable): self
+    {
+        return $this->showWhen($boolOrCallable);
+
+    }
+
     public function removeWhen($boolOrCallable): self
     {
         if (is_callable($boolOrCallable)) {

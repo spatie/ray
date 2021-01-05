@@ -162,6 +162,17 @@ sleep(1);
 $ray->red()->large()
 ```
 
+## Conditionally showing items
+
+You can conditionally show things using the `showIf` method. If you pass a truthy value, the item will be displayed.
+
+```php
+ray('will be show')->showIf(true);
+ray('will not be shown')->showIf(false);
+```
+
+You can also pass a callable to `showIf`. If the callable returns a truthy value, it will be shown. Otherwise, it will not.
+
 ### Removing items
 
 You can remove an item that is already displayed in Ray. To do this, call the `remove` function on an instance return by the `ray` function.
