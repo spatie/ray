@@ -241,6 +241,13 @@ class Ray
         return $this;
     }
 
+    public function charles(): self
+    {
+        $this->send('🎶 🎹 🎷 🕺');
+
+        return $this;
+    }
+
     public function pause(): self
     {
         $lockName = md5(time());
