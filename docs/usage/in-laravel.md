@@ -9,12 +9,12 @@ Additionally, you can use these Laravel specific methods.
 
 ### Showing queries
 
-You can display all queries that are executed by calling `showQueries`.
+You can display all queries that are executed by calling `showQueries` (or `queries`).
 
 ```php
 `ray()->showQueries();
 
-User::firstWhere('email', 'john@example.com');; // this query will be displayed in Ray.`
+User::firstWhere('email', 'john@example.com');; // this query will be displayed in Ray.
 ```
 
 ![screenshot](/docs/ray/v1/images/query.jpg)
@@ -45,7 +45,7 @@ User::all(); // this query won't be displayed.
 
 ### Showing events
 
-You can display all events that are executed by calling `showEvents`.
+You can display all events that are executed by calling `showEvents` (or `events`).
 
 ```php
 ray()->showEvents();
@@ -57,7 +57,7 @@ event(new TestEventWithParameter('my argument'));
 
 ![screenshot](/docs/ray/v1/images/event.jpg)
 
-To stop showing queries, call `stopLoggingQueries`.
+To stop showing events, call `stopShowingEvents`.
 
 ```php
 ray()->showEvents();
