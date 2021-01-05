@@ -7,7 +7,9 @@ To display something in Ray use the `ray()` function. It accepts everything: str
 
 ```php
 ray('a string');
+
 ray(['an array']);
+
 ray($anObject);
 ```
 
@@ -36,7 +38,7 @@ ray('this is gray')->gray();
 
 ### Using sizes
 
-Ray can display things in different sizes
+Ray can display things in different sizes.
 
 ```php
 ray('small')->small();
