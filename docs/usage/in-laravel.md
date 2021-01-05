@@ -3,7 +3,7 @@ title: In Laravel
 weight: 3
 ---
 
-Inside a Laravel application, you can use all methods from [the framework agnostic version](TODO: add link).
+Inside a Laravel application, you can use all methods from [the framework agnostic version](/docs/ray/v1/usage/in-a-framework-agnostic-project).
 
 Additionally, you can use these Laravel specific methods.
 
@@ -30,8 +30,6 @@ ray()->stopShowingQueries();
 
 User::firstWhere('email', 'jane@example.com'); // this query won't be displayed.
 ```
-
-![Screenshot](TODO: add screenshot)
 
 Alternatively, you can pass a callable to `showQueries`. Only the queries performed inside that callable will be displayed in Ray.
 

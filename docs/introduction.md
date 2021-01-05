@@ -23,8 +23,8 @@ Here's how that looks like in Ray.
 
 ![screenshot](/docs/ray/v1/images/intro.jpg)
 
-There are many other helper functions available on Ray that allow you to display things that can help you debug such as [runtime and memory usage](TODO: add link), [queries that were executed](TODO: add link), and much more. 
+There are many other helper functions available on Ray that allow you to display things that can help you debug such as [runtime and memory usage](/docs/ray/v1/usage/in-a-framework-agnostic-project#measuring-performance-and-memory-usage), [queries that were executed](/docs/ray/v1/usage/in-laravel#showing-queries), and much more. 
 
 ## Getting started
 
-To get started you should buy a license for the Ray app [in our store](TODO: add link), and [install the free package into your app](TODO: add link).
+To get started you should buy a license for the Ray app [in our store](/products/ray), and [install the free package into your app](/docs/ray/v1/getting-started/installation-in-a-framework-agnostic-php-project).
