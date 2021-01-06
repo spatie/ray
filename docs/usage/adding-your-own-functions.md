@@ -10,14 +10,27 @@ Here's a silly example where the passed value will be displayed in uppercase in 
 ```php
 Spatie\Ray\Ray::macro('uppercase', function(string $value) {
     $uppercasedValue = strtoupper($value);
-
-    $payload = new Spatie\Ray\Payloads\LogPayload($uppercasedValue);
     
-    $this->sendRequest($payload);
+    $this->send($uppercasedValue);
     
     return $this;
 });
+
+ray()->uppercase('this string will be displayed uppercase in ray')
 ```
+
+If you want to control the little label next to the item you should use `sendCustom` in your macro.
+
+```php
+Ray::macro('myCustomFunction', function() {
+    $this->sendCustom('my custom content', 'hey');
+});
+
+ray()->myCustomFunction();
+```
+
+![screenshot](/docs/ray/v1/images/custom.png)
+
 
 
 
