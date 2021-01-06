@@ -1,6 +1,6 @@
 ---
 title: Installation in a framework agnostic PHP project
-weight: 1
+weight: 2
 ---
 
 To start using Ray any PHP project , install the `ray` package.

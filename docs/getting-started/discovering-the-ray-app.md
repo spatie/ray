@@ -1,6 +1,6 @@
 ---
 title: Discovering the Ray app
-weight: 4
+weight: 5
 ---
 
 Ray is a very simple app to use. You can use any of the `ray` calls that are documented on the [other](/docs/ray/v1/usage/in-a-framework-agnostic-project) [pages](/docs/ray/v1/usage/in-laravel) in this section.

@@ -3,7 +3,9 @@ title: Introduction
 weight: 1
 ---
 
-Ray is a beautiful, lightweight app that helps you debug your app. You can use the `ray()` function to quickly dump stuff. Any variable(s) that you pass to `ray` will be displayed.
+Ray is a beautiful, lightweight desktop app that helps you debug your app. There's a [free demo](https://myray.app) available.
+
+After installing the [framework agnostic](/docs/ray/v1/getting-started/installation-in-a-framework-agnostic-php-project) or [Laravel specific package](https://spatie.be/docs/ray/v1/getting-started/installation-in-laravel), you can use the `ray()` function to quickly dump stuff. Any variable(s) that you pass to `ray` will be displayed.
 
 Here's an example:
 

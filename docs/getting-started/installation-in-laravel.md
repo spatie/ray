@@ -1,6 +1,6 @@
 ---
 title: Installation in Laravel
-weight: 2
+weight: 3
 ---
 
 If you use Laravel, this is the way.

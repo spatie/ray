@@ -1,6 +1,6 @@
 ---
 title: Configuring Ray
-weight: 3
+weight: 4
 ---
 
 You can optionally configure Ray by creating a file named `ray.php` in your project directory.  We recommend putting `ray.php` in your `.gitignore` so your fellow developers can use their own configuration.
