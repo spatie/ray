@@ -12,6 +12,7 @@ use Spatie\Ray\Concerns\RaySizes;
 use Spatie\Ray\Payloads\CallerPayload;
 use Spatie\Ray\Payloads\ColorPayload;
 use Spatie\Ray\Payloads\CreateLockPayload;
+use Spatie\Ray\Payloads\CustomPayload;
 use Spatie\Ray\Payloads\HidePayload;
 use Spatie\Ray\Payloads\LogPayload;
 use Spatie\Ray\Payloads\MeasurePayload;
@@ -290,6 +291,13 @@ class Ray
         $payload = LogPayload::createForArguments($arguments);
 
         return $this->sendRequest($payload);
+    }
+
+    public function sendCustom(string $content, string $label = ''): self
+    {
+        $customPayload = new CustomPayload($content, $label);
+
+        return $this->sendRequest($customPayload);
     }
 
     /**

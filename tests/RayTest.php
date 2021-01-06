@@ -307,6 +307,16 @@ class RayTest extends TestCase
         $this->assertEquals('create_lock', $this->client->sentPayloads()[0]['payloads'][0]['type']);
     }
 
+    /** @test */
+    public function it_can_send_custom_stuff_to_ray()
+    {
+        $this->ray->sendCustom('my custom content');
+        $this->assertMatchesSnapshot($this->client->sentPayloads());
+
+        $this->ray->sendCustom('my custom content', 'custom label');
+        $this->assertMatchesSnapshot($this->client->sentPayloads());
+    }
+
     protected function getValueOfLastSentContent(string $contentKey)
     {
         $payload = $this->client->sentPayloads();
