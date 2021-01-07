@@ -9,6 +9,8 @@ class Settings
     protected array $defaultSettings = [
         'host' => 'localhost',
         'port' => 23517,
+        'remote_path' => null,
+        'local_path' => null,
     ];
 
     public function __construct(array $settings)
