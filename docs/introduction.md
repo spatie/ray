@@ -23,7 +23,7 @@ User::firstWhere('email', 'john@example.com');
 
 Here's how that looks like in Ray.
 
-![screenshot](/docs/ray/v1/images/intro.jpg)
+![screenshot](./images/intro.jpg)
 
 There are many other helper functions available on Ray that allow you to display things that can help you debug such as [runtime and memory usage](/docs/ray/v1/usage/in-a-framework-agnostic-project#measuring-performance-and-memory-usage), [queries that were executed](/docs/ray/v1/usage/in-laravel#showing-queries), and much more. 
 
