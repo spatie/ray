@@ -54,7 +54,7 @@ return [
     /*
      *  The url used to communicate with the Ray app.
      */
-    'host' => 'http://localhost',
+    'host' => 'localhost',
     
     /*
      *  The port number used to communicate with the Ray app. 
