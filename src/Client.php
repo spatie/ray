@@ -23,11 +23,18 @@ class Client
     {
         $curlHandle = $this->getCurlHandleForUrl('get', '');
 
-        curl_setopt($curlHandle, CURLOPT_POSTFIELDS, $request->toJson());
+        $curlError = null;
 
-        try {
-            curl_exec($curlHandle);
-        } catch (Exception $exception) {
+        curl_setopt($curlHandle, CURLOPT_POSTFIELDS, $request->toJson());
+        curl_exec($curlHandle);
+
+        if (curl_errno($curlHandle)) {
+            $curlError = curl_error($curlHandle);
+        }
+
+        curl_close($curlHandle);
+
+        if ($curlError) {
             throw new Exception("Ray seems not be running at http://{$this->host}:{$this->portNumber}");
         }
     }
@@ -35,9 +42,20 @@ class Client
     public function lockExists(string $lockName): bool
     {
         $curlHandle = $this->getCurlHandleForUrl('get', "locks/{$lockName}");
+        $curlError = null;
 
         try {
             $curlResult = curl_exec($curlHandle);
+
+            if (curl_errno($curlHandle)) {
+                $curlError = curl_error($curlHandle);
+            }
+
+            curl_close($curlHandle);
+
+            if ($curlError) {
+                throw new Exception;
+            }
 
             if (! $curlResult) {
                 return false;
@@ -82,6 +100,7 @@ class Client
         curl_setopt($curlHandle, CURLOPT_HTTP_VERSION, CURL_HTTP_VERSION_1_0);
         curl_setopt($curlHandle, CURLOPT_ENCODING, '');
         curl_setopt($curlHandle, CURLINFO_HEADER_OUT, true);
+        curl_setopt($curlHandle, CURLOPT_FAILONERROR, true);
 
         if ($method === 'post') {
             curl_setopt($curlHandle, CURLOPT_POST, true);
