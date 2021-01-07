@@ -13,7 +13,7 @@ class SettingsTest extends TestCase
         $settings = SettingsFactory::createFromConfigFile();
 
         $this->assertEquals(23517, $settings->port);
-        $this->assertEquals('http://localhost', $settings->host);
+        $this->assertEquals('localhost', $settings->host);
     }
 
     /** @test */
