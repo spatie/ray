@@ -26,7 +26,6 @@ class Client
         $curlError = null;
 
         curl_setopt($curlHandle, CURLOPT_POSTFIELDS, $request->toJson());
-        curl_setopt($curlHandle, CURLOPT_FAILONERROR, true);
         curl_exec($curlHandle);
 
         if (curl_errno($curlHandle)) {
@@ -44,8 +43,6 @@ class Client
     {
         $curlHandle = $this->getCurlHandleForUrl('get', "locks/{$lockName}");
         $curlError = null;
-
-        curl_setopt($curlHandle, CURLOPT_FAILONERROR, true);
 
         try {
             $curlResult = curl_exec($curlHandle);
@@ -103,6 +100,7 @@ class Client
         curl_setopt($curlHandle, CURLOPT_HTTP_VERSION, CURL_HTTP_VERSION_1_0);
         curl_setopt($curlHandle, CURLOPT_ENCODING, '');
         curl_setopt($curlHandle, CURLINFO_HEADER_OUT, true);
+        curl_setopt($curlHandle, CURLOPT_FAILONERROR, true);
 
         if ($method === 'post') {
             curl_setopt($curlHandle, CURLOPT_POST, true);
