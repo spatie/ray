@@ -1,6 +1,6 @@
 {
     "name": "spatie/ray",
-    "description": "The PHP client",
+    "description": "Debug with Ray to fix problems faster",
     "keywords": [
         "spatie",
         "ray"
