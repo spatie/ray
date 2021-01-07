@@ -32,7 +32,6 @@ class SettingsTest extends TestCase
     {
         if ($_ENV('CI')) {
             $this->markTestSkipped('Test does not run on GitHub actions');
-
         }
     }
 }
