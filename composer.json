@@ -29,7 +29,8 @@
     "require-dev": {
         "illuminate/support": "^8.18",
         "phpunit/phpunit": "^9.5",
-        "spatie/phpunit-snapshot-assertions": "^4.2"
+        "spatie/phpunit-snapshot-assertions": "^4.2",
+        "vimeo/psalm": "^4.3"
     },
     "autoload": {
         "psr-4": {
