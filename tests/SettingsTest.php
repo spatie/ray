@@ -31,7 +31,7 @@ class SettingsTest extends TestCase
 
     protected function skipOnGitHubActions(): void
     {
-        if ($_ENV['CI'] ?? false) {
+        if (getenv('CI')) {
             $this->markTestSkipped('Test does not run on GitHub actions');
         }
     }
