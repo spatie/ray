@@ -20,7 +20,8 @@ class SettingsTest extends TestCase
     /** @test */
     public function it_can_find_the_settings_file()
     {
-        $this->skipOnGitHubActions();;
+        $this->skipOnGitHubActions();
+        ;
 
         $settings = SettingsFactory::createFromConfigFile(__DIR__ . Ray::makePathOsSafe('/testSettings/subDirectory/subSubDirectory'));
 
