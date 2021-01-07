@@ -69,12 +69,12 @@ class Client
 
             return $response['active'] ?? false;
         } catch (Exception $exception) {
-            if ($exception instanceof  StopExecutionRequested) {
+            if ($exception instanceof StopExecutionRequested) {
                 throw $exception;
             }
-
-            throw CouldNotConnectToRay::make($this->host, $this->portNumber);
         }
+
+        return false;
     }
 
     protected function getCurlHandleForUrl(string $method, string $url)
