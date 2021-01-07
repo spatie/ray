@@ -7,7 +7,7 @@ class Settings
     protected array $settings = [];
 
     protected array $defaultSettings = [
-        'host' => 'http://localhost',
+        'host' => 'localhost',
         'port' => 23517,
     ];
 
