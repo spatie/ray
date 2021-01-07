@@ -6,7 +6,7 @@ weight: 2
 To start using Ray any PHP project , install the `ray` package.
 
 ```bash
-php artisan spatie/ray
+composer require spatie/ray
 ```
 
 You should be able to use the `ray` function without any other steps.
