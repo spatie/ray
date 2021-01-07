@@ -266,7 +266,14 @@ class Ray
 
         return $this;
     }
-
+    
+    public function rey(): self
+    {
+        $this->send('https://media.giphy.com/media/l4KhRjusZ6o2pLYpG/giphy.gif');
+        
+        return $this;
+    }
+    
     public function pause(): self
     {
         $lockName = md5(time());
