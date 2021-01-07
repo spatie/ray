@@ -35,7 +35,7 @@ class SettingsFactory
         while (is_dir($configDirectory)) {
             foreach ($configNames as $configName) {
                 $configFullPath = $configDirectory.DIRECTORY_SEPARATOR.$configName;
-
+echo $configFullPath .PHP_EOL;
                 if (file_exists($configFullPath)) {
                     return $configFullPath;
                 }
