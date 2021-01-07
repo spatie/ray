@@ -22,7 +22,7 @@ return [
      *  The port number used to communicate with the Ray app. 
      */
     'port' => 23517,
-]
+];
 ```
 
 
