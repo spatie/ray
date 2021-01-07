@@ -1,3 +1,0 @@
--
-    uuid: fakeUuid
-    payloads: [{ type: create_lock, content: { name: feb95a3999057b40535a153a391f1ead }, origin: { file: /tests/RayTest.php, line_number: 246 } }]

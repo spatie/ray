@@ -1,4 +1,0 @@
--
-    uuid: fakeUuid
-    payloads: [{ type: log, content: { values: [a] }, origin: { file: /tests/RayTest.php, line_number: xxx } }]
-    meta: {  }

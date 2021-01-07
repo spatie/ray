@@ -1,4 +1,0 @@
--
-    uuid: fakeUuid
-    payloads: [{ type: custom, content: { content: 'my custom content', label: '' }, origin: { file: /tests/RayTest.php, line_number: xxx } }]
-    meta: {  }
