@@ -35,7 +35,7 @@ class RayTest extends TestCase
     {
         $this->ray->send('a');
 
-        $this->assertMatchesSnapshot($this->client->sentPayloads());
+        $this->assertMatchesOsSafeSnapshot($this->client->sentPayloads());
     }
 
     /** @test */
@@ -45,7 +45,7 @@ class RayTest extends TestCase
 
         ray('a');
 
-        $this->assertMatchesSnapshot($this->client->sentPayloads());
+        $this->assertMatchesOsSafeSnapshot($this->client->sentPayloads());
     }
 
     /** @test */
@@ -64,7 +64,7 @@ class RayTest extends TestCase
     {
         $this->ray->send('first', 'second', 'third');
 
-        $this->assertMatchesSnapshot($this->client->sentPayloads());
+        $this->assertMatchesOsSafeSnapshot($this->client->sentPayloads());
     }
 
     /** @test */
@@ -72,7 +72,7 @@ class RayTest extends TestCase
     {
         $this->ray->send('test', 'test2')->color('green')->size('big');
 
-        $this->assertMatchesSnapshot($this->client->sentPayloads());
+        $this->assertMatchesOsSafeSnapshot($this->client->sentPayloads());
     }
 
     public function it_has_a_helper_function()
@@ -85,7 +85,7 @@ class RayTest extends TestCase
     {
         $this->ray->hide();
 
-        $this->assertMatchesSnapshot($this->client->sentPayloads());
+        $this->assertMatchesOsSafeSnapshot($this->client->sentPayloads());
     }
 
     /** @test */
@@ -93,7 +93,7 @@ class RayTest extends TestCase
     {
         $this->ray->remove();
 
-        $this->assertMatchesSnapshot($this->client->sentPayloads());
+        $this->assertMatchesOsSafeSnapshot($this->client->sentPayloads());
     }
 
     /** @test */
@@ -259,7 +259,7 @@ class RayTest extends TestCase
     {
         $this->ray->ban();
 
-        $this->assertMatchesSnapshot($this->client->sentPayloads());
+        $this->assertMatchesOsSafeSnapshot($this->client->sentPayloads());
     }
 
     /** @test */
@@ -267,7 +267,7 @@ class RayTest extends TestCase
     {
         $this->ray->notify('notification text');
 
-        $this->assertMatchesSnapshot($this->client->sentPayloads());
+        $this->assertMatchesOsSafeSnapshot($this->client->sentPayloads());
     }
 
     /** @test */
@@ -275,7 +275,7 @@ class RayTest extends TestCase
     {
         $this->ray->className($this);
 
-        $this->assertMatchesSnapshot($this->client->sentPayloads());
+        $this->assertMatchesOsSafeSnapshot($this->client->sentPayloads());
     }
 
     /** @test */
@@ -283,7 +283,7 @@ class RayTest extends TestCase
     {
         $this->ray->send(false);
 
-        $this->assertMatchesSnapshot($this->client->sentPayloads());
+        $this->assertMatchesOsSafeSnapshot($this->client->sentPayloads());
     }
 
     /** @test */
@@ -299,7 +299,7 @@ class RayTest extends TestCase
 
         $this->ray->myCustomFunction('my value');
 
-        $this->assertMatchesSnapshot($this->client->sentPayloads());
+        $this->assertMatchesOsSafeSnapshot($this->client->sentPayloads());
     }
 
     /** @test */
@@ -314,10 +314,10 @@ class RayTest extends TestCase
     public function it_can_send_custom_stuff_to_ray()
     {
         $this->ray->sendCustom('my custom content');
-        $this->assertMatchesSnapshot($this->client->sentPayloads());
+        $this->assertMatchesOsSafeSnapshot($this->client->sentPayloads());
 
         $this->ray->sendCustom('my custom content', 'custom label');
-        $this->assertMatchesSnapshot($this->client->sentPayloads());
+        $this->assertMatchesOsSafeSnapshot($this->client->sentPayloads());
     }
 
     protected function getValueOfLastSentContent(string $contentKey)
@@ -331,5 +331,10 @@ class RayTest extends TestCase
         $lastPayload = end($payload);
 
         return Arr::get($lastPayload, "payloads.0.content.{$contentKey}");
+    }
+
+    protected function assertMatchesOsSafeSnapshot($data)
+    {
+        $this->assertMatchesJsonSnapshot(json_encode($data));
     }
 }
