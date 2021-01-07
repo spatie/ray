@@ -22,6 +22,7 @@ class FakeClient extends Client
                 }
             }
 
+            $payload['origin']['file'] = $this->convertToUnixPath($payload['origin']['file']);
             $payload['origin']['line_number'] = 'xxx';
         }
 
@@ -45,5 +46,12 @@ class FakeClient extends Client
     protected function baseDirectory(): string
     {
         return str_replace("/tests/TestClasses", '', __DIR__);
+    }
+
+    protected function convertToUnixPath(string $path): string
+    {
+        $path = str_replace('D:\a\ray\ray', '', $path);
+
+        return str_replace(DIRECTORY_SEPARATOR, '/', $path);
     }
 }
