@@ -3,7 +3,6 @@
 namespace Spatie\Ray;
 
 use Exception;
-use Spatie\Ray\Exceptions\CouldNotConnectToRay;
 use Spatie\Ray\Exceptions\StopExecutionRequested;
 
 class Client
