@@ -29,4 +29,4 @@ There are many other helper functions available on Ray that allow you to display
 
 ## Getting started
 
-To get started you should buy a license for the Ray app [in our store](/products/ray), and [install the free package into your app](/docs/ray/v1/getting-started/installation-in-a-framework-agnostic-php-project).
+To get started you should buy a license for the Ray app [in our store](https://spatie.be/products/ray), and [install the free package into your app](/docs/ray/v1/getting-started/installation-in-a-framework-agnostic-php-project).
