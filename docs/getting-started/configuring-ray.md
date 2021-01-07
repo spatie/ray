@@ -52,7 +52,7 @@ return [
     'send_dumps_to_ray' => true,
     
     /*
-     *  The url used to communicate with the Ray app.
+     *  The host used to communicate with the Ray app.
      */
     'host' => 'localhost',
     
