@@ -34,9 +34,21 @@ return [
     'local_path' => null,
 ];
 ```
+For Laravel projects you can run an artisan command to publish the config file in to the project root.
 
+```bash
+php artisan ray:publish-config
+```
 
-For Laravel projects use this template:
+You can also add an option for 'docker' or 'homestead' to give a base configuration for those dev environments.
+
+```bash
+php artisan ray:publish-config --docker
+//or
+php artisan ray:publish-config --homestead
+```
+
+Alternatively for Laravel projects you can create a ray.php file and use the following template:
 
 ```php
 // save this in a file called "ray.php" in the root directory of your project; not in the Laravel "config" directory
@@ -64,6 +76,7 @@ return [
     /*
      * The host used to communicate with the Ray app.
      * For usage in Docker on Mac or Windows, you can replace host with 'host.docker.internal'
+     * For usage in Homestead on Mac or Windows, you can replace host with '10.0.2.2'
      */
     'host' => 'localhost',
     
@@ -73,7 +86,6 @@ return [
     'port' => 23517,
 ];
 ```
-
 
 When developing using Docker, the Ray host should point to the internal IP of your Docker host by using 'host.docker.internal'. 
 
