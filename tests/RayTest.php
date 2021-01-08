@@ -320,6 +320,21 @@ class RayTest extends TestCase
         $this->assertMatchesOsSafeSnapshot($this->client->sentPayloads());
     }
 
+    /** @test */
+    public function it_can_send_data_to_ray_and_return_the_data()
+    {
+        $data = ['a' => 1, 'b' => 2];
+        
+        $result = $this->ray->pass($data);
+
+        $this->assertEquals($data, $result);
+
+        $dumpedValue = $this->getValueOfLastSentContent('values')[0];
+
+        $this->assertStringContainsString('<span class=sf-dump-key>a</span>', $dumpedValue);
+        $this->assertStringContainsString('<span class=sf-dump-key>b</span>', $dumpedValue);
+    }
+
     protected function getValueOfLastSentContent(string $contentKey)
     {
         $payload = $this->client->sentPayloads();
