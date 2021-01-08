@@ -329,6 +329,11 @@ class Ray
             'php_version_id' => PHP_VERSION_ID,
         ], $meta);
 
+        foreach ($payloads as $payload) {
+            $payload->remotePath = $this->settings->remote_path;
+            $payload->localPath = $this->settings->local_path;
+        }
+
         $request = new Request($this->uuid, $payloads, $allMeta);
 
         self::$client->send($request);

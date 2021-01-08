@@ -324,7 +324,7 @@ class RayTest extends TestCase
     public function it_can_send_data_to_ray_and_return_the_data()
     {
         $data = ['a' => 1, 'b' => 2];
-        
+
         $result = $this->ray->pass($data);
 
         $this->assertEquals($data, $result);
@@ -333,6 +333,21 @@ class RayTest extends TestCase
 
         $this->assertStringContainsString('<span class=sf-dump-key>a</span>', $dumpedValue);
         $this->assertStringContainsString('<span class=sf-dump-key>b</span>', $dumpedValue);
+    }
+
+    /** @test */
+    public function it_can_rewrite_the_file_paths_using_the_config_values()
+    {
+        $settings = SettingsFactory::createFromConfigFile();
+
+        $settings->remote_path = 'tests';
+        $settings->local_path = 'local_path';
+
+        $this->ray = new Ray($settings, $this->client, 'fakeUuid');
+
+        $this->ray->send('hey');
+
+        $this->assertEquals('/local_path/RayTest.php', $this->client->sentPayloads()[0]['payloads'][0]['origin']['file']);
     }
 
     protected function getValueOfLastSentContent(string $contentKey)
