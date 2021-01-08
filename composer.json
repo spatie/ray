@@ -19,6 +19,7 @@
         "php": "^7.4|^8.0",
         "ext-curl": "*",
         "ext-json": "*",
+        "composer-runtime-api": "^2.0",
         "ramsey/uuid": "^4.1",
         "spatie/backtrace": "^1.0",
         "spatie/macroable": "^1.0",
