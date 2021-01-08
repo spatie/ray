@@ -63,3 +63,22 @@ return [
     'port' => 23517,
 ];
 ```
+
+
+When developing using Docker, the Ray host should point to the internal IP of your Docker host by using 'host.docker.internal':
+
+```php
+// save this in a file called "ray.php"
+
+return [
+    /*
+     *  The host used to communicate with the Ray app.
+     */
+    'host' => 'host.docker.internal',
+
+    /*
+     *  The port number used to communicate with the Ray app. 
+     */
+    'port' => 23517,
+];
+```
