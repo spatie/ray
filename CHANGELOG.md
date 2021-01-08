@@ -2,6 +2,10 @@
 
 All notable changes to `ray` will be documented in this file
 
+## 1.3.4 - 2020-01-08
+
+- prevent warning if `open_basedir` is enabled
+
 ## 1.3.3 - 2020-01-08
 
 - do not require Composer 2
