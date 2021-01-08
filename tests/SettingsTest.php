@@ -28,6 +28,23 @@ class SettingsTest extends TestCase
         $this->assertEquals(12345, $settings->port);
         $this->assertEquals('http://otherhost', $settings->host);
     }
+    
+    /** @test */
+    public function it_can_find_the_settings_file_more_than_once()
+    {
+        $this->skipOnGitHubActions();
+        ;
+
+        $settings1 = SettingsFactory::createFromConfigFile(__DIR__ . Ray::makePathOsSafe('/testSettings/subDirectory/subSubDirectory'));
+
+        $this->assertEquals(12345, $settings1->port);
+        $this->assertEquals('http://otherhost', $settings1->host);
+        
+        $settings2 = SettingsFactory::createFromConfigFile(__DIR__ . Ray::makePathOsSafe('/testSettings/subDirectory/subSubDirectory'));
+
+        $this->assertEquals(12345, $settings2->port);
+        $this->assertEquals('http://otherhost', $settings2->host);
+    }
 
     protected function skipOnGitHubActions(): void
     {
