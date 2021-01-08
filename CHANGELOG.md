@@ -2,6 +2,10 @@
 
 All notable changes to `ray` will be documented in this file
 
+## 1.1.3 - 2020-01-08
+
+- prevent exception when installing in an Orchestra powered testsuite
+
 ## 1.1.2 - 2020-01-08
 
 - enforce Composer 2 requirement
