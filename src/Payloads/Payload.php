@@ -11,6 +11,18 @@ abstract class Payload
 
     abstract public function getType(): string;
 
+    public ?string $remote_path = null;
+    public ?string $local_path = null;
+
+    public function replaceRemotePathWithLocalPath(string $file_path) :string
+    {
+        if (is_null($this->remote_path) || is_null($this->local_path)) {
+            return $file_path;
+        }
+
+        return str_replace($this->remote_path, $this->local_path, $file_path);
+    }
+
     public function getContent(): array
     {
         return [];
@@ -35,6 +47,10 @@ abstract class Payload
         /** @var \Spatie\Ray\Origin\OriginFactory $originFactory */
         $originFactory = new self::$originFactoryClass;
 
-        return $originFactory->getOrigin();
+        $origin = $originFactory->getOrigin();
+
+        $origin->file = $this->replaceRemotePathWithLocalPath($origin->file);
+
+        return $origin;
     }
 }
