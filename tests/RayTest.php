@@ -323,12 +323,16 @@ class RayTest extends TestCase
     /** @test */
     public function it_can_send_data_to_ray_and_return_the_data()
     {
-        $data = ['foo' => 'bar'];
+        $data = ['a' => 1, 'b' => 2];
         
         $result = $this->ray->pass($data);
 
         $this->assertEquals($data, $result);
-        $this->assertMatchesOsSafeSnapshot($this->client->sentPayloads());
+
+        $dumpedValue = $this->getValueOfLastSentContent('values')[0];
+
+        $this->assertStringContainsString('<span class=sf-dump-key>a</span>', $dumpedValue);
+        $this->assertStringContainsString('<span class=sf-dump-key>b</span>', $dumpedValue);
     }
 
     protected function getValueOfLastSentContent(string $contentKey)
