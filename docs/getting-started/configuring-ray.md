@@ -29,7 +29,7 @@ return [
 For Laravel projects use this template:
 
 ```php
-// save this in a file called "ray.php"
+// save this in a file called "ray.php" in the root directory of your project; not in the laravel "config" directory
 
 return [
     /*
@@ -52,12 +52,13 @@ return [
     'send_dumps_to_ray' => true,
     
     /*
-     *  The host used to communicate with the Ray app.
+     * The host used to communicate with the Ray app.
+     * For usage in Docker on Mac or Windows, you can replace host with 'host.docker.internal'
      */
     'host' => 'localhost',
     
     /*
-     *  The port number used to communicate with the Ray app. 
+     * The port number used to communicate with the Ray app. 
      */
     'port' => 23517,
 ];
