@@ -19,7 +19,7 @@ class SettingsFactory
             return [];
         }
 
-        $options = include_once $configFilePath;
+        $options = include $configFilePath;
 
         return $options;
     }
