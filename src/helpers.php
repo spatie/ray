@@ -16,8 +16,7 @@ if (! function_exists('ray')) {
         if (class_exists(LaravelRay::class)) {
             try {
                 return app(LaravelRay::class)->send(...$args);
-            }
-            catch(BindingResolutionException $exception) {
+            } catch (BindingResolutionException $exception) {
                 // this  exception can occur when requiring spatie/ray in an Orchestra powered
                 // testsuite without spatie/laravel-ray's service provider being registered
                 // in `getPackageProviders` of the base test suite
