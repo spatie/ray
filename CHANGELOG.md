@@ -2,6 +2,10 @@
 
 All notable changes to `ray` will be documented in this file
 
+## 1.1.2 - 2020-01-08
+
+- enforce Composer 2 requirement
+
 ### 1.1.1 - 2020-01-08
 
 - fix for repeated calls to `ray()` throwing an exception (#30)
