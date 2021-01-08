@@ -29,7 +29,7 @@
     "require-dev": {
         "phpunit/phpunit": "^9.5",
         "spatie/phpunit-snapshot-assertions": "^4.2",
-        "illuminate/support": "6.x|8.x"
+        "illuminate/support": "6.x|^8.18"
     },
     "autoload": {
         "psr-4": {
