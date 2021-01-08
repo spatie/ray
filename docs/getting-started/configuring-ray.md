@@ -29,7 +29,7 @@ return [
 For Laravel projects use this template:
 
 ```php
-// save this in a file called "ray.php" in the root directory of your project; not in the laravel "config" directory
+// save this in a file called "ray.php" in the root directory of your project; not in the Laravel "config" directory
 
 return [
     /*
