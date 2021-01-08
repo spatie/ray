@@ -293,6 +293,13 @@ class Ray
         return $this->sendRequest($payload);
     }
 
+    public function pass($argument)
+    {
+        $this->send($argument);
+
+        return $argument;
+    }
+
     public function sendCustom(string $content, string $label = ''): self
     {
         $customPayload = new CustomPayload($content, $label);
