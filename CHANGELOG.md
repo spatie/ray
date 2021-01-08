@@ -2,6 +2,10 @@
 
 All notable changes to `ray` will be documented in this file
 
+## 1.3.0 - 2020-01-08
+
+- add support for `remote_path` and `local_path` config values
+
 ## 1.2.0 - 2020-01-08
 
 - add `pass` function
