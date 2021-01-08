@@ -11,16 +11,16 @@ abstract class Payload
 
     abstract public function getType(): string;
 
-    public ?string $remote_path = null;
-    public ?string $local_path = null;
+    public ?string $remotePath = null;
+    public ?string $localPath = null;
 
-    public function replaceRemotePathWithLocalPath(string $file_path) :string
+    public function replaceRemotePathWithLocalPath(string $filePath): string
     {
-        if (is_null($this->remote_path) || is_null($this->local_path)) {
-            return $file_path;
+        if (is_null($this->remotePath) || is_null($this->localPath)) {
+            return $filePath;
         }
 
-        return str_replace($this->remote_path, $this->local_path, $file_path);
+        return str_replace($this->remotePath, $this->localPath, $filePath);
     }
 
     public function getContent(): array

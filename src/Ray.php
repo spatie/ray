@@ -330,8 +330,8 @@ class Ray
         ], $meta);
 
         foreach ($payloads as $payload) {
-            $payload->remote_path = $this->settings->remote_path;
-            $payload->local_path = $this->settings->local_path;
+            $payload->remotePath = $this->settings->remote_path;
+            $payload->localPath = $this->settings->local_path;
         }
 
         $request = new Request($this->uuid, $payloads, $allMeta);
