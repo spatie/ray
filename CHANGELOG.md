@@ -2,6 +2,10 @@
 
 All notable changes to `ray` will be documented in this file
 
+## 1.2.0 - 2020-01-08
+
+- add `pass` function
+
 ## 1.1.3 - 2020-01-08
 
 - prevent exception when installing in an Orchestra powered testsuite
