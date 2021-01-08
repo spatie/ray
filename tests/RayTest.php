@@ -320,6 +320,17 @@ class RayTest extends TestCase
         $this->assertMatchesOsSafeSnapshot($this->client->sentPayloads());
     }
 
+    /** @test */
+    public function it_can_send_data_to_ray_and_return_the_data()
+    {
+        $data = ['foo' => 'bar'];
+        
+        $result = $this->ray->pass($data);
+
+        $this->assertEquals($data, $result);
+        $this->assertMatchesOsSafeSnapshot($this->client->sentPayloads());
+    }
+
     protected function getValueOfLastSentContent(string $contentKey)
     {
         $payload = $this->client->sentPayloads();
