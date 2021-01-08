@@ -2,6 +2,10 @@
 
 All notable changes to `ray` will be documented in this file
 
+## 1.3.3 - 2020-01-08
+
+- do not require Composer 2
+
 ## 1.3.2 - 2020-01-08
 
 - prevent ray from blowing up when there is no config file
