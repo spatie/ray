@@ -19,7 +19,7 @@ User::firstWhere('email', 'john@example.com');; // this query will be displayed 
 
 ![screenshot](/docs/ray/v1/images/query.jpg)
 
-To stop showing queries, call `stopLoggingQueries`.
+To stop showing queries, call `stopShowingQueries`.
 
 ```php
 ray()->showQueries();
