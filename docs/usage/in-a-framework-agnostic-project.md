@@ -207,6 +207,32 @@ ray($largeObject)->hide()
 
 ![screenshot](/docs/ray/v1/images/hide.jpg)
 
+### Returning items
+
+To make all methods chainable, the `ray()` function returns and instance of `Spatie\Ray\Ray`. To quickly send something to Ray and have that something return as a value, use the `pass` function.
+
+```php
+ray()->pass($anything) // $anything will be returned
+```
+
+This is handy when, for instance, debuggin return values.
+
+You can change
+
+```php
+function foo() {
+    return 'return value',
+}
+```
+
+to 
+
+```php
+function foo() {
+    return ray()->pass('return value'),
+}
+```
+
 ### Displaying a notification
 
 You can use Ray to display a notification.
