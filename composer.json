@@ -28,7 +28,6 @@
         "symfony/var-dumper": "^4.2|^5.2"
     },
     "require-dev": {
-        "illuminate/support": "^8.18",
         "phpunit/phpunit": "^9.5",
         "spatie/phpunit-snapshot-assertions": "^4.2"
     },
