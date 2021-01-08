@@ -21,7 +21,7 @@ class SettingsFactory
 
         $options = include $configFilePath;
 
-        return $options;
+        return $options ?? [];
     }
 
     protected function searchConfigFiles(string $configDirectory = null): string
