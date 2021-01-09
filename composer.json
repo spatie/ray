@@ -19,7 +19,7 @@
         "php": "^7.4|^8.0",
         "ext-curl": "*",
         "ext-json": "*",
-        "ramsey/uuid": "^3 || ^4",
+        "ramsey/uuid": "^3.0|^4.1",
         "spatie/backtrace": "^1.0",
         "spatie/macroable": "^1.0",
         "symfony/console": "^4.2|^5.2",
