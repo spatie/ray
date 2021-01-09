@@ -269,6 +269,22 @@ class RayTest extends TestCase
 
         $this->assertMatchesOsSafeSnapshot($this->client->sentPayloads());
     }
+    
+    /** @test */
+    public function it_can_send_the_json_payload()
+    {
+        $this->ray->json('{"message": "message text 2"}');
+
+        $this->assertMatchesOsSafeSnapshot($this->client->sentPayloads());
+    }
+    
+    /** @test */
+    public function it_can_send_the_toJson_payload()
+    {
+        $this->ray->toJson(['message' => 'message text 1']);
+        
+        $this->assertMatchesOsSafeSnapshot($this->client->sentPayloads());
+    }
 
     /** @test */
     public function it_can_send_the_class_name()
