@@ -2,6 +2,10 @@
 
 All notable changes to `ray` will be documented in this file
 
+## 1.3.5 - 2020-01-09
+
+- fix search for `$indexOfRay` to include calls from the parent directory (#80)
+
 ## 1.3.4 - 2020-01-08
 
 - prevent warning if `open_basedir` is enabled
