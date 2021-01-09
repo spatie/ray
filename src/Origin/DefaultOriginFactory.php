@@ -29,7 +29,7 @@ class DefaultOriginFactory implements OriginFactory
                 return true;
             }
 
-            if ($this->startsWith($frame->file, __DIR__)) {
+            if ($this->startsWith($frame->file, dirname(__DIR__))) {
                 return true;
             }
 
