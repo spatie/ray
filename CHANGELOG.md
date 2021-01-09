@@ -2,6 +2,10 @@
 
 All notable changes to `ray` will be documented in this file
 
+## 1.3.7 - 2020-01-09
+
+add `vendor_frame` attribute to frames
+
 ## 1.3.6 - 2020-01-09
 
 - allow older version of uuid package

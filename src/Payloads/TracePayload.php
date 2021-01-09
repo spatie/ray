@@ -46,6 +46,7 @@ class TracePayload extends Payload
             'line_number' => $frame->lineNumber,
             'class' => $frame->class,
             'method' => $frame->method,
+            'vendor_frame' => ! $frame->applicationFrame,
         ], $this->frames);
 
         if (! is_null($this->limit)) {

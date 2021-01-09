@@ -34,6 +34,7 @@ class CallerPayload extends Payload
                 'line_number' => $frame->lineNumber,
                 'class' => $frame->class,
                 'method' => $frame->method,
+                'vendor_frame' => ! $frame->applicationFrame,
             ],
         ];
     }
