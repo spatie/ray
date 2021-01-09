@@ -10,7 +10,7 @@
                     ]
                 },
                 "origin": {
-                    "file": "\/src\/helpers.php",
+                    "file": "\/tests\/RayTest.php",
                     "line_number": "xxx"
                 }
             }
