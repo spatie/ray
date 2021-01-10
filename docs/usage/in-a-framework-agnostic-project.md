@@ -248,5 +248,11 @@ ray()->notify('This is my notification');
 You can stop the PHP process by calling `die`.
 
 ```php
-ray()->die();
+ray($anything)->die();
+```
+
+Alternatively, you can use the `rd` function.
+
+```php
+rd($anything);
 ```

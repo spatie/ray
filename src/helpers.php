@@ -28,3 +28,9 @@ if (! function_exists('ray')) {
         return (new Ray($settings))->send(...$args);
     }
 }
+
+if (! function_exists('rd')) {
+    function rd(...$args) {
+        ray(...$args)->die();
+    }
+}
