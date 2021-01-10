@@ -139,3 +139,17 @@ ray()->enable();
 
 ray('three') // will be displayed in ray
 ```
+
+You can check if Ray is enabled or disabled with the `enabled` and `disabled` functions.
+
+```php
+ray()->disable();
+
+ray()->enabled() // false
+ray()->disabled() // true
+
+ray()->enable();
+
+ray()->enabled() // true
+ray()->disabled() // false
+```
