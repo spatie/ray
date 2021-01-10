@@ -122,7 +122,6 @@ ray()->measure();
 sleep(2);
 
 ray()->measure();
-
 ```
 
 ![screenshot](/docs/ray/v1/images/measure.jpg)
@@ -242,6 +241,26 @@ ray()->notify('This is my notification');
 ```
 
 ![screenshot](/docs/ray/v1/images/notification.jpg)
+
+### Displaying decoded JSON data
+
+You can use Ray to decode a JSON string and display the data.
+
+```php
+ray()->json('{"message": "hello world"}');
+```
+
+![screenshot](/docs/ray/v1/images/json-decoded.jpg)
+
+### Displaying an encoded JSON string
+
+You can use Ray to encode a value and display it as a JSON string.
+
+```php
+ray()->toJson(['message' => 'hello world']);
+```
+
+![screenshot](/docs/ray/v1/images/json-encoded.jpg)
 
 ### Halting the PHP process
 
