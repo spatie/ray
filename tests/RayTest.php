@@ -275,7 +275,10 @@ class RayTest extends TestCase
     {
         $this->ray->json('{"message": "message text 2"}');
 
-        $this->assertMatchesOsSafeSnapshot($this->client->sentPayloads());
+        $dumpedValue = $this->client->sentPayloads()[0]['payloads'][0]['content']['content'];
+
+        $this->assertStringContainsString('<span class=sf-dump-key>message</span>', $dumpedValue);
+        $this->assertStringContainsString('<span class=sf-dump-str title="14 characters">message text 2</span>', $dumpedValue);
     }
     
     /** @test */

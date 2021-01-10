@@ -15,7 +15,7 @@ class DecodedJsonPayload extends Payload
 
     public function getType(): string
     {
-        return 'json';
+        return 'custom';
     }
 
     public function getContent(): array
@@ -23,7 +23,8 @@ class DecodedJsonPayload extends Payload
         $decodedJson = json_decode($this->value, true);
 
         return [
-            'value' => ArgumentConverter::convertToPrimitive($decodedJson),
+            'content' => ArgumentConverter::convertToPrimitive($decodedJson),
+            'label' => '',
         ];
     }
 }
