@@ -13,7 +13,9 @@ use Spatie\Ray\Payloads\CallerPayload;
 use Spatie\Ray\Payloads\ColorPayload;
 use Spatie\Ray\Payloads\CreateLockPayload;
 use Spatie\Ray\Payloads\CustomPayload;
+use Spatie\Ray\Payloads\DecodedJsonPayload;
 use Spatie\Ray\Payloads\HidePayload;
+use Spatie\Ray\Payloads\JsonPayload;
 use Spatie\Ray\Payloads\LogPayload;
 use Spatie\Ray\Payloads\MeasurePayload;
 use Spatie\Ray\Payloads\NewScreenPayload;
@@ -203,6 +205,26 @@ class Ray
     public function notify(string $text): self
     {
         $payload = new NotifyPayload($text);
+
+        return $this->sendRequest($payload);
+    }
+    
+    /**
+     * Sends the provided value encoded as a JSON string using json_encode().
+     */
+    public function toJson($value): self
+    {
+        $payload = new JsonPayload($value);
+        
+        return $this->sendRequest($payload);
+    }
+    
+    /**
+     * Sends the provided JSON string decoded using json_decode().
+     */
+    public function json(string $json): self
+    {
+        $payload = new DecodedJsonPayload($json);
 
         return $this->sendRequest($payload);
     }
