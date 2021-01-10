@@ -30,7 +30,8 @@ if (! function_exists('ray')) {
 }
 
 if (! function_exists('rd')) {
-    function rd(...$args) {
+    function rd(...$args)
+    {
         ray(...$args)->die();
     }
 }
