@@ -145,11 +145,11 @@ You can check if Ray is enabled or disabled with the `enabled` and `disabled` fu
 ```php
 ray()->disable();
 
-ray()->enabled() // false
-ray()->disabled() // true
+ray()->enabled(); // false
+ray()->disabled(); // true
 
 ray()->enable();
 
-ray()->enabled() // true
-ray()->disabled() // false
+ray()->enabled(); // true
+ray()->disabled(); // false
 ```
