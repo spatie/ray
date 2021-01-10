@@ -5,6 +5,14 @@ weight: 3
 
 Inside a Laravel application, you can use all methods from [the framework agnostic version](/docs/ray/v1/usage/in-a-framework-agnostic-project).
 
+### Laravel Valet caveat
+
+If you are using Laravel Valet, be sure to use PHP 7.4 version. You can run this command.
+
+```valet use php@7.4```
+
+[Laravel Valet PHP version documentation](https://laravel.com/docs/8.x/valet#php-versions)
+
 Additionally, you can use these Laravel specific methods.
 
 ### Showing queries
@@ -14,7 +22,7 @@ You can display all queries that are executed by calling `showQueries` (or `quer
 ```php
 ray()->showQueries();
 
-User::firstWhere('email', 'john@example.com');; // this query will be displayed in Ray.
+User::firstWhere('email', 'john@example.com'); // this query will be displayed in Ray.
 ```
 
 ![screenshot](/docs/ray/v1/images/query.jpg)
