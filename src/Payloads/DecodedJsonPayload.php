@@ -2,6 +2,8 @@
 
 namespace Spatie\Ray\Payloads;
 
+use Spatie\Ray\ArgumentConverter;
+
 class DecodedJsonPayload extends Payload
 {
     protected string $value;
@@ -18,8 +20,10 @@ class DecodedJsonPayload extends Payload
 
     public function getContent(): array
     {
+        $decodedJson = json_decode($this->value, true);
+
         return [
-            'value' => json_decode($this->value),
+            'value' => ArgumentConverter::convertToPrimitive($decodedJson),
         ];
     }
 }
