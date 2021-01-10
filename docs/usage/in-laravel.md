@@ -14,7 +14,7 @@ You can display all queries that are executed by calling `showQueries` (or `quer
 ```php
 ray()->showQueries();
 
-User::firstWhere('email', 'john@example.com');; // this query will be displayed in Ray.
+User::firstWhere('email', 'john@example.com'); // this query will be displayed in Ray.
 ```
 
 ![screenshot](/docs/ray/v1/images/query.jpg)
