@@ -2,6 +2,10 @@
 
 All notable changes to `ray` will be documented in this file
 
+## 1.5.0 - 2020-01-09
+
+- add `json` function
+
 ## 1.4.0 - 2020-01-09
 
 - add `rd` function
