@@ -2,6 +2,10 @@
 
 All notable changes to `ray` will be documented in this file
 
+## 1.5.3 - 2021-01-10
+
+- fix for traces of WordPress
+
 ## 1.5.2 - 2021-01-10
 
 - colorize app frames
