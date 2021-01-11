@@ -2,6 +2,10 @@
 
 All notable changes to `ray` will be documented in this file
 
+## 1.5.5 - 2021-01-11
+
+- split origin factory in overridable functions
+
 ## 1.5.4 - 2021-01-11
 
 - support WordPressRay
