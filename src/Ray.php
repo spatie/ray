@@ -6,6 +6,7 @@ use Closure;
 use Composer\InstalledVersions;
 use Ramsey\Uuid\Uuid;
 use Spatie\Backtrace\Backtrace;
+use Spatie\LaravelRay\Ray as LaravelRay;
 use Spatie\Macroable\Macroable;
 use Spatie\Ray\Concerns\RayColors;
 use Spatie\Ray\Concerns\RaySizes;
@@ -25,7 +26,6 @@ use Spatie\Ray\Payloads\SizePayload;
 use Spatie\Ray\Payloads\TracePayload;
 use Spatie\Ray\Settings\Settings;
 use Symfony\Component\Stopwatch\Stopwatch;
-use Spatie\LaravelRay\Ray as LaravelRay;
 
 class Ray
 {
