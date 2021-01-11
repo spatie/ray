@@ -7,6 +7,8 @@ You can optionally configure Ray by creating a file named `ray.php` in your proj
 
 Ray will also look for `ray.php` in all parent directories of your project. To configure multiple Ray for multiple projects in one go, you could create a `ray.php` file in the directory where all your projects reside in.
 
+## Configuration in framework agnostic projects
+
 In framework agnostic projects you can use this template.
 
 ```php
@@ -34,23 +36,14 @@ return [
     'local_path' => null,
 ];
 ```
-For Laravel projects you can run an artisan command to publish the config file in to the project root.
 
-```bash
-php artisan ray:publish-config
-```
-
-You can also add an option for 'docker' or 'homestead' to give a base configuration for those dev environments.
-
-```bash
-php artisan ray:publish-config --docker
-//or
-php artisan ray:publish-config --homestead
-```
+### Configuration in Laravel apps
 
 Alternatively for Laravel projects you can create a `ray.php` file in your project directory (not in the `config` directory) using the following template.
 
 You can use [Laravel environment variables](https://laravel.com/docs/master/configuration#environment-configuration) to change the configuration values, if desired. Doing so can make it easier for your fellow developers to use their own configuration.
+
+Alternatively for Laravel projects you can create a `ray.php` file and use the following template:
 
 ```php
 // save this in a file called "ray.php" in the root directory of your project; not in the Laravel "config" directory
@@ -101,6 +94,12 @@ return [
 ];
 ```
 
+### Using Ray and Homestead
+
+To use Ray with Homestead you should replace the host in the config file above with IP `10.0.2.2`, or the IP your are using for your Homestead environment.
+
+### Using Ray and Docker
+
 When developing using Docker, the Ray host should point to the internal IP of your Docker host by using 'host.docker.internal'. 
 
 ```php
@@ -130,7 +129,7 @@ return [
 ```
 
 
-**Linux Docker Compose Users** - You will need to add an 'extra_hosts' parameter to your container definitions to expose 'host.docker.internal'.
+On Linux, you will need to add an 'extra_hosts' parameter to your container definitions to expose 'host.docker.internal'.
 ```
 #docker-compose.yml
 

@@ -136,6 +136,25 @@ ray()->measure(function() {
 
 ![screenshot](/docs/ray/v1/images/measure-closure.jpg)
 
+### Working with JSON
+
+You can send valid JSON to Ray with the `json` function.
+
+It will be displayed nicely in Ray.
+
+```php
+$jsonString = json_encode($anythingYouLike);
+
+ray()->json($jsonString);
+```
+
+Want to display the json representation of anything you'd like in Ray? Use `toJson`
+
+```php
+ray()->toJson($anythingYouLike);
+```
+
+
 ### Updating displayed items
 
 You can update values that are already displayed in Ray. To do this, you must hold on the instance returned by the `ray` function and call send on it.
