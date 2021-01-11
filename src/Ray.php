@@ -25,6 +25,7 @@ use Spatie\Ray\Payloads\SizePayload;
 use Spatie\Ray\Payloads\TracePayload;
 use Spatie\Ray\Settings\Settings;
 use Symfony\Component\Stopwatch\Stopwatch;
+use Spatie\LaravelRay\Ray as LaravelRay;
 
 class Ray
 {
@@ -146,6 +147,10 @@ class Ray
     public function trace(?Closure $startingFromFrame = null): self
     {
         $backtrace = Backtrace::create();
+
+        if (class_exists(LaravelRay::class) && function_exists('base_path')) {
+            $backtrace->applicationPath(base_path());
+        }
 
         if ($startingFromFrame) {
             $backtrace->startingFromFrame($startingFromFrame);
