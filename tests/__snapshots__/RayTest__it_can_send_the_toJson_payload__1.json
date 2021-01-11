@@ -3,7 +3,7 @@
         "uuid": "fakeUuid",
         "payloads": [
             {
-                "type": "json",
+                "type": "json_string",
                 "content": {
                     "value": "{\"message\":\"message text 1\"}"
                 },
