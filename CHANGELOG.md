@@ -2,6 +2,10 @@
 
 All notable changes to `ray` will be documented in this file
 
+## 1.5.4 - 2021-01-11
+
+- support WordPressRay
+
 ## 1.5.3 - 2021-01-10
 
 - fix for traces of WordPress
