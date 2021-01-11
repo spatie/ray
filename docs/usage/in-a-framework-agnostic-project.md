@@ -138,22 +138,25 @@ ray()->measure(function() {
 
 ### Working with JSON
 
-You can send valid JSON to Ray with the `json` function.
-
-It will be displayed nicely in Ray.
+Want to display the json representation of anything you'd like in Ray? Use `toJson`
 
 ```php
-$jsonString = json_encode($anythingYouLike);
+ray()->toJson(['a' => 1, 'b' => ['c' => 3]]);
+```
+
+![screenshot](/docs/ray/v1/images/to-json.jpg)
+
+You can send valid JSON to Ray with the `json` function.
+
+It will be displayed nicely and collapsable in Ray.
+
+```php
+$jsonString = json_encode(['a' => 1, 'b' => ['c' => 3]]);
 
 ray()->json($jsonString);
 ```
 
-Want to display the json representation of anything you'd like in Ray? Use `toJson`
-
-```php
-ray()->toJson($anythingYouLike);
-```
-
+![screenshot](/docs/ray/v1/images/json.jpg)
 
 ### Updating displayed items
 
@@ -260,26 +263,6 @@ ray()->notify('This is my notification');
 ```
 
 ![screenshot](/docs/ray/v1/images/notification.jpg)
-
-### Displaying decoded JSON data
-
-You can use Ray to decode a JSON string and display the data.
-
-```php
-ray()->json('{"message": "hello world"}');
-```
-
-![screenshot](/docs/ray/v1/images/json-decoded.jpg)
-
-### Displaying an encoded JSON string
-
-You can use Ray to encode a value and display it as a JSON string.
-
-```php
-ray()->toJson(['message' => 'hello world']);
-```
-
-![screenshot](/docs/ray/v1/images/json-encoded.jpg)
 
 ### Halting the PHP process
 
