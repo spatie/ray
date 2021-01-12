@@ -1,5 +1,5 @@
 ---
-title: Installation in WordPress
+title: WordPress
 weight: 4
 ---
 

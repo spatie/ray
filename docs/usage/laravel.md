@@ -1,5 +1,5 @@
 ---
-title: In Laravel
+title: Laravel
 weight: 3
 ---
 

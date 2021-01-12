@@ -1,6 +1,6 @@
 ---
-title: In a JavaScript project
-weight: 6
+title: JavaScript
+weight: 5
 ---
 
 You can send information from JavaScript to Ray via this third party package:

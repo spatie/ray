@@ -1,5 +1,5 @@
 ---
-title: In WordPress
+title: WordPress
 weight: 4
 ---
 

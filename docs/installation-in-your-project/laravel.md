@@ -1,5 +1,5 @@
 ---
-title: Installation in Laravel
+title: Laravel
 weight: 3
 ---
 

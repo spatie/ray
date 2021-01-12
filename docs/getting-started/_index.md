@@ -1,4 +1,4 @@
 ---
-title: Getting started
+title: The Ray desktop app
 weight: 2
 ---

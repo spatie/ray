@@ -1,5 +1,5 @@
 ---
-title: Installation in a framework agnostic PHP project
+title: Framework agnostic PHP
 weight: 2
 ---
 
