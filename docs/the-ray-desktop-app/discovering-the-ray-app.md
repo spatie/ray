@@ -3,7 +3,7 @@ title: Discovering the Ray app
 weight: 2
 ---
 
-[Ray](https://myray.app) is a very simple app to use. You can use any of the `ray` calls that are documented on the [other](/docs/ray/v1/usage/in-a-framework-agnostic-project) [pages](/docs/ray/v1/usage/in-laravel) in this section.
+[Ray](https://myray.app) is a very simple app to use. You can use any of the `ray` calls that are documented in [the usage section](/docs/ray/v1/usage/introduction).
 
 ![screenshot](/docs/ray/v1/images/empty.jpg)
 
@@ -17,7 +17,7 @@ When debugging, you probably will need a couple of attempts to find the source o
 
 ## Using color filters
 
-You can give an item a color using one of the [color functions](/docs/ray/v1/usage/in-a-framework-agnostic-project#using-colors). On top of the screen you can turn on a color filter to only see items with a specific color.
+You can give an item a color using one of the [color functions](/docs/ray/v1/usage/framework-agnostic-php-project#using-colors). On top of the screen you can turn on a color filter to only see items with a specific color.
 
 ## Keep Ray on top
 

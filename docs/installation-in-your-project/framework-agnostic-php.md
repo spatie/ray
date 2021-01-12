@@ -11,5 +11,5 @@ composer require spatie/ray
 
 You should be able to use the `ray` function without any other steps.
 
-If you use Laravel, you should use install [the Laravel specific package](/docs/ray/v1/getting-started/installation-in-laravel) instead of `spatie/ray`.
+If you use Laravel, you should use install [the Laravel specific package](/docs/ray/v1/installation-in-your-project/laravel) instead of `spatie/ray`.
 

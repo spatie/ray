@@ -34,7 +34,7 @@ ray()->showMails();
 wp_mail('to@email.com', 'my subject', 'the content');
 ```
 
-![screenshot](/docs/ray/v1/images/wordpress-mail.jpg)
+![screenshot](/docs/ray/v1/images/wordpress-mails.jpg)
 
 
 To stop showing mail, call `stopShowingMails()`

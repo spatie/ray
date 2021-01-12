@@ -3,7 +3,7 @@ title: Laravel
 weight: 3
 ---
 
-For Laravel projects you can create a `ray.php` file in your project directory (not in the `config` directory) using the following template:
+For Laravel projects you can create a `ray.php` file in your project directory (not in the `config` directory) using the following template as [the ray config file](/docs/ray/v1/configuration/general):
 
 ```php
 // save this in a file called "ray.php" in the root directory of your project; not in the Laravel "config" directory
