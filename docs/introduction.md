@@ -14,7 +14,7 @@ ray('Hello world');
 
 ray(['a' => 1, 'b' => 2])->color('red');
 
-ray('multiple', 'argments', 'are', 'welcome');
+ray('multiple', 'arguments', 'are', 'welcome');
 
 ray()->showQueries();
 
