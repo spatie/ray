@@ -42,10 +42,11 @@ class TracePayload extends Payload
     public function getContent(): array
     {
         $frames = array_map(fn (Frame $frame) => [
-            'file_name' => $frame->file,
+            'file_name' => $this->replaceRemotePathWithLocalPath($frame->file),
             'line_number' => $frame->lineNumber,
             'class' => $frame->class,
             'method' => $frame->method,
+            'vendor_frame' => ! $frame->applicationFrame,
         ], $this->frames);
 
         if (! is_null($this->limit)) {

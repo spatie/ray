@@ -1,9 +1,9 @@
 ---
-title: Adding your own functions
-weight: 4
+title: Adding your own Ray functions in PHP
+weight: 1
 ---
 
-`ray` will proxy all calls to the `Spatie\Ray\Ray` class. This class is macroable: you can dynamically add your own functions to it.
+In all PHP projects, `ray` will proxy all calls to the `Spatie\Ray\Ray` class. This class is macroable: you can dynamically add your own functions to it.
 
 Here's a silly example where the passed value will be displayed in uppercase in the Ray app.
 

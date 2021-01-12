@@ -1,5 +1,5 @@
 ---
-title: In a framework agnostic project
+title: Framework agnostic PHP
 weight: 2
 ---
 
@@ -122,7 +122,6 @@ ray()->measure();
 sleep(2);
 
 ray()->measure();
-
 ```
 
 ![screenshot](/docs/ray/v1/images/measure.jpg)
@@ -136,6 +135,28 @@ ray()->measure(function() {
 ```
 
 ![screenshot](/docs/ray/v1/images/measure-closure.jpg)
+
+### Working with JSON
+
+Want to display the json representation of anything you'd like in Ray? Use `toJson`
+
+```php
+ray()->toJson(['a' => 1, 'b' => ['c' => 3]]);
+```
+
+![screenshot](/docs/ray/v1/images/to-json.png)
+
+You can send valid JSON to Ray with the `json` function.
+
+It will be displayed nicely and collapsable in Ray.
+
+```php
+$jsonString = json_encode(['a' => 1, 'b' => ['c' => 3]]);
+
+ray()->json($jsonString);
+```
+
+![screenshot](/docs/ray/v1/images/json.png)
 
 ### Updating displayed items
 
@@ -207,6 +228,32 @@ ray($largeObject)->hide()
 
 ![screenshot](/docs/ray/v1/images/hide.jpg)
 
+### Returning items
+
+To make all methods chainable, the `ray()` function returns and instance of `Spatie\Ray\Ray`. To quickly send something to Ray and have that something return as a value, use the `pass` function.
+
+```php
+ray()->pass($anything) // $anything will be returned
+```
+
+This is handy when, for instance, debuggin return values.
+
+You can change
+
+```php
+function foo() {
+    return 'return value',
+}
+```
+
+to 
+
+```php
+function foo() {
+    return ray()->pass('return value'),
+}
+```
+
 ### Displaying a notification
 
 You can use Ray to display a notification.
@@ -222,5 +269,11 @@ ray()->notify('This is my notification');
 You can stop the PHP process by calling `die`.
 
 ```php
-ray()->die();
+ray($anything)->die();
+```
+
+Alternatively, you can use the `rd` function.
+
+```php
+rd($anything);
 ```

@@ -6,6 +6,7 @@ use Closure;
 use Composer\InstalledVersions;
 use Ramsey\Uuid\Uuid;
 use Spatie\Backtrace\Backtrace;
+use Spatie\LaravelRay\Ray as LaravelRay;
 use Spatie\Macroable\Macroable;
 use Spatie\Ray\Concerns\RayColors;
 use Spatie\Ray\Concerns\RaySizes;
@@ -13,7 +14,9 @@ use Spatie\Ray\Payloads\CallerPayload;
 use Spatie\Ray\Payloads\ColorPayload;
 use Spatie\Ray\Payloads\CreateLockPayload;
 use Spatie\Ray\Payloads\CustomPayload;
+use Spatie\Ray\Payloads\DecodedJsonPayload;
 use Spatie\Ray\Payloads\HidePayload;
+use Spatie\Ray\Payloads\JsonStringPayload;
 use Spatie\Ray\Payloads\LogPayload;
 use Spatie\Ray\Payloads\MeasurePayload;
 use Spatie\Ray\Payloads\NewScreenPayload;
@@ -145,6 +148,10 @@ class Ray
     {
         $backtrace = Backtrace::create();
 
+        if (class_exists(LaravelRay::class) && function_exists('base_path')) {
+            $backtrace->applicationPath(base_path());
+        }
+
         if ($startingFromFrame) {
             $backtrace->startingFromFrame($startingFromFrame);
         }
@@ -203,6 +210,26 @@ class Ray
     public function notify(string $text): self
     {
         $payload = new NotifyPayload($text);
+
+        return $this->sendRequest($payload);
+    }
+
+    /**
+     * Sends the provided value encoded as a JSON string using json_encode().
+     */
+    public function toJson($value): self
+    {
+        $payload = new JsonStringPayload($value);
+
+        return $this->sendRequest($payload);
+    }
+
+    /**
+     * Sends the provided JSON string decoded using json_decode().
+     */
+    public function json(string $json): self
+    {
+        $payload = new DecodedJsonPayload($json);
 
         return $this->sendRequest($payload);
     }
@@ -293,6 +320,13 @@ class Ray
         return $this->sendRequest($payload);
     }
 
+    public function pass($argument)
+    {
+        $this->send($argument);
+
+        return $argument;
+    }
+
     public function sendCustom(string $content, string $label = ''): self
     {
         $customPayload = new CustomPayload($content, $label);
@@ -321,6 +355,11 @@ class Ray
             'php_version' => phpversion(),
             'php_version_id' => PHP_VERSION_ID,
         ], $meta);
+
+        foreach ($payloads as $payload) {
+            $payload->remotePath = $this->settings->remote_path;
+            $payload->localPath = $this->settings->local_path;
+        }
 
         $request = new Request($this->uuid, $payloads, $allMeta);
 

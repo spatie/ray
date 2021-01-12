@@ -3,11 +3,9 @@
         "uuid": "fakeUuid",
         "payloads": [
             {
-                "type": "log",
+                "type": "json_string",
                 "content": {
-                    "values": [
-                        "a"
-                    ]
+                    "value": "{\"message\":\"message text 1\"}"
                 },
                 "origin": {
                     "file": "\/tests\/RayTest.php",

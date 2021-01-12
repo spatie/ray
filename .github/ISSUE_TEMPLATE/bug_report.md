@@ -11,11 +11,14 @@ assignees: ''
 A clear and concise description of what the bug is.
 
 **Versions**
-Ray version:
-spatie/ray package version:
-spatie/laravel-ray package version (if applicable): 
+Ray version (you can see this in "About Ray"):
+
+You can use `composer show` to get the version numbers of:
+- spatie/ray package version:
+- spatie/laravel-ray package version (if applicable): 
+
+PHP version:
 Laravel version (if applicable):
-Media Library Pro version:
 
 **To Reproduce**
 Steps to reproduce the behavior:

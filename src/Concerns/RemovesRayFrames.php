@@ -32,6 +32,7 @@ trait RemovesRayFrames
         return [
             'Spatie\Ray',
             'Spatie\LaravelRay',
+            'Spatie\WordPressRay',
         ];
     }
 }

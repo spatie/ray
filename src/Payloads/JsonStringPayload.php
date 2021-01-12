@@ -2,7 +2,7 @@
 
 namespace Spatie\Ray\Payloads;
 
-class JsonPayload extends Payload
+class JsonStringPayload extends Payload
 {
     /** @var mixed */
     protected $value;
@@ -14,7 +14,7 @@ class JsonPayload extends Payload
 
     public function getType(): string
     {
-        return 'json';
+        return 'json_string';
     }
 
     public function getContent(): array

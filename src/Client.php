@@ -34,7 +34,7 @@ class Client
         curl_close($curlHandle);
 
         if ($curlError) {
-            throw new Exception("Ray seems not be running at http://{$this->host}:{$this->portNumber}");
+            // do nothing for now
         }
     }
 

@@ -3,11 +3,11 @@ title: Introduction
 weight: 1
 ---
 
-Ray is a beautiful, lightweight desktop app that helps you debug your app. There's a [free demo](https://myray.app) available.
+[Ray](https://myray.app) is a beautiful, lightweight desktop app that helps you debug your app. There's a [free demo](https://myray.app) available that can be unlocked with a [license](https://spatie.be/products/ray).
 
-After installing the [framework agnostic](/docs/ray/v1/getting-started/installation-in-a-framework-agnostic-php-project) or [Laravel specific package](https://spatie.be/docs/ray/v1/getting-started/installation-in-laravel), you can use the `ray()` function to quickly dump stuff. Any variable(s) that you pass to `ray` will be displayed.
+After installing [one of the libraries to send information to Ray](/v1/installation-in-your-project/introduction), you can use the `ray()` function to quickly dump stuff. Any variable(s) that you pass to `ray` will be displayed.
 
-Here's an example:
+Here's an example for a Laravel app:
 
 ```
 ray('Hello world');
@@ -25,8 +25,4 @@ Here's how that looks like in Ray.
 
 ![screenshot](./images/intro.jpg)
 
-There are many other helper functions available on Ray that allow you to display things that can help you debug such as [runtime and memory usage](/docs/ray/v1/usage/in-a-framework-agnostic-project#measuring-performance-and-memory-usage), [queries that were executed](/docs/ray/v1/usage/in-laravel#showing-queries), and much more. 
-
-## Getting started
-
-To get started you should buy a license for the Ray app [in our store](https://spatie.be/products/ray), and [install the free package into your app](/docs/ray/v1/getting-started/installation-in-a-framework-agnostic-php-project).
+There are many other helper functions available on Ray that allow you to display things that can help you debug such as [runtime and memory usage](/docs/ray/v1/usage/framework-agnostic-php-project#measuring-performance-and-memory-usage), [queries that were executed](/docs/ray/v1/usage/laravel#showing-queries), and much more.

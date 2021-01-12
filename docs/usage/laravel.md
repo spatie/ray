@@ -1,5 +1,5 @@
 ---
-title: In Laravel
+title: Laravel
 weight: 3
 ---
 
@@ -14,12 +14,12 @@ You can display all queries that are executed by calling `showQueries` (or `quer
 ```php
 ray()->showQueries();
 
-User::firstWhere('email', 'john@example.com');; // this query will be displayed in Ray.
+User::firstWhere('email', 'john@example.com'); // this query will be displayed in Ray.
 ```
 
 ![screenshot](/docs/ray/v1/images/query.jpg)
 
-To stop showing queries, call `stopLoggingQueries`.
+To stop showing queries, call `stopShowingQueries`.
 
 ```php
 ray()->showQueries();
@@ -138,4 +138,18 @@ ray('two') // won't be displayed in ray
 ray()->enable();
 
 ray('three') // will be displayed in ray
+```
+
+You can check if Ray is enabled or disabled with the `enabled` and `disabled` functions.
+
+```php
+ray()->disable();
+
+ray()->enabled(); // false
+ray()->disabled(); // true
+
+ray()->enable();
+
+ray()->enabled(); // true
+ray()->disabled(); // false
 ```
