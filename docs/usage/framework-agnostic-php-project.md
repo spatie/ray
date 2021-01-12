@@ -144,7 +144,7 @@ Want to display the json representation of anything you'd like in Ray? Use `toJs
 ray()->toJson(['a' => 1, 'b' => ['c' => 3]]);
 ```
 
-![screenshot](/docs/ray/v1/images/to-json.jpg)
+![screenshot](/docs/ray/v1/images/to-json.png)
 
 You can send valid JSON to Ray with the `json` function.
 
@@ -156,7 +156,7 @@ $jsonString = json_encode(['a' => 1, 'b' => ['c' => 3]]);
 ray()->json($jsonString);
 ```
 
-![screenshot](/docs/ray/v1/images/json.jpg)
+![screenshot](/docs/ray/v1/images/json.png)
 
 ### Updating displayed items
 
