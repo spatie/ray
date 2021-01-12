@@ -5,7 +5,7 @@ weight: 1
 
 [Ray](https://myray.app) is a beautiful, lightweight desktop app that helps you debug your app. There's a [free demo](https://myray.app) available that can be unlocked with a [license](https://spatie.be/products/ray).
 
-After installing the [one of the libraries to send information to Ray](/v1/installation-in-your-project/introduction), you can use the `ray()` function to quickly dump stuff. Any variable(s) that you pass to `ray` will be displayed.
+After installing [one of the libraries to send information to Ray](/v1/installation-in-your-project/introduction), you can use the `ray()` function to quickly dump stuff. Any variable(s) that you pass to `ray` will be displayed.
 
 Here's an example for a Laravel app:
 
