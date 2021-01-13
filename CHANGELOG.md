@@ -2,6 +2,10 @@
 
 All notable changes to `ray` will be documented in this file
 
+## 1.7.1 - 2021-01-13
+
+- improve return type of ray function
+
 ## 1.7.0 - 2021-01-13
 
 - support multiple arguments to `toJson()` and `json()` (#148)
