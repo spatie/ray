@@ -2,7 +2,11 @@
 
 All notable changes to `ray` will be documented in this file
 
-## 1.5.9 - 20201-01-13
+## 1.5.10 - 2021-01-13
+
+- allow better compatibility with WordPress
+
+## 1.5.9 - 2021-01-13
 
 - ignore package version errors
 
