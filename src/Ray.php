@@ -235,9 +235,6 @@ class Ray
         return $this->sendRequest($payload);
     }
 
-    /**
-     * Sends the contents of the specified file.
-     */
     public function file(string $filename): self
     {
         $payload = new FileContentsPayload($filename);
