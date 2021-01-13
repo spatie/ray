@@ -108,6 +108,15 @@ ray()->mailable(new TestMailable());
 
 ![screenshot](/docs/ray/v1/images/mailable.jpg)
 
+
+### Displaying markdown
+
+View the rendered version of a markdown string in Ray by calling the `markdown` function.
+
+```php
+ray()->markdown('# Hello World');
+```
+
 ### Displaying collections
 
 In a Laravel app, Ray will automatically register a `ray` collection macro to easily send collections to ray.
