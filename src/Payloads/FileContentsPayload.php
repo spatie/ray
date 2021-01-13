@@ -4,11 +4,11 @@ namespace Spatie\Ray\Payloads;
 
 class FileContentsPayload extends Payload
 {
-    protected string $filename;
+    protected string $file;
 
-    public function __construct(string $filename)
+    public function __construct(string $file)
     {
-        $this->filename = $filename;
+        $this->file = $file;
     }
 
     public function getType(): string
@@ -18,18 +18,18 @@ class FileContentsPayload extends Payload
 
     public function getContent(): array
     {
-        if (!file_exists($this->filename)) {
-            $contents = "file not found: '{$this->filename}'";
-            $label = null;
-        } else {
-            $contents = file_get_contents($this->filename);
-            $contents = nl2br(htmlentities($contents));
-            $label = basename($this->filename);
+        if (!file_exists($this->file)) {
+            return [
+                'content' => "File not found: '{$this->file}'",
+                'label' => 'File',
+            ];
         }
 
+        $contents = file_get_contents($this->file);
+
         return [
-            'content' => $contents,
-            'label' => $label,
+            'content' => nl2br(htmlentities($contents)),
+            'label' => basename($this->file),
         ];
     }
 }
