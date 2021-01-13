@@ -308,9 +308,37 @@ class RayTest extends TestCase
     }
 
     /** @test */
+    public function it_can_send_multiple_json_payloads()
+    {
+        $this->ray->json(
+            '{"message": "message text 1"}',
+            '{"message": "message text 2"}'
+        );
+
+        $dumpedValue1 = $this->client->sentPayloads()[0]['payloads'][0]['content']['content'];
+        $dumpedValue2 = $this->client->sentPayloads()[0]['payloads'][1]['content']['content'];
+
+        $this->assertStringContainsString('<span class=sf-dump-key>message</span>', $dumpedValue1);
+        $this->assertStringContainsString('<span class=sf-dump-key>message</span>', $dumpedValue2);
+        $this->assertStringContainsString('<span class=sf-dump-str title="14 characters">message text 1</span>', $dumpedValue1);
+        $this->assertStringContainsString('<span class=sf-dump-str title="14 characters">message text 2</span>', $dumpedValue2);
+    }
+
+    /** @test */
     public function it_can_send_the_toJson_payload()
     {
         $this->ray->toJson(['message' => 'message text 1']);
+
+        $this->assertMatchesOsSafeSnapshot($this->client->sentPayloads());
+    }
+
+    /** @test */
+    public function it_can_send_multiple_toJson_payloads()
+    {
+        $this->ray->toJson(
+            ['message' => 'message text 1'],
+            ['message' => 'message text 2']
+        );
 
         $this->assertMatchesOsSafeSnapshot($this->client->sentPayloads());
     }

@@ -1,0 +1,28 @@
+[
+    {
+        "uuid": "fakeUuid",
+        "payloads": [
+            {
+                "type": "json_string",
+                "content": {
+                    "value": "{\"message\":\"message text 1\"}"
+                },
+                "origin": {
+                    "file": "\/tests\/RayTest.php",
+                    "line_number": "xxx"
+                }
+            },
+            {
+                "type": "json_string",
+                "content": {
+                    "value": "{\"message\":\"message text 2\"}"
+                },
+                "origin": {
+                    "file": "\/tests\/RayTest.php",
+                    "line_number": "xxx"
+                }
+            }
+        ],
+        "meta": []
+    }
+]
