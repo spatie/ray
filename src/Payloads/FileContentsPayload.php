@@ -18,7 +18,7 @@ class FileContentsPayload extends Payload
 
     public function getContent(): array
     {
-        if (!file_exists($this->file)) {
+        if (! file_exists($this->file)) {
             return [
                 'content' => "File not found: '{$this->file}'",
                 'label' => 'File',
