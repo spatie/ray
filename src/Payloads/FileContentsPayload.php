@@ -24,7 +24,7 @@ class FileContentsPayload extends Payload
         } else {
             $contents = file_get_contents($this->filename);
             $contents = nl2br(htmlentities($contents));
-            $label = realpath($this->filename);
+            $label = basename($this->filename);
         }
 
         return [

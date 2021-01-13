@@ -6,7 +6,7 @@
                 "type": "custom",
                 "content": {
                     "content": "&lt;?php<br \/>\n<br \/>\nreturn [<br \/>\n    'port' =&gt; 12345,<br \/>\n<br \/>\n    'host' =&gt; 'http:\/\/otherhost',<br \/>\n];<br \/>\n",
-                    "label": "\/development\/repositories\/ray\/tests\/testSettings\/ray.php"
+                    "label": "ray.php"
                 },
                 "origin": {
                     "file": "\/tests\/RayTest.php",
