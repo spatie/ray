@@ -54,4 +54,4 @@ ray()->enable();
 ray('three') // will be displayed in ray
 ```
 
-By default, Ray is disabled in production environments, and will only transmit data in non-production environments. If you want to use Ray in a production environment, you must explicitly enable it with `ray()->enable()`.
+By default, Ray is disabled in production environments. If you want to use Ray in a production environment, you must explicitly enable it with `ray()->enable()`.
