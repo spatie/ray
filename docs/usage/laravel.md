@@ -131,7 +131,7 @@ You can use the `@ray` directive to easily send variables to Ray from inside a B
 @ray($variable, $anotherVariables)
 ```
 
-### Using Ray with test response
+### Using Ray with test responses
 
 When testing responses, you can send a `TestResponse` to Ray using the `ray()` method. 
 
