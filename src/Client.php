@@ -20,21 +20,23 @@ class Client
 
     public function send(Request $request): void
     {
-        $curlHandle = $this->getCurlHandleForUrl('get', '');
+        try {
+            $curlHandle = $this->getCurlHandleForUrl('get', '');
 
-        $curlError = null;
+            $curlError = null;
 
-        curl_setopt($curlHandle, CURLOPT_POSTFIELDS, $request->toJson());
-        curl_exec($curlHandle);
+            curl_setopt($curlHandle, CURLOPT_POSTFIELDS, $request->toJson());
+            curl_exec($curlHandle);
 
-        if (curl_errno($curlHandle)) {
-            $curlError = curl_error($curlHandle);
-        }
+            if (curl_errno($curlHandle)) {
+                $curlError = curl_error($curlHandle);
+            }
 
-        curl_close($curlHandle);
-
-        if ($curlError) {
-            // do nothing for now
+            if ($curlError) {
+                // do nothing for now
+            }
+        } finally {
+            curl_close($curlHandle);
         }
     }
 
@@ -49,8 +51,6 @@ class Client
             if (curl_errno($curlHandle)) {
                 $curlError = curl_error($curlHandle);
             }
-
-            curl_close($curlHandle);
 
             if ($curlError) {
                 throw new Exception;
@@ -71,6 +71,8 @@ class Client
             if ($exception instanceof StopExecutionRequested) {
                 throw $exception;
             }
+        } finally {
+            curl_close($curlHandle);
         }
 
         return false;
