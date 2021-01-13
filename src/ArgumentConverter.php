@@ -9,6 +9,10 @@ class ArgumentConverter
 {
     public static function convertToPrimitive($argument)
     {
+        if (is_null($argument)) {
+            return null;
+        }
+
         if (is_string($argument)) {
             return $argument;
         }

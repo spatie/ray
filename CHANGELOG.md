@@ -2,6 +2,10 @@
 
 All notable changes to `ray` will be documented in this file
 
+## 1.7.2 - 2021-01-13
+
+- when passing `null`, let argument convertor return `null`
+
 ## 1.7.1 - 2021-01-13
 
 - improve return type of ray function
