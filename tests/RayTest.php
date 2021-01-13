@@ -5,12 +5,10 @@ namespace Spatie\Ray\Tests;
 use Illuminate\Support\Arr;
 use PHPUnit\Framework\TestCase;
 use Spatie\Backtrace\Frame;
-use Spatie\Ray\Client;
 use Spatie\Ray\Payloads\LogPayload;
 use Spatie\Ray\Ray;
 use Spatie\Ray\Settings\SettingsFactory;
 use Spatie\Ray\Tests\TestClasses\FakeClient;
-use Spatie\Ray\Tests\TestClasses\FakeRay;
 use Spatie\Snapshots\MatchesSnapshots;
 
 class RayTest extends TestCase

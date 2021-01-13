@@ -2,8 +2,8 @@
 
 namespace Spatie\Ray\Tests\Exceptions;
 
-use Spatie\Ray\Exceptions\CouldNotConnectToRay;
 use PHPUnit\Framework\TestCase;
+use Spatie\Ray\Exceptions\CouldNotConnectToRay;
 
 class CouldNotConnectToRayTest extends TestCase
 {

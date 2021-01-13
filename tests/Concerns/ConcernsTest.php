@@ -30,12 +30,11 @@ class ConcernsTest extends TestCase
 
         $ray = new FakeRay();
 
-        foreach($colors as $colorName) {
+        foreach ($colors as $colorName) {
             $ray->{$colorName}();
             $this->assertEquals($colorName, $ray->getLastColor());
         }
 
         $this->assertEquals($colors, $ray->getColorHistory());
     }
-
 }
