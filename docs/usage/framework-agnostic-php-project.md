@@ -158,6 +158,14 @@ ray()->json($jsonString);
 
 ![screenshot](/docs/ray/v1/images/json.png)
 
+### Working with files
+
+You can display the contents of any file in Ray with the `file` function.
+
+```php
+ray()->file('somefile.txt');
+```
+
 ### Updating displayed items
 
 You can update values that are already displayed in Ray. To do this, you must hold on the instance returned by the `ray` function and call send on it.

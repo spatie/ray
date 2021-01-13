@@ -1,0 +1,19 @@
+[
+    {
+        "uuid": "fakeUuid",
+        "payloads": [
+            {
+                "type": "custom",
+                "content": {
+                    "content": "&lt;?php<br \/><br \/>return [<br \/>    'port' =&gt; 12345,<br \/><br \/>    'host' =&gt; 'http:\/\/otherhost',<br \/>];<br \/>",
+                    "label": "ray.php"
+                },
+                "origin": {
+                    "file": "\/tests\/RayTest.php",
+                    "line_number": "xxx"
+                }
+            }
+        ],
+        "meta": []
+    }
+]

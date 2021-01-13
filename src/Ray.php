@@ -16,6 +16,7 @@ use Spatie\Ray\Payloads\ColorPayload;
 use Spatie\Ray\Payloads\CreateLockPayload;
 use Spatie\Ray\Payloads\CustomPayload;
 use Spatie\Ray\Payloads\DecodedJsonPayload;
+use Spatie\Ray\Payloads\FileContentsPayload;
 use Spatie\Ray\Payloads\HidePayload;
 use Spatie\Ray\Payloads\JsonStringPayload;
 use Spatie\Ray\Payloads\LogPayload;
@@ -231,6 +232,13 @@ class Ray
     public function json(string $json): self
     {
         $payload = new DecodedJsonPayload($json);
+
+        return $this->sendRequest($payload);
+    }
+
+    public function file(string $filename): self
+    {
+        $payload = new FileContentsPayload($filename);
 
         return $this->sendRequest($payload);
     }
