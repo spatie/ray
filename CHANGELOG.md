@@ -2,6 +2,10 @@
 
 All notable changes to `ray` will be documented in this file
 
+## 1.6.0 - 2021-01-13
+
+- add `file` function (#134)
+
 ## 1.5.10 - 2021-01-13
 
 - allow better compatibility with WordPress
