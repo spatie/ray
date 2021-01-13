@@ -131,6 +131,31 @@ You can use the `@ray` directive to easily send variables to Ray from inside a B
 @ray($variable, $anotherVariables)
 ```
 
+### Using Ray with test response
+
+When testing responses, you can send a `TestResponse` to Ray using the `ray()` method. 
+
+`ray()` is chainable, so you can chain on any of Laravel's assertion methods.
+
+```php
+// somewhere in your app
+Route::get('api/my-endpoint', function () {
+    return response()->json(['a' => 1]);
+});
+
+// somewhere in a test
+/** test */
+public function my_endpoint_works_correctly() 
+{
+    $this
+        ->get('api/my-endpoint')
+        ->ray()
+        ->assertSuccessful();
+}
+```
+
+![screenshot](/docs/ray/v1/images/response.png)
+
 ### Enabling / disabling Ray
 
 You can enable and disable sending stuff to Ray with the `enable` and `disable` functions.
