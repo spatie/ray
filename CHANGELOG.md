@@ -2,6 +2,10 @@
 
 All notable changes to `ray` will be documented in this file
 
+## 1.5.7 - 2021-01-13
+
+- remove unneeded symfony/console dependency
+
 ## 1.5.6 - 2021-01-13
 
 - allow lower dependencies
