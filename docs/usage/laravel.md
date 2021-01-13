@@ -91,7 +91,7 @@ ray()->model($user)
 
 ![screenshot](/docs/ray/v1/images/model.jpg)
 
-The `model` function an also accept multiple models.
+The `model` function can also accept multiple models.
 
 ```php
 // all of these models will be displayed in Ray
