@@ -269,7 +269,7 @@ class RayTest extends TestCase
 
         $this->assertMatchesOsSafeSnapshot($this->client->sentPayloads());
     }
-    
+
     /** @test */
     public function it_can_send_the_json_payload()
     {
@@ -280,12 +280,20 @@ class RayTest extends TestCase
         $this->assertStringContainsString('<span class=sf-dump-key>message</span>', $dumpedValue);
         $this->assertStringContainsString('<span class=sf-dump-str title="14 characters">message text 2</span>', $dumpedValue);
     }
-    
+
     /** @test */
     public function it_can_send_the_toJson_payload()
     {
         $this->ray->toJson(['message' => 'message text 1']);
-        
+
+        $this->assertMatchesOsSafeSnapshot($this->client->sentPayloads());
+    }
+
+    /** @test */
+    public function it_can_send_the_file_content_payload()
+    {
+        $this->ray->file(__DIR__ .'/testSettings/ray.php');
+
         $this->assertMatchesOsSafeSnapshot($this->client->sentPayloads());
     }
 
