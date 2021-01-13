@@ -5,7 +5,7 @@
             {
                 "type": "custom",
                 "content": {
-                    "content": "&lt;?php<br \/>\n<br \/>\nreturn [<br \/>\n    'port' =&gt; 12345,<br \/>\n<br \/>\n    'host' =&gt; 'http:\/\/otherhost',<br \/>\n];<br \/>\n",
+                    "content": "&lt;?php<br \/><br \/>return [<br \/>    'port' =&gt; 12345,<br \/><br \/>    'host' =&gt; 'http:\/\/otherhost',<br \/>];<br \/>",
                     "label": "ray.php"
                 },
                 "origin": {

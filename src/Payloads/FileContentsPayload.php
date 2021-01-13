@@ -28,8 +28,16 @@ class FileContentsPayload extends Payload
         $contents = file_get_contents($this->file);
 
         return [
-            'content' => nl2br(htmlentities($contents)),
+            'content' => $this->encodeContent($contents),
             'label' => basename($this->file),
         ];
+    }
+
+    protected function encodeContent(string $content): string
+    {
+        $result = htmlentities($content);
+
+        // using nl2br() causes tests to fail on windows, so use <br> only
+        return str_replace(PHP_EOL, '<br />', $result);
     }
 }
