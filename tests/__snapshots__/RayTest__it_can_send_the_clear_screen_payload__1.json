@@ -1,0 +1,18 @@
+[
+    {
+        "uuid": "fakeUuid",
+        "payloads": [
+            {
+                "type": "new_screen",
+                "content": {
+                    "name": ""
+                },
+                "origin": {
+                    "file": "\/tests\/RayTest.php",
+                    "line_number": "xxx"
+                }
+            }
+        ],
+        "meta": []
+    }
+]

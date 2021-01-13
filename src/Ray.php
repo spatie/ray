@@ -217,23 +217,27 @@ class Ray
     }
 
     /**
-     * Sends the provided value encoded as a JSON string using json_encode().
+     * Sends the provided value(s) encoded as a JSON string using json_encode().
      */
-    public function toJson($value): self
+    public function toJson(...$values): self
     {
-        $payload = new JsonStringPayload($value);
+        $payloads = array_map(function ($value) {
+            return new JsonStringPayload($value);
+        }, $values);
 
-        return $this->sendRequest($payload);
+        return $this->sendRequest($payloads);
     }
 
     /**
-     * Sends the provided JSON string decoded using json_decode().
+     * Sends the provided JSON string(s) decoded using json_decode().
      */
-    public function json(string $json): self
+    public function json(string ...$jsons): self
     {
-        $payload = new DecodedJsonPayload($json);
+        $payloads = array_map(function ($json) {
+            return new DecodedJsonPayload($json);
+        }, $jsons);
 
-        return $this->sendRequest($payload);
+        return $this->sendRequest($payloads);
     }
 
     public function file(string $filename): self

@@ -138,7 +138,7 @@ ray()->measure(function() {
 
 ### Working with JSON
 
-Want to display the json representation of anything you'd like in Ray? Use `toJson`
+Want to display the JSON representation of anything you'd like in Ray? Use `toJson`. You can provide any value that can be converted to JSON with [json_encode](https://www.php.net/json_encode).
 
 ```php
 ray()->toJson(['a' => 1, 'b' => ['c' => 3]]);
@@ -146,7 +146,21 @@ ray()->toJson(['a' => 1, 'b' => ['c' => 3]]);
 
 ![screenshot](/docs/ray/v1/images/to-json.png)
 
-You can send valid JSON to Ray with the `json` function.
+The `toJson` function can also accept multiple arguments.
+
+```php
+// all of these will be displayed in Ray
+$object = new \stdClass();
+$object->company = 'Spatie';
+
+ray()->toJson(
+    ['a' => 1, 'b' => ['c' => 3]],
+    ['d' => ['e' => 5]],
+    $object
+);
+```
+
+You can send a valid JSON string to Ray with the `json` function.
 
 It will be displayed nicely and collapsable in Ray.
 
@@ -157,6 +171,13 @@ ray()->json($jsonString);
 ```
 
 ![screenshot](/docs/ray/v1/images/json.png)
+
+The `json` function can also accept multiple valid JSON strings.
+
+```php
+// all of these will be displayed in Ray
+ray()->json($jsonString, $anotherJsonString, $yetAnotherJsonString);
+```
 
 ### Working with files
 

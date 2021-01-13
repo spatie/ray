@@ -2,6 +2,14 @@
 
 All notable changes to `ray` will be documented in this file
 
+## 1.7.0 - 2021-01-13
+
+- support multiple arguments to `toJson()` and `json()` (#148)
+
+## 1.6.1 - 2021-01-13
+
+- prevent possible memory leak (#143)
+
 ## 1.6.0 - 2021-01-13
 
 - add `file` function (#134)

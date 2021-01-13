@@ -1,5 +1,5 @@
 ---
-title: Windows 10 using Homestead
+title: Windows 10
 weight: 3
 ---
 
