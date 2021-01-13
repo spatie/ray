@@ -83,7 +83,7 @@ event(new MyEvent()); // this event won't be displayed.
 
 ### Handling models
 
-Using the `model` function, you can display the attributes of relations of a model.
+Using the `model` function, you can display the attributes and relations of a model.
 
 ```php
 ray()->model($user)
