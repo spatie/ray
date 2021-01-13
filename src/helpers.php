@@ -11,7 +11,7 @@ if (! function_exists('ray')) {
     /**
      * @param mixed ...$args
      *
-     * @return \Spatie\Ray\Ray|LaravelRay
+     * @return \Spatie\Ray\Ray|LaravelRay|WordPressRay
      */
     function ray(...$args)
     {
