@@ -5,10 +5,12 @@ namespace Spatie\Ray\Tests;
 use Illuminate\Support\Arr;
 use PHPUnit\Framework\TestCase;
 use Spatie\Backtrace\Frame;
+use Spatie\Ray\Client;
 use Spatie\Ray\Payloads\LogPayload;
 use Spatie\Ray\Ray;
 use Spatie\Ray\Settings\SettingsFactory;
 use Spatie\Ray\Tests\TestClasses\FakeClient;
+use Spatie\Ray\Tests\TestClasses\FakeRay;
 use Spatie\Snapshots\MatchesSnapshots;
 
 class RayTest extends TestCase
@@ -127,6 +129,10 @@ class RayTest extends TestCase
         $this->client->reset();
         $this->ray->send('hey')->removeWhen(false);
         $this->assertCount(1, $this->client->sentPayloads());
+
+        $this->client->reset();
+        $this->ray->send('hey')->removeIf(true);
+        $this->assertCount(2, $this->client->sentPayloads());
     }
 
     /** @test */
@@ -138,6 +144,10 @@ class RayTest extends TestCase
         $this->client->reset();
         $this->ray->send('hey')->removeWhen(fn () => false);
         $this->assertCount(1, $this->client->sentPayloads());
+
+        $this->client->reset();
+        $this->ray->send('hey')->removeIf(fn () => true);
+        $this->assertCount(2, $this->client->sentPayloads());
     }
 
     /** @test */
@@ -203,6 +213,16 @@ class RayTest extends TestCase
     }
 
     /** @test */
+    public function it_removes_a_named_stopwatch_when_stopping_time()
+    {
+        $this->ray->measure('test-timer');
+        $this->assertTrue(isset($this->ray::$stopWatches['test-timer']));
+
+        $this->ray->stopTime('test-timer');
+        $this->assertFalse(isset($this->ray::$stopWatches['test-timer']));
+    }
+
+    /** @test */
     public function it_can_send_backtrace_to_ray()
     {
         $this->ray->trace();
@@ -263,6 +283,14 @@ class RayTest extends TestCase
     }
 
     /** @test */
+    public function it_can_send_the_charles_payload()
+    {
+        $this->ray->charles();
+
+        $this->assertMatchesOsSafeSnapshot($this->client->sentPayloads());
+    }
+
+    /** @test */
     public function it_can_send_the_notify_payload()
     {
         $this->ray->notify('notification text');
@@ -293,6 +321,23 @@ class RayTest extends TestCase
     public function it_can_send_the_file_content_payload()
     {
         $this->ray->file(__DIR__ .'/testSettings/ray.php');
+
+        $this->assertMatchesOsSafeSnapshot($this->client->sentPayloads());
+    }
+
+    /** @test */
+    public function it_can_send_the_new_screen_payload()
+    {
+        $this->ray->newScreen('my-screen');
+        $this->ray->newScreen();
+
+        $this->assertMatchesOsSafeSnapshot($this->client->sentPayloads());
+    }
+
+    /** @test */
+    public function it_can_send_the_clear_screen_payload()
+    {
+        $this->ray->clearScreen();
 
         $this->assertMatchesOsSafeSnapshot($this->client->sentPayloads());
     }
@@ -375,6 +420,20 @@ class RayTest extends TestCase
         $this->ray->send('hey');
 
         $this->assertEquals('/local_path/RayTest.php', $this->client->sentPayloads()[0]['payloads'][0]['origin']['file']);
+    }
+
+    /** @test */
+    public function it_returns_itself_and_does_not_send_anything_when_calling_send_without_arguments()
+    {
+        $settings = SettingsFactory::createFromConfigFile();
+
+        $this->ray = new Ray($settings, $this->client, 'fakeUuid');
+
+        $result = $this->ray->send();
+
+        $this->assertCount(0, $this->client->sentPayloads());
+        $this->assertEquals($this->ray, $result);
+        $this->assertNull($this->getValueOfLastSentContent('values'));
     }
 
     protected function getValueOfLastSentContent(string $contentKey)
