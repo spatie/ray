@@ -2,6 +2,10 @@
 
 All notable changes to `ray` will be documented in this file
 
+## 1.5.6 - 2021-01-13
+
+- allow lower dependencies
+
 ## 1.5.5 - 2021-01-11
 
 - split origin factory in overridable functions
