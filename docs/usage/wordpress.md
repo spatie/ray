@@ -36,5 +36,22 @@ wp_mail('to@email.com', 'my subject', 'the content');
 
 ![screenshot](/docs/ray/v1/images/wordpress-mails.png)
 
+To stop showing mail, call `stopShowingMails()`.
 
-To stop showing mail, call `stopShowingMails()`
+### Enabling / disabling Ray
+
+You can enable and disable sending stuff to Ray with the `enable` and `disable` functions.
+
+```php
+ray('one') // will be displayed in ray
+
+ray()->disable();
+
+ray('two') // won't be displayed in ray
+
+ray()->enable();
+
+ray('three') // will be displayed in ray
+```
+
+By default, Ray is disabled in production environments, and will only transmit data in non-production environments. If you want to use Ray in a production environment, you must explicitly enable it with `ray()->enable()`.

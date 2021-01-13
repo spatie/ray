@@ -3,7 +3,9 @@ title: WordPress
 weight: 4
 ---
 
-You can install Ray in WordPress by manually cloning the repo or installing the plugin via the Plugins section on the WordPress admin UI
+There are several ways to install Ray in WordPress.
+
+By default, Ray is disabled in production environments, and will only transmit data in non-production environments. If you want to use Ray in a production environment, you must explicitly enable it with `ray()->enable()`.
 
 ## Manually cloning the repo
 
