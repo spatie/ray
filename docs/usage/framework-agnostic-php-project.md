@@ -1,6 +1,5 @@
 ---
-title: Framework agnostic PHP
-weight: 2
+title: Framework agnostic PHP weight: 2
 ---
 
 To display something in Ray use the `ray()` function. It accepts everything: strings, arrays, objects, ... you name it.
@@ -23,7 +22,7 @@ ray('as' 'many' , 'arguments', 'as', 'you', 'like');
 
 ### Using colors
 
-You can colorize things your sent to ray by using one of the color functions. 
+You can colorize things your sent to ray by using one of the color functions.
 
 ```php
 ray('this is green')->green();
@@ -66,13 +65,16 @@ ray()->newScreen('My debug screen')
 
 ![screenshot](/docs/ray/v1/images/screen.jpg)
 
-You could opt to use `newScreen` very early on in a request so you'll only see items that were sent to Ray in the current request. In a Laravel app, a good place for this might be the service provider.
+You could opt to use `newScreen` very early on in a request so you'll only see items that were sent to Ray in the
+current request. In a Laravel app, a good place for this might be the service provider.
 
-When using PHPUnit to run tests, you might use `newScreen` to get a new screen each time your run a test to debug some code.
+When using PHPUnit to run tests, you might use `newScreen` to get a new screen each time your run a test to debug some
+code.
 
 ### See the caller of a function
 
-Sometimes you want to know where your code is being called. You can quickly determine that by using the `caller` function.
+Sometimes you want to know where your code is being called. You can quickly determine that by using the `caller`
+function.
 
 ```php
 ray()->caller();
@@ -98,7 +100,52 @@ ray()->pause();
 
 ![screenshot](/docs/ray/v1/images/pause.jpg)
 
-If you press the "Continue" button in Ray, execution will continue. When you press "Stop execution" Ray will thrown an exception in your app to halt execution.
+If you press the "Continue" button in Ray, execution will continue. When you press "Stop execution", Ray will throw an
+exception in your app to halt execution.
+
+### Counting execution times
+
+You can display a count of how many times a piece of code was called using `count`.
+
+Here's an example:
+
+```php
+ foreach (range(1, 2) as $i) {
+    sleep(1);
+    ray()->count();
+
+    foreach (range(1, 4) as $j) {
+        sleep(1);
+
+        ray()->count();
+    }
+}
+```
+
+This is how that looks like in Ray.
+
+![screenshot](/docs/ray/v1/images/count.png)
+
+Optionally, you can pass a name to `count`. Ray will display a count of how many times a `count` with that name was
+executed.
+
+Here's an example:
+
+```php
+ foreach (range(1, 4) as $i) {
+    ray()->count('first');
+
+    foreach (range(1, 2) as $j) {
+        ray()->count('first');
+        
+        ray()->count('second');
+    }
+}
+```
+
+This is how that looks like in Ray.
+
+![screenshot](/docs/ray/v1/images/named-count.png)
 
 ### Display the class name of an object
 
@@ -110,7 +157,8 @@ ray()->className($anObject)
 
 ### Measuring performance and memory usage
 
-You can use the `measure` function to display runtime and memory usage. When `measure` is called again, the time between this previous call is also displayed.
+You can use the `measure` function to display runtime and memory usage. When `measure` is called again, the time between
+this previous call is also displayed.
 
 ```php
 ray()->measure();
@@ -126,7 +174,8 @@ ray()->measure();
 
 ![screenshot](/docs/ray/v1/images/measure.jpg)
 
-The `measure` call optionally accepts a callable. Ray will output the time needed to run the callable and the maximum memory used.
+The `measure` call optionally accepts a callable. Ray will output the time needed to run the callable and the maximum
+memory used.
 
 ```php
 ray()->measure(function() {
@@ -138,7 +187,8 @@ ray()->measure(function() {
 
 ### Working with JSON
 
-Want to display the JSON representation of anything you'd like in Ray? Use `toJson`. You can provide any value that can be converted to JSON with [json_encode](https://www.php.net/json_encode).
+Want to display the JSON representation of anything you'd like in Ray? Use `toJson`. You can provide any value that can
+be converted to JSON with [json_encode](https://www.php.net/json_encode).
 
 ```php
 ray()->toJson(['a' => 1, 'b' => ['c' => 3]]);
@@ -189,7 +239,8 @@ ray()->file('somefile.txt');
 
 ### Updating displayed items
 
-You can update values that are already displayed in Ray. To do this, you must hold on the instance returned by the `ray` function and call send on it.
+You can update values that are already displayed in Ray. To do this, you must hold on the instance returned by the `ray`
+function and call send on it.
 
 Here's an example where you'll see a countdown from 10 to one.
 
@@ -202,7 +253,8 @@ foreach(range(10, 1) as $number) {
 }
 ```
 
-The instance `$ray` may also be used to add a color or size to items already on display. Here's an example where an items will change color and size after a second
+The instance `$ray` may also be used to add a color or size to items already on display. Here's an example where an
+items will change color and size after a second
 
 ```php
 $ray = ray('a string');
@@ -221,11 +273,13 @@ ray('will be show')->showIf(true);
 ray('will not be shown')->showIf(false);
 ```
 
-You can also pass a callable to `showIf`. If the callable returns a truthy value, it will be shown. Otherwise, it will not.
+You can also pass a callable to `showIf`. If the callable returns a truthy value, it will be shown. Otherwise, it will
+not.
 
 ### Removing items
 
-You can remove an item that is already displayed in Ray. To do this, call the `remove` function on an instance return by the `ray` function.
+You can remove an item that is already displayed in Ray. To do this, call the `remove` function on an instance return by
+the `ray` function.
 
 ```php
 $ray = ray('will be removed after 1 sec');
@@ -259,7 +313,8 @@ ray($largeObject)->hide()
 
 ### Returning items
 
-To make all methods chainable, the `ray()` function returns and instance of `Spatie\Ray\Ray`. To quickly send something to Ray and have that something return as a value, use the `pass` function.
+To make all methods chainable, the `ray()` function returns and instance of `Spatie\Ray\Ray`. To quickly send something
+to Ray and have that something return as a value, use the `pass` function.
 
 ```php
 ray()->pass($anything) // $anything will be returned
@@ -275,7 +330,7 @@ function foo() {
 }
 ```
 
-to 
+to
 
 ```php
 function foo() {
