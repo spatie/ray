@@ -22,4 +22,9 @@ class Origin
             'line_number' => $this->lineNumber,
         ];
     }
+
+    public function fingerPrint(): string
+    {
+        return md5(print_r($this->toArray(), true));
+    }
 }
