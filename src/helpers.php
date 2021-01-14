@@ -32,7 +32,7 @@ if (! function_exists('ray')) {
 
         $rayClass = Ray::class;
 
-        if(class_exists(WordPressRay::class)) {
+        if (class_exists(WordPressRay::class)) {
             $rayClass = WordPressRay::class;
         }
 
