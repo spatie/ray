@@ -2,6 +2,10 @@
 
 All notable changes to `ray` will be documented in this file
 
+## 1.8.0 - 2021-01-14
+
+- add a check for YiiRay's instance
+
 ## 1.7.2 - 2021-01-13
 
 - when passing `null`, let argument convertor return `null`
