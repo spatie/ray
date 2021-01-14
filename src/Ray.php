@@ -333,7 +333,7 @@ class Ray
 
         $message .= '.';
 
-        $ray->sendCustom($message);
+        $ray->sendCustom($message, 'Count');
 
         return $ray;
     }
