@@ -3,9 +3,10 @@
 use Illuminate\Contracts\Container\BindingResolutionException;
 use Spatie\LaravelRay\Ray as LaravelRay;
 use Spatie\Ray\Ray;
-
 use Spatie\Ray\Settings\SettingsFactory;
+
 use Spatie\WordPressRay\Ray as WordPressRay;
+use Spatie\YiiRay\Ray as YiiRay;
 
 if (! function_exists('ray')) {
     /**
@@ -23,6 +24,10 @@ if (! function_exists('ray')) {
                 // testsuite without spatie/laravel-ray's service provider being registered
                 // in `getPackageProviders` of the base test suite
             }
+        }
+
+        if (class_exists(YiiRay::class)) {
+            return Yii::$container->get(YiiRay::class)->send(...$args);
         }
 
         $rayClass = class_exists(WordPressRay::class)
