@@ -20,3 +20,11 @@ Ray is also registered as [a plugin on WordPress.org](https://wordpress.org/plug
 ![screenshot](/docs/ray/v1/images/wp-install.png)
 
 Install and activate the plugin.
+
+## Setting Environment variable
+
+When developing locally you should have `WP_ENVIRONMENT_TYPE` set as `local` in your `wp-config.php` otherwise Ray won't work.
+
+```php
+define( 'WP_ENVIRONMENT_TYPE', 'local' );
+```
