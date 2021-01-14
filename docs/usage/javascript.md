@@ -1,6 +1,6 @@
 ---
 title: JavaScript
-weight: 5
+weight: 6
 ---
 
 To display something in Ray use the `ray()` function. It accepts everything: strings, arrays, objects, ... you name it.
