@@ -465,10 +465,10 @@ class RayTest extends TestCase
     /** @test */
     public function it_can_determine_how_many_times_a_particular_piece_of_code_was_called_for_a_given_name()
     {
-        foreach(range(1,2) as $i) {
+        foreach (range(1, 2) as $i) {
             ray()->count('first');
 
-            foreach(range(1,2) as $j) {
+            foreach (range(1, 2) as $j) {
                 ray()->count('second');
                 ray()->count('another');
             }
@@ -479,16 +479,15 @@ class RayTest extends TestCase
         $this->assertEquals(2, Ray::$counters->get('first'));
         $this->assertEquals(4, Ray::$counters->get('second'));
         $this->assertEquals(6, Ray::$counters->get('another'));
-
     }
 
     /** @test */
     public function it_can_determine_how_many_times_a_particular_piece_of_code_was_called_without_a_name()
     {
-        foreach(range(1,2) as $i) {
+        foreach (range(1, 2) as $i) {
             ray()->count();
 
-            foreach(range(1,2) as $j) {
+            foreach (range(1, 2) as $j) {
                 ray()->count();
             }
         }
@@ -508,7 +507,6 @@ class RayTest extends TestCase
 
         return Arr::get($lastPayload, "payloads.0.content.{$contentKey}");
     }
-
 
     protected function assertMatchesOsSafeSnapshot($data)
     {
