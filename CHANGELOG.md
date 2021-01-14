@@ -2,6 +2,10 @@
 
 All notable changes to `ray` will be documented in this file
 
+## 1.9.1 - 2021-01-15
+
+- improve helper functions
+
 ## 1.9.0 - 2021-01-15
 
 - add `count`
