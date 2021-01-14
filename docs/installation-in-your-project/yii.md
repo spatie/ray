@@ -1,6 +1,6 @@
 ---
 title: Yii2
-weight: 5
+weight: 6
 ---
 
 If you use Yii2, this is the way.

@@ -1,6 +1,6 @@
 ---
 title: Yii2
-weight: 5
+weight: 6
 ---
 
 Inside a Yii2 application, you can use all methods from [the framework agnostic version](/docs/ray/v1/usage/framework-agnostic-php-project).
