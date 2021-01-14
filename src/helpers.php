@@ -2,11 +2,11 @@
 
 use Illuminate\Contracts\Container\BindingResolutionException;
 use Spatie\LaravelRay\Ray as LaravelRay;
-use Spatie\YiiRay\Ray as YiiRay;
 use Spatie\Ray\Ray;
-
 use Spatie\Ray\Settings\SettingsFactory;
+
 use Spatie\WordPressRay\Ray as WordPressRay;
+use Spatie\YiiRay\Ray as YiiRay;
 
 if (! function_exists('ray')) {
     /**
