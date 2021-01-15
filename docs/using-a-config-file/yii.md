@@ -1,5 +1,5 @@
 ---
-title: Yii 
+title: Yii2 
 weight: 6
 ---
 
