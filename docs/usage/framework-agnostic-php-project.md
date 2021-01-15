@@ -135,7 +135,7 @@ Here's an example:
 
     foreach (range(1, 2) as $j) {
         ray()->count('first');
-        
+
         ray()->count('second');
     }
 }
@@ -233,6 +233,15 @@ You can display the contents of any file in Ray with the `file` function.
 
 ```php
 ray()->file('somefile.txt');
+```
+
+### Displaying images
+
+To display an image, call the `image` function and pass either a fully-qualified filename or url as its only argument.
+
+```php
+ray()->image('https://placekitten.com/200/300');
+ray()->image('/home/auser/kitten.jpg');
 ```
 
 ### Updating displayed items

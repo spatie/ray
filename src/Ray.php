@@ -19,6 +19,7 @@ use Spatie\Ray\Payloads\CustomPayload;
 use Spatie\Ray\Payloads\DecodedJsonPayload;
 use Spatie\Ray\Payloads\FileContentsPayload;
 use Spatie\Ray\Payloads\HidePayload;
+use Spatie\Ray\Payloads\ImagePayload;
 use Spatie\Ray\Payloads\JsonStringPayload;
 use Spatie\Ray\Payloads\LogPayload;
 use Spatie\Ray\Payloads\MeasurePayload;
@@ -250,6 +251,13 @@ class Ray
     public function file(string $filename): self
     {
         $payload = new FileContentsPayload($filename);
+
+        return $this->sendRequest($payload);
+    }
+
+    public function image(string $location): self
+    {
+        $payload = new ImagePayload($location);
 
         return $this->sendRequest($payload);
     }
