@@ -1,5 +1,6 @@
 ---
-title: Framework agnostic PHP weight: 2
+title: Framework agnostic PHP 
+weight: 2
 ---
 
 To display something in Ray use the `ray()` function. It accepts everything: strings, arrays, objects, ... you name it.
