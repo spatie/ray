@@ -86,7 +86,7 @@ event(new MyEvent()); // this event won't be displayed.
 Using the `model` function, you can display the attributes and relations of a model.
 
 ```php
-ray()->model($user)
+ray()->model($user);
 ```
 
 ![screenshot](/docs/ray/v1/images/model.jpg)
@@ -98,10 +98,10 @@ The `model` function can also accept multiple models and even collections.
 ray()->model($user, $anotherUser, $yetAnotherUser);
 
 // all models in the collection will be display
-ray()->model(User::all()):
+ray()->model(User::all());
 
 // all models in all collections will be displayed
-ray()->model(User::all(), OtherModel::all()):
+ray()->model(User::all(), OtherModel::all());
 ```
 
 Alternatively, you can use `models()` which is an alias for `model()`.
