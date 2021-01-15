@@ -254,6 +254,13 @@ class Ray
         return $this->sendRequest($payload);
     }
 
+    public function image(string $location): self
+    {
+        $payload = new ImagePayload($location);
+
+        return $this->sendRequest($payload);
+    }
+
     public function die($status = '')
     {
         die($status);
