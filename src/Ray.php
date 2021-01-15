@@ -19,6 +19,7 @@ use Spatie\Ray\Payloads\CustomPayload;
 use Spatie\Ray\Payloads\DecodedJsonPayload;
 use Spatie\Ray\Payloads\FileContentsPayload;
 use Spatie\Ray\Payloads\HidePayload;
+use Spatie\Ray\Payloads\ImagePayload;
 use Spatie\Ray\Payloads\JsonStringPayload;
 use Spatie\Ray\Payloads\LogPayload;
 use Spatie\Ray\Payloads\MeasurePayload;
