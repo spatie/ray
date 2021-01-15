@@ -264,10 +264,34 @@ class Ray
         return $this->send(get_class($object));
     }
 
+    public function phpinfo(string ...$properties): self
+    {
+        $default = [
+            'PHP version' => phpversion(),
+            'Timezone' => ini_get('date.timezone'),
+            'Charset' => ini_get('default_charset'),
+            'Memory limit' => ini_get('memory_limit'),
+            'Max file upload size' => ini_get('max_file_uploads'),
+            'Max post size' => ini_get('post_max_size'),
+            'Hostname' => php_uname('n'),
+            'PHP ini file' => php_ini_loaded_file(),
+            "PHP scanned ini file" => explode(',', str_replace(PHP_EOL, '', php_ini_scanned_files() ?? '')),
+            'Extensions' => implode(', ', get_loaded_extensions()),
+        ];
+
+        $properties = array_flip($properties);
+
+        foreach ($properties as $property => $value) {
+            $properties[$property] = ini_get($property);
+        }
+
+        return $this->toJson(array_merge($properties, $default));
+    }
+
     public function showWhen($boolOrCallable): self
     {
         if (is_callable($boolOrCallable)) {
-            $boolOrCallable = (bool)$boolOrCallable();
+            $boolOrCallable = (bool) $boolOrCallable();
         }
 
         if (! $boolOrCallable) {
@@ -285,7 +309,7 @@ class Ray
     public function removeWhen($boolOrCallable): self
     {
         if (is_callable($boolOrCallable)) {
-            $boolOrCallable = (bool)$boolOrCallable();
+            $boolOrCallable = (bool) $boolOrCallable();
         }
 
         if ($boolOrCallable) {
@@ -387,7 +411,7 @@ class Ray
     }
 
     /**
-     * @param \Spatie\Ray\Payloads\Payload|\Spatie\Ray\Payloads\Payload[]$payloads
+     * @param \Spatie\Ray\Payloads\Payload|\Spatie\Ray\Payloads\Payload[] $payloads
      * @param array $meta
      *
      * @return $this

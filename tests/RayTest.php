@@ -5,6 +5,7 @@ namespace Spatie\Ray\Tests;
 use Illuminate\Support\Arr;
 use PHPUnit\Framework\TestCase;
 use Spatie\Backtrace\Frame;
+use Spatie\Ray\ArgumentConverter;
 use Spatie\Ray\Payloads\LogPayload;
 use Spatie\Ray\Ray;
 use Spatie\Ray\Settings\SettingsFactory;
@@ -503,6 +504,41 @@ class RayTest extends TestCase
         $this->assertNotNull($ray);
         $this->assertEquals('1-2-3-4', $ray->uuid);
         $this->assertEquals($ray->settings, SettingsFactory::createFromConfigFile());
+    }
+
+    /** @test */
+    public function it_can_send_the_php_info_payload()
+    {
+        $this->ray->phpinfo();
+
+        $info = json_encode([
+            'PHP version' => phpversion(),
+            'Timezone' => ini_get('date.timezone'),
+            'Charset' => ini_get('default_charset'),
+            'Memory limit' => ini_get('memory_limit'),
+            'Max file upload size' => ini_get('max_file_uploads'),
+            'Max post size' => ini_get('post_max_size'),
+            'Hostname' => php_uname('n'),
+            'PHP ini file' => php_ini_loaded_file(),
+            "PHP scanned ini file" => explode(',', str_replace(PHP_EOL, '', php_ini_scanned_files() ?? '')),
+            'Extensions' => implode(', ', get_loaded_extensions()),
+        ]);
+
+        $this->assertEquals(
+            $info,
+            $this->getValueOfLastSentContent('value')
+        );
+    }
+
+    /** @test */
+    public function it_can_add_values_to_the_php_info_payload()
+    {
+        $this->ray->phpinfo('default_mimetype');
+
+        $this->assertArrayHasKey(
+            'default_mimetype',
+            json_decode($this->getValueOfLastSentContent('value'), true)
+        );
     }
 
     protected function getValueOfLastSentContent(string $contentKey)
