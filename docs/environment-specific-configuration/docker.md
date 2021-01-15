@@ -32,7 +32,7 @@ return [
 ```
 
 
-On Linux, you will need to add an 'extra_hosts' parameter to your container definitions to expose 'host.docker.internal'.
+On Linux, you will need to add an 'extra_hosts' parameter to your container definitions to expose 'host.docker.internal'. Please make sure you are using Docker `20.03` or higher.
 ```
 #docker-compose.yml
 
