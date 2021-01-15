@@ -112,12 +112,9 @@ Here's an example:
 
 ```php
  foreach (range(1, 2) as $i) {
-    sleep(1);
     ray()->count();
 
     foreach (range(1, 4) as $j) {
-        sleep(1);
-
         ray()->count();
     }
 }
