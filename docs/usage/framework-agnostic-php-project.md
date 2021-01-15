@@ -134,7 +134,6 @@ Here's an example:
     ray()->count('first');
 
     foreach (range(1, 2) as $j) {
-        ray()->count('first');
         
         ray()->count('second');
     }
