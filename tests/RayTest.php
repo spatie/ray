@@ -525,7 +525,7 @@ class RayTest extends TestCase
 
         $this->assertEquals(
             $info,
-            $this->getValueOfLastSentContent('value')
+            $this->getValueOfLastSentContent('content')
         );
     }
 
@@ -536,7 +536,7 @@ class RayTest extends TestCase
 
         $this->assertArrayHasKey(
             'default_mimetype',
-            json_decode($this->getValueOfLastSentContent('value'), true)
+            json_decode($this->getValueOfLastSentContent('content'), true)
         );
     }
 

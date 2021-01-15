@@ -285,7 +285,10 @@ class Ray
             $properties[$property] = ini_get($property);
         }
 
-        return $this->toJson(array_merge($properties, $default));
+        return $this->sendCustom(
+            json_encode(array_merge($properties, $default)),
+            'PHPInfo'
+        );
     }
 
     public function showWhen($boolOrCallable): self
