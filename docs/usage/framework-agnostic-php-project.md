@@ -48,6 +48,15 @@ ray('large')->large();
 
 ![screenshot](/docs/ray/v1/images/sizes.jpg)
 
+### Setting statuses
+
+You can set the background color of a Ray entry to indicate a status one of the status functions.
+
+```php
+ray('successful')->success();
+ray('failed')->failure();
+```
+
 ### Creating a new screen
 
 You can use `newScreen` (or `clearScreen`) to programmatically create a new screen.
@@ -135,7 +144,7 @@ Here's an example:
 
     foreach (range(1, 2) as $j) {
         ray()->count('first');
-        
+
         ray()->count('second');
     }
 }
