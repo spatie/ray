@@ -4,7 +4,7 @@ namespace Spatie\Ray\Settings;
 
 class SettingsFactory
 {
-    public static function createFromConfigFile(string $configDirectory = null): settings
+    public static function createFromConfigFile(string $configDirectory = null): Settings
     {
         $settingValues = (new static())->getSettingsFromConfigFile($configDirectory);
 
