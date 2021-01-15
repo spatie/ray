@@ -28,6 +28,7 @@ use Spatie\Ray\Payloads\RemovePayload;
 use Spatie\Ray\Payloads\SizePayload;
 use Spatie\Ray\Payloads\TracePayload;
 use Spatie\Ray\Settings\Settings;
+use Spatie\Ray\Settings\SettingsFactory;
 use Spatie\Ray\Support\Counters;
 use Symfony\Component\Stopwatch\Stopwatch;
 
@@ -52,7 +53,7 @@ class Ray
 
     public static function create(Client $client = null, string $uuid = null): self
     {
-        $settings = Settings::load();
+        $settings = SettingsFactory::createFromConfigFile();
 
         return new static($settings, $client, $uuid);
     }

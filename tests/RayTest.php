@@ -495,6 +495,16 @@ class RayTest extends TestCase
         $this->assertEquals("Called 4 times.", $this->client->sentPayloads()[5]['payloads'][0]['content']['content']);
     }
 
+    /** @test */
+    public function it_creates_a_Ray_instance_with_default_settings_when_create_is_called_without_arguments()
+    {
+        $ray = Ray::create(null, '1-2-3-4');
+
+        $this->assertNotNull($ray);
+        $this->assertEquals('1-2-3-4', $ray->uuid);
+        $this->assertEquals($ray->settings, SettingsFactory::createFromConfigFile());
+    }
+
     protected function getValueOfLastSentContent(string $contentKey)
     {
         $payload = $this->client->sentPayloads();
