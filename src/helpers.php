@@ -12,7 +12,7 @@ if (! function_exists('ray')) {
     /**
      * @param mixed ...$args
      *
-     * @return \Spatie\Ray\Ray|LaravelRay|WordPressRay
+     * @return \Spatie\Ray\Ray|LaravelRay|WordPressRay|YiiRay
      */
     function ray(...$args)
     {
@@ -30,9 +30,11 @@ if (! function_exists('ray')) {
             return Yii::$container->get(YiiRay::class)->send(...$args);
         }
 
-        $rayClass = class_exists(WordPressRay::class)
-            ? WordPressRay::class
-            : Ray::class;
+        $rayClass = Ray::class;
+
+        if (class_exists(WordPressRay::class)) {
+            $rayClass = WordPressRay::class;
+        }
 
         $settings = SettingsFactory::createFromConfigFile();
 

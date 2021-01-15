@@ -1,6 +1,6 @@
 ---
 title: Bash
-weight: 6
+weight: 7
 ---
 
 You can send information from Bash to Ray via this third party package:

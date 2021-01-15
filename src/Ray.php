@@ -11,6 +11,7 @@ use Spatie\LaravelRay\Ray as LaravelRay;
 use Spatie\Macroable\Macroable;
 use Spatie\Ray\Concerns\RayColors;
 use Spatie\Ray\Concerns\RaySizes;
+use Spatie\Ray\Origin\DefaultOriginFactory;
 use Spatie\Ray\Payloads\CallerPayload;
 use Spatie\Ray\Payloads\ColorPayload;
 use Spatie\Ray\Payloads\CreateLockPayload;
@@ -28,6 +29,7 @@ use Spatie\Ray\Payloads\SizePayload;
 use Spatie\Ray\Payloads\TracePayload;
 use Spatie\Ray\Settings\Settings;
 use Spatie\Ray\Settings\SettingsFactory;
+use Spatie\Ray\Support\Counters;
 use Symfony\Component\Stopwatch\Stopwatch;
 
 class Ray
@@ -39,6 +41,8 @@ class Ray
     public Settings $settings;
 
     protected static Client $client;
+
+    public static Counters $counters;
 
     public static string $fakeUuid;
 
@@ -59,6 +63,8 @@ class Ray
         $this->settings = $settings;
 
         self::$client = $client ?? self::$client ?? new Client($settings->port, $settings->host);
+
+        self::$counters = self::$counters ?? new Counters();
 
         $this->uuid = $uuid ?? static::$fakeUuid ?? Uuid::uuid4()->toString();
     }
@@ -308,6 +314,38 @@ class Ray
         return $this;
     }
 
+    public function count(?string $name = null): self
+    {
+        $fingerPrint = (new DefaultOriginFactory())->getOrigin()->fingerPrint();
+
+        [$ray, $times] = self::$counters->increment($name ?? $fingerPrint);
+
+        $message = "Called ";
+
+        if ($name) {
+            $message .= "`{$name}` ";
+        }
+
+        $message .= "{$times} ";
+
+        $message .= $times === 1
+            ? 'time'
+            : 'times';
+
+        $message .= '.';
+
+        $ray->sendCustom($message, 'Count');
+
+        return $ray;
+    }
+
+    public function clearCounters(): self
+    {
+        self::$counters->clear();
+
+        return $this;
+    }
+
     public function pause(): self
     {
         $lockName = md5(time());
@@ -368,7 +406,6 @@ class Ray
         } catch (Exception $e) {
             // In WordPress this entire package will be rewritten
         }
-
 
         $allMeta = array_merge([
             'php_version' => phpversion(),
