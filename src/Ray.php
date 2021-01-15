@@ -11,12 +11,14 @@ use Spatie\LaravelRay\Ray as LaravelRay;
 use Spatie\Macroable\Macroable;
 use Spatie\Ray\Concerns\RayColors;
 use Spatie\Ray\Concerns\RaySizes;
+use Spatie\Ray\Concerns\RayStatuses;
 use Spatie\Ray\Origin\DefaultOriginFactory;
 use Spatie\Ray\Payloads\CallerPayload;
 use Spatie\Ray\Payloads\ColorPayload;
 use Spatie\Ray\Payloads\CreateLockPayload;
 use Spatie\Ray\Payloads\CustomPayload;
 use Spatie\Ray\Payloads\DecodedJsonPayload;
+use Spatie\Ray\Payloads\StatusPayload;
 use Spatie\Ray\Payloads\FileContentsPayload;
 use Spatie\Ray\Payloads\HidePayload;
 use Spatie\Ray\Payloads\JsonStringPayload;
@@ -36,6 +38,7 @@ class Ray
 {
     use RayColors;
     use RaySizes;
+    use RayStatuses;
     use Macroable;
 
     public Settings $settings;
@@ -91,6 +94,15 @@ class Ray
     public function color(string $color): self
     {
         $payload = new ColorPayload($color);
+
+        $this->sendRequest($payload);
+
+        return $this;
+    }
+
+    public function status(string $status): self
+    {
+        $payload = new StatusPayload($status);
 
         $this->sendRequest($payload);
 
