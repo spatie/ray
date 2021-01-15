@@ -369,6 +369,14 @@ class RayTest extends TestCase
     }
 
     /** @test */
+    public function it_can_send_the_clear_all_payload()
+    {
+        $this->ray->clearAll();
+
+        $this->assertMatchesOsSafeSnapshot($this->client->sentPayloads());
+    }
+
+    /** @test */
     public function it_can_send_the_class_name()
     {
         $this->ray->className($this);

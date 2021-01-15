@@ -13,6 +13,7 @@ use Spatie\Ray\Concerns\RayColors;
 use Spatie\Ray\Concerns\RaySizes;
 use Spatie\Ray\Origin\DefaultOriginFactory;
 use Spatie\Ray\Payloads\CallerPayload;
+use Spatie\Ray\Payloads\ClearAllPayload;
 use Spatie\Ray\Payloads\ColorPayload;
 use Spatie\Ray\Payloads\CreateLockPayload;
 use Spatie\Ray\Payloads\CustomPayload;
@@ -78,9 +79,14 @@ class Ray
     {
         $payload = new NewScreenPayload($name);
 
-        $this->sendRequest($payload);
+        return $this->sendRequest($payload);
+    }
 
-        return $this;
+    public function clearAll()
+    {
+        $payload = new ClearAllPayload();
+
+        return $this->sendRequest($payload);
     }
 
     public function clearScreen()
@@ -92,36 +98,28 @@ class Ray
     {
         $payload = new ColorPayload($color);
 
-        $this->sendRequest($payload);
-
-        return $this;
+        return $this->sendRequest($payload);
     }
 
     public function size(string $size): self
     {
         $payload = new SizePayload($size);
 
-        $this->sendRequest($payload);
-
-        return $this;
+        return $this->sendRequest($payload);
     }
 
     public function remove(): self
     {
         $payload = new RemovePayload();
 
-        $this->sendRequest($payload);
-
-        return $this;
+        return $this->sendRequest($payload);
     }
 
     public function hide(): self
     {
         $payload = new HidePayload();
 
-        $this->sendRequest($payload);
-
-        return $this;
+        return $this->sendRequest($payload);
     }
 
     /**
@@ -302,16 +300,12 @@ class Ray
 
     public function ban(): self
     {
-        $this->send('🕶');
-
-        return $this;
+        return $this->send('🕶');
     }
 
     public function charles(): self
     {
-        $this->send('🎶 🎹 🎷 🕺');
-
-        return $this;
+        return $this->send('🎶 🎹 🎷 🕺');
     }
 
     public function count(?string $name = null): self

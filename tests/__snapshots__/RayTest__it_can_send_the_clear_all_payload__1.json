@@ -1,0 +1,16 @@
+[
+    {
+        "uuid": "fakeUuid",
+        "payloads": [
+            {
+                "type": "clear_all",
+                "content": [],
+                "origin": {
+                    "file": "\/tests\/RayTest.php",
+                    "line_number": "xxx"
+                }
+            }
+        ],
+        "meta": []
+    }
+]

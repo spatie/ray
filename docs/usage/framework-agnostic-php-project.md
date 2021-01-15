@@ -72,6 +72,14 @@ current request. In a Laravel app, a good place for this might be the service pr
 When using PHPUnit to run tests, you might use `newScreen` to get a new screen each time your run a test to debug some
 code.
 
+### Clearing everything including history
+
+To clear the current screen and all previous screens, call `clearAll`.
+
+```php
+ray()->clearAll(); 
+```
+
 ### See the caller of a function
 
 Sometimes you want to know where your code is being called. You can quickly determine that by using the `caller`

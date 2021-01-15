@@ -2,6 +2,10 @@
 
 All notable changes to `ray` will be documented in this file
 
+## 1.10.0
+
+- add `clearAll`
+
 ## 1.9.2 - 2021-01-15
 
 - fix bugs around settings
