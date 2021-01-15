@@ -7,6 +7,41 @@ Inside a Yii2 application, you can use all methods from [the framework agnostic 
 
 Additionally, you can use these Laravel specific methods.
 
+### Showing queries
+
+You can display all queries that are executed by calling `showQueries` (or `queries`).
+
+```php
+ray()->showQueries();
+
+Yii::$app->db->createCommand('SELECT * FROM users')->queryAll(); // this query will be displayed in Ray.
+```
+
+To stop showing queries, call `stopShowingQueries`.
+
+```php
+ray()->showQueries();
+
+Yii::$app->db->createCommand('SELECT * FROM users')->queryAll(); // this query will be displayed.
+
+ray()->stopShowingQueries();
+
+Yii::$app->db->createCommand('SELECT * FROM users')->queryAll(); // this query won't be displayed.
+```
+
+Alternatively, you can pass a callable to `showQueries`. Only the queries performed inside that callable will be displayed in Ray.
+
+```php
+Yii::$app->db->createCommand('SELECT * FROM users')->queryAll(); // this query won't be displayed.
+
+ray()->showQueries(function() {
+    Yii::$app->db->createCommand('SELECT * FROM users')->queryAll(); // this query will be displayed.
+});
+
+Yii::$app->db->createCommand('SELECT * FROM users')->queryAll(); // this query won't be displayed.
+```
+
+
 ### Showing events
 
 You can display all events that are executed by calling `showEvents` (or `events`).
