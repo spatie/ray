@@ -91,12 +91,20 @@ ray()->model($user)
 
 ![screenshot](/docs/ray/v1/images/model.jpg)
 
-The `model` function can also accept multiple models.
+The `model` function can also accept multiple models and even collections.
 
 ```php
 // all of these models will be displayed in Ray
 ray()->model($user, $anotherUser, $yetAnotherUser);
+
+// all models in the collection will be display
+ray()->model(User::all()):
+
+// all models in all collections will be displayed
+ray()->model(User::all(), OtherModel::all()):
 ```
+
+Alternatively, you can use `models()` which is an alias for `model()`.
 
 ### Displaying mailables
 
