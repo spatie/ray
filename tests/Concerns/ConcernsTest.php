@@ -5,9 +5,17 @@ namespace Spatie\Ray\Tests\Concerns;
 
 use PHPUnit\Framework\TestCase;
 use Spatie\Ray\Tests\TestClasses\FakeRay;
+use Spatie\Snapshots\MatchesSnapshots;
 
 class ConcernsTest extends TestCase
 {
+    use MatchesSnapshots;
+
+    protected function assertMatchesOsSafeSnapshot($data)
+    {
+        $this->assertMatchesJsonSnapshot(json_encode($data));
+    }
+
     /** @test */
     public function it_sets_small_and_large_payload_sizes()
     {
@@ -36,5 +44,25 @@ class ConcernsTest extends TestCase
         }
 
         $this->assertEquals($colors, $ray->getColorHistory());
+    }
+
+    /** @test */
+    public function it_sets_success_and_failure_statuses()
+    {
+        $ray = new FakeRay();
+
+        $statuses = ['success', 'failure'];
+
+        foreach($statuses as $status) {
+            $ray->status($status);
+            $this->assertEquals($status, $ray->getLastStatus());
+
+            $ray->status('reset');
+
+            $ray->{$status}();
+            $this->assertEquals($status, $ray->getLastStatus());
+        }
+
+        $this->assertMatchesOsSafeSnapshot($ray->getStatusHistory());
     }
 }
