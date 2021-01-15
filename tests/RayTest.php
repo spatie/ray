@@ -5,7 +5,6 @@ namespace Spatie\Ray\Tests;
 use Illuminate\Support\Arr;
 use PHPUnit\Framework\TestCase;
 use Spatie\Backtrace\Frame;
-use Spatie\Ray\ArgumentConverter;
 use Spatie\Ray\Payloads\LogPayload;
 use Spatie\Ray\Ray;
 use Spatie\Ray\Settings\SettingsFactory;
