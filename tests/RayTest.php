@@ -505,6 +505,14 @@ class RayTest extends TestCase
         $this->assertEquals($ray->settings, SettingsFactory::createFromConfigFile());
     }
 
+    /** @test */
+    public function it_sends_an_image_payload()
+    {
+        $this->ray->image('http://localhost/test.jpg');
+
+        $this->assertMatchesOsSafeSnapshot($this->client->sentPayloads());
+    }
+
     protected function getValueOfLastSentContent(string $contentKey)
     {
         $payload = $this->client->sentPayloads();
