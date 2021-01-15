@@ -362,3 +362,17 @@ Alternatively, you can use the `rd` function.
 ```php
 rd($anything);
 ```
+
+### Showing PHP info
+
+Want some information about your PHP configuration?
+
+```php
+ray()->phpinfo();
+```
+
+This will provide you an overview of important PHP configuration values, you can also add some extra ini options as such:
+
+```php
+ray()->phpinfo('xdebug.enabled', 'default_mimetype');
+```
