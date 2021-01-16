@@ -18,7 +18,7 @@ ray($anObject);
 `ray` accepts multiple arguments. Each argument will be displayed in the Ray app.
 
 ```php
-ray('as' 'many' , 'arguments', 'as', 'you', 'like');
+ray('as', 'many' , 'arguments', 'as', 'you', 'like');
 ```
 
 ### Using colors
