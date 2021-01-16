@@ -119,7 +119,7 @@ You can display a count of how many times a piece of code was called using `coun
 Here's an example:
 
 ```php
- foreach (range(1, 2) as $i) {
+foreach (range(1, 2) as $i) {
     ray()->count();
 
     foreach (range(1, 4) as $j) {
@@ -138,7 +138,7 @@ executed.
 Here's an example:
 
 ```php
- foreach (range(1, 4) as $i) {
+foreach (range(1, 4) as $i) {
     ray()->count('first');
 
     foreach (range(1, 2) as $j) {
