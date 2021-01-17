@@ -2,6 +2,10 @@
 
 All notable changes to `ray` will be documented in this file
 
+## 1.11.1
+
+- lower deps
+
 ## 1.11.0
 
 - add `image()`
