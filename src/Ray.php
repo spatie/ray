@@ -384,15 +384,17 @@ class Ray
             return LogPayload::createForArguments([$argument]);
         }, $arguments);
 
-        $this->sendRequest($payloads);
-
-        return $this;
+        return $this->sendRequest($payloads);
     }
 
     public function send(...$arguments): self
     {
         if (!count($arguments)) {
             return $this;
+        }
+
+        if ($this->settings->always_send_raw_values) {
+            return $this->raw(...$arguments);
         }
 
         $payloads = PayloadFactory::createForValues($arguments);
