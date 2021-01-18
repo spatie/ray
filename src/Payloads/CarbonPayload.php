@@ -6,11 +6,11 @@ use Carbon\Carbon;
 
 class CarbonPayload extends Payload
 {
-    protected Carbon $carbon;
+    protected ?Carbon $carbon;
 
     protected string $format;
 
-    public function __construct(Carbon $carbon, string $format = 'Y-m-d H:i:s')
+    public function __construct(?Carbon $carbon, string $format = 'Y-m-d H:i:s')
     {
         $this->carbon = $carbon;
 

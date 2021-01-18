@@ -235,6 +235,16 @@ The `json` function can also accept multiple valid JSON strings.
 ray()->json($jsonString, $anotherJsonString, $yetAnotherJsonString);
 ```
 
+### Working with Carbon instances
+
+[Carbon](https://carbon.nesbot.com/docs/) is a popular datetime package. You can send instances of `Carbon` to Ray with `carbon`.
+
+```php
+ray()->carbon(new \Carbon\Carbon());
+```
+
+![screenshot](/docs/ray/v1/images/carbon.png)
+
 ### Working with files
 
 You can display the contents of any file in Ray with the `file` function.
