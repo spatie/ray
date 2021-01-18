@@ -6,8 +6,30 @@
                 "type": "log",
                 "content": {
                     "values": [
-                        "first",
-                        "second",
+                        "first"
+                    ]
+                },
+                "origin": {
+                    "file": "\/tests\/RayTest.php",
+                    "line_number": "xxx"
+                }
+            },
+            {
+                "type": "log",
+                "content": {
+                    "values": [
+                        "second"
+                    ]
+                },
+                "origin": {
+                    "file": "\/tests\/RayTest.php",
+                    "line_number": "xxx"
+                }
+            },
+            {
+                "type": "log",
+                "content": {
+                    "values": [
                         "third"
                     ]
                 },
