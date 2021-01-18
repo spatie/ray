@@ -543,11 +543,26 @@ class RayTest extends TestCase
     /** @test */
     public function it_can_send_the_raw_values()
     {
-        TestTime::freeze('Y-m-d H:i:s', '2020-01-01 00:00:00');
+        $this->ray->raw(new Carbon(), 'string', ['a' => 1]);
 
-        $this->ray->raw(new Carbon, 'string', ['a' => 1]);
+        $payloads = $this->client->sentPayloads();
 
-        $this->assertMatchesOsSafeSnapshot($this->client->sentPayloads());
+        $this->assertEquals('log', $payloads[0]['payloads'][0]['type']);
+        $this->assertEquals('log', $payloads[0]['payloads'][1]['type']);
+        $this->assertEquals('log', $payloads[0]['payloads'][2]['type']);
+    }
+
+    /** @test */
+    public function it_will_automatically_use_a_specialized_payloads()
+    {
+        $this->ray->send(new Carbon(), 'string', ['a => 1']);
+
+        $payloads = $this->client->sentPayloads();
+
+        $this->assertEquals('carbon', $payloads[0]['payloads'][0]['type']);
+        $this->assertEquals('log', $payloads[0]['payloads'][1]['type']);
+        $this->assertEquals('log', $payloads[0]['payloads'][2]['type']);
+
     }
 
     protected function getValueOfLastSentContent(string $contentKey)
