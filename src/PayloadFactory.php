@@ -12,7 +12,7 @@ class PayloadFactory
 {
     protected array $values;
 
-    protected static ?Closure $payloadFinder;
+    protected static ?Closure $payloadFinder = null;
 
     public static function createForValues(array $arguments): array
     {
