@@ -51,5 +51,10 @@ return [
      * computer where your IDE or code editor is running on.
      */
     'local_path' => env('RAY_LOCAL_PATH', null),
+    
+    /*
+     * When this setting is enabled, the package will not try to format values sent to Ray.
+     */
+    'always_send_raw_values' => false,
 ];
 ```
