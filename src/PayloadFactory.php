@@ -23,9 +23,8 @@ class PayloadFactory
 
     public function getPayloads(): array
     {
-        return array_map(function($value) {
+        return array_map(function ($value) {
             return $this->getPayload($value);
-
         }, $this->values);
     }
 
