@@ -8,13 +8,13 @@ use Composer\InstalledVersions;
 use Exception;
 use Ramsey\Uuid\Uuid;
 use Spatie\Backtrace\Backtrace;
-use Spatie\Ray\Payloads\CarbonPayload;
 use Spatie\LaravelRay\Ray as LaravelRay;
 use Spatie\Macroable\Macroable;
 use Spatie\Ray\Concerns\RayColors;
 use Spatie\Ray\Concerns\RaySizes;
 use Spatie\Ray\Origin\DefaultOriginFactory;
 use Spatie\Ray\Payloads\CallerPayload;
+use Spatie\Ray\Payloads\CarbonPayload;
 use Spatie\Ray\Payloads\ClearAllPayload;
 use Spatie\Ray\Payloads\ColorPayload;
 use Spatie\Ray\Payloads\CreateLockPayload;
@@ -302,7 +302,6 @@ class Ray
 
         return $this;
     }
-
 
     public function removeIf($boolOrCallable): self
     {

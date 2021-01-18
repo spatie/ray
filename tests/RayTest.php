@@ -538,7 +538,6 @@ class RayTest extends TestCase
         $this->assertEquals('2020-01-01 00:00:00', $payload['payloads'][0]['content']['formatted']);
         $this->assertEquals('1577836800', $payload['payloads'][0]['content']['timestamp']);
         $this->assertEquals('UTC', $payload['payloads'][0]['content']['timezone']);
-
     }
 
     protected function getValueOfLastSentContent(string $contentKey)
