@@ -3,6 +3,7 @@
 namespace Spatie\Ray;
 
 use Carbon\Carbon;
+use Closure;
 use Spatie\Ray\Payloads\CarbonPayload;
 use Spatie\Ray\Payloads\LogPayload;
 use Spatie\Ray\Payloads\Payload;
@@ -11,9 +12,16 @@ class PayloadFactory
 {
     protected array $values;
 
+    protected static ?Closure $payloadFinder;
+
     public static function createForValues(array $arguments): array
     {
         return (new static($arguments))->getPayloads();
+    }
+
+    public static function registerPayloadFinder(callable $callable)
+    {
+        self::$payloadFinder = $callable;
     }
 
     public function __construct(array $values)
@@ -30,6 +38,12 @@ class PayloadFactory
 
     protected function getPayload($value): Payload
     {
+        if (self::$payloadFinder) {
+            if ($payload = (static::$payloadFinder)($value)) {
+                return $payload;
+            }
+        }
+
         if ($value instanceof Carbon) {
             return new CarbonPayload($value);
         }
