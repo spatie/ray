@@ -562,7 +562,6 @@ class RayTest extends TestCase
         $this->assertEquals('carbon', $payloads[0]['payloads'][0]['type']);
         $this->assertEquals('log', $payloads[0]['payloads'][1]['type']);
         $this->assertEquals('log', $payloads[0]['payloads'][2]['type']);
-
     }
 
     protected function getValueOfLastSentContent(string $contentKey)
