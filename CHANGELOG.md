@@ -2,19 +2,19 @@
 
 All notable changes to `ray` will be documented in this file
 
-## 1.12.0
+## 1.12.0 - 2021-01-18
 
 - add `carbon`
 
-## 1.11.1
+## 1.11.1 - 2021-01-17
 
 - lower deps
 
-## 1.11.0
+## 1.11.0 - 2021-01-15
 
 - add `image()`
 
-## 1.10.0
+## 1.10.0 - 2021-01-15
 
 - add `clearAll`
 
