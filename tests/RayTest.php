@@ -540,6 +540,16 @@ class RayTest extends TestCase
         $this->assertEquals('UTC', $payload['payloads'][0]['content']['timezone']);
     }
 
+    /** @test */
+    public function it_can_send_the_raw_values()
+    {
+        TestTime::freeze('Y-m-d H:i:s', '2020-01-01 00:00:00');
+
+        $this->ray->raw(new Carbon, 'string', ['a' => 1]);
+
+        $this->assertMatchesOsSafeSnapshot($this->client->sentPayloads());
+    }
+
     protected function getValueOfLastSentContent(string $contentKey)
     {
         $payload = $this->client->sentPayloads();

@@ -24,6 +24,7 @@ use Spatie\Ray\Payloads\FileContentsPayload;
 use Spatie\Ray\Payloads\HidePayload;
 use Spatie\Ray\Payloads\ImagePayload;
 use Spatie\Ray\Payloads\JsonStringPayload;
+use Spatie\Ray\Payloads\LogPayload;
 use Spatie\Ray\Payloads\MeasurePayload;
 use Spatie\Ray\Payloads\NewScreenPayload;
 use Spatie\Ray\Payloads\NotifyPayload;
@@ -369,6 +370,19 @@ class Ray
         do {
             sleep(1);
         } while (self::$client->lockExists($lockName));
+
+        return $this;
+    }
+
+    public function raw(...$arguments): self
+    {
+        if (! count($arguments)) {
+            return $this;
+        }
+
+        $payload = new LogPayload($arguments);
+
+        $this->sendRequest($payload);
 
         return $this;
     }
