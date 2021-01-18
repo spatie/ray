@@ -380,9 +380,9 @@ class Ray
             return $this;
         }
 
-        $payload = LogPayload::createForArguments($arguments);
+        $payloads = PayloadFactory::createForValues($arguments);
 
-        return $this->sendRequest($payload);
+        return $this->sendRequest($payloads);
     }
 
     public function pass($argument)
