@@ -136,7 +136,7 @@ class Ray
             return $this->measureClosure($stopwatchName);
         }
 
-        if (!isset(static::$stopWatches[$stopwatchName])) {
+        if (! isset(static::$stopWatches[$stopwatchName])) {
             $stopwatch = new Stopwatch(true);
             static::$stopWatches[$stopwatchName] = $stopwatch;
 
@@ -278,7 +278,7 @@ class Ray
             $boolOrCallable = (bool)$boolOrCallable();
         }
 
-        if (!$boolOrCallable) {
+        if (! $boolOrCallable) {
             $this->remove();
         }
 
@@ -376,7 +376,7 @@ class Ray
 
     public function raw(...$arguments): self
     {
-        if (!count($arguments)) {
+        if (! count($arguments)) {
             return $this;
         }
 
@@ -389,7 +389,7 @@ class Ray
 
     public function send(...$arguments): self
     {
-        if (!count($arguments)) {
+        if (! count($arguments)) {
             return $this;
         }
 
@@ -425,7 +425,7 @@ class Ray
      */
     public function sendRequest($payloads, array $meta = []): self
     {
-        if (!is_array($payloads)) {
+        if (! is_array($payloads)) {
             $payloads = [$payloads];
         }
 
