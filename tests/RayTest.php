@@ -2,6 +2,7 @@
 
 namespace Spatie\Ray\Tests;
 
+use Carbon\Carbon;
 use Illuminate\Support\Arr;
 use PHPUnit\Framework\TestCase;
 use Spatie\Backtrace\Frame;
@@ -10,6 +11,7 @@ use Spatie\Ray\Ray;
 use Spatie\Ray\Settings\SettingsFactory;
 use Spatie\Ray\Tests\TestClasses\FakeClient;
 use Spatie\Snapshots\MatchesSnapshots;
+use Spatie\TestTime\TestTime;
 
 class RayTest extends TestCase
 {
@@ -519,6 +521,24 @@ class RayTest extends TestCase
         $this->ray->image('http://localhost/test.jpg');
 
         $this->assertMatchesOsSafeSnapshot($this->client->sentPayloads());
+    }
+
+    /** @test */
+    public function it_can_send_a_carbon_payload()
+    {
+        TestTime::freeze('Y-m-d H:i:s', '2020-01-01 00:00:00');
+
+        $carbon = new Carbon();
+
+        ray()->carbon($carbon);
+
+        $this->assertCount(1, $this->client->sentPayloads());
+
+        $payload = $this->client->sentPayloads()[0];
+        $this->assertEquals('2020-01-01 00:00:00', $payload['payloads'][0]['content']['formatted']);
+        $this->assertEquals('1577836800', $payload['payloads'][0]['content']['timestamp']);
+        $this->assertEquals('UTC', $payload['payloads'][0]['content']['timezone']);
+
     }
 
     protected function getValueOfLastSentContent(string $contentKey)

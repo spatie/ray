@@ -2,11 +2,13 @@
 
 namespace Spatie\Ray;
 
+use Carbon\Carbon;
 use Closure;
 use Composer\InstalledVersions;
 use Exception;
 use Ramsey\Uuid\Uuid;
 use Spatie\Backtrace\Backtrace;
+use Spatie\Ray\Payloads\CarbonPayload;
 use Spatie\LaravelRay\Ray as LaravelRay;
 use Spatie\Macroable\Macroable;
 use Spatie\Ray\Concerns\RayColors;
@@ -301,9 +303,19 @@ class Ray
         return $this;
     }
 
+
     public function removeIf($boolOrCallable): self
     {
         return $this->removeWhen($boolOrCallable);
+    }
+
+    public function carbon(?Carbon $carbon): self
+    {
+        $payload = new CarbonPayload($carbon);
+
+        $this->sendRequest($payload);
+
+        return $this;
     }
 
     public function ban(): self
