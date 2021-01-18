@@ -26,9 +26,11 @@
         "symfony/var-dumper": "^4.2|^5.1"
     },
     "require-dev": {
+        "illuminate/support": "6.x|^8.18",
+        "nesbot/carbon": "^2.43",
         "phpunit/phpunit": "^9.5",
         "spatie/phpunit-snapshot-assertions": "^4.2",
-        "illuminate/support": "6.x|^8.18"
+        "spatie/test-time": "^1.2"
     },
     "autoload": {
         "psr-4": {
