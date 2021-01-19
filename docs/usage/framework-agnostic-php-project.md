@@ -112,6 +112,8 @@ ray()->pause();
 If you press the "Continue" button in Ray, execution will continue. When you press "Stop execution", Ray will throw an
 exception in your app to halt execution.
 
+If you are using Windows, you must set the maximum execution time to a high value, as the paused time will count against the maximum execution time.
+
 ### Counting execution times
 
 You can display a count of how many times a piece of code was called using `count`.
