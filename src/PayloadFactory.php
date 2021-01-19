@@ -4,8 +4,10 @@ namespace Spatie\Ray;
 
 use Carbon\Carbon;
 use Closure;
+use Spatie\Ray\Payloads\BoolPayload;
 use Spatie\Ray\Payloads\CarbonPayload;
 use Spatie\Ray\Payloads\LogPayload;
+use Spatie\Ray\Payloads\NullPayload;
 use Spatie\Ray\Payloads\Payload;
 
 class PayloadFactory
@@ -42,6 +44,14 @@ class PayloadFactory
             if ($payload = (static::$payloadFinder)($value)) {
                 return $payload;
             }
+        }
+
+        if (is_bool($value)) {
+            return new BoolPayload($value);
+        }
+
+        if (is_null($value)) {
+            return new NullPayload();
         }
 
         if ($value instanceof Carbon) {
