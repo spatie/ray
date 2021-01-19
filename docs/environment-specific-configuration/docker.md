@@ -31,8 +31,17 @@ return [
 ];
 ```
 
+To make sure that Ray uses the correct file path for creating the links, you will also need to setup the `remote_path` and `local_path` variables. `remote_path` is the absolute path of your project in the Docker container. `local_path` is the absolute path of your project on the local file system.
 
-On Linux, you will need to add an 'extra_hosts' parameter to your container definitions to expose 'host.docker.internal'. Please make sure you are using Docker `20.03` or higher.
+**Example:**
+In your `docker-compose.yml` you mount the volume as follows:
+```
+volumes:
+  - .:/var/www
+```
+Then `remote_path` should be `/var/www` and `local_path` should be the absolute path to the directory where your `docker-compose.yml` is located (you can find this by running `pwd` inside that directoy if you are on Linux).
+
+On Linux, you will also need to add an 'extra_hosts' parameter to your container definitions to expose 'host.docker.internal'. Please make sure you are using Docker `20.03` or higher.
 ```
 #docker-compose.yml
 
