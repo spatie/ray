@@ -2,7 +2,7 @@
 
 All notable changes to `ray` will be documented in this file
 
-## 1.13.0 - 2021-01-18 (unreleased)
+## 1.13.0 - 2021-01-18
 
 - the package will now select the best payload type when passing something to `ray()`
 - added `html` method
