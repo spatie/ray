@@ -43,18 +43,18 @@ class Ray
     use RaySizes;
     use Macroable;
 
-    public Settings $settings;
+    public $settings;
 
-    protected static Client $client;
+    protected static $client;
 
-    public static Counters $counters;
+    public static $counters;
 
-    public static string $fakeUuid;
+    public static $fakeUuid;
 
-    public string $uuid = '';
+    public $uuid = '';
 
     /** @var \Symfony\Component\Stopwatch\Stopwatch[] */
-    public static array $stopWatches = [];
+    public static $stopWatches = [];
 
     public static function create(Client $client = null, string $uuid = null): self
     {

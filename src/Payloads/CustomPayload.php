@@ -5,9 +5,9 @@ namespace Spatie\Ray\Payloads;
 
 class CustomPayload extends Payload
 {
-    protected string $content;
+    protected $content;
 
-    protected string $label;
+    protected $label;
 
     public function __construct(string $content, string $label = '')
     {

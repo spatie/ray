@@ -4,9 +4,9 @@ namespace Spatie\Ray\Settings;
 
 class Settings
 {
-    protected array $settings = [];
+    protected $settings = [];
 
-    protected array $defaultSettings = [
+    protected $defaultSettings = [
         'host' => 'localhost',
         'port' => 23517,
         'remote_path' => null,

@@ -9,7 +9,7 @@ class CallerPayload extends Payload
 {
     use RemovesRayFrames;
 
-    protected array $frames;
+    protected $frames;
 
     public function __construct(array $frames)
     {

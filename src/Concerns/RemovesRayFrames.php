@@ -10,7 +10,7 @@ trait RemovesRayFrames
     {
         $frames = array_filter(
             $frames,
-            fn (Frame $frame) => ! $this->isRayFrame($frame)
+            function (Frame $frame) { return ! $this->isRayFrame($frame); }
         );
 
         return array_values($frames);

@@ -4,7 +4,7 @@ namespace Spatie\Ray\Payloads;
 
 class FileContentsPayload extends Payload
 {
-    protected string $file;
+    protected $file;
 
     public function __construct(string $file)
     {

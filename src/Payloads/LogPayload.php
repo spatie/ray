@@ -6,7 +6,7 @@ use Spatie\Ray\ArgumentConverter;
 
 class LogPayload extends Payload
 {
-    protected array $values;
+    protected $values;
 
     public static function createForArguments(array $arguments): Payload
     {

@@ -6,18 +6,18 @@ use Spatie\Ray\Payloads\Payload;
 
 class Request
 {
-    protected string $uuid;
+    protected $uuid;
 
-    protected array $payloads;
-    
-    protected array $meta;
+    protected $payloads;
+
+    protected $meta;
 
     public function __construct(string $uuid, array $payloads, array $meta = [])
     {
         $this->uuid = $uuid;
 
         $this->payloads = $payloads;
-        
+
         $this->meta = $meta;
     }
 
