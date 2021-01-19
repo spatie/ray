@@ -22,6 +22,7 @@ use Spatie\Ray\Payloads\CustomPayload;
 use Spatie\Ray\Payloads\DecodedJsonPayload;
 use Spatie\Ray\Payloads\FileContentsPayload;
 use Spatie\Ray\Payloads\HidePayload;
+use Spatie\Ray\Payloads\HtmlPayload;
 use Spatie\Ray\Payloads\ImagePayload;
 use Spatie\Ray\Payloads\JsonStringPayload;
 use Spatie\Ray\Payloads\LogPayload;
@@ -372,6 +373,13 @@ class Ray
         } while (self::$client->lockExists($lockName));
 
         return $this;
+    }
+
+    public function html(string $html = '')
+    {
+        $payload = new HtmlPayload($html);
+
+        return $this->sendRequest($payload);
     }
 
     public function raw(...$arguments): self

@@ -261,7 +261,15 @@ To display an image, call the `image` function and pass either a fully-qualified
 
 ```php
 ray()->image('https://placekitten.com/200/300');
-ray()->image('/home/auser/kitten.jpg');
+ray()->image('/home/user/kitten.jpg');
+```
+
+### Rendering HTML
+
+To render a piece of HTML directly in Ray, you can use the `html` method.
+
+```php
+ray()->html('<b>Bold string<b>');
 ```
 
 ### Updating displayed items
