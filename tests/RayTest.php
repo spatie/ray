@@ -8,6 +8,7 @@ use PHPUnit\Framework\TestCase;
 use Spatie\Backtrace\Frame;
 use Spatie\Ray\Payloads\LogPayload;
 use Spatie\Ray\Ray;
+use Spatie\Ray\Settings\Settings;
 use Spatie\Ray\Settings\SettingsFactory;
 use Spatie\Ray\Tests\TestClasses\FakeClient;
 use Spatie\Snapshots\MatchesSnapshots;
@@ -19,6 +20,8 @@ class RayTest extends TestCase
 
     protected FakeClient $client;
 
+    protected Settings $settings;
+
     protected Ray $ray;
 
     public function setUp(): void
@@ -27,9 +30,9 @@ class RayTest extends TestCase
 
         $this->client = new FakeClient();
 
-        $settings = SettingsFactory::createFromConfigFile();
+        $this->settings = SettingsFactory::createFromConfigFile();
 
-        $this->ray = new Ray($settings, $this->client, 'fakeUuid');
+        $this->ray = new Ray($this->settings, $this->client, 'fakeUuid');
     }
 
     /** @test */
@@ -538,6 +541,38 @@ class RayTest extends TestCase
         $this->assertEquals('2020-01-01 00:00:00', $payload['payloads'][0]['content']['formatted']);
         $this->assertEquals('1577836800', $payload['payloads'][0]['content']['timestamp']);
         $this->assertEquals('UTC', $payload['payloads'][0]['content']['timezone']);
+    }
+
+    /** @test */
+    public function it_can_send_the_raw_values()
+    {
+        $this->ray->raw(new Carbon(), 'string', ['a' => 1]);
+
+        $payloads = $this->client->sentPayloads();
+
+        $this->assertEquals('log', $payloads[0]['payloads'][0]['type']);
+        $this->assertEquals('log', $payloads[0]['payloads'][1]['type']);
+        $this->assertEquals('log', $payloads[0]['payloads'][2]['type']);
+    }
+
+    /** @test */
+    public function it_will_send_a_specialized_payloads_by_default()
+    {
+        $this->ray->send(new Carbon(), 'string', ['a => 1']);
+
+        $payloads = $this->client->sentPayloads();
+
+        $this->assertEquals('carbon', $payloads[0]['payloads'][0]['type']);
+        $this->assertEquals('log', $payloads[0]['payloads'][1]['type']);
+        $this->assertEquals('log', $payloads[0]['payloads'][2]['type']);
+    }
+
+    /** @test */
+    public function it_will_respect_the_raw_values_config_setting()
+    {
+        $this->settings->always_send_raw_values = true;
+        $this->ray->send(new Carbon());
+        $this->assertEquals('log',  $this->client->sentPayloads()[0]['payloads'][0]['type']);
     }
 
     protected function getValueOfLastSentContent(string $contentKey)

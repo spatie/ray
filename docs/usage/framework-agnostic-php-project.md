@@ -112,6 +112,8 @@ ray()->pause();
 If you press the "Continue" button in Ray, execution will continue. When you press "Stop execution", Ray will throw an
 exception in your app to halt execution.
 
+If you are using Windows, you must set the maximum execution time to a high value, as the paused time will count against the maximum execution time.
+
 ### Counting execution times
 
 You can display a count of how many times a piece of code was called using `count`.
@@ -385,4 +387,16 @@ Alternatively, you can use the `rd` function.
 
 ```php
 rd($anything);
+```
+
+### Showing raw values
+
+When you sent certain values to Ray, such as Carbon instances or Eloquent models, these values will be displayed in nice way. To see all private, protected, and public properties of such values, you can use the `raw()` method.
+
+```php
+$eloquentModel = User::create(['email' => 'john@example.com']);
+
+ray(new Carbon, $eloquentModel)); // will be formatted nicely
+
+ray()->raw(new Carbon, $eloquentModel) // no custom formatting, all properties will be shown in Ray.
 ```

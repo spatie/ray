@@ -374,15 +374,32 @@ class Ray
         return $this;
     }
 
+    public function raw(...$arguments): self
+    {
+        if (! count($arguments)) {
+            return $this;
+        }
+
+        $payloads = array_map(function ($argument) {
+            return LogPayload::createForArguments([$argument]);
+        }, $arguments);
+
+        return $this->sendRequest($payloads);
+    }
+
     public function send(...$arguments): self
     {
         if (! count($arguments)) {
             return $this;
         }
 
-        $payload = LogPayload::createForArguments($arguments);
+        if ($this->settings->always_send_raw_values) {
+            return $this->raw(...$arguments);
+        }
 
-        return $this->sendRequest($payload);
+        $payloads = PayloadFactory::createForValues($arguments);
+
+        return $this->sendRequest($payloads);
     }
 
     public function pass($argument)
@@ -400,7 +417,7 @@ class Ray
     }
 
     /**
-     * @param \Spatie\Ray\Payloads\Payload|\Spatie\Ray\Payloads\Payload[]$payloads
+     * @param \Spatie\Ray\Payloads\Payload|\Spatie\Ray\Payloads\Payload[] $payloads
      * @param array $meta
      *
      * @return $this
