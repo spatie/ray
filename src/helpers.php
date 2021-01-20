@@ -1,13 +1,13 @@
 <?php
 
 use Illuminate\Contracts\Container\BindingResolutionException;
+use Spatie\CraftRay\Ray as CraftRay;
 use Spatie\LaravelRay\Ray as LaravelRay;
 use Spatie\Ray\Ray;
-use Spatie\Ray\Settings\SettingsFactory;
 
+use Spatie\Ray\Settings\SettingsFactory;
 use Spatie\RayBundle\Ray as SymfonyRay;
 use Spatie\WordPressRay\Ray as WordPressRay;
-use Spatie\CraftRay\Ray as CraftRay;
 use Spatie\YiiRay\Ray as YiiRay;
 
 if (! function_exists('ray')) {
