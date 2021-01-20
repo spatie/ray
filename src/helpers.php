@@ -7,6 +7,7 @@ use Spatie\Ray\Settings\SettingsFactory;
 
 use Spatie\RayBundle\Ray as SymfonyRay;
 use Spatie\WordPressRay\Ray as WordPressRay;
+use Spatie\CraftRay\Ray as CraftRay;
 use Spatie\YiiRay\Ray as YiiRay;
 
 if (! function_exists('ray')) {
@@ -25,6 +26,10 @@ if (! function_exists('ray')) {
                 // testsuite without spatie/laravel-ray's service provider being registered
                 // in `getPackageProviders` of the base test suite
             }
+        }
+
+        if (class_exists(CraftRay::class)) {
+            return Yii::$container->get(CraftRay::class)->send(...$args);
         }
 
         if (class_exists(YiiRay::class)) {

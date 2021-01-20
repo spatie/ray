@@ -2,6 +2,10 @@
 
 All notable changes to `ray` will be documented in this file
 
+## 1.14.0 - 2021-01-20
+
+- Add support for CraftRay
+
 ## 1.13.0 - 2021-01-18
 
 - the package will now select the best payload type when passing something to `ray()`
