@@ -9,6 +9,7 @@ use Spatie\Backtrace\Frame;
 use Spatie\Ray\Payloads\LogPayload;
 use Spatie\Ray\Ray;
 use Spatie\Ray\Settings\Settings;
+use Spatie\Ray\Payloads\CallerPayload;
 use Spatie\Ray\Settings\SettingsFactory;
 use Spatie\Ray\Tests\TestClasses\FakeClient;
 use Spatie\Snapshots\MatchesSnapshots;
@@ -449,16 +450,15 @@ class RayTest extends TestCase
     /** @test */
     public function it_can_rewrite_the_file_paths_using_the_config_values()
     {
-        $settings = SettingsFactory::createFromConfigFile();
+        $payload = new CallerPayload([
+            new Frame('/app/app/MyFile.php', 1, []),
+            new Frame('/app/app/MyFile.php', 2, []),
+        ]);
 
-        $settings->remote_path = 'tests';
-        $settings->local_path = 'local_path';
+        $payload->remotePath = '/app';
+        $payload->localPath = '/some/local/path';
 
-        $this->ray = new Ray($settings, $this->client, 'fakeUuid');
-
-        $this->ray->send('hey');
-
-        $this->assertEquals('/local_path/RayTest.php', $this->client->sentPayloads()[0]['payloads'][0]['origin']['file']);
+        $this->assertEquals('/some/local/path/app/MyFile.php', $payload->getContent()['frame']['file_name']);
     }
 
     /** @test */
