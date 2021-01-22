@@ -31,6 +31,7 @@ use Spatie\Ray\Payloads\NewScreenPayload;
 use Spatie\Ray\Payloads\NotifyPayload;
 use Spatie\Ray\Payloads\RemovePayload;
 use Spatie\Ray\Payloads\SizePayload;
+use Spatie\Ray\Payloads\TablePayload;
 use Spatie\Ray\Payloads\TracePayload;
 use Spatie\Ray\Settings\Settings;
 use Spatie\Ray\Settings\SettingsFactory;
@@ -326,6 +327,13 @@ class Ray
     public function charles(): self
     {
         return $this->send('🎶 🎹 🎷 🕺');
+    }
+
+    public function table(array $values, $label = 'Table'): self
+    {
+        $payload = new TablePayload($values, $label);
+
+        return $this->sendRequest($payload);
     }
 
     public function count(?string $name = null): self
