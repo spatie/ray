@@ -1,0 +1,23 @@
+[
+    {
+        "uuid": "fakeUuid",
+        "payloads": [
+            {
+                "type": "table",
+                "content": {
+                    "values": {
+                        "First": "First value",
+                        "Second": "Second value",
+                        "Third": "Third value"
+                    },
+                    "label": "Table"
+                },
+                "origin": {
+                    "file": "\/tests\/RayTest.php",
+                    "line_number": "xxx"
+                }
+            }
+        ],
+        "meta": []
+    }
+]

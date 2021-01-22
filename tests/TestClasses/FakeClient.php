@@ -16,7 +16,7 @@ class FakeClient extends Client
         foreach ($requestProperties['payloads'] as &$payload) {
             $payload['origin']['file'] = $payload['origin']['file'] = str_replace($this->baseDirectory(), '', $payload['origin']['file']);
 
-            if (isset($payload['content']['values'])) {
+            if (isset($payload['content']['values']) && isset($payload['content']['values'][0])) {
                 if (! is_bool($payload['content']['values'][0])) {
                     $payload['content']['values'] = preg_replace('/sf-dump-[0-9]{1,10}/', 'sf-dump-xxxxxxxxxx', $payload['content']['values']);
                 }

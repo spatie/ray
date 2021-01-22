@@ -527,6 +527,18 @@ class RayTest extends TestCase
     }
 
     /** @test */
+    public function it_sends_a_table_payload()
+    {
+        $this->ray->table([
+            'First' => 'First value',
+            'Second' => 'Second value',
+            'Third' => 'Third value',
+        ]);
+
+        $this->assertMatchesOsSafeSnapshot($this->client->sentPayloads());
+    }
+
+    /** @test */
     public function it_can_send_a_carbon_payload()
     {
         TestTime::freeze('Y-m-d H:i:s', '2020-01-01 00:00:00');
