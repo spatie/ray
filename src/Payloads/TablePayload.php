@@ -24,7 +24,7 @@ class TablePayload extends Payload
 
     public function getContent(): array
     {
-        $values = array_map(function($value) {
+        $values = array_map(function ($value) {
             return ArgumentConverter::convertToPrimitive($value);
         }, $this->values);
 
