@@ -429,7 +429,7 @@ ray()->phpinfo();
 ray()->phpinfo('xdebug.enabled', 'default_mimetype');
 ```
 
-![screenshot](/docs/ray/v1/images/php-info.jpg)
+![screenshot](/docs/ray/v1/images/php-info.png)
 
 
 ### Showing raw values
