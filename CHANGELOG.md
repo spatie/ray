@@ -2,6 +2,10 @@
 
 All notable changes to `ray` will be documented in this file
 
+## 1.15.0 - 021-01-22
+
+- add `table` method
+
 ## 1.14.1 - 2021-01-22
 
 - fix bug when `remote_path` is also in `filePath` (#227)
