@@ -255,6 +255,28 @@ You can display the contents of any file in Ray with the `file` function.
 ray()->file('somefile.txt');
 ```
 
+### Displaying a table
+
+You can send an associative array to Ray with the `table` function
+
+```php
+ray()->table([
+    'First' => 'First value',
+    'Second' => 'Second value',
+    'Third' => 'Third value',
+]);
+```
+
+![screenshot](/docs/ray/v1/images/table.png)
+
+As a second argument, you can pass a label that will be displayed next to the table.
+
+```php
+ray()->table(['John', 'Paul', 'George', 'Ringo'], 'Beatles');
+```
+
+![screenshot](/docs/ray/v1/images/table-label.png)
+
 ### Displaying images
 
 To display an image, call the `image` function and pass either a fully-qualified filename or url as its only argument.
