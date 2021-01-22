@@ -419,6 +419,20 @@ Alternatively, you can use the `rd` function.
 rd($anything);
 ```
 
+### Showing PHP info
+
+Want some information about your PHP configuration?
+
+```php
+ray()->phpinfo();
+```
+
+This will provide you an overview of important PHP configuration values, you can also add some extra ini options as such:
+
+```php
+ray()->phpinfo('xdebug.enabled', 'default_mimetype');
+```
+
 ### Showing raw values
 
 When you sent certain values to Ray, such as Carbon instances or Eloquent models, these values will be displayed in nice way. To see all private, protected, and public properties of such values, you can use the `raw()` method.

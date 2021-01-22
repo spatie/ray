@@ -138,7 +138,7 @@ class Ray
             return $this->measureClosure($stopwatchName);
         }
 
-        if (! isset(static::$stopWatches[$stopwatchName])) {
+        if (!isset(static::$stopWatches[$stopwatchName])) {
             $stopwatch = new Stopwatch(true);
             static::$stopWatches[$stopwatchName] = $stopwatch;
 
@@ -274,13 +274,36 @@ class Ray
         return $this->send(get_class($object));
     }
 
+    public function phpinfo(string ...$properties): self
+    {
+        if (!count($properties)) {
+            return $this->table([
+                'PHP version' => phpversion(),
+                'Memory limit' => ini_get('memory_limit'),
+                'Max file upload size' => ini_get('max_file_uploads'),
+                'Max post size' => ini_get('post_max_size'),
+                'PHP ini file' => php_ini_loaded_file(),
+                "PHP scanned ini file" => php_ini_scanned_files() ,
+                'Extensions' => implode(', ', get_loaded_extensions()),
+            ], 'PHPInfo');
+        }
+
+        $properties = array_flip($properties);
+
+        foreach ($properties as $property => $value) {
+            $properties[$property] = ini_get($property);
+        }
+
+        return $this->table($properties, 'PHPInfo');
+    }
+
     public function showWhen($boolOrCallable): self
     {
         if (is_callable($boolOrCallable)) {
             $boolOrCallable = (bool)$boolOrCallable();
         }
 
-        if (! $boolOrCallable) {
+        if (!$boolOrCallable) {
             $this->remove();
         }
 
@@ -392,7 +415,7 @@ class Ray
 
     public function raw(...$arguments): self
     {
-        if (! count($arguments)) {
+        if (!count($arguments)) {
             return $this;
         }
 
@@ -405,7 +428,7 @@ class Ray
 
     public function send(...$arguments): self
     {
-        if (! count($arguments)) {
+        if (!count($arguments)) {
             return $this;
         }
 
@@ -441,7 +464,7 @@ class Ray
      */
     public function sendRequest($payloads, array $meta = []): self
     {
-        if (! is_array($payloads)) {
+        if (!is_array($payloads)) {
             $payloads = [$payloads];
         }
 

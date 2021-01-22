@@ -519,6 +519,29 @@ class RayTest extends TestCase
     }
 
     /** @test */
+    public function it_can_send_the_php_info_payload()
+    {
+        $this->ray->phpinfo();
+
+        $payloads = $this->client->sentPayloads();
+
+        $this->assertCount(1, $payloads);
+
+        $this->assertEquals('table', $payloads[0]['payloads'][0]['type']);
+    }
+
+    /** @test */
+    public function the_php_info_can_report_specific_options()
+    {
+        $this->ray->phpinfo('default_mimetype');
+
+        $payloads = $this->client->sentPayloads();
+
+        $this->assertCount(1, $payloads);
+
+        $this->assertArrayHasKey('default_mimetype', $payloads[0]['payloads'][0]['content']['values']);
+    }
+
     public function it_sends_an_image_payload()
     {
         $this->ray->image('http://localhost/test.jpg');
