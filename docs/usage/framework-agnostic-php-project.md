@@ -421,17 +421,16 @@ rd($anything);
 
 ### Showing PHP info
 
-Want some information about your PHP configuration?
+Using `phpinfo()` you can quickly see some information about your PHP environment.
+You can also pass ini options to see the value of those options.
 
 ```php
 ray()->phpinfo();
-```
-
-This will provide you an overview of important PHP configuration values, you can also add some extra ini options as such:
-
-```php
 ray()->phpinfo('xdebug.enabled', 'default_mimetype');
 ```
+
+![screenshot](/docs/ray/v1/images/php-info.jpg)
+
 
 ### Showing raw values
 
