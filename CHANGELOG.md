@@ -2,6 +2,10 @@
 
 All notable changes to `ray` will be documented in this file
 
+## 1.14.1 - 2021-01-22
+
+- fix bug when `remote_path` is also in `filePath` (#227)
+
 ## 1.14.0 - 2021-01-20
 
 - Add support for CraftRay
