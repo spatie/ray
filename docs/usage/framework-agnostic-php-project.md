@@ -18,7 +18,7 @@ ray($anObject);
 `ray` accepts multiple arguments. Each argument will be displayed in the Ray app.
 
 ```php
-ray('as' 'many' , 'arguments', 'as', 'you', 'like');
+ray('as', 'many' , 'arguments', 'as', 'you', 'like');
 ```
 
 ### Using colors
@@ -61,7 +61,7 @@ You can see values that were previously displayed, by clicking the little back b
 Optionally, you can give a screen a name:
 
 ```php
-ray()->newScreen('My debug screen')
+ray()->newScreen('My debug screen');
 ```
 
 ![screenshot](/docs/ray/v1/images/screen.jpg)
@@ -71,6 +71,14 @@ current request. In a Laravel app, a good place for this might be the service pr
 
 When using PHPUnit to run tests, you might use `newScreen` to get a new screen each time your run a test to debug some
 code.
+
+### Clearing everything including history
+
+To clear the current screen and all previous screens, call `clearAll`.
+
+```php
+ray()->clearAll(); 
+```
 
 ### See the caller of a function
 
@@ -104,6 +112,8 @@ ray()->pause();
 If you press the "Continue" button in Ray, execution will continue. When you press "Stop execution", Ray will throw an
 exception in your app to halt execution.
 
+If you are using Windows, you must set the maximum execution time to a high value, as the paused time will count against the maximum execution time.
+
 ### Counting execution times
 
 You can display a count of how many times a piece of code was called using `count`.
@@ -111,13 +121,10 @@ You can display a count of how many times a piece of code was called using `coun
 Here's an example:
 
 ```php
- foreach (range(1, 2) as $i) {
-    sleep(1);
+foreach (range(1, 2) as $i) {
     ray()->count();
 
     foreach (range(1, 4) as $j) {
-        sleep(1);
-
         ray()->count();
     }
 }
@@ -133,12 +140,12 @@ executed.
 Here's an example:
 
 ```php
- foreach (range(1, 4) as $i) {
+foreach (range(1, 4) as $i) {
     ray()->count('first');
 
     foreach (range(1, 2) as $j) {
         ray()->count('first');
-        
+
         ray()->count('second');
     }
 }
@@ -230,12 +237,61 @@ The `json` function can also accept multiple valid JSON strings.
 ray()->json($jsonString, $anotherJsonString, $yetAnotherJsonString);
 ```
 
+### Working with Carbon instances
+
+[Carbon](https://carbon.nesbot.com/docs/) is a popular datetime package. You can send instances of `Carbon` to Ray with `carbon`.
+
+```php
+ray()->carbon(new \Carbon\Carbon());
+```
+
+![screenshot](/docs/ray/v1/images/carbon.png)
+
 ### Working with files
 
 You can display the contents of any file in Ray with the `file` function.
 
 ```php
 ray()->file('somefile.txt');
+```
+
+### Displaying a table
+
+You can send an associative array to Ray with the `table` function.
+
+```php
+ray()->table([
+    'First' => 'First value',
+    'Second' => 'Second value',
+    'Third' => 'Third value',
+]);
+```
+
+![screenshot](/docs/ray/v1/images/table.png)
+
+As a second argument, you can pass a label that will be displayed next to the table.
+
+```php
+ray()->table(['John', 'Paul', 'George', 'Ringo'], 'Beatles');
+```
+
+![screenshot](/docs/ray/v1/images/table-label.png)
+
+### Displaying images
+
+To display an image, call the `image` function and pass either a fully-qualified filename or url as its only argument.
+
+```php
+ray()->image('https://placekitten.com/200/300');
+ray()->image('/home/user/kitten.jpg');
+```
+
+### Rendering HTML
+
+To render a piece of HTML directly in Ray, you can use the `html` method.
+
+```php
+ray()->html('<b>Bold string<b>');
 ```
 
 ### Updating displayed items
@@ -375,4 +431,16 @@ This will provide you an overview of important PHP configuration values, you can
 
 ```php
 ray()->phpinfo('xdebug.enabled', 'default_mimetype');
+```
+
+### Showing raw values
+
+When you sent certain values to Ray, such as Carbon instances or Eloquent models, these values will be displayed in nice way. To see all private, protected, and public properties of such values, you can use the `raw()` method.
+
+```php
+$eloquentModel = User::create(['email' => 'john@example.com']);
+
+ray(new Carbon, $eloquentModel)); // will be formatted nicely
+
+ray()->raw(new Carbon, $eloquentModel) // no custom formatting, all properties will be shown in Ray.
 ```

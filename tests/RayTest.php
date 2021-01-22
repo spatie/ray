@@ -2,20 +2,26 @@
 
 namespace Spatie\Ray\Tests;
 
+use Carbon\Carbon;
 use Illuminate\Support\Arr;
 use PHPUnit\Framework\TestCase;
 use Spatie\Backtrace\Frame;
+use Spatie\Ray\Payloads\CallerPayload;
 use Spatie\Ray\Payloads\LogPayload;
 use Spatie\Ray\Ray;
+use Spatie\Ray\Settings\Settings;
 use Spatie\Ray\Settings\SettingsFactory;
 use Spatie\Ray\Tests\TestClasses\FakeClient;
 use Spatie\Snapshots\MatchesSnapshots;
+use Spatie\TestTime\TestTime;
 
 class RayTest extends TestCase
 {
     use MatchesSnapshots;
 
     protected FakeClient $client;
+
+    protected Settings $settings;
 
     protected Ray $ray;
 
@@ -25,9 +31,9 @@ class RayTest extends TestCase
 
         $this->client = new FakeClient();
 
-        $settings = SettingsFactory::createFromConfigFile();
+        $this->settings = SettingsFactory::createFromConfigFile();
 
-        $this->ray = new Ray($settings, $this->client, 'fakeUuid');
+        $this->ray = new Ray($this->settings, $this->client, 'fakeUuid');
     }
 
     /** @test */
@@ -369,6 +375,14 @@ class RayTest extends TestCase
     }
 
     /** @test */
+    public function it_can_send_the_clear_all_payload()
+    {
+        $this->ray->clearAll();
+
+        $this->assertMatchesOsSafeSnapshot($this->client->sentPayloads());
+    }
+
+    /** @test */
     public function it_can_send_the_class_name()
     {
         $this->ray->className($this);
@@ -436,16 +450,15 @@ class RayTest extends TestCase
     /** @test */
     public function it_can_rewrite_the_file_paths_using_the_config_values()
     {
-        $settings = SettingsFactory::createFromConfigFile();
+        $payload = new CallerPayload([
+            new Frame('/app/app/MyFile.php', 1, []),
+            new Frame('/app/app/MyFile.php', 2, []),
+        ]);
 
-        $settings->remote_path = 'tests';
-        $settings->local_path = 'local_path';
+        $payload->remotePath = '/app';
+        $payload->localPath = '/some/local/path';
 
-        $this->ray = new Ray($settings, $this->client, 'fakeUuid');
-
-        $this->ray->send('hey');
-
-        $this->assertEquals('/local_path/RayTest.php', $this->client->sentPayloads()[0]['payloads'][0]['origin']['file']);
+        $this->assertEquals('/some/local/path/app/MyFile.php', $payload->getContent()['frame']['file_name']);
     }
 
     /** @test */
@@ -538,6 +551,74 @@ class RayTest extends TestCase
             'default_mimetype',
             json_decode($this->getValueOfLastSentContent('content'), true)
         );
+    }
+
+    public function it_sends_an_image_payload()
+    {
+        $this->ray->image('http://localhost/test.jpg');
+
+        $this->assertMatchesOsSafeSnapshot($this->client->sentPayloads());
+    }
+
+    /** @test */
+    public function it_sends_a_table_payload()
+    {
+        $this->ray->table([
+            'First' => 'First value',
+            'Second' => 'Second value',
+            'Third' => 'Third value',
+        ]);
+
+        $this->assertMatchesOsSafeSnapshot($this->client->sentPayloads());
+    }
+
+    /** @test */
+    public function it_can_send_a_carbon_payload()
+    {
+        TestTime::freeze('Y-m-d H:i:s', '2020-01-01 00:00:00');
+
+        $carbon = new Carbon();
+
+        ray()->carbon($carbon);
+
+        $this->assertCount(1, $this->client->sentPayloads());
+
+        $payload = $this->client->sentPayloads()[0];
+        $this->assertEquals('2020-01-01 00:00:00', $payload['payloads'][0]['content']['formatted']);
+        $this->assertEquals('1577836800', $payload['payloads'][0]['content']['timestamp']);
+        $this->assertEquals('UTC', $payload['payloads'][0]['content']['timezone']);
+    }
+
+    /** @test */
+    public function it_can_send_the_raw_values()
+    {
+        $this->ray->raw(new Carbon(), 'string', ['a' => 1]);
+
+        $payloads = $this->client->sentPayloads();
+
+        $this->assertEquals('log', $payloads[0]['payloads'][0]['type']);
+        $this->assertEquals('log', $payloads[0]['payloads'][1]['type']);
+        $this->assertEquals('log', $payloads[0]['payloads'][2]['type']);
+    }
+
+    /** @test */
+    public function it_will_send_a_specialized_payloads_by_default()
+    {
+        $this->ray->send(new Carbon(), 'string', ['a => 1']);
+
+        $payloads = $this->client->sentPayloads();
+
+        $this->assertEquals('carbon', $payloads[0]['payloads'][0]['type']);
+        $this->assertEquals('log', $payloads[0]['payloads'][1]['type']);
+        $this->assertEquals('log', $payloads[0]['payloads'][2]['type']);
+    }
+
+    /** @test */
+    public function it_will_respect_the_raw_values_config_setting()
+    {
+        $this->settings->always_send_raw_values = true;
+        $this->ray->send(new Carbon());
+        $this->assertEquals('log',  $this->client->sentPayloads()[0]['payloads'][0]['type']);
     }
 
     protected function getValueOfLastSentContent(string $contentKey)

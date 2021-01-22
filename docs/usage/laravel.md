@@ -81,22 +81,67 @@ ray()->showEvents(function() {
 event(new MyEvent()); // this event won't be displayed.
 ```
 
+### Showing jobs
+
+You can display all jobs that are executed by calling `showJobs` (or `jobs`).
+
+```php
+ray()->showJobs();
+
+dispatch(new TestJob('my-test-job'));
+
+```
+
+![screenshot](/docs/ray/v1/images/job.png)
+
+To stop showing jobs, call `stopShowingJobs`.
+
+```php
+ray()->showJobs();
+
+dispatch(new TestJob()); // this event will be displayed
+
+ray()->stopShowingJobs();
+
+dispatch(new MyTestOtherJob()); // this event won't be displayed.
+```
+
+Alternatively, you can pass a callable to `showJobs`. Only the jobs dispatch inside that callable will be displayed in Ray.
+
+```php
+event(new TestJob()); // this job won't be displayed.
+
+ray()->showJobs(function() {
+    dispatch(new TestJob()); // this job will be displayed.
+});
+
+event(new TestJob()); // this job won't be displayed.
+```
+
 ### Handling models
 
 Using the `model` function, you can display the attributes and relations of a model.
 
 ```php
-ray()->model($user)
+ray()->model($user);
 ```
 
 ![screenshot](/docs/ray/v1/images/model.jpg)
 
-The `model` function can also accept multiple models.
+The `model` function can also accept multiple models and even collections.
 
 ```php
 // all of these models will be displayed in Ray
 ray()->model($user, $anotherUser, $yetAnotherUser);
+
+// all models in the collection will be display
+ray()->model(User::all());
+
+// all models in all collections will be displayed
+ray()->model(User::all(), OtherModel::all());
 ```
+
+Alternatively, you can use `models()` which is an alias for `model()`.
 
 ### Displaying mailables
 

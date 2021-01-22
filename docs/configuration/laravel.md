@@ -3,7 +3,9 @@ title: Laravel
 weight: 3
 ---
 
-For Laravel projects you can create a `ray.php` file in your project directory (not in the `config` directory) using the following template as [the ray config file](/docs/ray/v1/configuration/general):
+For Laravel projects you can create a `ray.php` file in your project directory (not in the `config` directory) using the following template as [the ray config file](/docs/ray/v1/configuration/general). Since the configuration file is developer specific, you might want to add it to the `.gitignore` of the project.
+
+Note: if everyone working on the project needs the same configuration, you can put the file in the `config` directory as well.
 
 ```php
 // save this in a file called "ray.php" in the root directory of your project; not in the Laravel "config" directory
@@ -51,5 +53,13 @@ return [
      * computer where your IDE or code editor is running on.
      */
     'local_path' => env('RAY_LOCAL_PATH', null),
+    
+    /*
+     * When this setting is enabled, the package will not try to format values sent to Ray.
+     */
+    'always_send_raw_values' => false,
 ];
 ```
+
+## Docker
+See [our Docker-specific configuration page](/docs/ray/v1/environment-specific-configuration/docker) for information about setting up Ray in combination with Docker. All changes also apply to a setup with Laravel.

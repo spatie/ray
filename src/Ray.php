@@ -2,6 +2,7 @@
 
 namespace Spatie\Ray;
 
+use Carbon\Carbon;
 use Closure;
 use Composer\InstalledVersions;
 use Exception;
@@ -13,12 +14,16 @@ use Spatie\Ray\Concerns\RayColors;
 use Spatie\Ray\Concerns\RaySizes;
 use Spatie\Ray\Origin\DefaultOriginFactory;
 use Spatie\Ray\Payloads\CallerPayload;
+use Spatie\Ray\Payloads\CarbonPayload;
+use Spatie\Ray\Payloads\ClearAllPayload;
 use Spatie\Ray\Payloads\ColorPayload;
 use Spatie\Ray\Payloads\CreateLockPayload;
 use Spatie\Ray\Payloads\CustomPayload;
 use Spatie\Ray\Payloads\DecodedJsonPayload;
 use Spatie\Ray\Payloads\FileContentsPayload;
 use Spatie\Ray\Payloads\HidePayload;
+use Spatie\Ray\Payloads\HtmlPayload;
+use Spatie\Ray\Payloads\ImagePayload;
 use Spatie\Ray\Payloads\JsonStringPayload;
 use Spatie\Ray\Payloads\LogPayload;
 use Spatie\Ray\Payloads\MeasurePayload;
@@ -26,6 +31,7 @@ use Spatie\Ray\Payloads\NewScreenPayload;
 use Spatie\Ray\Payloads\NotifyPayload;
 use Spatie\Ray\Payloads\RemovePayload;
 use Spatie\Ray\Payloads\SizePayload;
+use Spatie\Ray\Payloads\TablePayload;
 use Spatie\Ray\Payloads\TracePayload;
 use Spatie\Ray\Settings\Settings;
 use Spatie\Ray\Settings\SettingsFactory;
@@ -78,9 +84,14 @@ class Ray
     {
         $payload = new NewScreenPayload($name);
 
-        $this->sendRequest($payload);
+        return $this->sendRequest($payload);
+    }
 
-        return $this;
+    public function clearAll()
+    {
+        $payload = new ClearAllPayload();
+
+        return $this->sendRequest($payload);
     }
 
     public function clearScreen()
@@ -92,36 +103,28 @@ class Ray
     {
         $payload = new ColorPayload($color);
 
-        $this->sendRequest($payload);
-
-        return $this;
+        return $this->sendRequest($payload);
     }
 
     public function size(string $size): self
     {
         $payload = new SizePayload($size);
 
-        $this->sendRequest($payload);
-
-        return $this;
+        return $this->sendRequest($payload);
     }
 
     public function remove(): self
     {
         $payload = new RemovePayload();
 
-        $this->sendRequest($payload);
-
-        return $this;
+        return $this->sendRequest($payload);
     }
 
     public function hide(): self
     {
         $payload = new HidePayload();
 
-        $this->sendRequest($payload);
-
-        return $this;
+        return $this->sendRequest($payload);
     }
 
     /**
@@ -254,6 +257,13 @@ class Ray
         return $this->sendRequest($payload);
     }
 
+    public function image(string $location): self
+    {
+        $payload = new ImagePayload($location);
+
+        return $this->sendRequest($payload);
+    }
+
     public function die($status = '')
     {
         die($status);
@@ -327,18 +337,30 @@ class Ray
         return $this->removeWhen($boolOrCallable);
     }
 
-    public function ban(): self
+    public function carbon(?Carbon $carbon): self
     {
-        $this->send('🕶');
+        $payload = new CarbonPayload($carbon);
+
+        $this->sendRequest($payload);
 
         return $this;
     }
 
+    public function ban(): self
+    {
+        return $this->send('🕶');
+    }
+
     public function charles(): self
     {
-        $this->send('🎶 🎹 🎷 🕺');
+        return $this->send('🎶 🎹 🎷 🕺');
+    }
 
-        return $this;
+    public function table(array $values, $label = 'Table'): self
+    {
+        $payload = new TablePayload($values, $label);
+
+        return $this->sendRequest($payload);
     }
 
     public function count(?string $name = null): self
@@ -388,15 +410,39 @@ class Ray
         return $this;
     }
 
+    public function html(string $html = '')
+    {
+        $payload = new HtmlPayload($html);
+
+        return $this->sendRequest($payload);
+    }
+
+    public function raw(...$arguments): self
+    {
+        if (! count($arguments)) {
+            return $this;
+        }
+
+        $payloads = array_map(function ($argument) {
+            return LogPayload::createForArguments([$argument]);
+        }, $arguments);
+
+        return $this->sendRequest($payloads);
+    }
+
     public function send(...$arguments): self
     {
         if (! count($arguments)) {
             return $this;
         }
 
-        $payload = LogPayload::createForArguments($arguments);
+        if ($this->settings->always_send_raw_values) {
+            return $this->raw(...$arguments);
+        }
 
-        return $this->sendRequest($payload);
+        $payloads = PayloadFactory::createForValues($arguments);
+
+        return $this->sendRequest($payloads);
     }
 
     public function pass($argument)

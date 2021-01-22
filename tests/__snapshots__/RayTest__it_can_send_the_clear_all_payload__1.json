@@ -3,11 +3,8 @@
         "uuid": "fakeUuid",
         "payloads": [
             {
-                "type": "custom",
-                "content": {
-                    "content": false,
-                    "label": "Boolean"
-                },
+                "type": "clear_all",
+                "content": [],
                 "origin": {
                     "file": "\/tests\/RayTest.php",
                     "line_number": "xxx"

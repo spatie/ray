@@ -5,8 +5,8 @@
             {
                 "type": "custom",
                 "content": {
-                    "content": false,
-                    "label": "Boolean"
+                    "content": "<img src=\"http:\/\/localhost\/test.jpg\" alt=\"\" \/>",
+                    "label": "Image"
                 },
                 "origin": {
                     "file": "\/tests\/RayTest.php",

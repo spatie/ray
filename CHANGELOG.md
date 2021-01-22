@@ -2,6 +2,41 @@
 
 All notable changes to `ray` will be documented in this file
 
+## 1.15.0 - 021-01-22
+
+- add `table` method
+
+## 1.14.1 - 2021-01-22
+
+- fix bug when `remote_path` is also in `filePath` (#227)
+
+## 1.14.0 - 2021-01-20
+
+- Add support for CraftRay
+
+## 1.13.0 - 2021-01-18
+
+- the package will now select the best payload type when passing something to `ray()`
+- added `html` method
+- added `NullPayload`
+- added `BoolPayload`
+
+## 1.12.0 - 2021-01-18
+
+- add `carbon`
+
+## 1.11.1 - 2021-01-17
+
+- lower deps
+
+## 1.11.0 - 2021-01-15
+
+- add `image()`
+
+## 1.10.0 - 2021-01-15
+
+- add `clearAll`
+
 ## 1.9.2 - 2021-01-15
 
 - fix bugs around settings

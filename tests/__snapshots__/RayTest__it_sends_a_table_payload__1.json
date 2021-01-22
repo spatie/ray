@@ -3,10 +3,14 @@
         "uuid": "fakeUuid",
         "payloads": [
             {
-                "type": "custom",
+                "type": "table",
                 "content": {
-                    "content": false,
-                    "label": "Boolean"
+                    "values": {
+                        "First": "First value",
+                        "Second": "Second value",
+                        "Third": "Third value"
+                    },
+                    "label": "Table"
                 },
                 "origin": {
                     "file": "\/tests\/RayTest.php",

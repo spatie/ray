@@ -7,6 +7,11 @@ assignees: ''
 
 ---
 
+**Before creating a new bug report**
+Please check if there isn't a similar issue on [the issue tracker](https://github.com/spatie/ray/issues) or in [the discussions](https://github.com/spatie/ray/issues).
+
+If you are having troubles connecting your project to Ray, please check [our docs](https://spatie.be/products/ray) first, especially the configuration and environment specific configuration sections.
+
 **Describe the bug**
 A clear and concise description of what the bug is.
 
