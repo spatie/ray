@@ -2,7 +2,11 @@
 
 All notable changes to `ray` will be documented in this file
 
-## 1.15.0 - 021-01-22
+## 1.16.0 - 2021-01-22
+
+- add `phpinfo` method
+
+## 1.15.0 - 2021-01-22
 
 - add `table` method
 
