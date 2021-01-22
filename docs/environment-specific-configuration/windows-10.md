@@ -3,6 +3,8 @@ title: Windows 10
 weight: 3
 ---
 
+## PhpStorm
+
 Windows 10 does not support the PhpStorm protocol and therefore you will not be able to open PhpStorm given the link from Ray. 
 As a work-around, @aik099 has a package to edits your registry to correlate the PhpStorm link protocol to your PhpStorm instance. 
 
