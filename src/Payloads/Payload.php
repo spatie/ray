@@ -20,7 +20,7 @@ abstract class Payload
             return $filePath;
         }
 
-        return str_replace($this->remotePath, $this->localPath, $filePath);
+        return substr_replace($filePath, $this->localPath, 0, strlen($this->remotePath));
     }
 
     public function getContent(): array
