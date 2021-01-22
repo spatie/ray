@@ -257,7 +257,7 @@ ray()->file('somefile.txt');
 
 ### Displaying a table
 
-You can send an associative array to Ray with the `table` function
+You can send an associative array to Ray with the `table` function.
 
 ```php
 ray()->table([
