@@ -61,7 +61,7 @@ You can see values that were previously displayed, by clicking the little back b
 Optionally, you can give a screen a name:
 
 ```php
-ray()->newScreen('My debug screen')
+ray()->newScreen('My debug screen');
 ```
 
 ![screenshot](/docs/ray/v1/images/screen.jpg)
