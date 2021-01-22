@@ -523,34 +523,23 @@ class RayTest extends TestCase
     {
         $this->ray->phpinfo();
 
-        $info = json_encode([
-            'PHP version' => phpversion(),
-            'Timezone' => ini_get('date.timezone'),
-            'Charset' => ini_get('default_charset'),
-            'Memory limit' => ini_get('memory_limit'),
-            'Max file upload size' => ini_get('max_file_uploads'),
-            'Max post size' => ini_get('post_max_size'),
-            'Hostname' => php_uname('n'),
-            'PHP ini file' => php_ini_loaded_file(),
-            "PHP scanned ini file" => explode(',', str_replace(PHP_EOL, '', php_ini_scanned_files() ?? '')),
-            'Extensions' => implode(', ', get_loaded_extensions()),
-        ]);
+        $payloads = $this->client->sentPayloads();
 
-        $this->assertEquals(
-            $info,
-            $this->getValueOfLastSentContent('content')
-        );
+        $this->assertCount(1, $payloads);
+
+        $this->assertEquals('table', $payloads[0]['payloads'][0]['type']);
     }
 
     /** @test */
-    public function it_can_add_values_to_the_php_info_payload()
+    public function the_php_info_can_report_specific_options()
     {
         $this->ray->phpinfo('default_mimetype');
 
-        $this->assertArrayHasKey(
-            'default_mimetype',
-            json_decode($this->getValueOfLastSentContent('content'), true)
-        );
+        $payloads = $this->client->sentPayloads();
+
+        $this->assertCount(1, $payloads);
+
+        $this->assertArrayHasKey('default_mimetype', $payloads[0]['payloads'][0]['content']['values']);
     }
 
     public function it_sends_an_image_payload()
