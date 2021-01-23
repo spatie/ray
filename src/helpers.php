@@ -10,6 +10,13 @@ use Spatie\RayBundle\Ray as SymfonyRay;
 use Spatie\WordPressRay\Ray as WordPressRay;
 use Spatie\YiiRay\Ray as YiiRay;
 
+// A globally shared instance of Ray
+// Using a shared instance of Ray prevents excessive
+// lookups for Settings
+if (!isset($sharedRayInstance)) {
+	$sharedRayInstance = null;
+}
+
 if (! function_exists('ray')) {
     /**
      * @param mixed ...$args
@@ -18,6 +25,13 @@ if (! function_exists('ray')) {
      */
     function ray(...$args)
     {
+        global $sharedRayInstance;
+        
+        // Return a cached instance if it is available
+    	if ($sharedRayInstance != null) {
+    		return $sharedRayInstance->send(...$args);
+    	}
+        
         if (class_exists(LaravelRay::class)) {
             try {
                 return app(LaravelRay::class)->send(...$args);
@@ -48,7 +62,8 @@ if (! function_exists('ray')) {
 
         $settings = SettingsFactory::createFromConfigFile();
 
-        return (new $rayClass($settings))->send(...$args);
+        $sharedRayInstance = new $rayClass($settings);
+        return $sharedRayInstance->send(...$args);
     }
 }
 
