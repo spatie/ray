@@ -99,11 +99,11 @@ To stop showing jobs, call `stopShowingJobs`.
 ```php
 ray()->showJobs();
 
-dispatch(new TestJob()); // this event will be displayed
+dispatch(new TestJob()); // this job will be displayed
 
 ray()->stopShowingJobs();
 
-dispatch(new MyTestOtherJob()); // this event won't be displayed.
+dispatch(new MyTestOtherJob()); // this job won't be displayed.
 ```
 
 Alternatively, you can pass a callable to `showJobs`. Only the jobs dispatch inside that callable will be displayed in Ray.
