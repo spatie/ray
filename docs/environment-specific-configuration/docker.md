@@ -7,7 +7,7 @@ When developing using Docker, the Ray host should point to the internal IP of yo
 
 ```php
 // save this in a file called "ray.php"
-
+<?php
 return [
     /*
      *  The host used to communicate with the Ray app.
