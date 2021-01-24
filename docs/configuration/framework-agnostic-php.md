@@ -7,6 +7,7 @@ In framework agnostic projects you can use this template as [the ray config file
 
 ```php
 // save this in a file called "ray.php"
+<?php
 
 return [
     /*
