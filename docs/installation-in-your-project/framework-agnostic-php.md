@@ -3,7 +3,7 @@ title: Framework agnostic PHP
 weight: 2
 ---
 
-To start using Ray any PHP project , install the `ray` package.
+To start using Ray in any PHP project, install the `ray` package.
 
 ```bash
 composer require spatie/ray
