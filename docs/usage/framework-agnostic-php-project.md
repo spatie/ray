@@ -443,3 +443,12 @@ ray(new Carbon, $eloquentModel)); // will be formatted nicely
 
 ray()->raw(new Carbon, $eloquentModel) // no custom formatting, all properties will be shown in Ray.
 ```
+
+### Showing and hideing the app
+
+You can show and hide the Ray app video code.
+
+```php
+ray()->showApp(); // Ray will be brought to the foreground
+ray()->hideApp(); // Ray will be hidden
+```

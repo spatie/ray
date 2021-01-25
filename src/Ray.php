@@ -21,6 +21,7 @@ use Spatie\Ray\Payloads\CreateLockPayload;
 use Spatie\Ray\Payloads\CustomPayload;
 use Spatie\Ray\Payloads\DecodedJsonPayload;
 use Spatie\Ray\Payloads\FileContentsPayload;
+use Spatie\Ray\Payloads\HideAppPayload;
 use Spatie\Ray\Payloads\HidePayload;
 use Spatie\Ray\Payloads\HtmlPayload;
 use Spatie\Ray\Payloads\ImagePayload;
@@ -30,6 +31,7 @@ use Spatie\Ray\Payloads\MeasurePayload;
 use Spatie\Ray\Payloads\NewScreenPayload;
 use Spatie\Ray\Payloads\NotifyPayload;
 use Spatie\Ray\Payloads\RemovePayload;
+use Spatie\Ray\Payloads\ShowAppPayload;
 use Spatie\Ray\Payloads\SizePayload;
 use Spatie\Ray\Payloads\TablePayload;
 use Spatie\Ray\Payloads\TracePayload;
@@ -446,6 +448,20 @@ class Ray
         $this->send($argument);
 
         return $argument;
+    }
+
+    public function showApp(): self
+    {
+        $payload = new ShowAppPayload();
+
+        return $this->sendRequest($payload);
+    }
+
+    public function hideApp(): self
+    {
+        $payload = new HideAppPayload();
+
+        return $this->sendRequest($payload);
     }
 
     public function sendCustom(string $content, string $label = ''): self
