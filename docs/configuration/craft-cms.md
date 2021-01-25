@@ -7,6 +7,7 @@ For Craft CMS projects you can create a `craft-ray.php` file in your project's `
 
 ```php
 // save this in a file called "ray.php" in the config directory of your project
+<?php
 return [
     /*
     * This settings controls whether data should be sent to Ray.
