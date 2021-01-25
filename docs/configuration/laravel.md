@@ -9,7 +9,7 @@ Note: if everyone working on the project needs the same configuration, you can p
 
 ```php
 // save this in a file called "ray.php" in the root directory of your project; not in the Laravel "config" directory
-
+<?php
 return [
     /*
     * This settings controls whether data should be sent to Ray.
