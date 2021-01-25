@@ -2,6 +2,10 @@
 
 All notable changes to `ray` will be documented in this file
 
+## 1.17.0 - 2021-01-25
+
+- add `showApp` and `hideApp`
+
 ## 1.16.0 - 2021-01-22
 
 - add `phpinfo` method
