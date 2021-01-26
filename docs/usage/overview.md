@@ -18,6 +18,8 @@ To display something in Ray use the `ray()` function. It accepts everything: str
 
 ### Framework agnostic PHP
 
+| Call | Description |
+| --- | --- |
 | `ray($variabele)` | Display a string, array or object |
 | `ray($variabele, $anotherVariable, …)` | Ray accepts multiple arguments |
 | `ray()->backtrace()` | Check entire backtrace |
@@ -59,6 +61,8 @@ To display something in Ray use the `ray()` function. It accepts everything: str
 
 #### Updating a Ray instance
 
+| Call | Description |
+| --- | --- |
 | `$ray->large()` | Update the size of a Ray instance. Use `large()` or `small`   |
 | `$ray->red()` | Update the color of a Ray instance. Use `green()`, `orange()`, `red()`, `blue()`,`purple()` or `gray()`   |
 | `$ray->remove()` | Remove an item from Ray   |
@@ -69,6 +73,8 @@ Read more on [Framework agnostic PHP](/docs/ray/v1/usage/framework-agnostic-php-
 
 ### Laravel
 
+| Call | Description |
+| --- | --- |
 | `ray()->disable()` | Disable sending stuff to Ray |
 | `ray()->disabled()` | Check if Ray is disabled |
 | `ray()->enable()` | Enable sending stuff to Ray |
@@ -88,6 +94,8 @@ Read more on [Framework agnostic PHP](/docs/ray/v1/usage/framework-agnostic-php-
 
 #### Macros &amp; Blade
 
+| Call | Description |
+| --- | --- |
 | `collect(['a', 'b', 'c'])->ray('title')` | Use the Ray collection macro to easily send collections to Ray  |
 | `@ray($variable, $anotherVariable, …)` | Send to Ray from a Blade view  |
 | `$this->get('api/my-endpoint')->ray()->assertSuccessful()` | Send a `TestResponse` to Ray. Chain on any of Laravel's assertion methods |
@@ -96,6 +104,8 @@ Read more on [Laravel](/docs/ray/v1/usage/laravel)
 
 ### Wordpress
 
+| Call | Description |
+| --- | --- |
 | `ray()->showQueries()` | Display all queries that are executed  |
 | `ray()->stopShowingQueries()` | Stop displaying queries  |
 | `ray()->showMails()` | Display all mails that are sent  |
@@ -107,6 +117,8 @@ Read more on [WordPress](/docs/ray/v1/usage/wordpress)
 
 ### Yii
 
+| Call | Description |
+| --- | --- |
 | `ray()->disable()` | Disable sending stuff to Ray |
 | `ray()->disabled()` | Check if Ray is disabled |
 | `ray()->enable()` | Enable sending stuff to Ray |
@@ -122,6 +134,8 @@ Read more on [Yii](/docs/ray/v1/usage/yii)
 
 ### Craft
 
+| Call | Description |
+| --- | --- |
 | `ray()->disable()` | Disable sending stuff to Ray |
 | `ray()->disabled()` | Check if Ray is disabled |
 | `ray()->enable()` | Enable sending stuff to Ray |
@@ -134,6 +148,9 @@ Read more on [Yii](/docs/ray/v1/usage/yii)
 | `ray()->stopShowingQueries()` | Stop displaying queries  |
 
 #### Twig
+
+| Call | Description |
+| --- | --- |
 | `{{ ray(variable, anotherVariable) }}` | Use Ray in Twig  |
 | `{{ myVariable | ray }}` | Use Ray as filter  |
 | `{{ ray.clearScreen }}` | Ray methods are also available on the global variable  |
@@ -142,6 +159,8 @@ Read more on [Craft](/docs/ray/v1/usage/craft)
 
 ### JavaScript
 
+| Call | Description |
+| --- | --- |
 | `ray(variabele)` | Display a string, array or object |
 | `ray(variabele, anotherVariable, …)` | Ray accepts multiple arguments |
 | `ray(…).color('blue')` | Output in color. Use `green`, `orange`, `red`, `blue`,`purple` or `gray` |
@@ -158,6 +177,8 @@ Read more on [Craft](/docs/ray/v1/usage/craft)
 
 #### Updating a Ray instance
 
+| Call | Description |
+| --- | --- |
 | `ray.size('large')` | Update the size of a Ray instance. Use `large` or `small`   |
 | `ray.color('red')` | Update the color of a Ray instance. Use `green`, `orange`, `red`, `blue`,`purple` or `gray`   |
 | `$ray.remove()` | Remove an item from Ray   |
