@@ -23,7 +23,7 @@ ray('as', 'many' , 'arguments', 'as', 'you', 'like');
 
 ### Using colors
 
-You can colorize things your sent to ray by using one of the color functions.
+You can colorize things you sent to ray by using one of the color functions.
 
 ```php
 ray('this is green')->green();
@@ -166,7 +166,7 @@ ray()->className($anObject)
 ### Measuring performance and memory usage
 
 You can use the `measure` function to display runtime and memory usage. When `measure` is called again, the time between
-this previous call is also displayed.
+this and previous call is also displayed.
 
 ```php
 ray()->measure();
@@ -444,9 +444,9 @@ ray(new Carbon, $eloquentModel)); // will be formatted nicely
 ray()->raw(new Carbon, $eloquentModel) // no custom formatting, all properties will be shown in Ray.
 ```
 
-### Showing and hideing the app
+### Showing and hiding the app
 
-You can show and hide the Ray app video code.
+You can show and hide the Ray app via code.
 
 ```php
 ray()->showApp(); // Ray will be brought to the foreground
