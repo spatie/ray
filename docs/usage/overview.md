@@ -16,7 +16,7 @@ To display something in Ray use the `ray()` function. It accepts everything: str
 - [Craft](#craft)
 - [Javascript](#javascript)
 
-### Framework agnostic PHP
+## Framework agnostic PHP
 
 | Call | Description |
 | --- | --- |
@@ -59,7 +59,7 @@ To display something in Ray use the `ray()` function. It accepts everything: str
 | `ray()->toJson($variable, $another, … )` | Display the JSON representation of 1 or more values that can be converted |
 | `ray()->trace()` | Check entire backtrace |
 
-#### Updating a Ray instance
+### Updating a Ray instance
 
 | Call | Description |
 | --- | --- |
@@ -71,7 +71,7 @@ To display something in Ray use the `ray()` function. It accepts everything: str
 
 Read more on [Framework agnostic PHP](/docs/ray/v1/usage/framework-agnostic-php-project)
 
-### Laravel
+## Laravel
 
 | Call | Description |
 | --- | --- |
@@ -92,7 +92,7 @@ Read more on [Framework agnostic PHP](/docs/ray/v1/usage/framework-agnostic-php-
 | `ray()->showQueries(callable)` | Display all queries that are executed within a callable |
 | `ray()->stopShowingQueries()` | Stop displaying queries  |
 
-#### Macros &amp; Blade
+### Macros &amp; Blade
 
 | Call | Description |
 | --- | --- |
@@ -102,7 +102,7 @@ Read more on [Framework agnostic PHP](/docs/ray/v1/usage/framework-agnostic-php-
 
 Read more on [Laravel](/docs/ray/v1/usage/laravel)
 
-### Wordpress
+## Wordpress
 
 | Call | Description |
 | --- | --- |
@@ -115,7 +115,7 @@ Read more on [Laravel](/docs/ray/v1/usage/laravel)
 
 Read more on [WordPress](/docs/ray/v1/usage/wordpress)
 
-### Yii
+## Yii
 
 | Call | Description |
 | --- | --- |
@@ -132,7 +132,7 @@ Read more on [WordPress](/docs/ray/v1/usage/wordpress)
 
 Read more on [Yii](/docs/ray/v1/usage/yii)
 
-### Craft
+## Craft
 
 | Call | Description |
 | --- | --- |
@@ -147,7 +147,7 @@ Read more on [Yii](/docs/ray/v1/usage/yii)
 | `ray()->showQueries(callable)` | Display all queries that are executed within a callable |
 | `ray()->stopShowingQueries()` | Stop displaying queries  |
 
-#### Twig
+### Twig
 
 | Call | Description |
 | --- | --- |
@@ -157,7 +157,7 @@ Read more on [Yii](/docs/ray/v1/usage/yii)
 
 Read more on [Craft](/docs/ray/v1/usage/craft)
 
-### JavaScript
+## JavaScript
 
 | Call | Description |
 | --- | --- |
@@ -175,7 +175,7 @@ Read more on [Craft](/docs/ray/v1/usage/craft)
 | `ray(…).showIf(true)` | Conditionally show things based on a truthy value or callable  |
 | `ray(…).size('small')` | Output text smaller or bigger. Use `large` or `small`|
 
-#### Updating a Ray instance
+### Updating a Ray instance
 
 | Call | Description |
 | --- | --- |
