@@ -1,5 +1,5 @@
 ---
-title: Overview
+title: Reference
 weight: 1
 ---
 
@@ -12,8 +12,6 @@ weight: 1
 We asume you have completed the [installation](/docs/ray/v1/installation-in-your-project/introduction) of the Ray package or library in your project.
 
 To display something in Ray use the `ray()` function. It accepts everything: strings, arrays, objects, ... you name it.
-
-## Reference
 
 - [Framework agnostic PHP](#framework-agnostic-php)
 - [Laravel](#laravel)
