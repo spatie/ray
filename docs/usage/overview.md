@@ -3,6 +3,12 @@ title: Overview
 weight: 1
 ---
 
+<style>
+    code {
+        white-space:nowrap
+    }
+</style>
+
 We asume you have completed the [installation](/docs/ray/v1/installation-in-your-project/introduction) of the Ray package or library in your project.
 
 To display something in Ray use the `ray()` function. It accepts everything: strings, arrays, objects, ... you name it.
@@ -38,7 +44,7 @@ To display something in Ray use the `ray()` function. It accepts everything: str
 | `ray()->hideApp()` | Hide the app |
 | `ray()->html($html)` | Render a piece of HTML  |
 | `ray()->image($path)` | Display an image form a path or URL  |
-| `ray()->json($jsonString, $another, …)` | Send one or more valid JSON strings to Ray | 
+| `ray()->json($json, $another, …)` | Send one or more valid JSON strings to Ray | 
 | `ray(…)->large()` | Output text bigger |
 | `ray()->measure()` | Display runtime and memory usage. When measure is called again, the time between this and previous call is also displayed |
 | `ray()->newScreen()` | Start a new screen |
@@ -96,9 +102,9 @@ Read more on [Framework agnostic PHP](/docs/ray/v1/usage/framework-agnostic-php-
 
 | Call | Description |
 | --- | --- |
-| `collect(['a', 'b', 'c'])->ray('title')` | Use the Ray collection macro to easily send collections to Ray  |
+| `collect([…])->ray('title')` | Use the Ray collection macro to easily send collections to Ray  |
 | `@ray($variable, $another, …)` | Send to Ray from a Blade view  |
-| `$this->get('api/my-endpoint')->ray()->assertSuccessful()` | Send a `TestResponse` to Ray. Chain on any of Laravel's assertion methods |
+| `$this->get(…)->ray()->assertSuccessful()` | Send a `TestResponse` to Ray. Chain on any of Laravel's assertion methods |
 
 Read more on [Laravel](/docs/ray/v1/usage/laravel)
 
