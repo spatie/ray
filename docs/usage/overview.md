@@ -21,11 +21,11 @@ To display something in Ray use the `ray()` function. It accepts everything: str
 | Call | Description |
 | --- | --- |
 | `ray($variabele)` | Display a string, array or object |
-| `ray($variabele, $anotherVariable, …)` | Ray accepts multiple arguments |
+| `ray($variabele, $another, …)` | Ray accepts multiple arguments |
 | `ray()->backtrace()` | Check entire backtrace |
 | `ray(…)->blue()` | Output in blue |
 | `ray()->caller()` | Discover where code is being called |
-| `ray()->carbon($carbonInstance)` | Send `Carbon` instances to Ray |
+| `ray()->carbon($carbon)` | Send `Carbon` instances to Ray |
 | `ray()->className($object)` | Send the classname of an object to Ray |
 | `ray()->clearScreen()` | Clear current screen |
 | `ray()->clearAll()` | Clear current and all previous screens |
@@ -38,7 +38,7 @@ To display something in Ray use the `ray()` function. It accepts everything: str
 | `ray()->hideApp()` | Hide the app |
 | `ray()->html($html)` | Render a piece of HTML  |
 | `ray()->image($path)` | Display an image form a path or URL  |
-| `ray()->json($jsonString, $anotherJsonString, …)` | Send one or more valid JSON strings to Ray | 
+| `ray()->json($jsonString, $another, …)` | Send one or more valid JSON strings to Ray | 
 | `ray(…)->large()` | Output text bigger |
 | `ray()->measure()` | Display runtime and memory usage. When measure is called again, the time between this and previous call is also displayed |
 | `ray()->newScreen()` | Start a new screen |
@@ -48,7 +48,7 @@ To display something in Ray use the `ray()` function. It accepts everything: str
 | `ray(…)->pass($variable)` | Display something in Ray and return the value instead of a Ray instance |
 | `ray()->pause()` | Pause execution |
 | `ray()->phpinfo()` | Display PHP info |
-| `ray()->phpinfo($key, $anotherKey, …)` | Display specific parts of PHP info |
+| `ray()->phpinfo($key, $another, …)` | Display specific parts of PHP info |
 | `ray(…)->purple()` | Output in purple |
 | `ray()->raw($value)` | Send raw output of a value to Ray without fancy formatting |
 | `ray(…)->red()` | Output in red |
@@ -56,7 +56,7 @@ To display something in Ray use the `ray()` function. It accepts everything: str
 | `ray(…)->showIf(true)` | Conditionally show things based on a truthy value or callable  |
 | `ray(…)->small()` | Output text smaller |
 | `ray()->table($array. $label)` | Format an associative array with optional label  |
-| `ray()->toJson($variable, $anotherVariable, … )` | Display the JSON representation of 1 or more values that can be converted |
+| `ray()->toJson($variable, $another, … )` | Display the JSON representation of 1 or more values that can be converted |
 | `ray()->trace()` | Check entire backtrace |
 
 #### Updating a Ray instance
@@ -97,7 +97,7 @@ Read more on [Framework agnostic PHP](/docs/ray/v1/usage/framework-agnostic-php-
 | Call | Description |
 | --- | --- |
 | `collect(['a', 'b', 'c'])->ray('title')` | Use the Ray collection macro to easily send collections to Ray  |
-| `@ray($variable, $anotherVariable, …)` | Send to Ray from a Blade view  |
+| `@ray($variable, $another, …)` | Send to Ray from a Blade view  |
 | `$this->get('api/my-endpoint')->ray()->assertSuccessful()` | Send a `TestResponse` to Ray. Chain on any of Laravel's assertion methods |
 
 Read more on [Laravel](/docs/ray/v1/usage/laravel)
@@ -151,8 +151,8 @@ Read more on [Yii](/docs/ray/v1/usage/yii)
 
 | Call | Description |
 | --- | --- |
-| `{{ ray(variable, anotherVariable) }}` | Use Ray in Twig  |
-| `{{ myVariable | ray }}` | Use Ray as filter  |
+| `{{ ray(variable, another) }}` | Use Ray in Twig  |
+| <code>{{ variable &#124; ray }}</code> | Use Ray as filter  |
 | `{{ ray.clearScreen }}` | Ray methods are also available on the global variable  |
 
 Read more on [Craft](/docs/ray/v1/usage/craft)
@@ -162,12 +162,12 @@ Read more on [Craft](/docs/ray/v1/usage/craft)
 | Call | Description |
 | --- | --- |
 | `ray(variabele)` | Display a string, array or object |
-| `ray(variabele, anotherVariable, …)` | Ray accepts multiple arguments |
+| `ray(variabele, another, …)` | Ray accepts multiple arguments |
 | `ray(…).color('blue')` | Output in color. Use `green`, `orange`, `red`, `blue`,`purple` or `gray` |
 | `ray().clearScreen()` | Clear current screen |
 | `ray().clearAll()` | Clear current and all previous screens |
 | `ray(…).hide()` | Display something in Ray and make it collapse immediately |
-| `ray(JSON.parse(['a' => 1, 'b' => ['c' => 3]]))` | Send JSON to Ray | 
+| `ray(JSON.parse([…]))` | Send JSON to Ray | 
 | `ray().newScreen()` | Start a new screen |
 | `ray().newScreen('title')` | Start a new named screen |
 | `ray(…).notify(message)` | Display a notification |
