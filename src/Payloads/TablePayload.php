@@ -6,9 +6,11 @@ use Spatie\Ray\ArgumentConverter;
 
 class TablePayload extends Payload
 {
-    protected array $values;
+    /** @var array */
+    protected $values;
 
-    protected string $label;
+    /** @var string */
+    protected $label;
 
     public function __construct(array $values, string $label = 'Table')
     {
