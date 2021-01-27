@@ -3,7 +3,6 @@
 namespace Spatie\Ray;
 
 use Carbon\Carbon;
-use Closure;
 use Spatie\Ray\Payloads\BoolPayload;
 use Spatie\Ray\Payloads\CarbonPayload;
 use Spatie\Ray\Payloads\LogPayload;
