@@ -8,10 +8,7 @@ trait RemovesRayFrames
 {
     protected function removeRayFrames(array $frames): array
     {
-        $frames = array_filter(
-            $frames,
-            fn (Frame $frame) => ! $this->isRayFrame($frame)
-        );
+        $frames = array_filter($frames, fn (Frame $frame) => ! $this->isRayFrame($frame));
 
         return array_values($frames);
     }

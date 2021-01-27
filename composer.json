@@ -29,6 +29,7 @@
         "illuminate/support": "6.x|^8.18",
         "nesbot/carbon": "^2.43",
         "phpunit/phpunit": "^9.5",
+        "rector/rector": "^0.9.16",
         "spatie/phpunit-snapshot-assertions": "^4.2",
         "spatie/test-time": "^1.2"
     },
