@@ -9,7 +9,7 @@ trait RemovesRayFrames
     protected function removeRayFrames(array $frames): array
     {
         $frames = array_filter($frames, function (Frame $frame) {
-            return !$this->isRayFrame($frame);
+            return ! $this->isRayFrame($frame);
         });
 
         return array_values($frames);
