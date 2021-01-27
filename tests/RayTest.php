@@ -119,11 +119,15 @@ class RayTest extends TestCase
     /** @test */
     public function it_can_conditionally_show_something_using_a_callable()
     {
-        $this->ray->send('hey')->showIf(fn () => true);
+        $this->ray->send('hey')->showIf(function () {
+            return true;
+        });
         $this->assertCount(1, $this->client->sentPayloads());
 
         $this->client->reset();
-        $this->ray->send('hey')->showIf(fn () => false);
+        $this->ray->send('hey')->showIf(function () {
+            return false;
+        });
         $this->assertCount(2, $this->client->sentPayloads());
     }
 
@@ -145,15 +149,21 @@ class RayTest extends TestCase
     /** @test */
     public function it_can_conditionally_remove_something_using_a_callable()
     {
-        $this->ray->send('hey')->removeWhen(fn () => true);
+        $this->ray->send('hey')->removeWhen(function () {
+            return true;
+        });
         $this->assertCount(2, $this->client->sentPayloads());
 
         $this->client->reset();
-        $this->ray->send('hey')->removeWhen(fn () => false);
+        $this->ray->send('hey')->removeWhen(function () {
+            return false;
+        });
         $this->assertCount(1, $this->client->sentPayloads());
 
         $this->client->reset();
-        $this->ray->send('hey')->removeIf(fn () => true);
+        $this->ray->send('hey')->removeIf(function () {
+            return true;
+        });
         $this->assertCount(2, $this->client->sentPayloads());
     }
 
@@ -246,7 +256,9 @@ class RayTest extends TestCase
     /** @test */
     public function it_can_send_backtrace_frames_starting_from_a_specific_frame()
     {
-        $this->ray->trace(fn (Frame $frame) => $frame->class === 'PHPUnit\TextUI\TestRunner');
+        $this->ray->trace(function (Frame $frame) {
+            return $frame->class === 'PHPUnit\TextUI\TestRunner';
+        });
 
         $frames = $this->getValueOfLastSentContent('frames');
 
