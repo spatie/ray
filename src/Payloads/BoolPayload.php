@@ -4,7 +4,8 @@ namespace Spatie\Ray\Payloads;
 
 class BoolPayload extends Payload
 {
-    protected bool $bool;
+    /** @var bool */
+    protected $bool;
 
     public function __construct(bool $bool)
     {

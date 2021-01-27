@@ -11,8 +11,11 @@ class FakeRay
     use RaySizes;
     use RayColors;
 
-    protected array $sizeHistory;
-    protected array $colorHistory;
+    /** @var array */
+    protected $sizeHistory;
+
+    /** @var array */
+    protected $colorHistory;
 
     public function __construct()
     {

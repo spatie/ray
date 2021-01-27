@@ -19,11 +19,14 @@ class RayTest extends TestCase
 {
     use MatchesSnapshots;
 
-    protected FakeClient $client;
+    /** @var \Spatie\Ray\Tests\TestClasses\FakeClient */
+    protected $client;
 
-    protected Settings $settings;
+    /** @var \Spatie\Ray\Settings\Settings */
+    protected $settings;
 
-    protected Ray $ray;
+    /** @var \Spatie\Ray\Ray */
+    protected $ray;
 
     public function setUp(): void
     {

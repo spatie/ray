@@ -4,7 +4,8 @@ namespace Spatie\Ray\Payloads;
 
 class ImagePayload extends Payload
 {
-    protected string $location;
+    /** @var string */
+    protected $location;
 
     public function __construct(string $location)
     {

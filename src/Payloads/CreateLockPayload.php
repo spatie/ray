@@ -4,7 +4,8 @@ namespace Spatie\Ray\Payloads;
 
 class CreateLockPayload extends Payload
 {
-    protected string $name;
+    /** @var string */
+    protected $name;
 
     public function __construct(string $name)
     {

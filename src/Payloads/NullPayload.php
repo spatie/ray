@@ -4,7 +4,8 @@ namespace Spatie\Ray\Payloads;
 
 class NullPayload extends Payload
 {
-    protected bool $bool;
+    /** @var bool */
+    protected $bool;
 
     public function getType(): string
     {

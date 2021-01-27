@@ -4,7 +4,8 @@ namespace Spatie\Ray\Payloads;
 
 class ApplicationLogPayload extends Payload
 {
-    protected string $value;
+    /** @var string */
+    protected $value;
 
     public function __construct(string $value)
     {

@@ -4,7 +4,8 @@ namespace Spatie\Ray\Payloads;
 
 class NotifyPayload extends Payload
 {
-    protected string $text;
+    /** @var string */
+    protected $text;
 
     public function __construct(string $text)
     {

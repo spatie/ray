@@ -9,11 +9,14 @@ class TracePayload extends Payload
 {
     use RemovesRayFrames;
 
-    protected array $frames;
+    /** @var array */
+    protected $frames;
 
-    protected ?int $startFromIndex = null;
+    /** @var int|null */
+    protected $startFromIndex = null;
 
-    protected ?int $limit = null;
+    /** @var int|null */
+    protected $limit = null;
 
     public function __construct(array $frames)
     {

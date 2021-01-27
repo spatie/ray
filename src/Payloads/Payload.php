@@ -7,12 +7,16 @@ use Spatie\Ray\Origin\Origin;
 
 abstract class Payload
 {
-    public static string $originFactoryClass = DefaultOriginFactory::class;
+    /** @var string */
+    public static $originFactoryClass = DefaultOriginFactory::class;
 
     abstract public function getType(): string;
 
-    public ?string $remotePath = null;
-    public ?string $localPath = null;
+    /** @var string|null */
+    public $remotePath = null;
+
+    /** @var string|null */
+    public $localPath = null;
 
     public function replaceRemotePathWithLocalPath(string $filePath): string
     {

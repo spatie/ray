@@ -7,9 +7,11 @@ use Spatie\Ray\Exceptions\StopExecutionRequested;
 
 class Client
 {
-    protected int $portNumber;
+    /** @var int */
+    protected $portNumber;
 
-    protected string $host;
+    /** @var string */
+    protected $host;
 
     public function __construct(int $portNumber = 23517, string $host = 'localhost')
     {

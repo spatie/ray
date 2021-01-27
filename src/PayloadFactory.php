@@ -12,9 +12,11 @@ use Spatie\Ray\Payloads\Payload;
 
 class PayloadFactory
 {
-    protected array $values;
+    /** @var array */
+    protected $values;
 
-    protected static ?Closure $payloadFinder = null;
+    /** @var \Closure|null */
+    protected static $payloadFinder = null;
 
     public static function createForValues(array $arguments): array
     {

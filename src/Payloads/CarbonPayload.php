@@ -6,9 +6,11 @@ use Carbon\Carbon;
 
 class CarbonPayload extends Payload
 {
-    protected ?Carbon $carbon;
+    /** @var \Carbon\Carbon|null */
+    protected $carbon;
 
-    protected string $format;
+    /** @var string */
+    protected $format;
 
     public function __construct(?Carbon $carbon, string $format = 'Y-m-d H:i:s')
     {

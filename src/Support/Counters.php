@@ -6,7 +6,8 @@ use Spatie\Ray\Ray;
 
 class Counters
 {
-    protected array $counters = [];
+    /** @var array */
+    protected $counters = [];
 
     public function increment(string $name): array
     {

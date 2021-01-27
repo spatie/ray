@@ -6,16 +6,23 @@ use Symfony\Component\Stopwatch\StopwatchEvent;
 
 class MeasurePayload extends Payload
 {
-    protected string $name;
-    protected bool $isNewTimer = false;
+    /** @var string */
+    protected $name;
+
+    /** @var bool */
+    protected $isNewTimer = false;
 
     /** @var float|int */
     protected $totalTime = 0;
-    protected int $maxMemoryUsageDuringTotalTime = 0;
+
+    /** @var int */
+    protected $maxMemoryUsageDuringTotalTime = 0;
 
     /** @var float|int */
     protected $timeSinceLastCall = 0;
-    protected int $maxMemoryUsageSinceLastCall = 0;
+
+    /** @var int */
+    protected $maxMemoryUsageSinceLastCall = 0;
 
     public function __construct(string $name, StopwatchEvent $stopwatchEvent)
     {

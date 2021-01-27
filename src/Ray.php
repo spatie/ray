@@ -46,15 +46,20 @@ class Ray
     use RaySizes;
     use Macroable;
 
-    public Settings $settings;
+    /** @var \Spatie\Ray\Settings\Settings */
+    public $settings;
 
-    protected static Client $client;
+    /** @var \Spatie\Ray\Client */
+    protected static $client;
 
-    public static Counters $counters;
+    /** @var \Spatie\Ray\Support\Counters */
+    public static $counters;
 
-    public static string $fakeUuid;
+    /** @var string */
+    public static $fakeUuid;
 
-    public string $uuid = '';
+    /** @var string */
+    public $uuid = '';
 
     /** @var \Symfony\Component\Stopwatch\Stopwatch[] */
     public static array $stopWatches = [];

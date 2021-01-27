@@ -7,7 +7,8 @@ use Spatie\Ray\Request;
 
 class FakeClient extends Client
 {
-    protected array $sentRequests = [];
+    /** @var array */
+    protected $sentRequests = [];
 
     public function send(Request $request): void
     {
