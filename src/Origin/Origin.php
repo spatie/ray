@@ -4,11 +4,11 @@ namespace Spatie\Ray\Origin;
 
 class Origin
 {
-    public ?string $file;
-
-    public ?int $lineNumber;
-
-    public function __construct(?string $file, ?int $lineNumber)
+    /**
+     * @param string|null $file
+     * @param int|null $lineNumber
+     */
+    public function __construct($file, $lineNumber)
     {
         $this->file = $file;
 

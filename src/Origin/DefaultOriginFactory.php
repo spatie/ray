@@ -18,7 +18,10 @@ class DefaultOriginFactory implements OriginFactory
         );
     }
 
-    protected function getFrame(): ?Frame
+    /**
+     * @return \Spatie\Backtrace\Frame|null
+     */
+    protected function getFrame()
     {
         $frames = $this->getAllFrames();
 
@@ -34,7 +37,12 @@ class DefaultOriginFactory implements OriginFactory
         return array_reverse($frames, true);
     }
 
-    protected function getIndexOfRayFrame(array $frames): ?int
+    /**
+     * @param array $frames
+     *
+     * @return int|null
+     */
+    protected function getIndexOfRayFrame(array $frames)
     {
         $index = $this->search(function (Frame $frame) {
             if ($frame->class === Ray::class) {
@@ -56,7 +64,13 @@ class DefaultOriginFactory implements OriginFactory
         return strpos($hayStack, $needle) === 0;
     }
 
-    protected function search(callable $callable, array $items): ?int
+    /**
+     * @param callable $callable
+     * @param array $items
+     *
+     * @return int|null
+     */
+    protected function search(callable $callable, array $items)
     {
         foreach ($items as $key => $item) {
             if ($callable($item, $key)) {
