@@ -62,7 +62,7 @@ class Ray
     public $uuid = '';
 
     /** @var \Symfony\Component\Stopwatch\Stopwatch[] */
-    public static array $stopWatches = [];
+    public static $stopWatches = [];
 
     public static function create(Client $client = null, string $uuid = null): self
     {

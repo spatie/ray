@@ -3,7 +3,7 @@ title: Requirements
 weight: 3
 ---
 
-All PHP packages require **PHP 7.4+** or higher.
+All PHP packages require **PHP 7.3+** or higher.
 
 Laravel Ray requires Laravel 7 or higher.
 
