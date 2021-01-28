@@ -24,8 +24,8 @@ To display something in Ray use the `ray()` function. It accepts everything: str
 
 | Call | Description |
 | --- | --- |
-| `ray($variabele)` | Display a string, array or object |
-| `ray($variabele, $another, …)` | Ray accepts multiple arguments |
+| `ray($variable)` | Display a string, array or object |
+| `ray($variable, $another, …)` | Ray accepts multiple arguments |
 | `ray()->backtrace()` | Check entire backtrace |
 | `ray(…)->blue()` | Output in blue |
 | `ray()->caller()` | Discover where code is being called |
@@ -165,8 +165,8 @@ Read more on [Craft](/docs/ray/v1/usage/craft)
 
 | Call | Description |
 | --- | --- |
-| `ray(variabele)` | Display a string, array or object |
-| `ray(variabele, another, …)` | Ray accepts multiple arguments |
+| `ray(variable)` | Display a string, array or object |
+| `ray(variable, another, …)` | Ray accepts multiple arguments |
 | `ray(…).color('blue')` | Output in color. Use `green`, `orange`, `red`, `blue`,`purple` or `gray` |
 | `ray().clearScreen()` | Clear current screen |
 | `ray().clearAll()` | Clear current and all previous screens |
