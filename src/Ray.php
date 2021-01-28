@@ -20,6 +20,7 @@ use Spatie\Ray\Payloads\ColorPayload;
 use Spatie\Ray\Payloads\CreateLockPayload;
 use Spatie\Ray\Payloads\CustomPayload;
 use Spatie\Ray\Payloads\DecodedJsonPayload;
+use Spatie\Ray\Payloads\ExceptionPayload;
 use Spatie\Ray\Payloads\FileContentsPayload;
 use Spatie\Ray\Payloads\HideAppPayload;
 use Spatie\Ray\Payloads\HidePayload;
@@ -418,6 +419,15 @@ class Ray
         $payload = new HtmlPayload($html);
 
         return $this->sendRequest($payload);
+    }
+
+    public function exception(Exception $exception): self
+    {
+        $payload = new ExceptionPayload($exception);
+
+        $this->sendRequest($payload);
+
+        return $this;
     }
 
     public function raw(...$arguments): self
