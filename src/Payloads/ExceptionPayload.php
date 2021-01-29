@@ -11,7 +11,7 @@ class ExceptionPayload extends Payload
     /** @var \Throwable */
     protected $exception;
 
-    /**  @var array */
+    /** @var array */
     protected $meta = [];
 
     public function __construct(Throwable $exception, array $meta = [])
