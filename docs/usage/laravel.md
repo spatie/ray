@@ -153,6 +153,20 @@ ray()->mailable(new TestMailable());
 
 ![screenshot](/docs/ray/v1/images/mailable.jpg)
 
+### Showing which views are rendered
+
+You can display all views that are rendered by calling `showViews`.
+
+```php
+ray()->showViews();
+
+// typically you'll do this in a controler
+view('welcome', ['name' => 'John Doe'])->render();
+```
+
+![screenshot](/docs/ray/v1/images/views.png)
+
+To stop showing views, call `stopShowingViews`.
 
 ### Displaying markdown
 
