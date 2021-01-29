@@ -3,6 +3,7 @@
 namespace Spatie\Ray\Tests;
 
 use Carbon\Carbon;
+use Exception;
 use Illuminate\Support\Arr;
 use PHPUnit\Framework\TestCase;
 use Spatie\Backtrace\Frame;
@@ -314,6 +315,19 @@ class RayTest extends TestCase
         $this->ray->notify('notification text');
 
         $this->assertMatchesOsSafeSnapshot($this->client->sentPayloads());
+    }
+
+    /** @test */
+    public function it_can_send_the_exception_payload()
+    {
+        $this->ray->exception(new Exception('This is an exception'));
+
+        $payloads = $this->client->sentPayloads();
+
+        $this->assertCount(1, $payloads);
+        $this->assertEquals('exception', $payloads[0]['payloads'][0]['type']);
+        $this->assertEquals(Exception::class, $payloads[0]['payloads'][0]['content']['class']);
+        $this->assertEquals('This is an exception', $payloads[0]['payloads'][0]['content']['message']);
     }
 
     /** @test */

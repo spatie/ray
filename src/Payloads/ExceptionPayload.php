@@ -8,10 +8,10 @@ use Spatie\Backtrace\Frame;
 
 class ExceptionPayload extends Payload
 {
-    /** @var \Exception */
+    /** @var \Throwable */
     protected $exception;
 
-    public function __construct(Exception  $exception)
+    public function __construct(\Throwable $exception)
     {
         $this->exception = $exception;
     }
