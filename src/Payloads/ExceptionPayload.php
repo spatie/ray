@@ -2,7 +2,6 @@
 
 namespace Spatie\Ray\Payloads;
 
-use Exception;
 use Spatie\Backtrace\Backtrace;
 use Spatie\Backtrace\Frame;
 
