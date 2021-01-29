@@ -4,15 +4,21 @@ namespace Spatie\Ray\Payloads;
 
 use Spatie\Backtrace\Backtrace;
 use Spatie\Backtrace\Frame;
+use Throwable;
 
 class ExceptionPayload extends Payload
 {
     /** @var \Throwable */
     protected $exception;
 
-    public function __construct(\Throwable $exception)
+    /**  @var array */
+    protected $meta = [];
+
+    public function __construct(Throwable $exception, array $meta = [])
     {
         $this->exception = $exception;
+
+        $this->meta = $meta;
     }
 
     public function getType(): string
@@ -28,6 +34,7 @@ class ExceptionPayload extends Payload
             'class' => get_class($this->exception),
             'message' => $this->exception->getMessage(),
             'frames' => $this->getFrames(),
+            'meta' => $this->meta,
         ];
     }
 
