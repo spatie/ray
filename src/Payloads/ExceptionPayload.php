@@ -43,7 +43,7 @@ class ExceptionPayload extends Payload
                 'class' => $frame->class,
                 'method' => $frame->method,
                 'vendor_frame' => ! $frame->applicationFrame,
-                'snippet' => $frame->getSnippet(12),
+                'snippet' =>$frame->getSnippetProperties(12),
             ];
         }, $frames);
     }
