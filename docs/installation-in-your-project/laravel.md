@@ -21,7 +21,7 @@ composer require spatie/laravel-ray --dev
 
 ## Creating a config file
 
-Optionally, you can run an artisan command to publish [the config file](/docs/ray/v1/getting-started/configuring-ray) in to the project root.
+Optionally, you can run an artisan command to publish [the config file](/docs/ray/v1/configuration/laravel) in to the project root.
 
 ```bash
 php artisan ray:publish-config
