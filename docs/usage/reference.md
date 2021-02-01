@@ -86,6 +86,9 @@ Read more on [Framework agnostic PHP](/docs/ray/v1/usage/framework-agnostic-php-
 | `ray()->mailable($mailable)` | Render a mailable  |
 | `ray()->markdown($markdown)` | Render markdown  |
 | `ray()->model($model)` | Display the attributes and relations of a model  |
+| `ray()->showCache()` | Display all cache events that are executed  |
+| `ray()->showCache(callable)` | Display all cache events that are executed within a callable |
+| `ray()->stopShowingCache()` | Stop displaying cache events  |
 | `ray()->showEvents()` | Display all events that are executed  |
 | `ray()->showEvents(callable)` | Display all events that are executed within a callable |
 | `ray()->stopShowingEvents()` | Stop displaying events  |
@@ -95,6 +98,10 @@ Read more on [Framework agnostic PHP](/docs/ray/v1/usage/framework-agnostic-php-
 | `ray()->showQueries()` | Display all queries that are executed  |
 | `ray()->showQueries(callable)` | Display all queries that are executed within a callable |
 | `ray()->stopShowingQueries()` | Stop displaying queries  |
+| `ray()->showRequests()` | Display all requests  |
+| `ray()->stopShowingRequests()` | Stop displaying requests  |
+| `ray()->showViews()` | Display all views  |
+| `ray()->stopShowingViews()` | Stop displaying views  |
 
 ### Macros &amp; Blade
 
