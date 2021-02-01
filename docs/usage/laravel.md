@@ -244,7 +244,7 @@ public function my_endpoint_works_correctly()
 
 ### Displaying requests
 
-To display all request made in your Laravel app in Ray, you can call `ray()->showRequests()`. A typical place to put this would be in a service provider.
+To display all requests made in your Laravel app in Ray, you can call `ray()->showRequests()`. A typical place to put this would be in a service provider.
 
 ![screenshot](/docs/ray/v1/images/request.png)
 
