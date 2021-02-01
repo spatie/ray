@@ -160,7 +160,7 @@ You can display all views that are rendered by calling `showViews`.
 ```php
 ray()->showViews();
 
-// typically you'll do this in a controler
+// typically you'll do this in a controller
 view('welcome', ['name' => 'John Doe'])->render();
 ```
 
