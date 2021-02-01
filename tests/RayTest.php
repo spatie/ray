@@ -367,6 +367,7 @@ class RayTest extends TestCase
     public function it_can_send_the_file_content_payload()
     {
         $this->ray->file(__DIR__ .'/testSettings/ray.php');
+        $this->ray->file('missing.php');
 
         $this->assertMatchesOsSafeSnapshot($this->client->sentPayloads());
     }
@@ -533,6 +534,20 @@ class RayTest extends TestCase
     }
 
     /** @test */
+    public function it_merges_default_settings_into_existing_settings()
+    {
+        $settings = SettingsFactory::createFromConfigFile();
+
+        $this->assertNull($settings->test);
+        $this->assertEquals(23517, $settings->port);
+
+        $settings->setDefaultSettings(['test' => 'testvalue']);
+
+        $this->assertEquals('testvalue', $settings->test);
+        $this->assertEquals(23517, $settings->port);
+    }
+
+    /** @test */
     public function it_can_send_the_php_info_payload()
     {
         $this->ray->phpinfo();
@@ -556,6 +571,7 @@ class RayTest extends TestCase
         $this->assertArrayHasKey('default_mimetype', $payloads[0]['payloads'][0]['content']['values']);
     }
 
+    /** @test */
     public function it_sends_an_image_payload()
     {
         $this->ray->image('http://localhost/test.jpg');
@@ -605,6 +621,15 @@ class RayTest extends TestCase
     }
 
     /** @test */
+    public function it_returns_a_ray_instance_when_calling_raw_without_arguments()
+    {
+        $instance = $this->ray->raw();
+
+        $this->assertInstanceOf(Ray::class, $instance);
+        $this->assertMatchesOsSafeSnapshot($this->client->sentPayloads());
+    }
+
+    /** @test */
     public function it_will_send_a_specialized_payloads_by_default()
     {
         $this->ray->send(new Carbon(), 'string', ['a => 1']);
@@ -614,6 +639,79 @@ class RayTest extends TestCase
         $this->assertEquals('carbon', $payloads[0]['payloads'][0]['type']);
         $this->assertEquals('log', $payloads[0]['payloads'][1]['type']);
         $this->assertEquals('log', $payloads[0]['payloads'][2]['type']);
+    }
+
+    /** @test */
+    public function it_sends_the_hide_application_payload()
+    {
+        $this->ray->hideApp();
+
+        $this->assertMatchesOsSafeSnapshot($this->client->sentPayloads());
+    }
+
+    /** @test */
+    public function it_sends_the_show_application_payload()
+    {
+        $this->ray->showApp();
+
+        $this->assertMatchesOsSafeSnapshot($this->client->sentPayloads());
+    }
+
+    /** @test */
+    public function it_sends_an_html_payload()
+    {
+        $this->ray->html('<strong>test</strong>');
+
+        $this->assertMatchesOsSafeSnapshot($this->client->sentPayloads());
+    }
+
+    /** @test */
+    public function it_sends_a_null_payload()
+    {
+        $this->ray->send(null);
+
+        $this->assertMatchesOsSafeSnapshot($this->client->sentPayloads());
+    }
+
+    /** @test */
+    public function it_returns_zero_when_accessing_a_missing_counter()
+    {
+        $this->assertEquals(0, Ray::$counters->get('missing'));
+        ray()->count('missing');
+        $this->assertEquals(1, Ray::$counters->get('missing'));
+    }
+
+    /** @test */
+    public function it_sets_the_ray_instance_for_a_counter()
+    {
+        $ray1 = ray();
+        $ray2 = ray();
+
+        $ray1->count('first');
+
+        $ray1::$counters->setRay('first', $ray1);
+
+        $this->assertEquals($ray1, $ray1::$counters->increment('first')[0]);
+
+        $ray1::$counters->setRay('first', $ray2);
+
+        $this->assertEquals($ray2, $ray1::$counters->increment('first')[0]);
+    }
+
+    /** @test */
+    public function it_clears_all_counters()
+    {
+        Ray::$counters->clear();
+
+        $this->assertEquals(0, Ray::$counters->get('first'));
+
+        ray()->count('first');
+
+        $this->assertEquals(1, Ray::$counters->get('first'));
+
+        ray()->clearCounters();
+
+        $this->assertEquals(0, Ray::$counters->get('first'));
     }
 
     /** @test */
