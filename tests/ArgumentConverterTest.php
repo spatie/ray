@@ -2,12 +2,11 @@
 
 namespace Spatie\Ray\Tests;
 
-use Spatie\Ray\ArgumentConverter;
 use PHPUnit\Framework\TestCase;
+use Spatie\Ray\ArgumentConverter;
 
 class ArgumentConverterTest extends TestCase
 {
-
     /** @test */
     public function it_returns_null_for_null_values()
     {
