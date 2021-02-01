@@ -118,6 +118,24 @@ ray()->showJobs(function() {
 event(new TestJob()); // this job won't be displayed.
 ```
 
+### Showing cache events
+
+You can display all cache events using `showCache`
+
+```php
+ray()->showCache();
+
+Cache::put('my-key', ['a' => 1]);
+
+Cache::get('my-key');
+
+Cache::get('another-key');
+```
+
+![screenshot](/docs/ray/v1/images/cache.png)
+
+To stop showing cache events, call `stopShowingCache`.
+
 ### Handling models
 
 Using the `model` function, you can display the attributes and relations of a model.
@@ -224,20 +242,28 @@ public function my_endpoint_works_correctly()
 
 ![screenshot](/docs/ray/v1/images/response.png)
 
+### Displaying request
+
+To display all request made in your Laravel app in Ray, you can call `ray()->showRequests()`. A typical place to put this would be in a service provider.
+
+![screenshot](/docs/ray/v1/images/request.png)
+
+To enable this behaviour by default, you can set the `send_requests_to_ray` option in [the config file](https://spatie.be/docs/ray/v1/configuration/laravel) to `true`.
+
 ### Enabling / disabling Ray
 
 You can enable and disable sending stuff to Ray with the `enable` and `disable` functions.
 
 ```php
-ray('one') // will be displayed in ray
+ray('one'); // will be displayed in ray
 
 ray()->disable();
 
-ray('two') // won't be displayed in ray
+ray('two'); // won't be displayed in ray
 
 ray()->enable();
 
-ray('three') // will be displayed in ray
+ray('three'); // will be displayed in ray
 ```
 
 You can check if Ray is enabled or disabled with the `enabled` and `disabled` functions.
