@@ -6,7 +6,6 @@ use Carbon\Carbon;
 use Illuminate\Support\Arr;
 use PHPUnit\Framework\TestCase;
 use Spatie\Backtrace\Frame;
-use Spatie\Ray\Payloads\BoolPayload;
 use Spatie\Ray\Payloads\CallerPayload;
 use Spatie\Ray\Payloads\LogPayload;
 use Spatie\Ray\Ray;
