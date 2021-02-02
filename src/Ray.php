@@ -94,14 +94,14 @@ class Ray
         return $this->sendRequest($payload);
     }
 
-    public function clearAll()
+    public function clearAll(): self
     {
         $payload = new ClearAllPayload();
 
         return $this->sendRequest($payload);
     }
 
-    public function clearScreen()
+    public function clearScreen(): self
     {
         return $this->newScreen();
     }
@@ -271,7 +271,7 @@ class Ray
         return $this->sendRequest($payload);
     }
 
-    public function die($status = '')
+    public function die($status = ''): void
     {
         die($status);
     }
@@ -413,7 +413,7 @@ class Ray
         return $this;
     }
 
-    public function html(string $html = '')
+    public function html(string $html = ''): self
     {
         $payload = new HtmlPayload($html);
 
