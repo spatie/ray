@@ -2,6 +2,10 @@
 
 All notable changes to `ray` will be documented in this file
 
+## 1.17.2 - 2021-02-02
+
+- cache config file
+
 ## 1.17.1 - 2021-01-27
 
 - add support for PHP 7.3
