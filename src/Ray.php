@@ -84,7 +84,9 @@ class Ray
 
         $this->uuid = $uuid ?? static::$fakeUuid ?? Uuid::uuid4()->toString();
 
-        static::$enabled = $this->settings->enable ?? true;
+        if ($this->settings->enable === false) {
+            $this->disable();
+        }
     }
 
     public function enable(): self
