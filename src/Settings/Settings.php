@@ -9,6 +9,7 @@ class Settings
 
     /** @var array */
     protected $defaultSettings = [
+        'enable' => true,
         'host' => 'localhost',
         'port' => 23517,
         'remote_path' => null,

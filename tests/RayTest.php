@@ -722,6 +722,40 @@ class RayTest extends TestCase
         $this->assertEquals('log',  $this->client->sentPayloads()[0]['payloads'][0]['type']);
     }
 
+    /** @test */
+    public function it_can_be_disabled()
+    {
+        $this->ray->send('test payload 1');
+        $this->ray->disable();
+        $this->ray->send('test payload 2');
+
+        $this->assertCount(1, $this->client->sentPayloads());
+    }
+
+    /** @test */
+    public function it_can_be_reenabled_after_being_disabled()
+    {
+        $this->ray->send('test payload 1');
+        $this->ray->disable();
+        $this->ray->send('test payload 2');
+        $this->ray->enable();
+        $this->ray->send('test payload 3');
+
+        $this->assertCount(2, $this->client->sentPayloads());
+    }
+
+    /** @test */
+    public function it_returns_the_correct_enabled_state()
+    {
+        Ray::$enabled = true;
+        $this->assertTrue($this->ray->enabled());
+        $this->assertFalse($this->ray->disabled());
+
+        Ray::$enabled = false;
+        $this->assertFalse($this->ray->enabled());
+        $this->assertTrue($this->ray->disabled());
+    }
+
     protected function getValueOfLastSentContent(string $contentKey)
     {
         $payload = $this->client->sentPayloads();
