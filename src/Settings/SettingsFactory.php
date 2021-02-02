@@ -4,6 +4,8 @@ namespace Spatie\Ray\Settings;
 
 class SettingsFactory
 {
+    public static $cache = [];
+
     public static function createFromConfigFile(string $configDirectory = null): Settings
     {
         $settingValues = (new static())->getSettingsFromConfigFile($configDirectory);
@@ -25,6 +27,15 @@ class SettingsFactory
     }
 
     protected function searchConfigFiles(string $configDirectory = null): string
+    {
+        if (! isset(self::$cache[$configDirectory])) {
+            self::$cache[$configDirectory] = $this->searchConfigFilesOnDisk($configDirectory);
+        }
+
+        return self::$cache[$configDirectory];
+    }
+
+    protected function searchConfigFilesOnDisk(string $configDirectory = null): string
     {
         $configNames = [
             'ray.php',
