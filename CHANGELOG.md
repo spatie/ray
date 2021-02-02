@@ -2,6 +2,10 @@
 
 All notable changes to `ray` will be documented in this file
 
+## 1.17.3 - 2021-02-02
+
+- use http v1.1 instead of 1.0 (#267)
+
 ## 1.17.2 - 2021-02-02
 
 - cache config file
