@@ -15,7 +15,7 @@ class SettingsFactory
 
     public function getSettingsFromConfigFile(string $configDirectory = null): array
     {
-        $configFilePath = $this->searchCachedConfigFiles($configDirectory);
+        $configFilePath = $this->searchConfigFiles($configDirectory);
 
         if (! file_exists($configFilePath)) {
             return [];
@@ -27,6 +27,15 @@ class SettingsFactory
     }
 
     protected function searchConfigFiles(string $configDirectory = null): string
+    {
+        if (! isset(self::$cache[$configDirectory])) {
+            self::$cache[$configDirectory] = $this->searchConfigFilesOnDisk($configDirectory);
+        }
+
+        return self::$cache[$configDirectory];
+    }
+
+    protected function searchConfigFilesOnDisk(string $configDirectory = null): string
     {
         $configNames = [
             'ray.php',
@@ -55,14 +64,5 @@ class SettingsFactory
         }
 
         return '';
-    }
-
-    protected function searchCachedConfigFiles(string $configDirectory = null): string
-    {
-        if (! isset(self::$cache[$configDirectory])) {
-            self::$cache[$configDirectory] = $this->searchConfigFiles($configDirectory);
-        }
-
-        return self::$cache[$configDirectory];
     }
 }
