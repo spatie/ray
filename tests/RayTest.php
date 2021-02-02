@@ -6,6 +6,7 @@ use Carbon\Carbon;
 use Illuminate\Support\Arr;
 use PHPUnit\Framework\TestCase;
 use Spatie\Backtrace\Frame;
+use Spatie\Ray\Payloads\BoolPayload;
 use Spatie\Ray\Payloads\CallerPayload;
 use Spatie\Ray\Payloads\LogPayload;
 use Spatie\Ray\Ray;
@@ -474,6 +475,25 @@ class RayTest extends TestCase
         $payload->localPath = '/some/local/path';
 
         $this->assertEquals('/some/local/path/app/MyFile.php', $payload->getContent()['frame']['file_name']);
+    }
+
+    /** @test */
+    public function it_only_rewrites_paths_for_matching_remote_paths()
+    {
+        $payload = new CallerPayload([
+            new Frame('/app/files/MyFile.php', 1, []),
+            new Frame('/app/files/MyFile.php', 2, []),
+        ]);
+
+        $payload->remotePath = '/files';
+        $payload->localPath = '/some/local/path';
+
+        $this->assertEquals('/app/files/MyFile.php', $payload->getContent()['frame']['file_name']);
+
+        $payload->remotePath = '/app';
+        $payload->localPath = '/some/local/path';
+
+        $this->assertEquals('/some/local/path/files/MyFile.php', $payload->getContent()['frame']['file_name']);
     }
 
     /** @test */
