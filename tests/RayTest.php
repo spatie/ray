@@ -735,6 +735,7 @@ class RayTest extends TestCase
     /** @test */
     public function it_can_be_reenabled_after_being_disabled()
     {
+        $this->ray->enable();
         $this->ray->send('test payload 1');
         $this->ray->disable();
         $this->ray->send('test payload 2');
