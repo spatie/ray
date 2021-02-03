@@ -628,6 +628,14 @@ class RayTest extends TestCase
     }
 
     /** @test */
+    public function it_sends_an_xml_payload()
+    {
+        $this->ray->xml('<root><one><two><three></three></two></one></root>');
+
+        $this->assertMatchesOsSafeSnapshot($this->client->sentPayloads());
+    }
+
+    /** @test */
     public function it_can_send_the_raw_values()
     {
         $this->ray->raw(new Carbon(), 'string', ['a' => 1]);
