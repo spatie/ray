@@ -477,6 +477,25 @@ class RayTest extends TestCase
     }
 
     /** @test */
+    public function it_only_rewrites_paths_for_matching_remote_paths()
+    {
+        $payload = new CallerPayload([
+            new Frame('/app/files/MyFile.php', 1, []),
+            new Frame('/app/files/MyFile.php', 2, []),
+        ]);
+
+        $payload->remotePath = '/files';
+        $payload->localPath = '/some/local/path';
+
+        $this->assertEquals('/app/files/MyFile.php', $payload->getContent()['frame']['file_name']);
+
+        $payload->remotePath = '/app';
+        $payload->localPath = '/some/local/path';
+
+        $this->assertEquals('/some/local/path/files/MyFile.php', $payload->getContent()['frame']['file_name']);
+    }
+
+    /** @test */
     public function it_returns_itself_and_does_not_send_anything_when_calling_send_without_arguments()
     {
         $settings = SettingsFactory::createFromConfigFile();
