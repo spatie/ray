@@ -2,6 +2,10 @@
 
 All notable changes to `ray` will be documented in this file
 
+## 1.19.0 - 2021-02-03
+
+- send XML payloads (#272)
+
 ## 1.18.0 - 2021-02-03
 
 - add `enable` and `disable` methods
