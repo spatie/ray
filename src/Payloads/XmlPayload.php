@@ -43,7 +43,7 @@ class XmlPayload extends Payload
 
     protected function formatAndIndentXml(string $xml): string
     {
-        if (!class_exists(\DOMDocument::class)) {
+        if (! class_exists(\DOMDocument::class)) {
             return $xml;
         }
 
@@ -53,7 +53,7 @@ class XmlPayload extends Payload
         $dom->strictErrorChecking = false;
         $dom->formatOutput = true;
 
-        if (!$dom->loadXML($xml, LIBXML_NOERROR | LIBXML_NOWARNING)) {
+        if (! $dom->loadXML($xml, LIBXML_NOERROR | LIBXML_NOWARNING)) {
             return $xml;
         }
 
