@@ -630,7 +630,7 @@ class RayTest extends TestCase
     /** @test */
     public function it_sends_an_xml_payload()
     {
-        $this->ray->xml('<root><one><two><three></three></two></one></root>');
+        $this->ray->xml('<one><two>2</two></one>');
 
         $this->assertMatchesOsSafeSnapshot($this->client->sentPayloads());
     }

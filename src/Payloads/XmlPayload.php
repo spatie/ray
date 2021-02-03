@@ -31,11 +31,14 @@ class XmlPayload extends Payload
     {
         $content = $this->formatAndIndentXml($xml);
 
-        return str_replace(
-            [PHP_EOL, ' '],
-            ['<br>', '&nbsp;'],
-            htmlspecialchars($content)
-        );
+        return $this->encodeXml(trim($content));
+    }
+
+    protected function encodeXml(string $xml): string
+    {
+        $result = htmlentities($xml);
+
+        return str_replace([PHP_EOL, "\n", ' '], ['<br>', '<br>', '&nbsp;'], $result);
     }
 
     protected function formatAndIndentXml(string $xml): string

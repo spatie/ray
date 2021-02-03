@@ -5,7 +5,7 @@
             {
                 "type": "custom",
                 "content": {
-                    "content": "&lt;?xml&nbsp;version=&quot;1.0&quot;?&gt;<br>&lt;root&gt;<br>&nbsp;&nbsp;&lt;one&gt;<br>&nbsp;&nbsp;&nbsp;&nbsp;&lt;two&gt;<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;three\/&gt;<br>&nbsp;&nbsp;&nbsp;&nbsp;&lt;\/two&gt;<br>&nbsp;&nbsp;&lt;\/one&gt;<br>&lt;\/root&gt;<br>",
+                    "content": "&lt;?xml&nbsp;version=&quot;1.0&quot;?&gt;<br>&lt;one&gt;<br>&nbsp;&nbsp;&lt;two&gt;2&lt;\/two&gt;<br>&lt;\/one&gt;",
                     "label": "XML"
                 },
                 "origin": {
