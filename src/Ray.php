@@ -65,6 +65,9 @@ class Ray
     /** @var \Symfony\Component\Stopwatch\Stopwatch[] */
     public static $stopWatches = [];
 
+    /** @var bool */
+    public static $enabled = true;
+
     public static function create(Client $client = null, string $uuid = null): self
     {
         $settings = SettingsFactory::createFromConfigFile();
@@ -81,6 +84,32 @@ class Ray
         self::$counters = self::$counters ?? new Counters();
 
         $this->uuid = $uuid ?? static::$fakeUuid ?? Uuid::uuid4()->toString();
+
+        static::$enabled = $this->settings->enable !== false;
+    }
+
+    public function enable(): self
+    {
+        static::$enabled = true;
+
+        return $this;
+    }
+
+    public function disable(): self
+    {
+        static::$enabled = false;
+
+        return $this;
+    }
+
+    public function enabled(): bool
+    {
+        return static::$enabled;
+    }
+
+    public function disabled(): bool
+    {
+        return ! static::$enabled;
     }
 
     public static function useClient(Client $client): void
@@ -493,6 +522,10 @@ class Ray
      */
     public function sendRequest($payloads, array $meta = []): self
     {
+        if (! $this->enabled()) {
+            return $this;
+        }
+
         if (! is_array($payloads)) {
             $payloads = [$payloads];
         }

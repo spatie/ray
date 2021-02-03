@@ -35,6 +35,10 @@ To display something in Ray use the `ray()` function. It accepts everything: str
 | `ray()->clearAll()` | Clear current and all previous screens |
 | `ray()->count()` | Count how many times a piece of code is called |
 | `ray(…)->die()` or `rd(…)` | Stop the PHP process |
+| `ray()->disable()` | Disable sending stuff to Ray |
+| `ray()->disabled()` | Check if Ray is disabled |
+| `ray()->enable()` | Enable sending stuff to Ray |
+| `ray()->enabled()` | Check if Ray is enabled |
 | `ray()->file($path)` | Display contents of a file |
 | `ray(…)->gray()` | Output in gray |
 | `ray(…)->green()` | Output in green |
