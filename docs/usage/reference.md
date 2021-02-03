@@ -66,6 +66,7 @@ To display something in Ray use the `ray()` function. It accepts everything: str
 | `ray()->table($array. $label)` | Format an associative array with optional label  |
 | `ray()->toJson($variable, $another, … )` | Display the JSON representation of 1 or more values that can be converted |
 | `ray()->trace()` | Check entire backtrace |
+| `ray()->xml($xmlString)` | Display formatted XML in Ray |
 
 ### Updating a Ray instance
 

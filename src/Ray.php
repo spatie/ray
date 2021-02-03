@@ -35,6 +35,7 @@ use Spatie\Ray\Payloads\ShowAppPayload;
 use Spatie\Ray\Payloads\SizePayload;
 use Spatie\Ray\Payloads\TablePayload;
 use Spatie\Ray\Payloads\TracePayload;
+use Spatie\Ray\Payloads\XmlPayload;
 use Spatie\Ray\Settings\Settings;
 use Spatie\Ray\Settings\SettingsFactory;
 use Spatie\Ray\Support\Counters;
@@ -445,6 +446,13 @@ class Ray
     public function html(string $html = ''): self
     {
         $payload = new HtmlPayload($html);
+
+        return $this->sendRequest($payload);
+    }
+
+    public function xml(string $xml): self
+    {
+        $payload = new XmlPayload($xml);
 
         return $this->sendRequest($payload);
     }
