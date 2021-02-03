@@ -2,6 +2,10 @@
 
 All notable changes to `ray` will be documented in this file
 
+## 1.18.0 - 2021-02-03
+
+- add `enable` and `disable` methods
+
 ## 1.17.4 - 2021-02-03
 
 - fix: remote_path/local_path replacements (#269)
