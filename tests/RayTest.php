@@ -757,6 +757,12 @@ class RayTest extends TestCase
         $this->assertTrue($this->ray->disabled());
     }
 
+    /** @test */
+    public function it_defaults_to_enabled_state()
+    {
+        $this->assertTrue($this->ray->enabled());
+    }
+
     protected function getValueOfLastSentContent(string $contentKey)
     {
         $payload = $this->client->sentPayloads();
