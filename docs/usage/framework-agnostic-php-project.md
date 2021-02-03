@@ -466,3 +466,33 @@ You can show and hide the Ray app via code.
 ray()->showApp(); // Ray will be brought to the foreground
 ray()->hideApp(); // Ray will be hidden
 ```
+
+### Enabling / disabling Ray
+
+You can enable and disable sending stuff to Ray with the `enable` and `disable` functions.
+
+```php
+ray('one'); // will be displayed in ray
+
+ray()->disable();
+
+ray('two'); // won't be displayed in ray
+
+ray()->enable();
+
+ray('three'); // will be displayed in ray
+```
+
+You can check if Ray is enabled or disabled with the `enabled` and `disabled` functions.
+
+```php
+ray()->disable();
+
+ray()->enabled(); // false
+ray()->disabled(); // true
+
+ray()->enable();
+
+ray()->enabled(); // true
+ray()->disabled(); // false
+```

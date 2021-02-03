@@ -250,32 +250,3 @@ To display all requests made in your Laravel app in Ray, you can call `ray()->sh
 
 To enable this behaviour by default, you can set the `send_requests_to_ray` option in [the config file](https://spatie.be/docs/ray/v1/configuration/laravel) to `true`.
 
-### Enabling / disabling Ray
-
-You can enable and disable sending stuff to Ray with the `enable` and `disable` functions.
-
-```php
-ray('one'); // will be displayed in ray
-
-ray()->disable();
-
-ray('two'); // won't be displayed in ray
-
-ray()->enable();
-
-ray('three'); // will be displayed in ray
-```
-
-You can check if Ray is enabled or disabled with the `enabled` and `disabled` functions.
-
-```php
-ray()->disable();
-
-ray()->enabled(); // false
-ray()->disabled(); // true
-
-ray()->enable();
-
-ray()->enabled(); // true
-ray()->disabled(); // false
-```
