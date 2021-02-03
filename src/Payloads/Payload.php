@@ -24,7 +24,9 @@ abstract class Payload
             return $filePath;
         }
 
-        return substr_replace($filePath, $this->localPath, 0, strlen($this->remotePath));
+        $pattern = '~^' . preg_quote($this->remotePath, '~') . '~';
+
+        return preg_replace($pattern, $this->localPath, $filePath);
     }
 
     public function getContent(): array
