@@ -83,10 +83,6 @@ Read more on [Framework agnostic PHP](/docs/ray/v1/usage/framework-agnostic-php-
 
 | Call | Description |
 | --- | --- |
-| `ray()->disable()` | Disable sending stuff to Ray |
-| `ray()->disabled()` | Check if Ray is disabled |
-| `ray()->enable()` | Enable sending stuff to Ray |
-| `ray()->enabled()` | Check if Ray is enabled |
 | `ray()->mailable($mailable)` | Render a mailable  |
 | `ray()->markdown($markdown)` | Render markdown  |
 | `ray()->model($model)` | Display the attributes and relations of a model  |
