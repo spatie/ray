@@ -249,6 +249,8 @@ $xmlString = '<one><two><three>3</three></two></one>';
 ray()->xml($xmlString);
 ```
 
+![screenshot](/docs/ray/v1/images/xml.png)
+
 ### Working with Carbon instances
 
 [Carbon](https://carbon.nesbot.com/docs/) is a popular datetime package. You can send instances of `Carbon` to Ray with `carbon`.
