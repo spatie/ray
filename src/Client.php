@@ -7,21 +7,63 @@ use Spatie\Ray\Exceptions\StopExecutionRequested;
 
 class Client
 {
+    protected static $cache = [];
+
     /** @var int */
     protected $portNumber;
 
     /** @var string */
     protected $host;
 
+    /** @var string */
+    protected $fingerprint;
+
     public function __construct(int $portNumber = 23517, string $host = 'localhost')
     {
+        $this->fingerprint = md5($this->host . ':' . $this->portNumber);
+
         $this->portNumber = $portNumber;
 
         $this->host = $host;
     }
 
+    public function serverIsAvailable(): bool
+    {
+        static::$cache = array_filter(static::$cache, function($data) {
+            return microtime(true) < $data[1];
+        });
+
+        if (! isset(static::$cache[$this->fingerprint])) {
+            $this->performAvailabilityCheck();
+        }
+
+        return static::$cache[$this->fingerprint][0];
+    }
+
+    public function performAvailabilityCheck()
+    {
+        try {
+            $curlHandle = $this->getCurlHandleForUrl('get', 'locks/___' . random_int(1000, 999999));
+
+            curl_exec($curlHandle);
+
+            $success = curl_errno($curlHandle) === CURLE_OK;
+            $expiresAt = microtime(true) + 10.0; // expire the availability after 10 sec
+
+            static::$cache[$this->fingerprint] = [$success, $expiresAt];
+
+        } finally {
+            curl_close($curlHandle);
+        }
+    }
+
     public function send(Request $request): void
     {
+        if (! $this->serverIsAvailable()) {
+            print_r(['server not available, not sending']);
+            return;
+        }
+
         try {
             $curlHandle = $this->getCurlHandleForUrl('get', '');
 
@@ -44,6 +86,11 @@ class Client
 
     public function lockExists(string $lockName): bool
     {
+        if (! $this->serverIsAvailable()) {
+            print_r(['server not available, not sending']);
+            return false;
+        }
+
         $curlHandle = $this->getCurlHandleForUrl('get', "locks/{$lockName}");
         $curlError = null;
 
