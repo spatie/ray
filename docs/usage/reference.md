@@ -122,8 +122,6 @@ Read more on [Laravel](/docs/ray/v1/usage/laravel)
 | `ray()->stopShowingQueries()` | Stop displaying queries  |
 | `ray()->showMails()` | Display all mails that are sent  |
 | `ray()->stopShowingMails()` | Stop displaying mails  |
-| `ray()->disable()` | Disable sending stuff to Ray |
-| `ray()->enable()` | Enable sending stuff to Ray |
 
 Read more on [WordPress](/docs/ray/v1/usage/wordpress)
 

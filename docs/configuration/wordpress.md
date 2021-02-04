@@ -10,6 +10,11 @@ In WordPress apps you can use this template as [the ray config file](/docs/ray/v
 <?php
 return [
     /*
+    * This settings controls whether data should be sent to Ray.
+    */
+    'enable' => true,
+    
+    /*
      *  The host used to communicate with the Ray app.
      */
     'host' => 'localhost',
