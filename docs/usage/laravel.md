@@ -250,3 +250,13 @@ To display all requests made in your Laravel app in Ray, you can call `ray()->sh
 
 To enable this behaviour by default, you can set the `send_requests_to_ray` option in [the config file](https://spatie.be/docs/ray/v1/configuration/laravel) to `true`.
 
+## Displaying Exceptions
+
+To display the details of an exception, you can call the `exception()` function:
+
+```php
+    $exception = new \Exception('test error');
+
+    ray()->exception($exception);
+```
+
