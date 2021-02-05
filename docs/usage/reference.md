@@ -129,10 +129,6 @@ Read more on [WordPress](/docs/ray/v1/usage/wordpress)
 
 | Call | Description |
 | --- | --- |
-| `ray()->disable()` | Disable sending stuff to Ray |
-| `ray()->disabled()` | Check if Ray is disabled |
-| `ray()->enable()` | Enable sending stuff to Ray |
-| `ray()->enabled()` | Check if Ray is enabled |
 | `ray()->showEvents()` | Display all events that are executed  |
 | `ray()->showEvents(callable)` | Display all events that are executed within a callable |
 | `ray()->stopShowingEvents()` | Stop displaying events  |
@@ -146,10 +142,6 @@ Read more on [Yii](/docs/ray/v1/usage/yii)
 
 | Call | Description |
 | --- | --- |
-| `ray()->disable()` | Disable sending stuff to Ray |
-| `ray()->disabled()` | Check if Ray is disabled |
-| `ray()->enable()` | Enable sending stuff to Ray |
-| `ray()->enabled()` | Check if Ray is enabled |
 | `ray()->showEvents()` | Display all events that are executed  |
 | `ray()->showEvents(callable)` | Display all events that are executed within a callable |
 | `ray()->stopShowingEvents()` | Stop displaying events  |

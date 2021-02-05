@@ -79,32 +79,3 @@ ray()->showEvents(function() {
 Yii::$app->trigger('myEvent', new MyEvent()); // this event won't be displayed.
 ```
 
-### Enabling / disabling Ray
-
-You can enable and disable sending stuff to Ray with the `enable` and `disable` functions.
-
-```php
-ray('one') // will be displayed in ray
-
-ray()->disable();
-
-ray('two') // won't be displayed in ray
-
-ray()->enable();
-
-ray('three') // will be displayed in ray
-```
-
-You can check if Ray is enabled or disabled with the `enabled` and `disabled` functions.
-
-```php
-ray()->disable();
-
-ray()->enabled(); // false
-ray()->disabled(); // true
-
-ray()->enable();
-
-ray()->enabled(); // true
-ray()->disabled(); // false
-```
