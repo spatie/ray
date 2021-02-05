@@ -118,6 +118,24 @@ ray()->showJobs(function() {
 event(new TestJob()); // this job won't be displayed.
 ```
 
+### Showing cache events
+
+You can display all cache events using `showCache`
+
+```php
+ray()->showCache();
+
+Cache::put('my-key', ['a' => 1]);
+
+Cache::get('my-key');
+
+Cache::get('another-key');
+```
+
+![screenshot](/docs/ray/v1/images/cache.png)
+
+To stop showing cache events, call `stopShowingCache`.
+
 ### Handling models
 
 Using the `model` function, you can display the attributes and relations of a model.
@@ -153,6 +171,20 @@ ray()->mailable(new TestMailable());
 
 ![screenshot](/docs/ray/v1/images/mailable.jpg)
 
+### Showing which views are rendered
+
+You can display all views that are rendered by calling `showViews`.
+
+```php
+ray()->showViews();
+
+// typically you'll do this in a controller
+view('welcome', ['name' => 'John Doe'])->render();
+```
+
+![screenshot](/docs/ray/v1/images/views.png)
+
+To stop showing views, call `stopShowingViews`.
 
 ### Displaying markdown
 
@@ -210,32 +242,11 @@ public function my_endpoint_works_correctly()
 
 ![screenshot](/docs/ray/v1/images/response.png)
 
-### Enabling / disabling Ray
+### Displaying requests
 
-You can enable and disable sending stuff to Ray with the `enable` and `disable` functions.
+To display all requests made in your Laravel app in Ray, you can call `ray()->showRequests()`. A typical place to put this would be in a service provider.
 
-```php
-ray('one') // will be displayed in ray
+![screenshot](/docs/ray/v1/images/request.png)
 
-ray()->disable();
+To enable this behaviour by default, you can set the `send_requests_to_ray` option in [the config file](https://spatie.be/docs/ray/v1/configuration/laravel) to `true`.
 
-ray('two') // won't be displayed in ray
-
-ray()->enable();
-
-ray('three') // will be displayed in ray
-```
-
-You can check if Ray is enabled or disabled with the `enabled` and `disabled` functions.
-
-```php
-ray()->disable();
-
-ray()->enabled(); // false
-ray()->disabled(); // true
-
-ray()->enable();
-
-ray()->enabled(); // true
-ray()->disabled(); // false
-```

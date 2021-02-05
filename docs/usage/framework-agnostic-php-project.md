@@ -237,6 +237,20 @@ The `json` function can also accept multiple valid JSON strings.
 ray()->json($jsonString, $anotherJsonString, $yetAnotherJsonString);
 ```
 
+### Working with XML
+
+You can send a valid XML string to Ray with the `xml` function.
+
+It will be displayed as formatted XML and collapsable in Ray.
+
+```php
+$xmlString = '<one><two><three>3</three></two></one>';
+
+ray()->xml($xmlString);
+```
+
+![screenshot](/docs/ray/v1/images/xml.png)
+
 ### Working with Carbon instances
 
 [Carbon](https://carbon.nesbot.com/docs/) is a popular datetime package. You can send instances of `Carbon` to Ray with `carbon`.
@@ -451,4 +465,34 @@ You can show and hide the Ray app via code.
 ```php
 ray()->showApp(); // Ray will be brought to the foreground
 ray()->hideApp(); // Ray will be hidden
+```
+
+### Enabling / disabling Ray
+
+You can enable and disable sending stuff to Ray with the `enable` and `disable` functions.
+
+```php
+ray('one'); // will be displayed in ray
+
+ray()->disable();
+
+ray('two'); // won't be displayed in ray
+
+ray()->enable();
+
+ray('three'); // will be displayed in ray
+```
+
+You can check if Ray is enabled or disabled with the `enabled` and `disabled` functions.
+
+```php
+ray()->disable();
+
+ray()->enabled(); // false
+ray()->disabled(); // true
+
+ray()->enable();
+
+ray()->enabled(); // true
+ray()->disabled(); // false
 ```

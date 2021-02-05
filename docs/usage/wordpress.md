@@ -3,7 +3,7 @@ title: WordPress
 weight: 4
 ---
 
-In WordPress, you can use all methods from [the framework agnostic version](/docs/ray/v1/usage/in-a-framework-agnostic-project).
+In WordPress, you can use all methods from [the framework agnostic version](/docs/ray/v1/usage/framework-agnostic-php-project).
 
 Additionally, you can use these following WordPress specific methods.
 
@@ -38,20 +38,10 @@ wp_mail('to@email.com', 'my subject', 'the content');
 
 To stop showing mail, call `stopShowingMails()`.
 
-### Enabling / disabling Ray
-
-You can enable and disable sending stuff to Ray with the `enable` and `disable` functions.
-
-```php
-ray('one') // will be displayed in ray
-
-ray()->disable();
-
-ray('two') // won't be displayed in ray
-
-ray()->enable();
-
-ray('three') // will be displayed in ray
-```
+### Production environments
 
 By default, Ray is disabled in production environments. If you want to use Ray in a production environment, you must explicitly enable it with `ray()->enable()`.
+
+For more information about using the `enable()` function, see the [framework agnostic docs](/docs/ray/v1/usage/framework-agnostic-php-project).
+
+

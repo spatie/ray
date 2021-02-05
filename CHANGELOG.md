@@ -2,6 +2,26 @@
 
 All notable changes to `ray` will be documented in this file
 
+## 1.19.0 - 2021-02-03
+
+- send XML payloads (#272)
+
+## 1.18.0 - 2021-02-03
+
+- add `enable` and `disable` methods
+
+## 1.17.4 - 2021-02-03
+
+- fix: remote_path/local_path replacements (#269)
+
+## 1.17.3 - 2021-02-02
+
+- use http v1.1 instead of 1.0 (#267)
+
+## 1.17.2 - 2021-02-02
+
+- cache config file
+
 ## 1.17.1 - 2021-01-27
 
 - add support for PHP 7.3

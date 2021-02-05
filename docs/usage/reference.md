@@ -35,6 +35,10 @@ To display something in Ray use the `ray()` function. It accepts everything: str
 | `ray()->clearAll()` | Clear current and all previous screens |
 | `ray()->count()` | Count how many times a piece of code is called |
 | `ray(…)->die()` or `rd(…)` | Stop the PHP process |
+| `ray()->disable()` | Disable sending stuff to Ray |
+| `ray()->disabled()` | Check if Ray is disabled |
+| `ray()->enable()` | Enable sending stuff to Ray |
+| `ray()->enabled()` | Check if Ray is enabled |
 | `ray()->file($path)` | Display contents of a file |
 | `ray(…)->gray()` | Output in gray |
 | `ray(…)->green()` | Output in green |
@@ -62,6 +66,7 @@ To display something in Ray use the `ray()` function. It accepts everything: str
 | `ray()->table($array. $label)` | Format an associative array with optional label  |
 | `ray()->toJson($variable, $another, … )` | Display the JSON representation of 1 or more values that can be converted |
 | `ray()->trace()` | Check entire backtrace |
+| `ray()->xml($xmlString)` | Display formatted XML in Ray |
 
 ### Updating a Ray instance
 
@@ -79,13 +84,12 @@ Read more on [Framework agnostic PHP](/docs/ray/v1/usage/framework-agnostic-php-
 
 | Call | Description |
 | --- | --- |
-| `ray()->disable()` | Disable sending stuff to Ray |
-| `ray()->disabled()` | Check if Ray is disabled |
-| `ray()->enable()` | Enable sending stuff to Ray |
-| `ray()->enabled()` | Check if Ray is enabled |
 | `ray()->mailable($mailable)` | Render a mailable  |
 | `ray()->markdown($markdown)` | Render markdown  |
 | `ray()->model($model)` | Display the attributes and relations of a model  |
+| `ray()->showCache()` | Display all cache events that are executed  |
+| `ray()->showCache(callable)` | Display all cache events that are executed within a callable |
+| `ray()->stopShowingCache()` | Stop displaying cache events  |
 | `ray()->showEvents()` | Display all events that are executed  |
 | `ray()->showEvents(callable)` | Display all events that are executed within a callable |
 | `ray()->stopShowingEvents()` | Stop displaying events  |
@@ -95,6 +99,10 @@ Read more on [Framework agnostic PHP](/docs/ray/v1/usage/framework-agnostic-php-
 | `ray()->showQueries()` | Display all queries that are executed  |
 | `ray()->showQueries(callable)` | Display all queries that are executed within a callable |
 | `ray()->stopShowingQueries()` | Stop displaying queries  |
+| `ray()->showRequests()` | Display all requests  |
+| `ray()->stopShowingRequests()` | Stop displaying requests  |
+| `ray()->showViews()` | Display all views  |
+| `ray()->stopShowingViews()` | Stop displaying views  |
 
 ### Macros &amp; Blade
 
@@ -114,8 +122,6 @@ Read more on [Laravel](/docs/ray/v1/usage/laravel)
 | `ray()->stopShowingQueries()` | Stop displaying queries  |
 | `ray()->showMails()` | Display all mails that are sent  |
 | `ray()->stopShowingMails()` | Stop displaying mails  |
-| `ray()->disable()` | Disable sending stuff to Ray |
-| `ray()->enable()` | Enable sending stuff to Ray |
 
 Read more on [WordPress](/docs/ray/v1/usage/wordpress)
 
@@ -123,10 +129,6 @@ Read more on [WordPress](/docs/ray/v1/usage/wordpress)
 
 | Call | Description |
 | --- | --- |
-| `ray()->disable()` | Disable sending stuff to Ray |
-| `ray()->disabled()` | Check if Ray is disabled |
-| `ray()->enable()` | Enable sending stuff to Ray |
-| `ray()->enabled()` | Check if Ray is enabled |
 | `ray()->showEvents()` | Display all events that are executed  |
 | `ray()->showEvents(callable)` | Display all events that are executed within a callable |
 | `ray()->stopShowingEvents()` | Stop displaying events  |
@@ -140,10 +142,6 @@ Read more on [Yii](/docs/ray/v1/usage/yii)
 
 | Call | Description |
 | --- | --- |
-| `ray()->disable()` | Disable sending stuff to Ray |
-| `ray()->disabled()` | Check if Ray is disabled |
-| `ray()->enable()` | Enable sending stuff to Ray |
-| `ray()->enabled()` | Check if Ray is enabled |
 | `ray()->showEvents()` | Display all events that are executed  |
 | `ray()->showEvents(callable)` | Display all events that are executed within a callable |
 | `ray()->stopShowingEvents()` | Stop displaying events  |

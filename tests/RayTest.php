@@ -382,6 +382,7 @@ class RayTest extends TestCase
     public function it_can_send_the_file_content_payload()
     {
         $this->ray->file(__DIR__ .'/testSettings/ray.php');
+        $this->ray->file('missing.php');
 
         $this->assertMatchesOsSafeSnapshot($this->client->sentPayloads());
     }
@@ -491,6 +492,25 @@ class RayTest extends TestCase
     }
 
     /** @test */
+    public function it_only_rewrites_paths_for_matching_remote_paths()
+    {
+        $payload = new CallerPayload([
+            new Frame('/app/files/MyFile.php', 1, []),
+            new Frame('/app/files/MyFile.php', 2, []),
+        ]);
+
+        $payload->remotePath = '/files';
+        $payload->localPath = '/some/local/path';
+
+        $this->assertEquals('/app/files/MyFile.php', $payload->getContent()['frame']['file_name']);
+
+        $payload->remotePath = '/app';
+        $payload->localPath = '/some/local/path';
+
+        $this->assertEquals('/some/local/path/files/MyFile.php', $payload->getContent()['frame']['file_name']);
+    }
+
+    /** @test */
     public function it_returns_itself_and_does_not_send_anything_when_calling_send_without_arguments()
     {
         $settings = SettingsFactory::createFromConfigFile();
@@ -548,6 +568,20 @@ class RayTest extends TestCase
     }
 
     /** @test */
+    public function it_merges_default_settings_into_existing_settings()
+    {
+        $settings = SettingsFactory::createFromConfigFile();
+
+        $this->assertNull($settings->test);
+        $this->assertEquals(23517, $settings->port);
+
+        $settings->setDefaultSettings(['test' => 'testvalue']);
+
+        $this->assertEquals('testvalue', $settings->test);
+        $this->assertEquals(23517, $settings->port);
+    }
+
+    /** @test */
     public function it_can_send_the_php_info_payload()
     {
         $this->ray->phpinfo();
@@ -571,6 +605,7 @@ class RayTest extends TestCase
         $this->assertArrayHasKey('default_mimetype', $payloads[0]['payloads'][0]['content']['values']);
     }
 
+    /** @test */
     public function it_sends_an_image_payload()
     {
         $this->ray->image('http://localhost/test.jpg');
@@ -608,6 +643,14 @@ class RayTest extends TestCase
     }
 
     /** @test */
+    public function it_sends_an_xml_payload()
+    {
+        $this->ray->xml('<one><two>2</two></one>');
+
+        $this->assertMatchesOsSafeSnapshot($this->client->sentPayloads());
+    }
+
+    /** @test */
     public function it_can_send_the_raw_values()
     {
         $this->ray->raw(new Carbon(), 'string', ['a' => 1]);
@@ -617,6 +660,15 @@ class RayTest extends TestCase
         $this->assertEquals('log', $payloads[0]['payloads'][0]['type']);
         $this->assertEquals('log', $payloads[0]['payloads'][1]['type']);
         $this->assertEquals('log', $payloads[0]['payloads'][2]['type']);
+    }
+
+    /** @test */
+    public function it_returns_a_ray_instance_when_calling_raw_without_arguments()
+    {
+        $instance = $this->ray->raw();
+
+        $this->assertInstanceOf(Ray::class, $instance);
+        $this->assertMatchesOsSafeSnapshot($this->client->sentPayloads());
     }
 
     /** @test */
@@ -632,11 +684,125 @@ class RayTest extends TestCase
     }
 
     /** @test */
+    public function it_sends_the_hide_application_payload()
+    {
+        $this->ray->hideApp();
+
+        $this->assertMatchesOsSafeSnapshot($this->client->sentPayloads());
+    }
+
+    /** @test */
+    public function it_sends_the_show_application_payload()
+    {
+        $this->ray->showApp();
+
+        $this->assertMatchesOsSafeSnapshot($this->client->sentPayloads());
+    }
+
+    /** @test */
+    public function it_sends_an_html_payload()
+    {
+        $this->ray->html('<strong>test</strong>');
+
+        $this->assertMatchesOsSafeSnapshot($this->client->sentPayloads());
+    }
+
+    /** @test */
+    public function it_sends_a_null_payload()
+    {
+        $this->ray->send(null);
+
+        $this->assertMatchesOsSafeSnapshot($this->client->sentPayloads());
+    }
+
+    /** @test */
+    public function it_returns_zero_when_accessing_a_missing_counter()
+    {
+        $this->assertEquals(0, Ray::$counters->get('missing'));
+        ray()->count('missing');
+        $this->assertEquals(1, Ray::$counters->get('missing'));
+    }
+
+    /** @test */
+    public function it_sets_the_ray_instance_for_a_counter()
+    {
+        $ray1 = ray();
+        $ray2 = ray();
+
+        $ray1->count('first');
+
+        $ray1::$counters->setRay('first', $ray1);
+
+        $this->assertEquals($ray1, $ray1::$counters->increment('first')[0]);
+
+        $ray1::$counters->setRay('first', $ray2);
+
+        $this->assertEquals($ray2, $ray1::$counters->increment('first')[0]);
+    }
+
+    /** @test */
+    public function it_clears_all_counters()
+    {
+        Ray::$counters->clear();
+
+        $this->assertEquals(0, Ray::$counters->get('first'));
+
+        ray()->count('first');
+
+        $this->assertEquals(1, Ray::$counters->get('first'));
+
+        ray()->clearCounters();
+
+        $this->assertEquals(0, Ray::$counters->get('first'));
+    }
+
+    /** @test */
     public function it_will_respect_the_raw_values_config_setting()
     {
         $this->settings->always_send_raw_values = true;
         $this->ray->send(new Carbon());
         $this->assertEquals('log',  $this->client->sentPayloads()[0]['payloads'][0]['type']);
+    }
+
+    /** @test */
+    public function it_can_be_disabled()
+    {
+        $this->ray->send('test payload 1');
+        $this->ray->disable();
+        $this->ray->send('test payload 2');
+
+        $this->assertCount(1, $this->client->sentPayloads());
+    }
+
+    /** @test */
+    public function it_can_be_reenabled_after_being_disabled()
+    {
+        $this->ray->enable();
+        $this->ray->send('test payload 1');
+        $this->ray->disable();
+        $this->ray->send('test payload 2');
+        $this->ray->enable();
+        $this->ray->send('test payload 3');
+
+        $this->assertCount(2, $this->client->sentPayloads());
+    }
+
+    /** @test */
+    public function it_returns_the_correct_enabled_state()
+    {
+        Ray::$enabled = true;
+        $this->assertTrue($this->ray->enabled());
+        $this->assertFalse($this->ray->disabled());
+
+        Ray::$enabled = false;
+        $this->assertFalse($this->ray->enabled());
+        $this->assertTrue($this->ray->disabled());
+    }
+
+    /** @test */
+    public function it_defaults_to_enabled_state()
+    {
+        $this->assertTrue($this->ray->enabled());
     }
 
     protected function getValueOfLastSentContent(string $contentKey)
