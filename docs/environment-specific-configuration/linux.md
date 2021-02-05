@@ -1,8 +1,6 @@
 ---
-
 title: Linux
 weight: 3
-
 ---
 
 When using the Linux AppImage, the automatic updates rename the binary with the latest version _(i.e., Ray-1.12.0.AppImage)_.
