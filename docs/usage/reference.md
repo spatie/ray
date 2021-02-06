@@ -177,6 +177,38 @@ Read more on [Craft](/docs/ray/v1/usage/craft)
 | `ray(…).showIf(true)` | Conditionally show things based on a truthy value or callable  |
 | `ray(…).size('small')` | Output text smaller or bigger. Use `large` or `small`|
 
+## NodeJS
+
+| Call | Description |
+| --- | --- |
+| `ray(variable)` | Display a string, array or object |
+| `ray(variable, another, …)` | Ray accepts multiple arguments |
+| `ray(…).blue()` | Output in color. Use `green`, `orange`, `red`, `blue`,`purple` or `gray` |
+| `ray().clearScreen()` | Clear current screen |
+| `ray().clearAll()` | Clear current and all previous screens |
+| `ray().count(name)` | Count how many times a piece of code is called, with optional name |
+| `ray().disable()` | Disable sending stuff to Ray |
+| `ray().disabled()` | Check if Ray is disabled |
+| `ray().enable()` | Enable sending stuff to Ray |
+| `ray().enabled()` | Check if Ray is enabled |
+| `ray().file(filename)` | Display contents of a file |
+| `ray(…).hide()` | Display something in Ray and make it collapse immediately |
+| `ray().hideApp()` | Programmatically hide the Ray app window |
+| `ray().html(string)` | Send HTML to Ray | 
+| `ray().image(url)` | Display an image in Ray | 
+| `ray().json([…])` | Send JSON to Ray | 
+| `ray().newScreen()` | Start a new screen |
+| `ray().newScreen('title')` | Start a new named screen |
+| `ray(…).notify(message)` | Display a notification |
+| `ray(…).pass(variable)` | Display something in Ray and return the value instead of a Ray instance |
+| `ray().pause()` | Pause code execution within your code; must be called using `await` |
+| `ray().showApp()` | Programmatically show the Ray app window |
+| `ray(…).showIf(true)` | Conditionally show things based on a truthy value or callable  |
+| `ray(…).showWhen(true)` | Conditionally show things based on a truthy value or callable  |
+| `ray(…).small()` | Output text smaller or bigger. Use `large` or `small`|
+| `ray().table([…])` | Display an array of items formatted as a table; Objects and arrays are pretty-printed |
+| `ray().xml(string)` | Send XML to Ray | 
+
 ### Updating a Ray instance
 
 | Call | Description |
