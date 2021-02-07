@@ -194,6 +194,7 @@ Read more on [Craft](/docs/ray/v1/usage/craft)
 | `ray().disabled()` | Check if Ray is disabled |
 | `ray().enable()` | Enable sending stuff to Ray |
 | `ray().enabled()` | Check if Ray is enabled |
+| `ray().error(err)` | Display information about an error or exception |
 | `ray().file(filename)` | Display contents of a file |
 | `ray(…).hide()` | Display something in Ray and make it collapse immediately |
 | `ray().hideApp()` | Programmatically hide the Ray app window |
