@@ -31,6 +31,8 @@ ray().clearScreen();
 ray().clearAll();
 ```
 
+![screenshot](/docs/ray/v1/images/screen.jpg)
+
 ### App visibility
 
 The Ray app can be shown or hidden programmatically.
@@ -54,9 +56,9 @@ ray().file('test.txt');
 
 ray().image('https://placekitten.com/200/300');
 
-ray().xml('<one><two>22</two></one>');
-
 ray().html('<strong>hello</strong> world');
+
+ray().xml('<one><two>22</two></one>');
 ```
 
 ### Using colors
@@ -196,7 +198,7 @@ Ray can display information about a date in a nicely formatted table using the `
 Specifying the format is optional. It uses the [dayjs formatting](https://day.js.org/docs/en/display/format) style.
 
 ```js
-ray().date(new Date(), 'YYYY-MM-DD hh:mm');
+ray().date(new Date(), 'YYYY-MM-DD hh:mm:ss');
 ```
 
 ![screenshot](/docs/ray/v1/images/carbon.jpg)
