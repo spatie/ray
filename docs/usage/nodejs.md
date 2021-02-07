@@ -19,6 +19,18 @@ ray('this is also sent');
 
 ### Working with screens
 
+Ray can create or clear new screens of information.
+
+```js
+ray().newScreen();
+
+ray().newScreen('my new screen');
+
+ray().clearScreen();
+
+ray().clearAll();
+```
+
 ### App visibility
 
 The Ray app can be shown or hidden programmatically.
@@ -159,6 +171,35 @@ ray().notify('This is my notification');
 
 ![screenshot](/docs/ray/v1/images/notification.jpg)
 
+
+### Working with errors
+
+Ray can display information about an `Error` or exception with the `error` method.
+
+```js
+ray().error(new Error('my error message'));
+```
+
+### Displaying class information
+
+You can display the classname of an object with `className()`.
+
+```js
+const obj = new MyClass1();
+
+ray().className(obj);
+```
+
+### Working with dates
+
+Ray can display information about a date in a nicely formatted table using the `date()` method.
+Specifying the format is optional. It uses the [dayjs formatting](https://day.js.org/docs/en/display/format) style.
+
+```js
+ray().date(new Date(), 'YYYY-MM-DD hh:mm');
+```
+
+![screenshot](/docs/ray/v1/images/carbon.jpg)
 
 ### Feature demo
 

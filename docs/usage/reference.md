@@ -19,6 +19,7 @@ To display something in Ray use the `ray()` function. It accepts everything: str
 - [Yii](#yii)
 - [Craft](#craft)
 - [Javascript](#javascript)
+- [NodeJS](#nodejs)
 
 ## Framework agnostic PHP
 
@@ -187,6 +188,8 @@ Read more on [Craft](/docs/ray/v1/usage/craft)
 | `ray().clearScreen()` | Clear current screen |
 | `ray().clearAll()` | Clear current and all previous screens |
 | `ray().count(name)` | Count how many times a piece of code is called, with optional name |
+| `ray().date(date, format)` | Display a formatted date, the timezone, and its timestamp | 
+| `ray().die()` | Halt code execution - NodeJS only |
 | `ray().disable()` | Disable sending stuff to Ray |
 | `ray().disabled()` | Check if Ray is disabled |
 | `ray().enable()` | Enable sending stuff to Ray |
