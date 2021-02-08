@@ -57,8 +57,9 @@ return [
 
     /*
     * The host used to communicate with the Ray app.
-    * For usage in Docker on Mac or Windows, you can replace host with 'host.docker.internal'
-    * For usage in Homestead on Mac or Windows, you can replace host with '10.0.2.2'
+    * When using Docker on Mac or Windows, you can replace localhost with 'host.docker.internal'
+    * When using Homestead with the VirtualBox provider, you can replace localhost with '10.0.2.2'
+    * When using Homestead with the Parallels provider, you can replace localhost with '10.211.55.2'
     */
     'host' => env('RAY_HOST', 'localhost'),
 
