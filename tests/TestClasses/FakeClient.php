@@ -10,6 +10,11 @@ class FakeClient extends Client
     /** @var array */
     protected $sentRequests = [];
 
+    public function serverIsAvailable(): bool
+    {
+        return true;
+    }
+
     public function send(Request $request): void
     {
         $requestProperties = $request->toArray();
