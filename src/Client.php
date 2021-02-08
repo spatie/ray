@@ -41,7 +41,7 @@ class Client
         return static::$cache[$this->fingerprint][0] ?? true;
     }
 
-    protected function performAvailabilityCheck(): void
+    public function performAvailabilityCheck(): bool
     {
         try {
             $curlHandle = $this->getCurlHandleForUrl('get', '/_availability_check');
@@ -56,6 +56,8 @@ class Client
 
         } finally {
             curl_close($curlHandle);
+
+            return $success;
         }
     }
 
