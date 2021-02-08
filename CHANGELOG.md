@@ -2,6 +2,10 @@
 
 All notable changes to `ray` will be documented in this file
 
+## 1.19.1 - 2021-02-08
+
+- allow symfony/stopwatch 4.0 (#284)
+
 ## 1.19.0 - 2021-02-03
 
 - send XML payloads (#272)
