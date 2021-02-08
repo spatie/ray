@@ -30,7 +30,7 @@ class Client
     public function serverIsAvailable(): bool
     {
         // purge expired entries from the cache
-        static::$cache = array_filter(static::$cache, function($data) {
+        static::$cache = array_filter(static::$cache, function ($data) {
             return microtime(true) < $data[1];
         });
 
@@ -48,12 +48,11 @@ class Client
 
             curl_exec($curlHandle);
 
-            $success = curl_errno($curlHandle) ===  CURLE_HTTP_NOT_FOUND;
+            $success = curl_errno($curlHandle) === CURLE_HTTP_NOT_FOUND;
             // expire the cache entry after 30 sec
             $expiresAt = microtime(true) + 30.0;
 
             static::$cache[$this->fingerprint] = [$success, $expiresAt];
-
         } finally {
             curl_close($curlHandle);
 
