@@ -5,6 +5,36 @@ weight: 7
 
 The API for the NodeJS package closely mirrors the official `spatie/ray` package API, so it's likely that if it exists there, it's available to use in your NodeJS project.
 
+### Importing the package
+
+When working with NodeJS, import the package as you would normally:
+
+```js 
+// es module import:
+import { ray } from 'node-ray';
+
+// commonjs import:
+const ray = require('node-ray').ray;
+```
+
+When creating a bundle for use within a browser-based environment _(i.e. with webpack)_, import the `/web` variant:
+
+```js 
+// es module import:
+import { ray } from 'node-ray/web';
+
+// commonjs import:
+const ray = require('node-ray/web').ray;
+```
+
+To use `node-ray` directly in a webpage, include the standalone umd-format script via CDN. The standalone version is bundled with everything _except_ the axios library, which must be included separately and before the standalone script.
+Once imported, you may access the helper `ray()` function as `Ray.ray()`.
+
+```html
+    <script src="https://cdn.jsdelivr.net/npm/axios@latest"></script>
+    <script src="https://cdn.jsdelivr.net/npm/node-ray@latest/dist/standalone.js"></script>
+```
+
 ### Enabling and disabling
 
 Ray can be enabled or disabled at runtime using `enable()` or `disable()`.
