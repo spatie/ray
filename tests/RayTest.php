@@ -790,6 +790,14 @@ class RayTest extends TestCase
         $this->assertTrue($this->ray->enabled());
     }
 
+    /** @test */
+    public function it_checks_the_availablity_of_the_Ray_server()
+    {
+        $this->client->changePortAndReturnOriginal(34993);
+
+        $this->assertFalse($this->client->performAvailabilityCheck());
+    }
+
     protected function getValueOfLastSentContent(string $contentKey)
     {
         $payload = $this->client->sentPayloads();
