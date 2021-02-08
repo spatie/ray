@@ -29,6 +29,7 @@ class Client
 
     public function serverIsAvailable(): bool
     {
+        // purge expired entries from the cache
         static::$cache = array_filter(static::$cache, function($data) {
             return microtime(true) < $data[1];
         });
@@ -37,18 +38,19 @@ class Client
             $this->performAvailabilityCheck();
         }
 
-        return static::$cache[$this->fingerprint][0];
+        return static::$cache[$this->fingerprint][0] ?? true;
     }
 
-    public function performAvailabilityCheck()
+    protected function performAvailabilityCheck(): void
     {
         try {
-            $curlHandle = $this->getCurlHandleForUrl('get', 'locks/___' . random_int(1000, 999999));
+            $curlHandle = $this->getCurlHandleForUrl('get', '/_availability_check');
 
             curl_exec($curlHandle);
 
-            $success = curl_errno($curlHandle) === CURLE_OK;
-            $expiresAt = microtime(true) + 10.0; // expire the availability after 10 sec
+            $success = curl_errno($curlHandle) ===  CURLE_HTTP_NOT_FOUND;
+            // expire the cache entry after 30 sec
+            $expiresAt = microtime(true) + 30.0;
 
             static::$cache[$this->fingerprint] = [$success, $expiresAt];
 
@@ -60,7 +62,6 @@ class Client
     public function send(Request $request): void
     {
         if (! $this->serverIsAvailable()) {
-            print_r(['server not available, not sending']);
             return;
         }
 
@@ -87,7 +88,6 @@ class Client
     public function lockExists(string $lockName): bool
     {
         if (! $this->serverIsAvailable()) {
-            print_r(['server not available, not sending']);
             return false;
         }
 
