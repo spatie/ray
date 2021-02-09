@@ -233,6 +233,60 @@ ray().date(new Date(), 'YYYY-MM-DD hh:mm:ss');
 
 ![screenshot](/docs/ray/v1/images/carbon.jpg)
 
+
+### Measuring performance
+
+You can use the `measure` function to display runtime and memory usage. When `measure` is called again, the time between
+this and previous call is also displayed.
+
+```js
+const sleep = (seconds) => {
+    const start = new Date().getTime();
+    while (new Date().getTime() < start + (seconds * 1000)) { }
+};
+
+ray().measure();
+
+sleep(1);
+
+ray().measure();
+
+sleep(2);
+
+ray().measure();
+```
+
+![screenshot](/docs/ray/v1/images/measure.jpg)
+
+The `measure` call optionally accepts a callable. Ray will output the time needed to run the callable and the maximum
+memory used.
+
+```js
+const sleep = (seconds) => {
+    const start = new Date().getTime();
+    while (new Date().getTime() < start + (seconds * 1000)) { }
+};
+
+ray().measure(() => {
+    sleep(5);
+});
+```
+
+The `stopTime` method can remove a stopwatch if you've previous called `measure()` with a name:
+```js
+
+ray().measure('my timer');
+
+sleep(1);
+
+ray().measure('my timer');
+
+ray().stopTime('my timer');
+```
+
+Calling `stopTime()` without specifying a name will delete all existing stopwatches.
+
+
 ### Feature demo
 
 Here's a sample script that demonstrates a number of the features, both basic and advanced.
