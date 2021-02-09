@@ -7,21 +7,65 @@ use Spatie\Ray\Exceptions\StopExecutionRequested;
 
 class Client
 {
+    protected static $cache = [];
+
     /** @var int */
     protected $portNumber;
 
     /** @var string */
     protected $host;
 
+    /** @var string */
+    protected $fingerprint;
+
     public function __construct(int $portNumber = 23517, string $host = 'localhost')
     {
+        $this->fingerprint = md5($this->host . ':' . $this->portNumber);
+
         $this->portNumber = $portNumber;
 
         $this->host = $host;
     }
 
+    public function serverIsAvailable(): bool
+    {
+        // purge expired entries from the cache
+        static::$cache = array_filter(static::$cache, function ($data) {
+            return microtime(true) < $data[1];
+        });
+
+        if (! isset(static::$cache[$this->fingerprint])) {
+            $this->performAvailabilityCheck();
+        }
+
+        return static::$cache[$this->fingerprint][0] ?? true;
+    }
+
+    public function performAvailabilityCheck(): bool
+    {
+        try {
+            $curlHandle = $this->getCurlHandleForUrl('get', '/_availability_check');
+
+            curl_exec($curlHandle);
+
+            $success = curl_errno($curlHandle) === CURLE_HTTP_NOT_FOUND;
+            // expire the cache entry after 30 sec
+            $expiresAt = microtime(true) + 30.0;
+
+            static::$cache[$this->fingerprint] = [$success, $expiresAt];
+        } finally {
+            curl_close($curlHandle);
+
+            return $success;
+        }
+    }
+
     public function send(Request $request): void
     {
+        if (! $this->serverIsAvailable()) {
+            return;
+        }
+
         try {
             $curlHandle = $this->getCurlHandleForUrl('get', '');
 
@@ -44,6 +88,10 @@ class Client
 
     public function lockExists(string $lockName): bool
     {
+        if (! $this->serverIsAvailable()) {
+            return false;
+        }
+
         $curlHandle = $this->getCurlHandleForUrl('get', "locks/{$lockName}");
         $curlError = null;
 
