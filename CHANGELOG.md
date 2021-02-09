@@ -2,6 +2,10 @@
 
 All notable changes to `ray` will be documented in this file
 
+## 1.19.2 - 2021-02-09
+
+- add curl throttling after failed connection (#286)
+
 ## 1.19.1 - 2021-02-08
 
 - allow symfony/stopwatch 4.0 (#284)
