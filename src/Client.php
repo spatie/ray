@@ -20,7 +20,7 @@ class Client
 
     public function __construct(int $portNumber = 23517, string $host = 'localhost')
     {
-        $this->fingerprint = md5($this->host . ':' . $this->portNumber);
+        $this->fingerprint = $host . ':' . $portNumber;
 
         $this->portNumber = $portNumber;
 
