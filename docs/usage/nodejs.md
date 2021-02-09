@@ -14,7 +14,7 @@ When working with NodeJS, import the package as you would normally:
 import { ray } from 'node-ray';
 
 // commonjs import:
-const ray = require('node-ray').ray;
+const { ray } = require('node-ray');
 ```
 
 When creating a bundle for use within a browser-based environment _(i.e. with webpack)_, import the `/web` variant:
@@ -24,15 +24,18 @@ When creating a bundle for use within a browser-based environment _(i.e. with we
 import { ray } from 'node-ray/web';
 
 // commonjs import:
-const ray = require('node-ray/web').ray;
+const { ray } = require('node-ray/web');
 ```
 
 To use `node-ray` directly in a webpage, include the standalone umd-format script via CDN. The standalone version is bundled with everything _except_ the axios library, which must be included separately and before the standalone script.
-Once imported, you may access the helper `ray()` function as `Ray.ray()`.
 
 ```html
     <script src="https://cdn.jsdelivr.net/npm/axios@latest"></script>
     <script src="https://cdn.jsdelivr.net/npm/node-ray@latest/dist/standalone.js"></script>
+    <script>
+        window.ray = Ray.ray;
+        window.Ray = Ray.Ray;
+    </script>
 ```
 
 ### Enabling and disabling
