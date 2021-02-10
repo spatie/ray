@@ -85,7 +85,7 @@ class Ray
 
         $this->uuid = $uuid ?? static::$fakeUuid ?? Uuid::uuid4()->toString();
 
-        static::$enabled = static::$enabled ?? $this->settings->enable !== false;
+        static::$enabled = static::$enabled ?? $this->settings->enable ?? true;
     }
 
     public function enable(): self
@@ -104,12 +104,12 @@ class Ray
 
     public function enabled(): bool
     {
-        return static::$enabled;
+        return static::$enabled || static::$enabled === null;
     }
 
     public function disabled(): bool
     {
-        return ! static::$enabled;
+        return static::$enabled === false;
     }
 
     public static function useClient(Client $client): void
