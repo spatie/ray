@@ -65,8 +65,8 @@ class Ray
     /** @var \Symfony\Component\Stopwatch\Stopwatch[] */
     public static $stopWatches = [];
 
-    /** @var bool */
-    public static $enabled = true;
+    /** @var bool|null */
+    public static $enabled = null;
 
     public static function create(Client $client = null, string $uuid = null): self
     {
@@ -85,7 +85,7 @@ class Ray
 
         $this->uuid = $uuid ?? static::$fakeUuid ?? Uuid::uuid4()->toString();
 
-        static::$enabled = $this->settings->enable !== false;
+        static::$enabled = static::$enabled ?? $this->settings->enable !== false;
     }
 
     public function enable(): self

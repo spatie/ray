@@ -798,6 +798,25 @@ class RayTest extends TestCase
         $this->assertFalse($this->client->performAvailabilityCheck());
     }
 
+    /** @test */
+    public function it_respects_the_enabled_property()
+    {
+        $ray = $this->getNewRay()->disable();
+
+        $this->assertFalse($ray->enabled());
+        $this->assertFalse($this->getNewRay()->enabled());
+
+        getRay()->enable();
+
+        $this->assertTrue($ray->enabled());
+        $this->assertTrue($this->getNewRay()->enabled());
+    }
+
+    protected function getNewRay(): Ray
+    {
+        return Ray::create($this->client, 'fakeUuid');
+    }
+
     protected function getValueOfLastSentContent(string $contentKey)
     {
         $payload = $this->client->sentPayloads();
