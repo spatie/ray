@@ -36,6 +36,8 @@ class RayTest extends TestCase
         $this->settings = SettingsFactory::createFromConfigFile();
 
         $this->ray = new Ray($this->settings, $this->client, 'fakeUuid');
+
+        $this->ray->enable();
     }
 
     /** @test */
@@ -806,7 +808,7 @@ class RayTest extends TestCase
         $this->assertFalse($ray->enabled());
         $this->assertFalse($this->getNewRay()->enabled());
 
-        getRay()->enable();
+        $this->getNewRay()->enable();
 
         $this->assertTrue($ray->enabled());
         $this->assertTrue($this->getNewRay()->enabled());
