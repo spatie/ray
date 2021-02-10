@@ -814,6 +814,22 @@ class RayTest extends TestCase
         $this->assertTrue($this->getNewRay()->enabled());
     }
 
+    /** @test */
+    public function it_respects_the_enabled_property_when_sending_payloads()
+    {
+        $ray = $this->getNewRay()->disable();
+        $ray->send('test message 1');
+        $this->assertCount(0, $this->client->sentPayloads());
+
+        $ray->enable();
+        $ray->send('test message 2');
+        $this->assertCount(1, $this->client->sentPayloads());
+
+        $ray->disable();
+        $ray->send('test message 3');
+        $this->assertCount(1, $this->client->sentPayloads());
+    }
+
     protected function getNewRay(): Ray
     {
         return Ray::create($this->client, 'fakeUuid');
