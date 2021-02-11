@@ -93,6 +93,14 @@ ray.pause;
 If you press the "Continue" button in Ray, execution will continue. When you press "Stop execution", Ray will throw an
 exception in your app to halt execution.
 
+### Display the class name of an object
+
+To quickly send the class name of an object to ray, use the `class_anem` function.
+
+```ruby
+ray.class_name(anything)
+```
+
 ### Updating displayed items
 
 You can update values that are already displayed in Ray. To do this, you must hold on the instance returned by the `ray`
