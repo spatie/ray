@@ -1,6 +1,6 @@
 ---
 title: Ruby
-weight: 8
+weight: 9
 ---
 
 To display something in Ray use the `ray` function. It accepts everything: strings, hashes, objects, ... you name it.

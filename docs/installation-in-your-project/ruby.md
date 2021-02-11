@@ -1,6 +1,6 @@
 ---
 title: Ruby
-weight: 8
+weight: 9
 ---
 
 The Ruby gem is still in active development. We haven't released a stable version just yet, but you can already install and play around with the `0.x` version.
