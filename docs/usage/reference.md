@@ -20,6 +20,7 @@ To display something in Ray use the `ray()` function. It accepts everything: str
 - [Craft](#craft)
 - [Javascript](#javascript)
 - [NodeJS](#nodejs)
+- [Vue](#vue)
 
 ## Framework agnostic PHP
 
@@ -215,6 +216,14 @@ Read more on [Craft](/docs/ray/v1/usage/craft)
 | `ray().stopTime(name)` | Removes a named stopwatch if specified, otherwise removes all stopwatches |
 | `ray().table([…])` | Display an array of items formatted as a table; Objects and arrays are pretty-printed |
 | `ray().xml(string)` | Send XML to Ray | 
+
+## Vue
+
+| Call | Description |
+| --- | --- |
+| `this.$ray().data()` | Send the component data object to Ray |
+| `this.$ray().props()` | Send the component props to Ray |
+| `this.$ray().ref(name)` | Display the `innerHTML` of a named ref in Ray |
 
 ### Updating a Ray instance
 
