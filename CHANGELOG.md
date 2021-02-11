@@ -2,6 +2,10 @@
 
 All notable changes to `ray` will be documented in this file
 
+## 1.19.4 - 2021-02-11
+
+- fix enabled status (#301)
+
 ## 1.19.3 - 2021-02-09
 
 - fix Client cache fingerprint initialization (#292)
