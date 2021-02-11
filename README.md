@@ -12,7 +12,7 @@ You can find the full documentation on [our documentation site](https://spatie.b
 
 ## Testing
 
-``` bash
+```bash
 composer test
 ```
 
