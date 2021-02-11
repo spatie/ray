@@ -3,6 +3,7 @@ title: Vue
 weight: 8
 ---
 
+
 You can send information from Vue (2.x or 3.x) code to Ray via this third party package:
 
 [permafrost-dev/vue-ray](https://github.com/permafrost-dev/vue-ray)
