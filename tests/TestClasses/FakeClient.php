@@ -10,6 +10,20 @@ class FakeClient extends Client
     /** @var array */
     protected $sentRequests = [];
 
+    public function serverIsAvailable(): bool
+    {
+        return true;
+    }
+
+    public function changePortAndReturnOriginal(int $newPortNumber): int
+    {
+        $result = $this->portNumber;
+
+        $this->portNumber = $newPortNumber;
+
+        return $result;
+    }
+
     public function send(Request $request): void
     {
         $requestProperties = $request->toArray();

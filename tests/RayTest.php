@@ -36,6 +36,8 @@ class RayTest extends TestCase
         $this->settings = SettingsFactory::createFromConfigFile();
 
         $this->ray = new Ray($this->settings, $this->client, 'fakeUuid');
+
+        $this->ray->enable();
     }
 
     /** @test */
@@ -788,6 +790,49 @@ class RayTest extends TestCase
     public function it_defaults_to_enabled_state()
     {
         $this->assertTrue($this->ray->enabled());
+    }
+
+    /** @test */
+    public function it_checks_the_availablity_of_the_Ray_server()
+    {
+        $this->client->changePortAndReturnOriginal(34993);
+
+        $this->assertFalse($this->client->performAvailabilityCheck());
+    }
+
+    /** @test */
+    public function it_respects_the_enabled_property()
+    {
+        $ray = $this->getNewRay()->disable();
+
+        $this->assertFalse($ray->enabled());
+        $this->assertFalse($this->getNewRay()->enabled());
+
+        $this->getNewRay()->enable();
+
+        $this->assertTrue($ray->enabled());
+        $this->assertTrue($this->getNewRay()->enabled());
+    }
+
+    /** @test */
+    public function it_respects_the_enabled_property_when_sending_payloads()
+    {
+        $ray = $this->getNewRay()->disable();
+        $ray->send('test message 1');
+        $this->assertCount(0, $this->client->sentPayloads());
+
+        $ray->enable();
+        $ray->send('test message 2');
+        $this->assertCount(1, $this->client->sentPayloads());
+
+        $ray->disable();
+        $ray->send('test message 3');
+        $this->assertCount(1, $this->client->sentPayloads());
+    }
+
+    protected function getNewRay(): Ray
+    {
+        return Ray::create($this->client, 'fakeUuid');
     }
 
     protected function getValueOfLastSentContent(string $contentKey)
