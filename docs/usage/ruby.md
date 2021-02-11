@@ -101,6 +101,14 @@ To quickly send the class name of an object to ray, use the `class_anem` functio
 ray.class_name(anything)
 ```
 
+### Working with JSON
+
+Want to display the JSON representation of anything you'd like in Ray? Use `to_json`..
+
+```php
+ray()->toJson(['a' => 1, 'b' => ['c' => 3]]);
+```
+
 ### Updating displayed items
 
 You can update values that are already displayed in Ray. To do this, you must hold on the instance returned by the `ray`
