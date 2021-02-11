@@ -42,6 +42,16 @@ ray('regular');
 ray('large').large;
 ```
 
+### Using sizes
+
+Ray can display things in different sizes.
+
+```ruby
+ray('small').small;
+ray('regular');
+ray('large').large;
+```
+
 ### Creating a new screen
 
 You can use `newScreen` (or `clearScreen`) to programmatically create a new screen.
