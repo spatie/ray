@@ -173,3 +173,12 @@ You can show and hide the Ray app via code.
 ray.showApp; // Ray will be brought to the foreground
 ray.hideApp; // Ray will be hidden
 ```
+
+### Returning items
+
+To make all methods chainable, the `ray` function returns and instance of Ray. To quickly send something
+to Ray and have that something return as a value, use the `pass` function.
+
+```ruby
+ray()->pass(yourVariable) // yourVariable will be returned
+```
