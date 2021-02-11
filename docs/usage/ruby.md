@@ -95,7 +95,7 @@ exception in your app to halt execution.
 
 ### Display the class name of an object
 
-To quickly send the class name of an object to ray, use the `class_anem` function.
+To quickly send the class name of an object to ray, use the `class_name` function.
 
 ```ruby
 ray.class_name(anything)
