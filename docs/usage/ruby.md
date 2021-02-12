@@ -102,7 +102,7 @@ function.
 ray.caller
 ```
 
-If you want to see the entire backtrace, use the `trace` (or `backtrace`).
+If you want to see the entire backtrace, use `trace`.
 
 ```ruby
 ray.trace;
