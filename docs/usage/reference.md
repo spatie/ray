@@ -221,9 +221,12 @@ Read more on [Craft](/docs/ray/v1/usage/craft)
 
 | Call | Description |
 | --- | --- |
+| `this.$ray().<method>` | All NodeJS methods [listed above](#nodejs) are also available |
 | `this.$ray().data()` | Send the component data object to Ray |
 | `this.$ray().props()` | Send the component props to Ray |
 | `this.$ray().ref(name)` | Display the `innerHTML` of a named ref in Ray |
+| `this.$ray().track(name)` | Display changes to a component's data variable in real time |
+| `this.$ray().untrack(name)` | Stop displaying changes to a component's data variable |
 
 ### Updating a Ray instance
 
