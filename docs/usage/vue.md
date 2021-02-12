@@ -70,6 +70,31 @@ export default {
 </script>
 ```
 
+## Tracking component data
+
+Changes to any of a component's data variables can be tracked and displayed in real time using the `track(name)` method.
+
+```vue
+<script>
+export default {
+    props: ['title'],
+    data() {
+        return {
+            one: 100,
+            two: 22,
+        };
+    },
+    created() {
+        this.$ray().data();
+        this.$ray().track('one');
+    },
+    mounted() {
+        setInterval( () => { this.one += 3; }, 4000);
+    }
+}
+</script>
+```
+
 ### Example component
 
 ```vue
