@@ -93,6 +93,21 @@ ray.pause;
 If you press the "Continue" button in Ray, execution will continue. When you press "Stop execution", Ray will throw an
 exception in your app to halt execution.
 
+### See the caller of a function
+
+Sometimes you want to know where your code is being called. You can quickly determine that by using the `caller`
+function.
+
+```ruby
+ray.caller
+```
+
+If you want to see the entire backtrace, use the `trace` (or `backtrace`).
+
+```ruby
+ray.trace;
+```
+
 ### Display the class name of an object
 
 To quickly send the class name of an object to ray, use the `class_anem` function.
