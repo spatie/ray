@@ -81,7 +81,7 @@ ray().hideApp();
 Ray can display payloads of several types, including JSON, file contents, images, XML, and HTML.
 
 ```js
-ray().json('{"name": "John"}');
+ray().json('['a' => 1, 'b' => ['c' => 3]]');
 
 ray().toJson({name: 'my object'});
 
@@ -91,8 +91,12 @@ ray().image('https://placekitten.com/200/300');
 
 ray().html('<strong>hello</strong> world');
 
-ray().xml('<one><two>22</two></one>');
+ray().xml('<one><two><three>3</three></two></one>');
 ```
+
+![screenshot](/docs/ray/v1/images/json.png)
+
+![screenshot](/docs/ray/v1/images/xml.png)
 
 ### Using colors
 
@@ -129,11 +133,25 @@ ray('large').large();
 
 ### Displaying tables
 
-Ray can display an array of items formatted in a table.  Complex items such as arrays and objects are pretty-printed and highlighted to make their contents pleasant to read.
+Ray can display an object formatted in a table.  Complex items such as arrays and objects are pretty-printed and highlighted to make their contents pleasant to read.
 
 ```js
-ray().table(['hello world', true, [1, 2, 3], {name: 'John', age: 32}]);
+ray().table({
+    First: 'First value',
+    Second: 'Second value',
+    Third: 'Third value',
+});
 ```
+
+![screenshot](/docs/ray/v1/images/table.png)
+
+An array of items can also be displayed with formatted values.
+
+```js
+ray().table(['John', 'Paul', 'George', 'Ringo'], 'Beatles');
+```
+
+![screenshot](/docs/ray/v1/images/table-label.png)
 
 ### Counting
 
@@ -176,6 +194,25 @@ ray('will not be shown').showIf(false);
 
 ray('will not be shown').showWhen(() => false);
 ```
+
+### See the caller of a function
+
+Sometimes you want to know where your code is being called. You can quickly determine that by using the `caller`
+function.
+
+```js
+ray().caller();
+```
+
+![screenshot](/docs/ray/v1/images/caller.jpg)
+
+If you want to see the entire stack trace, use the `trace` function.
+
+```js
+ray().trace();
+```
+
+![screenshot](/docs/ray/v1/images/trace.jpg)
 
 ### Pausing code execution
 
@@ -289,6 +326,15 @@ ray().stopTime('my timer');
 
 Calling `stopTime()` without specifying a name will delete all existing stopwatches.
 
+### Showing events
+
+You can information about an event that has executed by calling `event(name, data)`, with `data` being optional.
+
+```js
+ray().event('TestEvent', ['my argument']);
+```
+
+![screenshot](/docs/ray/v1/images/event.jpg)
 
 ### Feature demo
 
