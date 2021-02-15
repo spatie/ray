@@ -44,6 +44,17 @@ class SettingsTest extends TestCase
         $this->assertEquals('http://otherhost', $settings2->host);
     }
 
+    /** @test */
+    public function it_can_find_a_yaml_config_file()
+    {
+        $this->skipOnGitHubActions();
+
+        $settings = SettingsFactory::createFromSymfonyConfigFile(__DIR__ . Ray::makePathOsSafe('/testSettings/config/packages'));
+
+        $this->assertEquals(3344, $settings->port);
+        $this->assertEquals('http://yamlhost', $settings->host);
+    }
+
     protected function skipOnGitHubActions(): void
     {
         if (getenv('CI')) {

@@ -2,6 +2,8 @@
 
 namespace Spatie\Ray\Settings;
 
+use Symfony\Component\Yaml\Yaml;
+
 class SettingsFactory
 {
     public static $cache = [];
@@ -13,12 +15,24 @@ class SettingsFactory
         return new Settings($settingValues);
     }
 
+    public static function createFromSymfonyConfigFile(string $configDirectory = null): Settings
+    {
+        $settingValues = (new static())->getSettingsFromConfigFile($configDirectory);
+
+        return new Settings($settingValues['spatie_ray']);
+    }
+
     public function getSettingsFromConfigFile(string $configDirectory = null): array
     {
         $configFilePath = $this->searchConfigFiles($configDirectory);
 
         if (! file_exists($configFilePath)) {
             return [];
+        }
+
+        if (pathinfo($configFilePath)['extension'] === 'yaml' ||
+            pathinfo($configFilePath)['extension'] === 'yml') {
+            return Yaml::parseFile($configFilePath);
         }
 
         $options = include $configFilePath;
@@ -39,6 +53,8 @@ class SettingsFactory
     {
         $configNames = [
             'ray.php',
+            'ray.yaml',
+            'ray.yml',
         ];
 
         $configDirectory = $configDirectory ?? getcwd();

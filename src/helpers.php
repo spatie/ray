@@ -37,6 +37,7 @@ if (! function_exists('ray')) {
         }
 
         $rayClass = Ray::class;
+        $settings = SettingsFactory::createFromConfigFile();
 
         if (class_exists(WordPressRay::class)) {
             $rayClass = WordPressRay::class;
@@ -44,9 +45,8 @@ if (! function_exists('ray')) {
 
         if (class_exists(SymfonyRay::class)) {
             $rayClass = SymfonyRay::class;
+            $settings = SettingsFactory::createFromSymfonyConfigFile('packages/config');
         }
-
-        $settings = SettingsFactory::createFromConfigFile();
 
         return (new $rayClass($settings))->send(...$args);
     }

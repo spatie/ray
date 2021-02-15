@@ -1,0 +1,3 @@
+spatie_ray:
+  port: 3344
+  host: "http://yamlhost"
