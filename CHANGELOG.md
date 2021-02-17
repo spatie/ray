@@ -2,6 +2,10 @@
 
 All notable changes to `ray` will be documented in this file
 
+## 1.19.5 - 2021-02-17
+
+- allow instances of `CarbonInterface` to be used for `CarbonPayload` (#316)
+
 ## 1.19.4 - 2021-02-11
 
 - fix enabled status (#301)
