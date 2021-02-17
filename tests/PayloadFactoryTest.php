@@ -10,7 +10,6 @@ use Spatie\Ray\Payloads\CarbonPayload;
 
 class PayloadFactoryTest extends TestCase
 {
-
     /** @test */
     public function it_accepts_carboninterface_instances_as_carbonpayload_argument(): void
     {
