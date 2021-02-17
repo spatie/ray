@@ -2,7 +2,7 @@
 
 namespace Spatie\Ray;
 
-use Carbon\Carbon;
+use Carbon\CarbonInterface;
 use Spatie\Ray\Payloads\BoolPayload;
 use Spatie\Ray\Payloads\CarbonPayload;
 use Spatie\Ray\Payloads\LogPayload;
@@ -55,7 +55,7 @@ class PayloadFactory
             return new NullPayload();
         }
 
-        if ($value instanceof Carbon) {
+        if ($value instanceof CarbonInterface) {
             return new CarbonPayload($value);
         }
 
