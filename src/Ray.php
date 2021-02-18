@@ -459,6 +459,7 @@ class Ray
         $this->sendRequest($payload);
 
         return $this;
+    }
 
     public function xml(string $xml): self
     {
