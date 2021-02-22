@@ -330,7 +330,6 @@ class RayTest extends TestCase
         $this->assertEquals('exception', $payloads[0]['payloads'][0]['type']);
         $this->assertEquals(Exception::class, $payloads[0]['payloads'][0]['content']['class']);
         $this->assertEquals('This is an exception', $payloads[0]['payloads'][0]['content']['message']);
-        var_dump($payloads);
     }
 
     /** @test */
