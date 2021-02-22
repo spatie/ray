@@ -2,6 +2,10 @@
 
 All notable changes to `ray` will be documented in this file
 
+## 1.20.0 - 2021-02-22
+
+- add `exception` method
+
 ## 1.19.5 - 2021-02-17
 
 - allow instances of `CarbonInterface` to be used for `CarbonPayload` (#316)
