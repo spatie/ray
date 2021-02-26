@@ -24,7 +24,7 @@ class Settings
 
     public function setDefaultSettings(array $defaults): self
     {
-        $this->settings = array_merge($defaults, $this->settings);
+        $this->settings = array_merge($this->settings, $defaults);
 
         return $this;
     }
