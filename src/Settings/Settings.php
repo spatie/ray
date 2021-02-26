@@ -35,7 +35,7 @@ class Settings
     public function setDefaultSettings(array $defaults)
     {
         foreach($defaults as $name => $value) {
-            if ($this->shouldSetSetting($name)) {
+            if ($this->wasLoadedUsingConfigFile($name)) {
                 $this->settings[$name] = $value;
             }
         }
@@ -43,7 +43,7 @@ class Settings
         return $this;
     }
 
-    protected function shouldSetSetting($name)
+    protected function wasLoadedUsingConfigFile($name)
     {
         if (! array_key_exists($name, $this->settings)) {
             return true;
