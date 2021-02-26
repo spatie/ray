@@ -10,7 +10,13 @@ class SettingsFactory
     {
         $settingValues = (new static())->getSettingsFromConfigFile($configDirectory);
 
-        return new Settings($settingValues);
+        $settings = new Settings($settingValues);
+
+        if (count($settingValues)) {
+            $settings->markAsLoadedUsingSettingsFile();
+        }
+
+        return $settings;
     }
 
     public function getSettingsFromConfigFile(string $configDirectory = null): array

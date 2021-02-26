@@ -7,6 +7,9 @@ class Settings
     /** @var array */
     protected $settings = [];
 
+    /** @var bool */
+    protected $loadedUsingSettingsFile = false;
+
     /** @var array */
     protected $defaultSettings = [
         'enable' => true,
@@ -22,11 +25,35 @@ class Settings
         $this->settings = array_merge($this->defaultSettings, $settings);
     }
 
-    public function setDefaultSettings(array $defaults): self
+    public function markAsLoadedUsingSettingsFile()
     {
-        $this->settings = array_merge($this->settings, $defaults);
+        $this->loadedUsingSettingsFile = true;
 
         return $this;
+    }
+
+    public function setDefaultSettings(array $defaults)
+    {
+        foreach($defaults as $name => $value) {
+            if ($this->shouldSetSetting($name)) {
+                $this->settings[$name] = $value;
+            }
+        }
+
+        return $this;
+    }
+
+    protected function shouldSetSetting($name)
+    {
+        if (! array_key_exists($name, $this->settings)) {
+            return true;
+        }
+
+        if (! $this->loadedUsingSettingsFile) {
+            return true;
+        }
+
+        return false;
     }
 
     public function __set(string $name, $value)
