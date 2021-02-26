@@ -34,7 +34,7 @@ class Settings
 
     public function setDefaultSettings(array $defaults)
     {
-        foreach($defaults as $name => $value) {
+        foreach ($defaults as $name => $value) {
             if ($this->shouldSetSetting($name)) {
                 $this->settings[$name] = $value;
             }
