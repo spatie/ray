@@ -44,7 +44,7 @@ class Client
     public function performAvailabilityCheck(): bool
     {
         try {
-            $curlHandle = $this->getCurlHandleForUrl('get', '/_availability_check');
+            $curlHandle = $this->getCurlHandleForUrl('get', '_availability_check');
 
             curl_exec($curlHandle);
 
