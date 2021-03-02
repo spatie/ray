@@ -8,11 +8,13 @@ class Origin
      * @param string|null $file
      * @param int|null $lineNumber
      */
-    public function __construct($file, $lineNumber)
+    public function __construct($file, $lineNumber, $hostname)
     {
         $this->file = $file;
 
         $this->lineNumber = $lineNumber;
+
+        $this->hostname = $hostname;
     }
 
     public function toArray(): array
@@ -20,6 +22,7 @@ class Origin
         return [
             'file' => $this->file,
             'line_number' => $this->lineNumber,
+            'hostname' => $this->hostname,
         ];
     }
 
