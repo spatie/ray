@@ -42,3 +42,39 @@ const { RayPlugin } = require('vue-ray/vue2');
 
 Vue.use(RayPlugin, { interceptErrors: true, host: '127.0.0.1', port: 23517 });
 ```
+
+### Installing the Vuex plugin
+
+In either a Vue 2.x or 3.x project, using installing the vuex plugin will send the vuex state to Ray whenever a mutation is called, in a manner similar to the `track()` method.
+
+```js
+// ...
+
+import { RayVuexPlugin } from 'vue-ray'; // or 'vue-ray/vue2' if using Vue 2.x
+
+// ...
+
+const storeObj = {
+  state: {
+    one: 11,
+    two: 22,
+  },
+  mutations: {
+    incrementOne(state) {
+        state.one += 1;
+    },
+    incrementTwo(state) {
+        state.two += 2;
+    },
+  },
+  actions: {},
+  modules: {},
+  plugins: [RayVuexPlugin],
+};
+
+// Vue 3:
+export default createStore(storeObj);
+
+// Vue 2:
+export default new Vuex.Store(storeObj);
+```
