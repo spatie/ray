@@ -128,7 +128,7 @@ export default {
         this.$ray().track('one');
 
         //if using vuex and the vue-ray vuex plugin, display vuex state changes:
-        this.$store.commit('increment');
+        this.$store.commit('incrementOne');
     },
     methods: {
         sendToRay() {
