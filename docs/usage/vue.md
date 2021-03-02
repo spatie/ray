@@ -103,7 +103,8 @@ export default {
     <div class="flex-col border-r border-gray-200 bg-white overflow-y-auto w-100">
         <div class="about">
             <h1>{{ title }}</h1>
-            <a @click="sendToRay()">send ref to Ray</a>
+            <a @click="sendToRay()">send ref to Ray</a><br>
+            <a @click="incrementOne()">increment data var 'one'</a><br>
         </div>
         <div ref="div1" class="w-full flex flex-wrap">
             <div ref="div1a" class="w-4/12 inline-flex">one</div>
@@ -115,17 +116,27 @@ export default {
 <script>
 export default {
     props: ['title'],
+    data() {
+        one: 1,
+    },
     created() {
         this.$ray().html('<em>test component created!</em>');
     },
     mounted() {
         this.$ray('test component mounted!');
         this.$ray().props();
+        this.$ray().track('one');
+
+        //if using vuex and the vue-ray vuex plugin, display vuex state changes:
+        this.$store.commit('incrementOne');
     },
     methods: {
         sendToRay() {
             this.$ray().ref('div1');
-        }
+        },
+        incrementOne() {
+            this.one += 1;
+        },
     }
 };
 </script>
