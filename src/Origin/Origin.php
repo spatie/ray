@@ -8,7 +8,7 @@ class Origin
      * @param string|null $file
      * @param int|null $lineNumber
      */
-    public function __construct($file, $lineNumber, $hostname)
+    public function __construct($file, $lineNumber, $hostname = '')
     {
         $this->file = $file;
 
