@@ -2,6 +2,10 @@
 
 All notable changes to `ray` will be documented in this file
 
+## 1.21.0 - 2021-03-03
+
+- add `hostname` in the origin section of a payload
+
 ## 1.20.1 - 2021-02-26
 
 - fix config loading priorities in other packages
