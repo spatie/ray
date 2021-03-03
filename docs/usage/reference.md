@@ -41,6 +41,7 @@ To display something in Ray use the `ray()` function. It accepts everything: str
 | `ray()->disabled()` | Check if Ray is disabled |
 | `ray()->enable()` | Enable sending stuff to Ray |
 | `ray()->enabled()` | Check if Ray is enabled |
+| `ray()->exception($e)` | Display information about an Exception |
 | `ray()->file($path)` | Display contents of a file |
 | `ray(…)->gray()` | Output in gray |
 | `ray(…)->green()` | Output in green |
@@ -198,6 +199,7 @@ Read more on [Craft](/docs/ray/v1/usage/craft)
 | `ray().enabled()` | Check if Ray is enabled |
 | `ray().error(err)` | Display information about an error or exception |
 | `ray().event(name, data)` | Display information about an event with optional data |
+| `ray().exception(err)` | Display extended information about an Error or Exception |
 | `ray().file(filename)` | Display contents of a file - NodeJS only |
 | `ray(…).hide()` | Display something in Ray and make it collapse immediately |
 | `ray().hideApp()` | Programmatically hide the Ray app window |
