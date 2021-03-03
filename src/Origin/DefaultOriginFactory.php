@@ -15,7 +15,7 @@ class DefaultOriginFactory implements OriginFactory
         return new Origin(
             $frame ? $frame->file : null,
             $frame ? $frame->lineNumber : null,
-            gethostname()
+            Hostname::get()
         );
     }
 

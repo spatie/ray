@@ -7,6 +7,7 @@ use Exception;
 use Illuminate\Support\Arr;
 use PHPUnit\Framework\TestCase;
 use Spatie\Backtrace\Frame;
+use Spatie\Ray\Origin\Hostname;
 use Spatie\Ray\Payloads\CallerPayload;
 use Spatie\Ray\Payloads\LogPayload;
 use Spatie\Ray\Ray;
@@ -31,6 +32,8 @@ class RayTest extends TestCase
     public function setUp(): void
     {
         parent::setUp();
+
+        Hostname::set('fake-hostname');
 
         $this->client = new FakeClient();
 

@@ -12,7 +12,7 @@
                 "origin": {
                     "file": "\/tests\/RayTest.php",
                     "line_number": "xxx",
-                    "hostname": "Alexs-MacBook-Pro.local"
+                    "hostname": "fake-hostname"
                 }
             },
             {
@@ -25,7 +25,7 @@
                 "origin": {
                     "file": "\/tests\/RayTest.php",
                     "line_number": "xxx",
-                    "hostname": "Alexs-MacBook-Pro.local"
+                    "hostname": "fake-hostname"
                 }
             },
             {
@@ -38,7 +38,7 @@
                 "origin": {
                     "file": "\/tests\/RayTest.php",
                     "line_number": "xxx",
-                    "hostname": "Alexs-MacBook-Pro.local"
+                    "hostname": "fake-hostname"
                 }
             }
         ],
