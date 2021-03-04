@@ -51,15 +51,15 @@ To get started, click the "Servers" icon on the top right of the Ray app
 
 On this screen you can define a server.
 
-![screenshot](/docs/ray/v1/images/define-server.jpg)
+![screenshot](/docs/ray/v1/images/define-server.png)
 
 When the server is defined, click the connect button.
 
-![screenshot](/docs/ray/v1/images/connect.jpg)
+![screenshot](/docs/ray/v1/images/connect.png)
 
 The output of any `ray` calls on the remote server will now be shown.
 
-![screenshot](/docs/ray/v1/images/remote-call.jpg)
+![screenshot](/docs/ray/v1/images/remote-call.png)
 
 
 
