@@ -42,3 +42,20 @@ You can press `cmd+shift+L` to hide or show the app, no matter which application
 You can customize this key in the preferences.
 
 ![screenshot](/docs/ray/v1/images/hotkeys.jpg)
+
+## Connecting to remote server
+
+When connected to a remote server, Ray will display the output of `ray` calls that happen on your remote server. The output is transferred securely from to server to your local machine via SSH.
+
+To get started, click the "Servers" icon on the top right of the Ray app
+
+On this screen you can define a server.
+
+![screenshot](/docs/ray/v1/images/define-server.jpg)
+
+When the server is defined, click the connect button
+
+![screenshot](/docs/ray/v1/images/connect.jpg)
+
+
+
