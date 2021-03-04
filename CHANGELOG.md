@@ -2,6 +2,10 @@
 
 All notable changes to `ray` will be documented in this file
 
+## 1.21.2 - 2021-03-04
+
+- fix hostname for other ray packages
+
 ## 1.21.1 - 2021-03-03
 
 - do not require hostname
