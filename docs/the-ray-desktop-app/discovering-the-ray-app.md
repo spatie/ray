@@ -43,7 +43,7 @@ You can customize this key in the preferences.
 
 ![screenshot](/docs/ray/v1/images/hotkeys.jpg)
 
-## Connecting to remote server
+## Connecting to remote servers
 
 When connected to a remote server, Ray will display the output of `ray` calls that happen on your remote server. The output is transferred securely from to server to your local machine via SSH.
 
