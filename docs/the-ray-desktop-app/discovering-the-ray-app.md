@@ -59,7 +59,7 @@ When the server is defined, click the connect button.
 
 The output of any `ray` calls on the remote server will now be shown.
 
-![screenshot](/docs/ray/v1/images/remote-call.png)
+![screenshot](/docs/ray/v1/images/remote-log.png)
 
 
 
