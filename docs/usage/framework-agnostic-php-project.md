@@ -446,6 +446,18 @@ ray()->phpinfo('xdebug.enabled', 'default_mimetype');
 ![screenshot](/docs/ray/v1/images/php-info.png)
 
 
+### Displaying exceptions
+
+You can display information about an Exception in Ray, including a snippet of source code showing where it was thrown.
+
+```php
+try {
+  throw new \Exception('test');
+} catch(\Exception $e) {
+  ray()->exception($e);
+}
+```
+
 ### Showing raw values
 
 When you sent certain values to Ray, such as Carbon instances or Eloquent models, these values will be displayed in nice way. To see all private, protected, and public properties of such values, you can use the `raw()` method.
