@@ -53,9 +53,13 @@ On this screen you can define a server.
 
 ![screenshot](/docs/ray/v1/images/define-server.jpg)
 
-When the server is defined, click the connect button
+When the server is defined, click the connect button.
 
 ![screenshot](/docs/ray/v1/images/connect.jpg)
+
+The output of any `ray` calls on the remote server will now be shown.
+
+![screenshot](/docs/ray/v1/images/remote-call.jpg)
 
 
 
