@@ -87,6 +87,7 @@ Read more on [Framework agnostic PHP](/docs/ray/v1/usage/framework-agnostic-php-
 
 | Call | Description |
 | --- | --- |
+| `ray()->env([name1, name2, ...])` | Display environment variables, optionally the specified names only |
 | `ray()->mailable($mailable)` | Render a mailable  |
 | `ray()->markdown($markdown)` | Render markdown  |
 | `ray()->model($model)` | Display the attributes and relations of a model  |
