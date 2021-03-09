@@ -1,6 +1,6 @@
 ---
-title: Developing a Ray Library
-weight: 2
+title: Developing a Ray Library: A Guide
+weight: 3
 ---
 
 The [Ray app](https://myray.app) is not a language-specific debugging app - as long as there's an integration library, it can be used with any language.
@@ -24,12 +24,6 @@ Create a javascript library that communicates with Ray that implements the follo
 - `charles()`
 - `send()`
 - `sendRequest()`
-
-We'll also need to create the following payloads:
-- `ColorPayload`
-- `HtmlPayload`
-- `LogPayload`
-- `Payload`
 
 ## Getting Started
 
@@ -78,8 +72,6 @@ node ./node_modules/.bin/ray-proxy
 ## Technology/Package choices
 
 For the development, we'll use [TypeScript](https://www.typescriptlang.org/docs/) as the primary language and the `esbuild` package to compile and bundle our library.  
-
-_Note that if you were creating this library to be consumed on a website via a `<script>` tag, using the `rollup` package would be a better choice._
 
 We'll use the `superagent` npm package for sending data to Ray, and the `uuid` package for generating the required `UUIDv4` values for creating valid payloads.
 
@@ -203,8 +195,8 @@ export function createLogPayload(text: string|string[], uuid: string | null = nu
 Now, we'll need our main class - `./src/Ray.ts`:
 
 ```typescript
-const  superagent  =  require('superagent');
 import { createLogPayload, createColorPayload, createHtmlPayload } from './payloadUtils';
+const  superagent = require('superagent');
 
 export class Ray {
 	public uuid: string | null = null;
@@ -251,7 +243,9 @@ export default Ray;
 
 ## Building the library
 
-We'll be using `ESBuild` to compile our library.  The following command tells `ESBuild` to bundle all files into a single output file, that it will be run on the `node` platform _(instead of in a browser)_, to target node v12 as the minimum node version to support, and to treat the `superagent` npm package as external _(meaning it should not be packaged as part of our outfile)_.
+We'll be using `ESBuild` to compile our library, which is a very fast ECMA compiler built in golang.
+
+The following command tells `ESBuild` to bundle all files into a single output file, that it will be run on the `node` platform _(instead of in a browser)_, to target node v12 as the minimum node version to support, and to treat the `superagent` npm package as external _(meaning it should not be packaged as part of our outfile)_.
 
 ```bash
 ./node_modules/.bin/esbuild --bundle \
@@ -269,7 +263,7 @@ if you'd like to add a shortcut, modify the `scripts` section in your `package.j
 
 Once saved, you may run the `npm run build` command instead of the `./node_modules/.bin/esbuild ...` command.
 
-After running the build command you choose, you'll see that the file `./dist/index.js` exists.
+After running the build command you choose, you'll see that the file `./dist/index.js` has been created.
 
 Finally, we're ready to test our library.
 
@@ -280,8 +274,9 @@ First, edit the file named `./dist/test.js`:
 ```javascript
 // ./dist/test.js
 const { Ray } = require('./index');
+
 (new Ray()).html('<em>hello world</em>').color('red');
-(new Ray()).send('hello world 2').color('blue');
+(new Ray()).send('Hello World!').color('blue');
 ```
 
 Finally, make sure the Ray app is running and run the following command in your terminal:
@@ -367,6 +362,8 @@ And lastly, we need to update the `send()` method on the `Ray` class:
 
 ```typescript
 public send(...args: any[]): Ray {
+    // we only need to send a single payload with `args` as the data, instead of
+    // sending a new payload for each arg in args.
 	const payload = createLogPayload(args, this.uuid);			
 	this.sendRequest(payload);
 	
