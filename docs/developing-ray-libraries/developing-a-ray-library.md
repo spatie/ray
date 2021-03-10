@@ -1,5 +1,5 @@
 ---
-title: Developing a Ray Library: A Guide
+title: Developing a Ray Library
 weight: 3
 ---
 
@@ -11,7 +11,7 @@ Estimated time investment: `1 hour`
 Required Tools: [Typescript](https://github.com/Microsoft/TypeScript), [ESBuild](https://github.com/evanw/esbuild), [ray-proxy](https://github.com/permafrost-dev/ray-proxy)
 Companion Repository: [permafrost-dev/creating-a-ray-integration](https://github.com/permafrost-dev/creating-a-ray-integration)
 
-# Creating a javascript integration for Ray
+## Creating a javascript integration for Ray
 
 In this guide, we'll create a new javascript library that communicates with Ray.  There are already comprehensive third-party libraries in this space, such as [node-ray](https://github.com/permafrost-dev/node-ray), but this will serve well as an example.
 
@@ -407,5 +407,5 @@ ray().html('<strong>bold text</strong>');
 
 That's it! Make sure to take a look at the [companion repository](https://github.com/permafrost-dev/creating-a-ray-integration) to check out the final project code.
 
-> Don't forget to stop the `ray-proxy` app and change your Ray port back to 23517.
+Don't forget to stop the `ray-proxy` app and change your Ray port back to 23517.
 
