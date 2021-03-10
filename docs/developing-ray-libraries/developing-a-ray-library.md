@@ -7,9 +7,9 @@ The [Ray app](https://myray.app) is not a language-specific debugging app - as l
 
 If you're interested in developing a Ray library for your language of choice, this document will help guide you through the process.  As an example, we'll be creating an example Ray integration library for Javascript/NodeJS; however, the concepts apply to any language.
 
-Estimated time investment: `1 hour`
-Required Tools: [Typescript](https://github.com/Microsoft/TypeScript), [ESBuild](https://github.com/evanw/esbuild), [ray-proxy](https://github.com/permafrost-dev/ray-proxy)
-Companion Repository: [permafrost-dev/creating-a-ray-integration](https://github.com/permafrost-dev/creating-a-ray-integration)
+- Estimated time investment: `1 hour`
+- Required Tools: [Typescript](https://github.com/Microsoft/TypeScript), [ESBuild](https://github.com/evanw/esbuild), [ray-proxy](https://github.com/permafrost-dev/ray-proxy)
+- Companion Repository: [permafrost-dev/creating-a-ray-integration](https://github.com/permafrost-dev/creating-a-ray-integration)
 
 ## Creating a javascript integration for Ray
 
