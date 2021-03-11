@@ -21,6 +21,7 @@ To display something in Ray use the `ray()` function. It accepts everything: str
 - [Javascript](#javascript)
 - [NodeJS](#nodejs)
 - [Vue](#vue)
+- [Alpine.js](#alpinejs)
 
 ## Framework agnostic PHP
 
@@ -233,6 +234,10 @@ Read more on [Craft](/docs/ray/v1/usage/craft)
 | `this.$ray().ref(name)` | Display the `innerHTML` of a named ref in Ray |
 | `this.$ray().track(name)` | Display changes to a component's data variable in real time |
 | `this.$ray().untrack(name)` | Stop displaying changes to a component's data variable |
+
+## AlpineJS
+
+All methods available to [NodeJS](#nodejs) are available to the Alpine.js integration.
 
 ### Updating a Ray instance
 
