@@ -21,7 +21,7 @@ return [
     /*
     * When enabled, all cache events  will automatically be sent to Ray.
     */
-    'send_cache_to_ray' => env('SEND CACHE_TO_RAY', false),
+    'send_cache_to_ray' => env('SEND_CACHE_TO_RAY', false),
 
     /*
     * When enabled, all things passed to `dump` or `dd`
@@ -32,7 +32,7 @@ return [
     /*
     * When enabled all job events will automatically be sent to Ray.
     */
-    'send_jobs_to_ray' => env('SEND JOBS_TO_RAY', false),
+    'send_jobs_to_ray' => env('SEND_JOBS_TO_RAY', false),
 
     /*
     * When enabled, all things logged to the application log
@@ -43,17 +43,17 @@ return [
     /*
     * When enabled, all queries will automatically be sent to Ray.
     */
-    'send_queries_to_ray' => env('SEND QUERIES_TO_RAY', false),
+    'send_queries_to_ray' => env('SEND_QUERIES_TO_RAY', false),
 
     /*
     * When enabled, all requests made to this app will automatically be sent to Ray.
     */
-    'send_requests_to_ray' => env('SEND REQUESTS_TO_RAY', false),
+    'send_requests_to_ray' => env('SEND_REQUESTS_TO_RAY', false),
     
     /*
     * When enabled, all views that are rendered automatically be sent to Ray.
     */
-    'send_views_to_ray' => env('SEND VIEWS_TO_RAY', false),
+    'send_views_to_ray' => env('SEND_VIEWS_TO_RAY', false),
 
     /*
     * The host used to communicate with the Ray app.
