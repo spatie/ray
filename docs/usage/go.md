@@ -90,34 +90,9 @@ exception in your app to halt execution.
 
 If you are using Windows, you must set the maximum execution time to a high value, as the paused time will count against the maximum execution time.
 
-### Working with JSON
-
-Want to display the JSON representation of anything you'd like in Ray? Use `toJson`. You can provide any value that can
-be converted to JSON with [json_encode](https://www.php.net/json_encode).
-
-```go
-ray()->toJson(['a' => 1, 'b' => ['c' => 3]]);
-```
-
-![screenshot](/docs/ray/v1/images/to-json.png)
-
-The `toJson` function can also accept multiple arguments.
-
-```go
-// all of these will be displayed in Ray
-$object = new \stdClass();
-$object->company = 'Spatie';
-
-ray()->toJson(
-    ['a' => 1, 'b' => ['c' => 3]],
-    ['d' => ['e' => 5]],
-    $object
-);
-```
-
 ### Working with Time
 
-[Carbon](https://carbon.nesbot.com/docs/) is a popular datetime package. You can send instances of `Carbon` to Ray with `carbon`.
+---
 
 ```go
 ray.Ray().Date()
@@ -170,7 +145,7 @@ myRay.Red().Large()
 
 You can conditionally show things using the `ShowIf` method. If you pass a truthy value, the item will be displayed.
 
-```php
+```go
 ray.Ray("will be show").ShowIf(true)
 ray.Ray("will not be shown").ShowIf(false)
 ```
@@ -180,71 +155,44 @@ not.
 
 ### Removing items
 
-You can remove an item that is already displayed in Ray. To do this, call the `remove` function on an instance return by
+You can remove an item that is already displayed in Ray. To do this, call the `Remove` function on an instance return by
 the `ray` function.
 
-```php
+```go
 ray := ray.Ray("will be removed after 1 sec")
 
-sleep(1);
+time.Sleep(time.Second)
 
-$ray->remove();
+ray.Remove()
 ```
 
-You can also conditionally remove items with the `removeWhen` function (or the `removeIf` alias).
+You can also conditionally remove items with the `RemoveWhen` function (or the `RemoveIf` alias).
 
-```php
-ray('this one will be remove if the number is 2')->removeWhen($number === 2);
+```go
+ray.Ray("this one will be remove if the number is 2").RemoveWhen(num == 2);
 ```
 
-`removeWhen` also accepts a callable.
+`RemoveWhen` also accepts a callable that returns a boolean.
 
-```php
-ray('this one will be remove if the number is 2')->removeWhen(fn() => ... // return true to remove the item);
+```go
+ray.Ray("this one will be remove if the number is 2").RemoveWhen(func () bool { ... } // return true to remove the item);
 ```
 
 ### Hiding items
 
 You can display something in ray and make it hidden immediately.
 
-```php
-ray()->hide()
+```go
+ray.Ray().Hide()
 ```
 
 ![screenshot](/docs/ray/v1/images/hide.jpg)
-
-### Returning items
-
-To make all methods chainable, the `ray()` function returns and instance of `Spatie\Ray\Ray`. To quickly send something
-to Ray and have that something return as a value, use the `pass` function.
-
-```php
-ray()->pass($anything) // $anything will be returned
-```
-
-This is handy when, for instance, debuggin return values.
-
-You can change
-
-```php
-function foo() {
-    return 'return value',
-}
-```
-
-to
-
-```php
-function foo() {
-    return ray()->pass('return value'),
-}
-```
 
 ### Displaying a notification
 
 You can use Ray to display a notification.
 
-```php
+```go
 ray.Ray().Notify('This is my notification')
 ```
 
@@ -254,7 +202,7 @@ ray.Ray().Notify('This is my notification')
 
 You can stop the Go process by calling `die`.
 
-```php
+```go
 ray.Ray().Die()
 ```
 
@@ -269,21 +217,21 @@ ray.Ray().HideApp() // Ray will be hidden
 
 ### Enabling / disabling Ray
 
-You can enable and disable sending stuff to Ray with the `enable` and `disable` functions.
+You can enable and disable sending stuff to Ray with the `Enable` and `Disable` functions.
 
 ```go
-ray.Ray('one') // will be displayed in ray
+ray.Ray("one") // will be displayed in ray
 
 ray.Ray().Disable()
 
-ray.Ray('two') // won't be displayed in ray
+ray.Ray("two") // won't be displayed in ray
 
 ray.Ray().Enable()
 
-ray.Ray('three') // will be displayed in ray
+ray.Ray("three") // will be displayed in ray
 ```
 
-You can check if Ray is enabled or disabled with the `enabled` and `disabled` functions.
+You can check if Ray is enabled or disabled with the `Enabled` and `Disabled` functions.
 
 ```GO
 ray.Ray().Disable()
