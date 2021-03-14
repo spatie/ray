@@ -1,7 +1,4 @@
----
-title: Go
-weight: 10
----
+
 
 To display something in Ray use the `ray.Ray()` function. It accepts everything: strings, maps, booleans, ... you name it.
 
@@ -92,15 +89,21 @@ If you are using Windows, you must set the maximum execution time to a high valu
 
 ### Working with Time
 
----
+Ray can display information about a date in a nicely formatted table using the `Time()` method.
 
 ```go
-ray.Ray().Date()
+ray.Ray().Time(time.Now())
+```
+
+You can also format the date different than the Go's default format by using `TimeWithFormat()`
+
+```go
+ray.Ray().TimeWithFormat(time.Now(), "01-02-2006 15:04:05")
 ```
 
 ### Displaying images
 
-To display an image, call the `image` function and pass either a fully-qualified filename or url as its only argument.
+To display an image, call the `image` function and pass either a fully-qualified url as its only argument.
 
 ```go
 ray.Ray().Image("https://placekitten.com/200/300")

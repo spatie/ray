@@ -241,7 +241,8 @@ Read more on [Craft](/docs/ray/v1/usage/craft)
 | `ray.Ray(…).Blue()` | Output in color. Use `Green`, `Orange`, `Red`, `Blue`,`Purple` or `Gray` |
 | `ray.Ray().ClearScreen()` | Clear current screen |
 | `ray.Ray().ClearAll()` | Clear current and all previous screens |
-| `ray.Ray().date(date, format)` | Display a formatted date, the timezone, and its timestamp |
+| `ray.Ray().Time(date)` | Display a formatted date, the timezone, and its time stamp |
+| `ray.Ray().TimeWithFormat(date)` | Display a formatted date, the timezone, and its time stamp |
 | `ray.Ray().Die()` | Halt code execution |
 | `ray.Ray().Disable()` | Disable sending stuff to Ray |
 | `ray.Ray().Disabled()` | Check if Ray is disabled |
@@ -252,7 +253,6 @@ Read more on [Craft](/docs/ray/v1/usage/craft)
 | `ray.Ray().HideApp()` | Hide the app |
 | `ray.Ray().Html(string)` | Send HTML to Ray |
 | `ray.Ray().Image(url)` | Display an image in Ray |
-| `ray().json([…])` | Send JSON to Ray |
 | `ray.Ray().NewScreen("")` | Start a new screen |
 | `ray.Ray().NewScreen("title")` | Start a new named screen |
 | `ray.Ray(…).Notify(message)` | Display a notification |
