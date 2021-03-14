@@ -21,6 +21,7 @@ To display something in Ray use the `ray()` function. It accepts everything: str
 - [Javascript](#javascript)
 - [NodeJS](#nodejs)
 - [Vue](#vue)
+- [Go](#go)
 
 ## Framework agnostic PHP
 
@@ -48,7 +49,7 @@ To display something in Ray use the `ray()` function. It accepts everything: str
 | `ray()->hideApp()` | Hide the app |
 | `ray()->html($html)` | Render a piece of HTML  |
 | `ray()->image($path)` | Display an image form a path or URL  |
-| `ray()->json($json, $another, …)` | Send one or more valid JSON strings to Ray | 
+| `ray()->json($json, $another, …)` | Send one or more valid JSON strings to Ray |
 | `ray(…)->large()` | Output text bigger |
 | `ray()->measure()` | Display runtime and memory usage. When measure is called again, the time between this and previous call is also displayed |
 | `ray()->newScreen()` | Start a new screen |
@@ -171,7 +172,7 @@ Read more on [Craft](/docs/ray/v1/usage/craft)
 | `ray().clearScreen()` | Clear current screen |
 | `ray().clearAll()` | Clear current and all previous screens |
 | `ray(…).hide()` | Display something in Ray and make it collapse immediately |
-| `ray(JSON.parse([…]))` | Send JSON to Ray | 
+| `ray(JSON.parse([…]))` | Send JSON to Ray |
 | `ray().newScreen()` | Start a new screen |
 | `ray().newScreen('title')` | Start a new named screen |
 | `ray(…).notify(message)` | Display a notification |
@@ -190,7 +191,7 @@ Read more on [Craft](/docs/ray/v1/usage/craft)
 | `ray().clearScreen()` | Clear current screen |
 | `ray().clearAll()` | Clear current and all previous screens |
 | `ray().count(name)` | Count how many times a piece of code is called, with optional name |
-| `ray().date(date, format)` | Display a formatted date, the timezone, and its timestamp | 
+| `ray().date(date, format)` | Display a formatted date, the timezone, and its timestamp |
 | `ray().die()` | Halt code execution - NodeJS only |
 | `ray().disable()` | Disable sending stuff to Ray |
 | `ray().disabled()` | Check if Ray is disabled |
@@ -201,9 +202,9 @@ Read more on [Craft](/docs/ray/v1/usage/craft)
 | `ray().file(filename)` | Display contents of a file - NodeJS only |
 | `ray(…).hide()` | Display something in Ray and make it collapse immediately |
 | `ray().hideApp()` | Programmatically hide the Ray app window |
-| `ray().html(string)` | Send HTML to Ray | 
-| `ray().image(url)` | Display an image in Ray | 
-| `ray().json([…])` | Send JSON to Ray | 
+| `ray().html(string)` | Send HTML to Ray |
+| `ray().image(url)` | Display an image in Ray |
+| `ray().json([…])` | Send JSON to Ray |
 | `ray().measure(callable)` | Measure the performance of a callback function |
 | `ray().measure()` | Begin measuring the overall time and elapsed time since previous `measure()` call |
 | `ray().newScreen()` | Start a new screen |
@@ -218,7 +219,7 @@ Read more on [Craft](/docs/ray/v1/usage/craft)
 | `ray().stopTime(name)` | Removes a named stopwatch if specified, otherwise removes all stopwatches |
 | `ray().table(…)` | Display an array of items or an object formatted as a table; Objects and arrays are pretty-printed |
 | `ray()->trace()` | Check entire backtrace |
-| `ray().xml(string)` | Send XML to Ray | 
+| `ray().xml(string)` | Send XML to Ray |
 
 ## Vue
 
@@ -230,6 +231,38 @@ Read more on [Craft](/docs/ray/v1/usage/craft)
 | `this.$ray().ref(name)` | Display the `innerHTML` of a named ref in Ray |
 | `this.$ray().track(name)` | Display changes to a component's data variable in real time |
 | `this.$ray().untrack(name)` | Stop displaying changes to a component's data variable |
+
+## Go
+
+| Call | Description |
+| --- | --- |
+| `ray.Ray(variable)` | Display a string, array or object |
+| `ray.Ray(variable, another, …)` | Ray accepts multiple arguments |
+| `ray.Ray(…).Blue()` | Output in color. Use `Green`, `Orange`, `Red`, `Blue`,`Purple` or `Gray` |
+| `ray.Ray().ClearScreen()` | Clear current screen |
+| `ray.Ray().ClearAll()` | Clear current and all previous screens |
+| `ray.Ray().date(date, format)` | Display a formatted date, the timezone, and its timestamp |
+| `ray.Ray().Die()` | Halt code execution |
+| `ray.Ray().Disable()` | Disable sending stuff to Ray |
+| `ray.Ray().Disabled()` | Check if Ray is disabled |
+| `ray.Ray().Enable()` | Enable sending stuff to Ray |
+| `ray.Ray().Enabled()` | Check if Ray is enabled |
+| `ray.Ray(…).Hide()` | Display something in Ray and make it collapse immediately |
+| `ray.Ray().Pause()` | Pause execution |
+| `ray.Ray().HideApp()` | Hide the app |
+| `ray.Ray().Html(string)` | Send HTML to Ray |
+| `ray.Ray().Image(url)` | Display an image in Ray |
+| `ray().json([…])` | Send JSON to Ray |
+| `ray.Ray().NewScreen("")` | Start a new screen |
+| `ray.Ray().NewScreen("title")` | Start a new named screen |
+| `ray.Ray(…).Notify(message)` | Display a notification |
+| `ray.Ray(…).Pass(variable)` | Display something in Ray and return the value instead of a Ray instance |
+| `ray.Ray().ShowApp()` | Bring the app to the foreground |
+| `ray.Ray(…).ShowIf(true)` | Conditionally show things based on a truthy value or callable |
+| `ray.Ray(…).ShowWhen(true)` | Conditionally show things based on a truthy value or callable  |
+| `ray.Ray(…).Small()` | Output text smaller or bigger. Use `Large` or `Small` |
+| `ray.Ray(…).RemoveWhen(true)` | Conditionally remove an item based on a truthy value or callable |
+
 
 ### Updating a Ray instance
 

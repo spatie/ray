@@ -9,11 +9,9 @@ To send information to the Ray desktop app, you'll need to install a package or 
 - [Laravel](/docs/ray/v1/installation-in-your-project/laravel)
 - [WordPress](/docs/ray/v1/installation-in-your-project/wordpress)
 - [Yii](/docs/ray/v1/installation-in-your-project/yii)
-
 - [Ruby](/docs/ray/v1/installation-in-your-project/ruby)
-
 - [JavaScript](/docs/ray/v1/installation-in-your-project/javascript)
 - [NodeJS](/docs/ray/v1/installation-in-your-project/nodejs)
 - [Vue](/docs/ray/v1/installation-in-your-project/vue)
-
+- [Go](/docs/ray/v1/installation-in-your-project/go)
 - [Bash](/docs/ray/v1/installation-in-your-project/bash)
