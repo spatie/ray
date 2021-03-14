@@ -22,6 +22,7 @@ To display something in Ray use the `ray()` function. It accepts everything: str
 - [NodeJS](#nodejs)
 - [Vue](#vue)
 - [Go](#go)
+- [Alpine.js](#alpinejs)
 
 ## Framework agnostic PHP
 
@@ -42,6 +43,7 @@ To display something in Ray use the `ray()` function. It accepts everything: str
 | `ray()->disabled()` | Check if Ray is disabled |
 | `ray()->enable()` | Enable sending stuff to Ray |
 | `ray()->enabled()` | Check if Ray is enabled |
+| `ray()->exception($e)` | Display information about an Exception |
 | `ray()->file($path)` | Display contents of a file |
 | `ray(…)->gray()` | Output in gray |
 | `ray(…)->green()` | Output in green |
@@ -87,6 +89,7 @@ Read more on [Framework agnostic PHP](/docs/ray/v1/usage/framework-agnostic-php-
 
 | Call | Description |
 | --- | --- |
+| `ray()->env([name1, name2, ...])` | Display environment variables, optionally the specified names only  |
 | `ray()->mailable($mailable)` | Render a mailable  |
 | `ray()->markdown($markdown)` | Render markdown  |
 | `ray()->model($model)` | Display the attributes and relations of a model  |
@@ -199,6 +202,7 @@ Read more on [Craft](/docs/ray/v1/usage/craft)
 | `ray().enabled()` | Check if Ray is enabled |
 | `ray().error(err)` | Display information about an error or exception |
 | `ray().event(name, data)` | Display information about an event with optional data |
+| `ray().exception(err)` | Display extended information about an Error or Exception |
 | `ray().file(filename)` | Display contents of a file - NodeJS only |
 | `ray(…).hide()` | Display something in Ray and make it collapse immediately |
 | `ray().hideApp()` | Programmatically hide the Ray app window |
@@ -256,13 +260,15 @@ Read more on [Craft](/docs/ray/v1/usage/craft)
 | `ray.Ray().NewScreen("")` | Start a new screen |
 | `ray.Ray().NewScreen("title")` | Start a new named screen |
 | `ray.Ray(…).Notify(message)` | Display a notification |
-| `ray.Ray(…).Pass(variable)` | Display something in Ray and return the value instead of a Ray instance |
 | `ray.Ray().ShowApp()` | Bring the app to the foreground |
 | `ray.Ray(…).ShowIf(true)` | Conditionally show things based on a truthy value or callable |
 | `ray.Ray(…).ShowWhen(true)` | Conditionally show things based on a truthy value or callable  |
 | `ray.Ray(…).Small()` | Output text smaller or bigger. Use `Large` or `Small` |
 | `ray.Ray(…).RemoveWhen(true)` | Conditionally remove an item based on a truthy value or callable |
 
+## AlpineJS
+
+All methods available to [NodeJS](#nodejs) are available to the Alpine.js integration.
 
 ### Updating a Ray instance
 

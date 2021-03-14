@@ -1,4 +1,7 @@
-
+---
+title: Go
+weight: 10
+---
 
 To display something in Ray use the `ray.Ray()` function. It accepts everything: strings, maps, booleans, ... you name it.
 

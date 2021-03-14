@@ -207,6 +207,17 @@ collect(['a', 'b', 'c'])
 
 ![screenshot](/docs/ray/v1/images/collection.jpg)
 
+
+### Displaying environment variables
+
+You can use the `env()` method to display all environment variables as loaded from your `.env` file.  You may optionally pass an array of variable names to exclusively display.
+
+```php
+ray()->env();
+
+ray()->env(['APP_NAME', 'DB_DATABASE', 'DB_HOSTNAME', 'DB_PORT']);
+```
+
 ### Using Ray in Blade views
 
 You can use the `@ray` directive to easily send variables to Ray from inside a Blade view. You can pass as many things as you'd like.

@@ -1,6 +1,6 @@
 ---
 title: Go
-weight: 7
+weight: 10
 ---
 
 
