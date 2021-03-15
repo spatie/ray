@@ -246,7 +246,7 @@ Read more on [Craft](/docs/ray/v1/usage/craft)
 | `ray.Ray().ClearScreen()` | Clear current screen |
 | `ray.Ray().ClearAll()` | Clear current and all previous screens |
 | `ray.Ray().Time(date)` | Display a formatted date, the timezone, and its time stamp |
-| `ray.Ray().TimeWithFormat(date)` | Display a formatted date, the timezone, and its time stamp |
+| `ray.Ray().TimeWithFormat(date, format)` | Display a formatted date, the timezone, and its time stamp |
 | `ray.Ray().Die()` | Halt code execution |
 | `ray.Ray().Disable()` | Disable sending stuff to Ray |
 | `ray.Ray().Disabled()` | Check if Ray is disabled |
