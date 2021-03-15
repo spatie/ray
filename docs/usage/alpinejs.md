@@ -1,6 +1,6 @@
 ---
 title: Alpine.js
-weight: 10
+weight: 11
 ---
 
 The third-party Alpine.js [package](https://github.com/permafrost-dev/alpinejs-ray) for Ray uses the [package for NodeJS](/docs/ray/v1/installation-in-your-project/nodejs) for 

@@ -1,6 +1,6 @@
 ---
 title: Alpine.js
-weight: 10
+weight: 11
 ---
 
 You can send information from Alpine.js to Ray via this third party package:
