@@ -30,7 +30,7 @@ By default Wordpress loads your plugins in the following order:
 
 If you wish to debug your plugins within the Ray app it is recommended that you install the plugin into your `/wp-content/mu-plugins` directory. Further details on Must Use Plugins can be [found here](https://wordpress.org/support/article/must-use-plugins/):
 
-To install, inside the `wp-contents/mu-plugins` directory run this command
+To install, inside the `wp-content/mu-plugins` directory run this command
 
 ```bash
 git clone git@github.com:spatie/wordpress-ray
