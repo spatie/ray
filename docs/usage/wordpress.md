@@ -36,7 +36,19 @@ wp_mail('to@email.com', 'my subject', 'the content');
 
 ![screenshot](/docs/ray/v1/images/wordpress-mails.png)
 
-To stop showing mail, call `stopShowingMails()`.
+To stop showing mails, call `stopShowingMails()`.
+
+### Displaying WordPress errors
+
+To display all WordPress errors, call `showWordPressErrors()`
+
+```php
+ray()->showWordPressErrors();
+```
+
+![screenshot](/docs/ray/v1/images/wordpress-errors.png)
+
+To stop showing errors, call `stopShowingWordPressErrors()`.
 
 ### Production environments
 
