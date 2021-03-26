@@ -23,7 +23,7 @@ $result = $wpdb->get_results( "SELECT * FROM wp_usermeta WHERE meta_key = 'point
 
 To stop showing queries, call `stopShowingQueries()`
 
-### Displaying mails
+## Displaying mails
 
 To show all mails sent in Ray call `showMails()`.
 
@@ -38,7 +38,7 @@ wp_mail('to@email.com', 'my subject', 'the content');
 
 To stop showing mails, call `stopShowingMails()`.
 
-### Displaying WordPress errors
+## Displaying WordPress errors
 
 To display all WordPress errors, call `showWordPressErrors()`
 
@@ -50,7 +50,7 @@ ray()->showWordPressErrors();
 
 To stop showing errors, call `stopShowingWordPressErrors()`.
 
-### Production environments
+## Production environments
 
 By default, Ray is disabled in production environments. If you want to use Ray in a production environment, you must explicitly enable it with `ray()->enable()`.
 
