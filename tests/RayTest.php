@@ -847,6 +847,22 @@ class RayTest extends TestCase
         $this->assertCount(1, $this->client->sentPayloads());
     }
 
+    /** @test */
+    public function it_can_send_using_if_condition()
+    {
+        ray_if(true,'a');
+
+        $this->assertMatchesOsSafeSnapshot($this->client->sentPayloads());
+    }
+
+    /** @test */
+    public function it_can_send_using_unless_condition()
+    {
+        ray_unless(false,'a');
+
+        $this->assertMatchesOsSafeSnapshot($this->client->sentPayloads());
+    }
+
     protected function getNewRay(): Ray
     {
         return Ray::create($this->client, 'fakeUuid');

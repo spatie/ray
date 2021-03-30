@@ -58,3 +58,25 @@ if (! function_exists('rd')) {
         ray(...$args)->die();
     }
 }
+
+if(! function_exists('ray_if')) {
+    /**
+     * @param bool  $condition
+     * @param mixed ...$args
+     */
+    function ray_if($condition, ...$args) {
+        if ($condition) {
+            ray(...$args);
+        }
+    }
+}
+
+if(! function_exists('ray_unless')) {
+    /**
+     * @param bool  $condition
+     * @param mixed ...$args
+     */
+    function ray_unless($condition, ...$args) {
+        ray_if(! $condition, ...$args);
+    }
+}
