@@ -80,6 +80,7 @@ To display something in Ray use the `ray()` function. It accepts everything: str
 | `$ray->large()` | Update the size of a Ray instance. Use `large()` or `small`   |
 | `$ray->red()` | Update the color of a Ray instance. Use `green()`, `orange()`, `red()`, `blue()`,`purple()` or `gray()`   |
 | `$ray->remove()` | Remove an item from Ray   |
+| `$ray->removeIf(true)` | Conditionally remove an item based on a truthy value or callable   |
 | `$ray->removeWhen(true)` | Conditionally remove an item based on a truthy value or callable   |
 | `$ray->send()` | Update the content of a Ray instance  |
 
@@ -216,6 +217,9 @@ Read more on [Craft](/docs/ray/v1/usage/craft)
 | `ray(…).notify(message)` | Display a notification |
 | `ray(…).pass(variable)` | Display something in Ray and return the value instead of a Ray instance |
 | `ray().pause()` | Pause code execution within your code; must be called using `await` |
+| `ray.remove()` | Remove an item from Ray   |
+| `ray.removeIf(true)` | Conditionally remove an item based on a truthy value or callable   |
+| `ray.removeWhen(true)` | Conditionally remove an item based on a truthy value or callable   |
 | `ray().showApp()` | Programmatically show the Ray app window |
 | `ray(…).showIf(true)` | Conditionally show things based on a truthy value or callable  |
 | `ray(…).showWhen(true)` | Conditionally show things based on a truthy value or callable  |

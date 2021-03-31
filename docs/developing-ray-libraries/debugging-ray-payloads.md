@@ -11,15 +11,21 @@ You may use the following third-party package to intercept and display the data 
 
 ## Usage
 
-Install `ray-proxy` as you would any other npm package:
+First, set your port in the Ray app to `23516` in the preferences.
+
+Next, you need to start the proxy application.
+
+The easiest way to run `ray-proxy` is with `npx`:
+
+```bash
+npx ray-proxy
+```
+
+You can also install `ray-proxy` as you would any other npm package:
 
 ```bash
 npm install ray-proxy --save-dev
-```
 
-First, set your port in the Ray app to `23516` in the preferences. Finally, run the proxy:
-
-```bash
 ./node_modules/.bin/ray-proxy
 ```
 
