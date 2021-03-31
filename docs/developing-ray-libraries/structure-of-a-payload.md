@@ -41,7 +41,9 @@ ray()->html('<em>hello world!</em>);
 
 ## Payload sections overview
 
-- The `"uuid"` section contains a valid `UUIDv4` value.  This value is important, as it can be used in future to modify the payload's display, such as changing its color.
+> All of the listed payload sections are **required** when sending a payload from an integration library.
+
+- The `"uuid"` section contains a valid `UUIDv4` value.  This value is important, as it can be used in future to modify the payload after it's been sent to Ray _(i.e., changing its color)_.
 - The `"meta"` section contains metadata about the Ray integration library as well as the current language and its version.
 - The `payloads[0].origin` section contains information about where the call to `ray()` originated from.  It's used to tell Ray what file to open when the related file link is clicked.
 - The `payloads[0].type` value contains the type of payload being sent.
