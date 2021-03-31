@@ -58,3 +58,12 @@ if (! function_exists('rd')) {
         ray(...$args)->die();
     }
 }
+
+if (! function_exists('rr')) {
+    function rr($arg)
+    {
+        ray($arg);
+
+        return $arg;
+    }
+}
