@@ -59,7 +59,6 @@ if (! function_exists('rd')) {
     }
 }
 
-
 if (! function_exists('rr')) {
     function rr($arg)
     {
