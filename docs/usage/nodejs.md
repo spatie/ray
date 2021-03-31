@@ -195,6 +195,31 @@ ray('will not be shown').showIf(false);
 ray('will not be shown').showWhen(() => false);
 ```
 
+### Removing items
+
+You can remove an item that is already displayed in Ray. To do this, call the `remove` function on an instance return by
+the `ray` function.
+
+```js
+const rayInstance = ray('will be removed after 1 sec');
+
+sleep(1); // assuming sleep() is defined somewhere
+
+rayInstance.remove();
+```
+
+You can also conditionally remove items with the `removeWhen` function (or the `removeIf` alias).
+
+```js
+ray('this one will be remove if the number is 2').removeWhen(number === 2);
+```
+
+`removeWhen` also accepts a callable.
+
+```js
+ray('this one will be remove if the number is 2').removeWhen(() => number === 2); // return true to remove the item
+```
+
 ### See the caller of a function
 
 Sometimes you want to know where your code is being called. You can quickly determine that by using the `caller`
