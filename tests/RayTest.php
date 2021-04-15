@@ -15,7 +15,6 @@ use Spatie\Ray\Settings\SettingsFactory;
 use Spatie\Ray\Tests\TestClasses\FakeClient;
 use Spatie\Snapshots\MatchesSnapshots;
 use Spatie\TestTime\TestTime;
-use Throwable;
 
 class RayTest extends TestCase
 {
