@@ -2,9 +2,13 @@
 
 All notable changes to `ray` will be documented in this file
 
-## 1.21.3 - 2021-04-17
+## 1.21.4 - 2021-04-17
 
 - color exceptions red by default
+
+## 1.21.3 - 2021-04-14
+
+- allow spatie/macroable v2 [#426](https://github.com/spatie/ray/pull/426)
 
 ## 1.21.2 - 2021-03-04
 

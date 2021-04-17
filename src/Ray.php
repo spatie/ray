@@ -31,6 +31,7 @@ use Spatie\Ray\Payloads\LogPayload;
 use Spatie\Ray\Payloads\MeasurePayload;
 use Spatie\Ray\Payloads\NewScreenPayload;
 use Spatie\Ray\Payloads\NotifyPayload;
+use Spatie\Ray\Payloads\PhpInfoPayload;
 use Spatie\Ray\Payloads\RemovePayload;
 use Spatie\Ray\Payloads\ShowAppPayload;
 use Spatie\Ray\Payloads\SizePayload;
@@ -314,25 +315,9 @@ class Ray
 
     public function phpinfo(string ...$properties): self
     {
-        if (! count($properties)) {
-            return $this->table([
-                'PHP version' => phpversion(),
-                'Memory limit' => ini_get('memory_limit'),
-                'Max file upload size' => ini_get('max_file_uploads'),
-                'Max post size' => ini_get('post_max_size'),
-                'PHP ini file' => php_ini_loaded_file(),
-                "PHP scanned ini file" => php_ini_scanned_files() ,
-                'Extensions' => implode(', ', get_loaded_extensions()),
-            ], 'PHPInfo');
-        }
+        $payload = new PhpInfoPayload(...$properties);
 
-        $properties = array_flip($properties);
-
-        foreach ($properties as $property => $value) {
-            $properties[$property] = ini_get($property);
-        }
-
-        return $this->table($properties, 'PHPInfo');
+        return $this->sendRequest($payload);
     }
 
     public function showWhen($boolOrCallable): self

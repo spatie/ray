@@ -55,23 +55,15 @@ ray()->send('this is a test');
 
 To help determine what payload data is actually being sent to Ray from our test PHP script, we'll use the third-party [`permafrost-dev/ray-proxy`](https://github.com/permafrost-dev/ray-proxy) package to intercept and display all payloads being sent to Ray.
 
-You'll first need to install the `ray-proxy` package:
+When you're ready to start intercepting data, start Ray app and set the port to `23516` in the preferences.  Then start `ray-proxy`:
 
 ```bash
-mkdir ./ray-lib-app
-cd ./ray-lib-app
-npm install ray-proxy
-```
-
-When you're ready to start intercepting data, start Ray app and set the port to `23516`.  Then start the proxy:
-
-```bash
-node ./node_modules/.bin/ray-proxy
+npx ray-proxy
 ```
 
 ## Technology/Package choices
 
-For the development, we'll use [TypeScript](https://www.typescriptlang.org/docs/) as the primary language and the `esbuild` package to compile and bundle our library.  
+For the development, we'll use [TypeScript](https://www.typescriptlang.org/docs/) as the primary language and the `esbuild` package to compile and bundle our library.
 
 We'll use the `superagent` npm package for sending data to Ray, and the `uuid` package for generating the required `UUIDv4` values for creating valid payloads.
 
@@ -128,11 +120,16 @@ php ./ray-library-reference/ray-test.php
 }
 ```
 
-Here we see that a payload has 3 parts: the `type`, the `content`, and the `origin`.  It appears that multiple payloads can be sent at once _(because the `payloads` property is an array)_.
+Here we see that a payload has 3 parts: the `type`, the `content`, and the `origin`.
 
-Sent along with the payload is a `UUIDv4` and a `meta` object, which seems to contain the name and version of the Ray library we're using.
+Sent along with the payload is a `UUIDv4` and a `meta` object, which contains the name and version of the Ray library we're using.
 
-Since this is a basic walk though, we'll use hard-coded `Origin` data - data about where the call originated from - placed in `./src/Origin.ts` _(it is left to the reader to implement a working Origin class)_:
+> The `uuid` property is critical: it's used by the Ray app to identify each payload.
+> Ray allows libraries to modify the value of payloads that have already been sent by sending subsequent payloads with the same `uuid` value.
+
+Since this is a basic walk though, we'll use hard-coded `Origin` data - information about where the call originated within the source code, placed in `./src/Origin.ts`.
+
+> Integration libraries **must** implement a working Origin class so the information displayed in Ray is correct.
 
 ```typescript
 // src/Origin.ts
@@ -151,11 +148,15 @@ Then create `./src/payloadUtils.ts`, which will contain helper functions for cre
 import { v4  as  uuidv4 } from  'uuid';
 import { OriginData } from './Origin';
 
+// create the actual payload to send using the structure from above
 export function createSendablePayload(payloads: any[] = [], uuid: string | null = null): any {
 	uuid = uuid ?? uuidv4({}).toString();
+	
 	return { uuid, payloads, meta: { my_package_version: "1.0.0" } };
 }
 
+// create a generic payload object.
+// in an actual library, we'd create separate Payload classes for each type.
 export function createPayload(type: string, label: string | undefined, content: any, contentName: string = 'content'): any {
 	let result = {
 		type: type,
@@ -192,7 +193,10 @@ export function createLogPayload(text: string|string[], uuid: string | null = nu
 }
 ```
 
-Now, we'll need our main class - `./src/Ray.ts`:
+Now, we'll need to create the main `Ray` class: `./src/Ray.ts`.
+
+> All integration libraries should implement a `Ray` class.
+> When creating an integration library, you should create separate Payload classes for each method (see [spatie/ray](https://github.com/spatie/ray) for examples).
 
 ```typescript
 import { createLogPayload, createColorPayload, createHtmlPayload } from './payloadUtils';
@@ -201,16 +205,21 @@ const  superagent = require('superagent');
 export class Ray {
 	public uuid: string | null = null;
 	
+	// change the color of the payload
 	public color(name: string): Ray {
-		const payload = createColorPayload(name, this.uuid);		
+		const payload = createColorPayload(name, this.uuid);
+		
 		return this.sendRequest(payload);
 	}
 	
+	// send custom html to Ray
 	public html(name: string): Ray {
-		const payload = createHtmlPayload(name, this.uuid);		
+		const payload = createHtmlPayload(name, this.uuid);
+		
 		return this.sendRequest(payload);	
 	}
 
+    // send an arbitrary number of arguments of any type to Ray
 	public send(...args: any[]): Ray {
 		args.forEach(arg => {
 			const payload = createLogPayload('log', null, arg);			
@@ -219,18 +228,16 @@ export class Ray {
 		
 		return this;
 	}
-
-    public ban(): Ray {
-	    return this.send('🕶');
-    }
     
 	public charles(): Ray {
 	    return this.send('🎶 🎹 🎷 🕺');
     }
 	
-	public sendRequest(request: any): Ray {
+	// send a payload object to Ray
+	public sendRequest(payload: any): Ray {
 		this.uuid = request.uuid;
-        superagent.post(`http://localhost:23517/`).send(request)
+		
+        superagent.post(`http://localhost:23517/`).send(payload)
 	        .then(resp => { })
 	        .catch(err => {});
 	
@@ -243,7 +250,7 @@ export default Ray;
 
 ## Building the library
 
-We'll be using `ESBuild` to compile our library, which is a very fast ECMA compiler built in golang.
+We'll be using `ESBuild` to compile our library, which is a very fast ECMA and Typescript compiler built in golang.
 
 The following command tells `ESBuild` to bundle all files into a single output file, that it will be run on the `node` platform _(instead of in a browser)_, to target node v12 as the minimum node version to support, and to treat the `superagent` npm package as external _(meaning it should not be packaged as part of our outfile)_.
 
@@ -384,7 +391,9 @@ node dist/test.js
 
 Success!  You should see two "hello world" messages, one red and one blue.
 
-Let's make one more change to make using our library easier: adding a `ray()` function to `./src/Ray.ts`:
+Let's add one more feature to make using our library more pleasant - a `ray()` helper function.
+
+> Integration libraries **must** provide a global `ray()` helper method to maintain consistency with the other libraries.
 
 ```typescript
 // ... Ray class code here
@@ -399,6 +408,7 @@ export default Ray;
 You can now modify your test script to something like:
 
 ```typescript
+// dist/test.js
 const { ray } = require('./index');
 
 ray('hello world').color('red');
@@ -407,5 +417,5 @@ ray().html('<strong>bold text</strong>');
 
 That's it! Make sure to take a look at the [companion repository](https://github.com/permafrost-dev/creating-a-ray-integration) to check out the final project code.
 
-Don't forget to stop the `ray-proxy` app and change your Ray port back to 23517.
+Don't forget to stop the `ray-proxy` app and change your Ray port back to its original value _(defaults to 23517)_.
 
