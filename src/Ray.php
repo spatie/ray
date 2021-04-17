@@ -457,6 +457,8 @@ class Ray
 
         $this->sendRequest($payload);
 
+        $this->red();
+
         return $this;
     }
 
