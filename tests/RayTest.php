@@ -329,7 +329,7 @@ class RayTest extends TestCase
 
         $payloads = $this->client->sentPayloads();
 
-        $this->assertCount(1, $payloads);
+        $this->assertCount(2, $payloads);
         $this->assertEquals('exception', $payloads[0]['payloads'][0]['type']);
         $this->assertEquals(Exception::class, $payloads[0]['payloads'][0]['content']['class']);
         $this->assertEquals('This is an exception', $payloads[0]['payloads'][0]['content']['message']);
