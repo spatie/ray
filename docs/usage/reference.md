@@ -279,7 +279,7 @@ All methods available to [NodeJS](#nodejs) are available to the Alpine.js integr
 | Call | Description |
 | --- | --- |
 | `ray.size('large')` | Update the size of a Ray instance. Use `large` or `small`   |
-| `ray.color('red')` | Update the color of a Ray instance. Use `green`, `orange`, `red`, `blue`,`purple` or `gray`   |
+| `ray.color('red')` | Update the color of a Ray instance. Use `green`, `yellow`, `orange`, `red`, `blue`,`purple` or `gray`   |
 | `$ray.remove()` | Remove an item from Ray   |
 | `$ray.removeWhen(true)` | Conditionally remove an item based on a truthy value or callable   |
 | `$ray.send()` | Update the content of a Ray instance  |

@@ -25,7 +25,7 @@ class ConcernsTest extends TestCase
     public function it_sets_the_same_color_payload_as_the_method_name()
     {
         $colors = [
-            'blue', 'gray', 'green', 'orange', 'purple', 'red',
+            'blue', 'gray', 'green', 'yellow', 'orange', 'purple', 'red',
         ];
 
         $ray = new FakeRay();

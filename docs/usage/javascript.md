@@ -25,6 +25,7 @@ You can colorize things your sent to ray by using the color function.
 
 ```js
 ray('this is green').color('green')
+ray('this is yellow').color('yellow')
 ray('this is orange').color('orange')
 ray('this is red').color('red')
 ray('this is blue').color('blue')
