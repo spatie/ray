@@ -414,6 +414,11 @@ class Ray
         return $this;
     }
 
+    public function counterValue(string $name): int
+    {
+        return self::$counters->get($name);
+    }
+
     public function pause(): self
     {
         $lockName = md5(time());

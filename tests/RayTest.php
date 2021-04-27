@@ -761,6 +761,20 @@ class RayTest extends TestCase
     }
 
     /** @test */
+    public function it_returns_the_value_of_a_named_counter()
+    {
+        $this->assertEquals(0, ray()->counterValue('first'));
+
+        ray()->count('first');
+
+        $this->assertEquals(1, ray()->counterValue('first'));
+
+        ray()->count('first');
+
+        $this->assertEquals(2, ray()->counterValue('first'));
+    }
+
+    /** @test */
     public function it_will_respect_the_raw_values_config_setting()
     {
         $this->settings->always_send_raw_values = true;
