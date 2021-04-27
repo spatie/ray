@@ -151,6 +151,18 @@ foreach (range(1, 4) as $i) {
 }
 ```
 
+You may access the value of a named counter using the  `counterValue` function.
+
+```php
+foreach (range(1, 4) as $i) {
+    ray()->count('first');
+
+    if (ray()->counterValue('first') === 2) {
+        echo "counter value is two!";
+    }
+}
+```
+
 This is how that looks like in Ray.
 
 ![screenshot](/docs/ray/v1/images/named-count.png)

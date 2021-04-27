@@ -38,6 +38,7 @@ To display something in Ray use the `ray()` function. It accepts everything: str
 | `ray()->clearScreen()` | Clear current screen |
 | `ray()->clearAll()` | Clear current and all previous screens |
 | `ray()->count()` | Count how many times a piece of code is called |
+| `ray()->counterValue(name)` | Return the value of a named counter |
 | `ray(…)->die()` or `rd(…)` | Stop the PHP process |
 | `ray()->disable()` | Disable sending stuff to Ray |
 | `ray()->disabled()` | Check if Ray is disabled |
