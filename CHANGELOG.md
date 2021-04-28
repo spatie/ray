@@ -2,6 +2,10 @@
 
 All notable changes to `ray` will be documented in this file
 
+## 1.22.0 - 2021-04-28
+
+- access named counter values (#437)
+
 ## 1.21.4 - 2021-04-17
 
 - color exceptions red by default
