@@ -42,6 +42,7 @@ use Spatie\Ray\Settings\Settings;
 use Spatie\Ray\Settings\SettingsFactory;
 use Spatie\Ray\Support\Counters;
 use Symfony\Component\Stopwatch\Stopwatch;
+use Throwable;
 
 class Ray
 {
@@ -441,7 +442,7 @@ class Ray
         return $this->sendRequest($payload);
     }
 
-    public function exception(Exception $exception, array $meta = []): self
+    public function exception(Throwable $exception, array $meta = []): self
     {
         $payload = new ExceptionPayload($exception, $meta);
 
