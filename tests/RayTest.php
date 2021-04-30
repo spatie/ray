@@ -869,7 +869,7 @@ class RayTest extends TestCase
 
         $payloads = PayloadFactory::createForValues([
             'value 1' => 'nested',
-            'value 2'
+            'value 2',
         ]);
 
         $this->ray->sendRequest($payloads);
