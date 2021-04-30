@@ -8,6 +8,7 @@ use Illuminate\Support\Arr;
 use PHPUnit\Framework\TestCase;
 use Spatie\Backtrace\Frame;
 use Spatie\Ray\Origin\Hostname;
+use Spatie\Ray\PayloadFactory;
 use Spatie\Ray\Payloads\CallerPayload;
 use Spatie\Ray\Payloads\LogPayload;
 use Spatie\Ray\Ray;
@@ -859,6 +860,47 @@ class RayTest extends TestCase
         $ray->disable();
         $ray->send('test message 3');
         $this->assertCount(1, $this->client->sentPayloads());
+    }
+
+    /** @test */
+    public function it_can_quickly_send_a_request()
+    {
+        $before = microtime(true);
+
+        $payloads = PayloadFactory::createForValues([
+            'value 1' => 'nested',
+            'value 2',
+        ]);
+
+        $this->ray->sendRequest($payloads);
+
+        $after = microtime(true);
+
+        $this->assertLessThan(0.005, $after - $before);
+    }
+
+    /** @test */
+    public function it_can_quickly_call_the_ray_helper()
+    {
+        $before = microtime(true);
+
+        ray('a');
+
+        $after = microtime(true);
+
+        $this->assertLessThan(0.05, $after - $before);
+    }
+
+    /** @test */
+    public function it_can_quickly_call_send_function()
+    {
+        $before = microtime(true);
+
+        $this->ray->send('a');
+
+        $after = microtime(true);
+
+        $this->assertLessThan(0.005, $after - $before);
     }
 
     protected function getNewRay(): Ray
