@@ -51,7 +51,7 @@ To display something in Ray use the `ray()` function. It accepts everything: str
 | `ray(…)->hide()` | Display something in Ray and make it collapse immediately |
 | `ray()->hideApp()` | Hide the app |
 | `ray()->html($html)` | Render a piece of HTML  |
-| `ray()->image($path)` | Display an image form a path or URL  |
+| `ray()->image($path)` | Display an image from a path or URL  |
 | `ray()->json($json, $another, …)` | Send one or more valid JSON strings to Ray |
 | `ray(…)->large()` | Output text bigger |
 | `ray()->measure()` | Display runtime and memory usage. When measure is called again, the time between this and previous call is also displayed |
