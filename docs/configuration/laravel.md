@@ -56,6 +56,11 @@ return [
     'send_views_to_ray' => env('SEND_VIEWS_TO_RAY', false),
 
     /*
+     * When enabled, all exceptions will be automatically sent to Ray.
+     */
+    'send_exceptions_to_ray' => env('SEND_EXCEPTIONS_TO_RAY', true),
+
+    /*
     * The host used to communicate with the Ray app.
     * When using Docker on Mac or Windows, you can replace localhost with 'host.docker.internal'
     * When using Homestead with the VirtualBox provider, you can replace localhost with '10.0.2.2'
