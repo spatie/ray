@@ -6,7 +6,7 @@ use Carbon\CarbonImmutable;
 
 class CacheStore
 {
-    /** @var array $store */
+    /** @var array */
     protected $store = [];
 
     public function hit(): self
@@ -40,11 +40,7 @@ class CacheStore
 
             if ($item->isBetween($now, $lastSecond)) {
                 $amountLastSecond++;
-
-                continue;
             }
-
-            unset($this->store[$key]);
         }
 
         return $amountLastSecond;
