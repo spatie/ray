@@ -41,6 +41,7 @@ use Spatie\Ray\Payloads\XmlPayload;
 use Spatie\Ray\Settings\Settings;
 use Spatie\Ray\Settings\SettingsFactory;
 use Spatie\Ray\Support\Counters;
+use Spatie\Ray\Support\RateLimit;
 use Symfony\Component\Stopwatch\Stopwatch;
 use Throwable;
 
@@ -71,6 +72,9 @@ class Ray
     /** @var bool|null */
     public static $enabled = null;
 
+    /** @var RateLimit */
+    public static $rateLimit;
+
     public static function create(Client $client = null, string $uuid = null): self
     {
         $settings = SettingsFactory::createFromConfigFile();
@@ -89,6 +93,8 @@ class Ray
         $this->uuid = $uuid ?? static::$fakeUuid ?? Uuid::uuid4()->toString();
 
         static::$enabled = static::$enabled ?? $this->settings->enable ?? true;
+
+        static::$rateLimit = RateLimit::create();
     }
 
     public function enable(): self
@@ -561,5 +567,10 @@ class Ray
     public static function makePathOsSafe(string $path): string
     {
         return str_replace('/', DIRECTORY_SEPARATOR, $path);
+    }
+
+    public static function rateLimit(): RateLimit
+    {
+        return self::$rateLimit;
     }
 }
