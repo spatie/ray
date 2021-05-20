@@ -11,6 +11,8 @@ class CacheStoreTest extends TestCase
     /** @test */
     public function it_can_count_per_seconds(): void
     {
+        TestTime::freeze('Y-m-d H:i:s', '2020-01-01 00:00:00');
+
         $store = new CacheStore();
 
         $store->hit()->hit()->hit();
