@@ -10,13 +10,13 @@ class RateLimit
     /** @var int|null */
     protected $callsPerSecond;
 
-    private function __construct(int $maxCalls, int $callsPerSecond)
+    private function __construct(?int $maxCalls, ?int $callsPerSecond)
     {
         $this->maxCalls = $maxCalls;
         $this->callsPerSecond = $callsPerSecond;
     }
 
-    public static function create(): self
+    public static function disabled(): self
     {
         return new self(null, null);
     }
@@ -47,5 +47,15 @@ class RateLimit
         $clone->callsPerSecond = null;
 
         return $clone;
+    }
+
+    public function getMax(): ?int
+    {
+        return $this->maxCalls;
+    }
+
+    public function getPerSecond(): ?int
+    {
+        return $this->callsPerSecond;
     }
 }

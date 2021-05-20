@@ -94,7 +94,7 @@ class Ray
 
         static::$enabled = static::$enabled ?? $this->settings->enable ?? true;
 
-        static::$rateLimit = RateLimit::create();
+        static::$rateLimit = RateLimit::disabled();
     }
 
     public function enable(): self
