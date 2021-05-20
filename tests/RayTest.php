@@ -1034,6 +1034,8 @@ class RayTest extends TestCase
     /** @test */
     public function it_cannot_call_when_rate_limit_max_has_reached()
     {
+        Ray::rateLimit()->clear();
+
         Ray::rateLimit()->max(1);
 
         ray('this can pass');

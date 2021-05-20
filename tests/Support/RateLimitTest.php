@@ -3,6 +3,7 @@
 namespace Spatie\Ray\Tests\Support;
 
 use PHPUnit\Framework\TestCase;
+use Spatie\Ray\Ray;
 use Spatie\Ray\Support\RateLimit;
 use Spatie\TestTime\TestTime;
 
@@ -20,23 +21,26 @@ class RateLimitTest extends TestCase
     /** @test */
     public function it_can_update_the_max_calls(): void
     {
-        TestTime::freeze('Y-m-d H:i:s', '2021-01-01 00:00:00');
+        $rateLimit = RateLimit::disabled();
 
-        $rateLimit = RateLimit::disabled()
-            ->max(1);
+        $rateLimit->clear();
+        $rateLimit->max(1);
 
         $this->assertFalse($rateLimit->isMaxReached());
 
         $rateLimit->hit();
 
         $this->assertTrue($rateLimit->isMaxReached());
+
     }
 
     /** @test */
     public function it_can_update_the_per_second_calls(): void
     {
-        $rateLimit = RateLimit::disabled()
-            ->perSeconds(1);
+        $rateLimit = RateLimit::disabled();
+
+        $rateLimit->clear();
+        $rateLimit->perSeconds(1);
 
         $this->assertFalse($rateLimit->isPerSecondsReached());
 
