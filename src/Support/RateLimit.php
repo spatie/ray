@@ -11,14 +11,14 @@ class RateLimit
     protected $callsPerSeconds;
 
     /** @var CacheStore */
-    protected static $cache;
+    protected $cache;
 
     private function __construct(?int $maxCalls, ?int $callsPerSeconds)
     {
         $this->maxCalls = $maxCalls;
         $this->callsPerSeconds = $callsPerSeconds;
 
-        self::$cache = new CacheStore();
+        $this->cache = new CacheStore();
     }
 
     public static function disabled(): self
@@ -30,7 +30,7 @@ class RateLimit
     {
         $clone = clone $this;
 
-        $clone::$cache->hit();
+        $clone->cache()->hit();
 
         return $clone;
     }
@@ -59,7 +59,7 @@ class RateLimit
             return false;
         }
 
-        return self::$cache->count() >= $this->maxCalls;
+        return $this->cache()->count() >= $this->maxCalls;
     }
 
     public function isPerSecondsReached(): bool
@@ -68,8 +68,7 @@ class RateLimit
             return false;
         }
 
-        // @todo
-        return false;
+        return $this->cache()->countLastSecond() >= $this->callsPerSeconds;
     }
 
     public function clear(): self
@@ -78,7 +77,13 @@ class RateLimit
 
         $clone->maxCalls = null;
         $clone->callsPerSeconds = null;
+        $clone->cache()->clear();
 
         return $clone;
+    }
+
+    public function cache(): CacheStore
+    {
+        return $this->cache;
     }
 }
