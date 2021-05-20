@@ -31,6 +31,7 @@ class RateLimitTest extends TestCase
         $this->assertTrue($newRateLimit->isMaxReached());
     }
 
+    /** @test */
     public function it_can_update_the_per_second_calls(): void
     {
         $rateLimit = RateLimit::disabled();
@@ -53,14 +54,20 @@ class RateLimitTest extends TestCase
         $rateLimit = $rateLimit->max(1);
         $rateLimit = $rateLimit->perSeconds(1);
 
-        $rateLimit = $rateLimit->hit();
+        $newRateLimit = $rateLimit->hit();
 
-        $this->assertTrue($rateLimit->isMaxReached());
-        //$this->assertTrue($rateLimit->isPerSecondsReached());
+        $this->assertFalse($rateLimit->isMaxReached()); // immutable check
+        $this->assertFalse($rateLimit->isPerSecondsReached()); // immutable check
+
+        //$this->assertTrue($newRateLimit->isMaxReached());
+        //$this->assertTrue($newRateLimit->isPerSecondsReached());
 
         $newRateLimit = $rateLimit->clear();
 
-        $this->assertTrue($rateLimit->isMaxReached()); // immutable check
+        //$this->assertTrue($rateLimit->isMaxReached()); // immutable check
+        //$this->assertTrue($rateLimit->isPerSecondsReached()); // immutable check
+
         $this->assertFalse($newRateLimit->isMaxReached());
+        $this->assertFalse($newRateLimit->isPerSecondsReached());
     }
 }
