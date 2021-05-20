@@ -903,6 +903,17 @@ class RayTest extends TestCase
         $this->assertLessThan(0.005, $after - $before);
     }
 
+    /** @test */
+    public function it_cannot_call_when_rate_limit_max_has_reached()
+    {
+        Ray::rateLimit()->max(1);
+
+        ray('this can pass');
+        ray('this cannot pass');
+
+        $this->assertSame(1, count($this->client->sentPayloads()));
+    }
+
     protected function getNewRay(): Ray
     {
         return Ray::create($this->client, 'fakeUuid');
