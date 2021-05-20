@@ -911,7 +911,7 @@ class RayTest extends TestCase
         ray('this can pass');
         ray('this cannot pass');
 
-        $this->assertSame(1, count($this->client->sentPayloads()));
+        $this->assertCount(1, $this->client->sentPayloads());
     }
 
     protected function getNewRay(): Ray
