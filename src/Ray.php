@@ -107,7 +107,7 @@ class Ray
 
         static::$enabled = static::$enabled ?? $this->settings->enable ?? true;
 
-        static::$rateLimit = RateLimit::disabled();
+        static::$rateLimit = static::$rateLimit ?? RateLimit::disabled();
     }
 
     public function enable(): self
@@ -618,12 +618,12 @@ class Ray
         }
 
         if (self::rateLimit()->isMaxReached()) {
-            // @todo notify ray once to notify the user has reached his limit
+            // @todo call ray once to notify the user has reached his limit
             return $this;
         }
 
         if (self::rateLimit()->isPerSecondsReached()) {
-            // @todo notify ray once to notify the user has reached his limit
+            // @todo call ray once to notify the user has reached his limit
             return $this;
         }
 

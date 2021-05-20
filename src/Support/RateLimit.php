@@ -5,20 +5,19 @@ namespace Spatie\Ray\Support;
 class RateLimit
 {
     /** @var int|null */
-    protected $maxCalls;
+    protected static $maxCalls;
 
     /** @var int|null */
-    protected $callsPerSeconds;
+    protected static $callsPerSeconds;
 
     /** @var CacheStore */
-    protected $cache;
+    protected static $cache;
 
     private function __construct(?int $maxCalls, ?int $callsPerSeconds)
     {
-        $this->maxCalls = $maxCalls;
-        $this->callsPerSeconds = $callsPerSeconds;
-
-        $this->cache = new CacheStore();
+        self::$maxCalls = $maxCalls;
+        self::$callsPerSeconds = $callsPerSeconds;
+        self::$cache = static::$cache ?? new CacheStore();
     }
 
     public static function disabled(): self
@@ -28,62 +27,59 @@ class RateLimit
 
     public function hit(): self
     {
-        $clone = clone $this;
+        $this->cache()->hit();
 
-        $clone->cache()->hit();
-
-        return $clone;
+        return $this;
     }
 
     public function max(?int $maxCalls): self
     {
-        $clone = clone $this;
+        $this::$maxCalls = $maxCalls;
 
-        $clone->maxCalls = $maxCalls;
-
-        return $clone;
+        return $this;
     }
 
     public function perSeconds(?int $callsPerSeconds): self
     {
-        $clone = clone $this;
+        $this::$callsPerSeconds = $callsPerSeconds;
 
-        $clone->callsPerSeconds = $callsPerSeconds;
-
-        return $clone;
+        return $this;
     }
 
     public function isMaxReached(): bool
     {
-        if ($this->maxCalls === null) {
+        if (self::$maxCalls === null) {
             return false;
         }
 
-        return $this->cache()->count() >= $this->maxCalls;
+        return $this->cache()->count() >= self::$maxCalls;
     }
 
     public function isPerSecondsReached(): bool
     {
-        if ($this->callsPerSeconds === null) {
+        if (self::$callsPerSeconds === null) {
             return false;
         }
 
-        return $this->cache()->countLastSecond() >= $this->callsPerSeconds;
+        return $this->cache()->countLastSecond() >= self::$callsPerSeconds;
     }
 
     public function clear(): self
     {
-        $clone = clone $this;
+        self::$maxCalls = null;
+        self::$callsPerSeconds = null;
+        self::$cache->clear();
 
-        $clone->maxCalls = null;
-        $clone->callsPerSeconds = null;
-        $clone->cache()->clear();
-
-        return $clone;
+        return $this;
     }
 
     public function cache(): CacheStore
     {
-        return $this->cache;
+        return self::$cache;
+    }
+
+    public function getMaxCalls(): ?int
+    {
+        return self::$maxCalls;
     }
 }

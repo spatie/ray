@@ -11,18 +11,14 @@ class CacheStore
 
     public function hit(): self
     {
-        $clone = clone $this;
-
-        $clone->store[] = CarbonImmutable::now()->toAtomString();
+        $this->store[] = CarbonImmutable::now()->toAtomString();
 
         return $this;
     }
 
     public function clear(): self
     {
-        $clone = clone $this;
-
-        $clone->store = [];
+        $this->store = [];
 
         return $this;
     }
