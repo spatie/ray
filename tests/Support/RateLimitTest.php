@@ -44,4 +44,23 @@ class RateLimitTest extends TestCase
 
         $this->assertTrue($newRateLimit->isPerSecondsReached());
     }
+
+    /** @test */
+    public function it_can_clear_all_limits(): void
+    {
+        $rateLimit = RateLimit::disabled();
+
+        $rateLimit = $rateLimit->max(1);
+        $rateLimit = $rateLimit->perSeconds(1);
+
+        $rateLimit = $rateLimit->hit();
+
+        $this->assertTrue($rateLimit->isMaxReached());
+        //$this->assertTrue($rateLimit->isPerSecondsReached());
+
+        $newRateLimit = $rateLimit->clear();
+
+        $this->assertTrue($rateLimit->isMaxReached()); // immutable check
+        $this->assertFalse($newRateLimit->isMaxReached());
+    }
 }
