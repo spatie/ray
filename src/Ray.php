@@ -547,6 +547,16 @@ class Ray
             // In WordPress this entire package will be rewritten
         }
 
+        if (self::rateLimit()->isMaxReached()) {
+            // @todo notify ray once to notify the user has reached his limit
+            return $this;
+        }
+
+        if (self::rateLimit()->isPerSecondsReached()) {
+            // @todo notify ray once to notify the user has reached his limit
+            return $this;
+        }
+
         $allMeta = array_merge([
             'php_version' => phpversion(),
             'php_version_id' => PHP_VERSION_ID,
@@ -560,6 +570,8 @@ class Ray
         $request = new Request($this->uuid, $payloads, $allMeta);
 
         self::$client->send($request);
+
+        self::rateLimit()->hit();
 
         return $this;
     }
