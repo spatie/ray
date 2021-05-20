@@ -68,7 +68,8 @@ class RateLimit
     {
         self::$maxCalls = null;
         self::$callsPerSeconds = null;
-        self::$cache->clear();
+
+        $this->cache()->clear();
 
         return $this;
     }
@@ -76,10 +77,5 @@ class RateLimit
     public function cache(): CacheStore
     {
         return self::$cache;
-    }
-
-    public function getMaxCalls(): ?int
-    {
-        return self::$maxCalls;
     }
 }
