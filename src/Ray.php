@@ -548,12 +548,14 @@ class Ray
         }
 
         if (self::rateLimit()->isMaxReached()) {
-            // @todo call ray once to notify the user has reached his limit
+            $this->sendCustom('Rate limit has been reached...', 'Rate limit')->red();
+
             return $this;
         }
 
         if (self::rateLimit()->isMaxPerSecondReached()) {
-            // @todo call ray once to notify the user has reached his limit
+            $this->sendCustom('Rate limit has been reached...', 'Rate limit')->red();
+
             return $this;
         }
 
