@@ -8,15 +8,15 @@ class RateLimit
     protected static $maxCalls;
 
     /** @var int|null */
-    protected static $callsPerSeconds;
+    protected static $maxPerSecond;
 
     /** @var CacheStore */
     protected static $cache;
 
-    private function __construct(?int $maxCalls, ?int $callsPerSeconds)
+    private function __construct(?int $maxCalls, ?int $maxPerSecond)
     {
         self::$maxCalls = $maxCalls;
-        self::$callsPerSeconds = $callsPerSeconds;
+        self::$maxPerSecond = $maxPerSecond;
         self::$cache = static::$cache ?? new CacheStore();
     }
 
@@ -39,9 +39,9 @@ class RateLimit
         return $this;
     }
 
-    public function perSeconds(?int $callsPerSeconds): self
+    public function perSecond(?int $callsPerSecond): self
     {
-        $this::$callsPerSeconds = $callsPerSeconds;
+        $this::$maxPerSecond = $callsPerSecond;
 
         return $this;
     }
@@ -55,19 +55,19 @@ class RateLimit
         return $this->cache()->count() >= self::$maxCalls;
     }
 
-    public function isPerSecondsReached(): bool
+    public function isMaxPerSecondReached(): bool
     {
-        if (self::$callsPerSeconds === null) {
+        if (self::$maxPerSecond === null) {
             return false;
         }
 
-        return $this->cache()->countLastSecond() >= self::$callsPerSeconds;
+        return $this->cache()->countLastSecond() >= self::$maxPerSecond;
     }
 
     public function clear(): self
     {
         self::$maxCalls = null;
-        self::$callsPerSeconds = null;
+        self::$maxPerSecond = null;
 
         $this->cache()->clear();
 

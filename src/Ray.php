@@ -552,7 +552,7 @@ class Ray
             return $this;
         }
 
-        if (self::rateLimit()->isPerSecondsReached()) {
+        if (self::rateLimit()->isMaxPerSecondReached()) {
             // @todo call ray once to notify the user has reached his limit
             return $this;
         }

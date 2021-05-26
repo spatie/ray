@@ -13,7 +13,7 @@ class RateLimitTest extends TestCase
         $rateLimit = RateLimit::disabled();
 
         $this->assertFalse($rateLimit->isMaxReached());
-        $this->assertFalse($rateLimit->isPerSecondsReached());
+        $this->assertFalse($rateLimit->isMaxPerSecondReached());
     }
 
     /** @test */
@@ -37,13 +37,13 @@ class RateLimitTest extends TestCase
         $rateLimit = RateLimit::disabled();
 
         $rateLimit->clear();
-        $rateLimit->perSeconds(1);
+        $rateLimit->perSecond(1);
 
-        $this->assertFalse($rateLimit->isPerSecondsReached());
+        $this->assertFalse($rateLimit->isMaxPerSecondReached());
 
         $rateLimit->hit();
 
-        $this->assertTrue($rateLimit->isPerSecondsReached());
+        $this->assertTrue($rateLimit->isMaxPerSecondReached());
     }
 
     /** @test */
@@ -53,15 +53,15 @@ class RateLimitTest extends TestCase
 
         $rateLimit
             ->max(1)
-            ->perSeconds(1)
+            ->perSecond(1)
             ->hit();
 
         $this->assertTrue($rateLimit->isMaxReached());
-        $this->assertTrue($rateLimit->isPerSecondsReached());
+        $this->assertTrue($rateLimit->isMaxPerSecondReached());
 
         $rateLimit->clear();
 
         $this->assertFalse($rateLimit->isMaxReached());
-        $this->assertFalse($rateLimit->isPerSecondsReached());
+        $this->assertFalse($rateLimit->isMaxPerSecondReached());
     }
 }
