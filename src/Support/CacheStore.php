@@ -2,9 +2,6 @@
 
 namespace Spatie\Ray\Support;
 
-use Carbon\CarbonImmutable;
-use DateTimeImmutable;
-
 class CacheStore
 {
     /** @var array */
