@@ -17,7 +17,7 @@ class RateLimit
     {
         self::$maxCalls = $maxCalls;
         self::$maxPerSecond = $maxPerSecond;
-        self::$cache = static::$cache ?? new CacheStore();
+        self::$cache = static::$cache ?? new CacheStore(new SystemClock());
     }
 
     public static function disabled(): self

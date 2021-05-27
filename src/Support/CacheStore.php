@@ -3,15 +3,24 @@
 namespace Spatie\Ray\Support;
 
 use Carbon\CarbonImmutable;
+use DateTimeImmutable;
 
 class CacheStore
 {
     /** @var array */
     protected $store = [];
 
+    /** @var Clock */
+    protected $clock;
+
+    public function __construct(Clock $clock)
+    {
+        $this->clock = $clock;
+    }
+
     public function hit(): self
     {
-        $this->store[] = CarbonImmutable::now()->toAtomString();
+        $this->store[] = $this->clock->now()::createFromFormat('U.u', microtime(true));
 
         return $this;
     }
@@ -30,19 +39,26 @@ class CacheStore
 
     public function countLastSecond(): int
     {
-        $amountLastSecond = 0;
+        $amount = 0;
 
-        $now = CarbonImmutable::now();
-        $lastSecond = $now->subSecond();
+        $lastSecond = $this->clock->now()->modify('-1 second');
+
+        $nowAsInt = strtotime($this->clock->now()->format('YmdHisu'));
+        $lastSecondAsInt = strtotime($lastSecond->format('YmdHisu'));
 
         foreach ($this->store as $key => $item) {
-            $item = CarbonImmutable::createFromTimeString($item);
+            $itemAsInt = strtotime($item->format('YmdHisu'));
 
-            if ($item->isBetween($now, $lastSecond)) {
-                $amountLastSecond++;
+            if ($this->isBetween($itemAsInt, $lastSecondAsInt, $nowAsInt)) {
+                $amount++;
             }
         }
 
-        return $amountLastSecond;
+        return $amount;
+    }
+
+    protected function isBetween($toCheck, $start, $end): bool
+    {
+        return $toCheck >= $start && $toCheck <= $end;
     }
 }
