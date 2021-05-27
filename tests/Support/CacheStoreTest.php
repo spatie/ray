@@ -4,27 +4,42 @@ namespace Spatie\Ray\Tests\Support;
 
 use PHPUnit\Framework\TestCase;
 use Spatie\Ray\Support\CacheStore;
+use Spatie\Ray\Tests\TestClasses\ClockMock;
 use Spatie\TestTime\TestTime;
 
 class CacheStoreTest extends TestCase
 {
+    /** @var ClockMock */
+    private $clock;
+
+    /** @var CacheStore */
+    private $store;
+
+    public function setUp(): void
+    {
+        $this->clock = new ClockMock();
+        $this->store = new CacheStore($this->clock);
+    }
+
     /** @test */
     public function it_can_count_per_seconds(): void
     {
-        TestTime::freeze('Y-m-d H:i:s', '2020-01-01 00:00:00');
+        $this->clock->freezeAtSecond();
 
-        $store = new CacheStore();
+        $this->store->hit()->hit()->hit();
 
-        $store->hit()->hit()->hit();
+        $this->assertSame(3, $this->store->countLastSecond());
 
-        $this->assertSame(3, $store->countLastSecond());
+        $this->clock->freezeAtSecond(
+            $this->clock->now()->modify('+1second')
+        );
 
-        TestTime::freeze('Y-m-d H:i:s', '2020-01-01 00:00:01');
+        $this->assertSame(3, $this->store->countLastSecond());
 
-        $this->assertSame(3, $store->countLastSecond());
+        $this->clock->freezeAtSecond(
+            $this->clock->now()->modify('+1second')
+        );
 
-        TestTime::freeze('Y-m-d H:i:s', '2020-01-01 00:00:02');
-
-        $this->assertSame(0, $store->countLastSecond());
+        $this->assertSame(0, $this->store->countLastSecond());
     }
 }
