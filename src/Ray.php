@@ -618,13 +618,13 @@ class Ray
         }
 
         if (self::rateLimit()->isMaxReached()) {
-            $this->sendCustom('Rate limit has been reached...', 'Rate limit')->red();
+            //$this->sendCustom('Rate limit has been reached...', 'Rate limit')->red();
 
             return $this;
         }
 
         if (self::rateLimit()->isMaxPerSecondReached()) {
-            $this->sendCustom('Rate limit has been reached...', 'Rate limit')->red();
+            //$this->sendCustom('Rate limit has been reached...', 'Rate limit')->red();
 
             return $this;
         }
