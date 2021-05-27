@@ -40,13 +40,12 @@ class CacheStore
 
         $lastSecond = $this->clock->now()->modify('-1 second');
 
-        $nowAsInt = strtotime($this->clock->now()->format('YmdHisu'));
-        $lastSecondAsInt = strtotime($lastSecond->format('YmdHisu'));
-
         foreach ($this->store as $key => $item) {
-            $itemAsInt = strtotime($item->format('YmdHisu'));
-
-            if ($this->isBetween($itemAsInt, $lastSecondAsInt, $nowAsInt)) {
+            if ($this->isBetween(
+                $item->getTimestamp(),
+                $lastSecond->getTimestamp(),
+                $this->clock->now()->getTimestamp())
+            ) {
                 $amount++;
             }
         }

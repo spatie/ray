@@ -30,13 +30,13 @@ class CacheStoreTest extends TestCase
         $this->assertSame(3, $this->store->countLastSecond());
 
         $this->clock->freezeAtSecond(
-            $this->clock->now()->modify('+1second')
+            $this->clock->now()->modify('+1 second')
         );
 
         $this->assertSame(3, $this->store->countLastSecond());
 
         $this->clock->freezeAtSecond(
-            $this->clock->now()->modify('+1second')
+            $this->clock->now()->modify('+1 second')
         );
 
         $this->assertSame(0, $this->store->countLastSecond());
