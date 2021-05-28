@@ -44,7 +44,8 @@ class CacheStore
             if ($this->isBetween(
                 $item->getTimestamp(),
                 $lastSecond->getTimestamp(),
-                $this->clock->now()->getTimestamp())
+                $this->clock->now()->getTimestamp()
+            )
             ) {
                 $amount++;
             }
