@@ -3,6 +3,7 @@
 namespace Spatie\Ray\Tests;
 
 use Carbon\Carbon;
+use Carbon\CarbonImmutable;
 use Exception;
 use Illuminate\Support\Arr;
 use PHPUnit\Framework\TestCase;
@@ -1034,9 +1035,9 @@ class RayTest extends TestCase
     /** @test */
     public function it_cannot_call_when_rate_limit_max_has_reached()
     {
-        Ray::rateLimit()->clear();
-
-        Ray::rateLimit()->max(1);
+        Ray::rateLimiter()
+            ->clear()
+            ->max(1);
 
         ray('this can pass');
         ray('this cannot pass, but triggers a warning call');
