@@ -4,11 +4,11 @@ namespace Spatie\Ray\Tests\Support;
 
 use PHPUnit\Framework\TestCase;
 use Spatie\Ray\Support\CacheStore;
-use Spatie\Ray\Tests\TestClasses\ClockMock;
+use Spatie\Ray\Tests\TestClasses\FakeClock;
 
 class CacheStoreTest extends TestCase
 {
-    /** @var ClockMock */
+    /** @var FakeClock */
     protected $clock;
 
     /** @var CacheStore */
@@ -16,7 +16,7 @@ class CacheStoreTest extends TestCase
 
     public function setUp(): void
     {
-        $this->clock = new ClockMock();
+        $this->clock = new FakeClock();
         $this->store = new CacheStore($this->clock);
     }
 
