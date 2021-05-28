@@ -1039,9 +1039,12 @@ class RayTest extends TestCase
         Ray::rateLimit()->max(1);
 
         ray('this can pass');
+        ray('this cannot pass, but triggers a warning call');
         ray('this cannot pass');
 
-        $this->assertCount(1, $this->client->sentPayloads());
+        $this->assertCount(2, $this->client->sentPayloads());
+
+        $this->assertSame('Rate limit has been reached...', $this->client->sentPayloads()[1]['payloads'][0]['content']['content']);
     }
 
     protected function getNewRay(): Ray
