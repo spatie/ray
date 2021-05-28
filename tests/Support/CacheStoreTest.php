@@ -9,10 +9,10 @@ use Spatie\Ray\Tests\TestClasses\ClockMock;
 class CacheStoreTest extends TestCase
 {
     /** @var ClockMock */
-    private $clock;
+    protected $clock;
 
     /** @var CacheStore */
-    private $store;
+    protected $store;
 
     public function setUp(): void
     {

@@ -7,7 +7,7 @@ use Spatie\Ray\Support\Clock;
 
 class ClockMock implements Clock
 {
-    private $fixedNow;
+    protected $fixedNow;
 
     public function __construct(DateTimeImmutable $now = null)
     {
