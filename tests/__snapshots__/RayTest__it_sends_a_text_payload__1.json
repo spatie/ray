@@ -1,0 +1,38 @@
+[
+    {
+        "uuid": "fakeUuid",
+        "payloads": [
+            {
+                "type": "custom",
+                "content": {
+                    "content": "text&nbsp;string",
+                    "label": "Text"
+                },
+                "origin": {
+                    "file": "\/tests\/RayTest.php",
+                    "line_number": "xxx",
+                    "hostname": "fake-hostname"
+                }
+            }
+        ],
+        "meta": []
+    },
+    {
+        "uuid": "fakeUuid",
+        "payloads": [
+            {
+                "type": "custom",
+                "content": {
+                    "content": "another&nbsp;&nbsp;&nbsp;&lt;strong&gt;text&lt;\/strong&gt;<br>&nbsp;&nbsp;string",
+                    "label": "Text"
+                },
+                "origin": {
+                    "file": "\/tests\/RayTest.php",
+                    "line_number": "xxx",
+                    "hostname": "fake-hostname"
+                }
+            }
+        ],
+        "meta": []
+    }
+]
