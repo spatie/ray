@@ -547,14 +547,9 @@ class Ray
             // In WordPress this entire package will be rewritten
         }
 
-        if (self::rateLimit()->isMaxReached()) {
-            //$this->sendCustom('Rate limit has been reached...', 'Rate limit')->red();
-
-            return $this;
-        }
-
-        if (self::rateLimit()->isMaxPerSecondReached()) {
-            //$this->sendCustom('Rate limit has been reached...', 'Rate limit')->red();
+        if (self::rateLimit()->isMaxReached() ||
+            self::rateLimit()->isMaxPerSecondReached()) {
+            $this->notifyWhenRateLimitReached();
 
             return $this;
         }
@@ -586,5 +581,20 @@ class Ray
     public static function rateLimit(): RateLimit
     {
         return self::$rateLimit;
+    }
+
+    protected function notifyWhenRateLimitReached(): void
+    {
+        if (self::rateLimit()->isNotified()) {
+            return;
+        }
+
+        $customPayload = new CustomPayload('Rate limit has been reached...', 'Rate limit');
+
+        $request = new Request($this->uuid, [$customPayload], []);
+
+        self::$client->send($request);
+
+        self::rateLimit()->notify();
     }
 }

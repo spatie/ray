@@ -13,6 +13,9 @@ class RateLimit
     /** @var CacheStore */
     protected static $cache;
 
+    /** @var bool */
+    protected static $notified;
+
     private function __construct(?int $maxCalls, ?int $maxPerSecond)
     {
         self::$maxCalls = $maxCalls;
@@ -52,7 +55,13 @@ class RateLimit
             return false;
         }
 
-        return $this->cache()->count() >= self::$maxCalls;
+        $reached = $this->cache()->count() >= self::$maxCalls;
+
+        if ($reached === false) {
+            self::$notified = false;
+        }
+
+        return $reached;
     }
 
     public function isMaxPerSecondReached(): bool
@@ -61,7 +70,13 @@ class RateLimit
             return false;
         }
 
-        return $this->cache()->countLastSecond() >= self::$maxPerSecond;
+        $reached = $this->cache()->countLastSecond() >= self::$maxPerSecond;
+
+        if ($reached === false) {
+            self::$notified = false;
+        }
+
+        return $reached;
     }
 
     public function clear(): self
@@ -72,6 +87,16 @@ class RateLimit
         $this->cache()->clear();
 
         return $this;
+    }
+
+    public function isNotified(): bool
+    {
+        return self::$notified;
+    }
+
+    public function notify(): void
+    {
+        self::$notified = true;
     }
 
     public function cache(): CacheStore
