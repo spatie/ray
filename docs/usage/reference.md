@@ -70,6 +70,7 @@ To display something in Ray use the `ray()` function. It accepts everything: str
 | `ray(…)->showIf(true)` | Conditionally show things based on a truthy value or callable  |
 | `ray(…)->small()` | Output text smaller |
 | `ray()->table($array. $label)` | Format an associative array with optional label  |
+| `ray()->text($string)` | Display the raw text for a string while preserving whitespace formatting  |
 | `ray()->toJson($variable, $another, … )` | Display the JSON representation of 1 or more values that can be converted |
 | `ray()->trace()` | Check entire backtrace |
 | `ray()->xml($xmlString)` | Display formatted XML in Ray |
