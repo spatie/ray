@@ -5,22 +5,22 @@ namespace Spatie\Ray\Support;
 class RateLimiter
 {
     /** @var int|null */
-    protected static $maxCalls;
+    protected $maxCalls;
 
     /** @var int|null */
-    protected static $maxPerSecond;
+    protected $maxPerSecond;
 
     /** @var CacheStore */
-    protected static $cache;
+    protected $cache;
 
     /** @var bool */
-    protected static $notified;
+    protected $notified;
 
     private function __construct(?int $maxCalls, ?int $maxPerSecond)
     {
-        self::$maxCalls = $maxCalls;
-        self::$maxPerSecond = $maxPerSecond;
-        self::$cache = static::$cache ?? new CacheStore(new SystemClock());
+        $this->maxCalls = $maxCalls;
+        $this->maxPerSecond = $maxPerSecond;
+        $this->cache = new CacheStore(new SystemClock());
     }
 
     public static function disabled(): self
@@ -37,28 +37,28 @@ class RateLimiter
 
     public function max(?int $maxCalls): self
     {
-        $this::$maxCalls = $maxCalls;
+        $this->maxCalls = $maxCalls;
 
         return $this;
     }
 
     public function perSecond(?int $callsPerSecond): self
     {
-        $this::$maxPerSecond = $callsPerSecond;
+        $this->maxPerSecond = $callsPerSecond;
 
         return $this;
     }
 
     public function isMaxReached(): bool
     {
-        if (self::$maxCalls === null) {
+        if ($this->maxCalls === null) {
             return false;
         }
 
-        $reached = $this->cache()->count() >= self::$maxCalls;
+        $reached = $this->cache()->count() >= $this->maxCalls;
 
         if ($reached === false) {
-            self::$notified = false;
+            $this->notified = false;
         }
 
         return $reached;
@@ -66,14 +66,14 @@ class RateLimiter
 
     public function isMaxPerSecondReached(): bool
     {
-        if (self::$maxPerSecond === null) {
+        if ($this->maxPerSecond === null) {
             return false;
         }
 
-        $reached = $this->cache()->countLastSecond() >= self::$maxPerSecond;
+        $reached = $this->cache()->countLastSecond() >= $this->maxPerSecond;
 
         if ($reached === false) {
-            self::$notified = false;
+            $this->notified = false;
         }
 
         return $reached;
@@ -81,8 +81,8 @@ class RateLimiter
 
     public function clear(): self
     {
-        self::$maxCalls = null;
-        self::$maxPerSecond = null;
+        $this->maxCalls = null;
+        $this->maxPerSecond = null;
 
         $this->cache()->clear();
 
@@ -91,16 +91,16 @@ class RateLimiter
 
     public function isNotified(): bool
     {
-        return self::$notified;
+        return $this->notified;
     }
 
     public function notify(): void
     {
-        self::$notified = true;
+        $this->notified = true;
     }
 
     public function cache(): CacheStore
     {
-        return self::$cache;
+        return $this->cache;
     }
 }
