@@ -3,7 +3,6 @@
 namespace Spatie\Ray\Tests;
 
 use Carbon\Carbon;
-use Carbon\CarbonImmutable;
 use Exception;
 use Illuminate\Support\Arr;
 use PHPUnit\Framework\TestCase;
