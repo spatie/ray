@@ -2,7 +2,7 @@
 
 namespace Spatie\Ray\Support;
 
-class RateLimit
+class RateLimiter
 {
     /** @var int|null */
     protected static $maxCalls;

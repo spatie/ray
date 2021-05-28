@@ -41,7 +41,7 @@ use Spatie\Ray\Payloads\XmlPayload;
 use Spatie\Ray\Settings\Settings;
 use Spatie\Ray\Settings\SettingsFactory;
 use Spatie\Ray\Support\Counters;
-use Spatie\Ray\Support\RateLimit;
+use Spatie\Ray\Support\RateLimiter;
 use Symfony\Component\Stopwatch\Stopwatch;
 use Throwable;
 
@@ -72,8 +72,8 @@ class Ray
     /** @var bool|null */
     public static $enabled = null;
 
-    /** @var RateLimit */
-    public static $rateLimit;
+    /** @var RateLimiter */
+    public static $rateLimiter;
 
     public static function create(Client $client = null, string $uuid = null): self
     {
@@ -94,7 +94,7 @@ class Ray
 
         static::$enabled = static::$enabled ?? $this->settings->enable ?? true;
 
-        static::$rateLimit = static::$rateLimit ?? RateLimit::disabled();
+        static::$rateLimiter = static::$rateLimiter ?? RateLimiter::disabled();
     }
 
     public function enable(): self
@@ -547,8 +547,8 @@ class Ray
             // In WordPress this entire package will be rewritten
         }
 
-        if (self::rateLimit()->isMaxReached() ||
-            self::rateLimit()->isMaxPerSecondReached()) {
+        if (self::rateLimiter()->isMaxReached() ||
+            self::rateLimiter()->isMaxPerSecondReached()) {
             $this->notifyWhenRateLimitReached();
 
             return $this;
@@ -568,7 +568,7 @@ class Ray
 
         self::$client->send($request);
 
-        self::rateLimit()->hit();
+        self::rateLimiter()->hit();
 
         return $this;
     }
@@ -578,14 +578,14 @@ class Ray
         return str_replace('/', DIRECTORY_SEPARATOR, $path);
     }
 
-    public static function rateLimit(): RateLimit
+    public static function rateLimiter(): RateLimiter
     {
-        return self::$rateLimit;
+        return self::$rateLimiter;
     }
 
     protected function notifyWhenRateLimitReached(): void
     {
-        if (self::rateLimit()->isNotified()) {
+        if (self::rateLimiter()->isNotified()) {
             return;
         }
 
@@ -595,6 +595,6 @@ class Ray
 
         self::$client->send($request);
 
-        self::rateLimit()->notify();
+        self::rateLimiter()->notify();
     }
 }
