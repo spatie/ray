@@ -8,7 +8,7 @@ use Spatie\Ray\Support\RateLimiter;
 class RateLimiterTest extends TestCase
 {
     /** @test */
-    public function it_can_initialize_a_disabled_rate_limit(): void
+    public function it_can_initialize_a_disabled_rate_limit()
     {
         $rateLimiter = RateLimiter::disabled();
 
@@ -17,7 +17,7 @@ class RateLimiterTest extends TestCase
     }
 
     /** @test */
-    public function it_can_update_the_max_calls(): void
+    public function it_can_update_the_max_calls()
     {
         $rateLimiter = RateLimiter::disabled()
             ->clear()
@@ -31,7 +31,7 @@ class RateLimiterTest extends TestCase
     }
 
     /** @test */
-    public function it_can_update_the_per_second_calls(): void
+    public function it_can_update_the_per_second_calls()
     {
         $rateLimiter = RateLimiter::disabled()
             ->clear()
@@ -45,7 +45,7 @@ class RateLimiterTest extends TestCase
     }
 
     /** @test */
-    public function it_can_clear_all_limits(): void
+    public function it_can_clear_all_limits()
     {
         $rateLimiter = RateLimiter::disabled()
             ->max(1)

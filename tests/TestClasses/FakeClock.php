@@ -5,7 +5,7 @@ namespace Spatie\Ray\Tests\TestClasses;
 use DateTimeImmutable;
 use Spatie\Ray\Support\Clock;
 
-class ClockMock implements Clock
+class FakeClock implements Clock
 {
     protected $fixedNow;
 
