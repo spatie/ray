@@ -2,6 +2,10 @@
 
 All notable changes to `ray` will be documented in this file
 
+## 1.23.0 - 2021-05-29
+
+- add `text` method (#460)
+
 ## 1.22.1 - 2021-04-28
 
 - allow Throwables to be logged
