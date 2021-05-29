@@ -36,6 +36,7 @@ use Spatie\Ray\Payloads\RemovePayload;
 use Spatie\Ray\Payloads\ShowAppPayload;
 use Spatie\Ray\Payloads\SizePayload;
 use Spatie\Ray\Payloads\TablePayload;
+use Spatie\Ray\Payloads\TextPayload;
 use Spatie\Ray\Payloads\TracePayload;
 use Spatie\Ray\Payloads\XmlPayload;
 use Spatie\Ray\Settings\Settings;
@@ -456,6 +457,13 @@ class Ray
     public function xml(string $xml): self
     {
         $payload = new XmlPayload($xml);
+
+        return $this->sendRequest($payload);
+    }
+
+    public function text(string $text): self
+    {
+        $payload = new TextPayload($text);
 
         return $this->sendRequest($payload);
     }

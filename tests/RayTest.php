@@ -713,6 +713,19 @@ class RayTest extends TestCase
     }
 
     /** @test */
+    public function it_sends_a_text_payload()
+    {
+        $this->ray->text('text string');
+        $this->ray->text('another   <strong>text</strong>' . PHP_EOL . '  string');
+
+        $lastPayload = $this->client->sentPayloads()[1]['payloads'][0];
+
+        $this->assertStringContainsString('&nbsp;&nbsp;&nbsp;&lt;strong&gt;', $lastPayload['content']['content']);
+        $this->assertStringContainsString('<br>', $lastPayload['content']['content']);
+        $this->assertMatchesOsSafeSnapshot($this->client->sentPayloads());
+    }
+
+    /** @test */
     public function it_sends_a_null_payload()
     {
         $this->ray->send(null);

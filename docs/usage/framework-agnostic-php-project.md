@@ -320,6 +320,15 @@ To render a piece of HTML directly in Ray, you can use the `html` method.
 ray()->html('<b>Bold string<b>');
 ```
 
+### Displaying text content
+
+To display raw text while preserving whitespace formatting, use the `text` method.  If the text contains HTML, it will be displayed as-is and is not rendered.
+
+```php
+ray()->text('<em>this string is html encoded</em>');
+ray()->text('  whitespace formatting' . PHP_EOL . '   is preserved as well.');
+```
+
 ### Updating displayed items
 
 You can update values that are already displayed in Ray. To do this, you must hold on the instance returned by the `ray`
