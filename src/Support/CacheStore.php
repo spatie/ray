@@ -7,17 +7,9 @@ class CacheStore
     /** @var array */
     protected $store = [];
 
-    /** @var Clock */
-    protected $clock;
-
-    public function __construct(Clock $clock)
-    {
-        $this->clock = $clock;
-    }
-
     public function hit(): self
     {
-        $this->store[] = $this->clock->now()::createFromFormat('U.u', microtime(true));
+        $this->store[] = Clock::now();
 
         return $this;
     }
@@ -38,13 +30,13 @@ class CacheStore
     {
         $amount = 0;
 
-        $lastSecond = $this->clock->now()->modify('-1 second');
+        $lastSecond = Clock::now()->modify('-1 second');
 
         foreach ($this->store as $key => $item) {
             if ($this->isBetween(
                 $item->getTimestamp(),
                 $lastSecond->getTimestamp(),
-                $this->clock->now()->getTimestamp()
+                Clock::now()->getTimestamp()
             )
             ) {
                 $amount++;

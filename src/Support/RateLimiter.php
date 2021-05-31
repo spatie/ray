@@ -20,7 +20,7 @@ class RateLimiter
     {
         $this->maxCalls = $maxCalls;
         $this->maxPerSecond = $maxPerSecond;
-        $this->cache = new CacheStore(new SystemClock());
+        $this->cache = new CacheStore();
     }
 
     public static function disabled(): self
