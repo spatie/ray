@@ -19,7 +19,7 @@ class Clock
         self::$fixedNow = $now ?? new DateTimeImmutable();
     }
 
-    public static function moveForward(string $modifier)
+    public static function moveForward(string $modifier): void
     {
         $currentTime = self::now();
 
