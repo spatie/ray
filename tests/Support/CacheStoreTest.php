@@ -5,7 +5,6 @@ namespace Spatie\Ray\Tests\Support;
 use PHPUnit\Framework\TestCase;
 use Spatie\Ray\Support\CacheStore;
 use Spatie\Ray\Support\Clock;
-use Spatie\Ray\Tests\TestClasses\FakeClock;
 
 class CacheStoreTest extends TestCase
 {
