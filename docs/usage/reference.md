@@ -54,6 +54,7 @@ To display something in Ray use the `ray()` function. It accepts everything: str
 | `ray()->image($path)` | Display an image from a path or URL  |
 | `ray()->json($json, $another, …)` | Send one or more valid JSON strings to Ray |
 | `ray(…)->large()` | Output text bigger |
+| `ray()->limit(N)->…` | Limit the number of payloads that can be sent to Ray to N; used for debugging within loops |
 | `ray()->measure()` | Display runtime and memory usage. When measure is called again, the time between this and previous call is also displayed |
 | `ray()->newScreen()` | Start a new screen |
 | `ray()->newScreen('title')` | Start a new named screen |

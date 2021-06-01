@@ -167,6 +167,18 @@ This is how that looks like in Ray.
 
 ![screenshot](/docs/ray/v1/images/named-count.png)
 
+### Limiting the number of sent payloads
+
+To limit the number of payloads sent by a particular `ray()` call, use the `limit` function.  It works well for debugging loops.
+
+```php
+foreach (range(1, 10) as $i) {
+    ray()->limit(3)->text("A #{$i}"); // counts to 3
+    ray()->limit(6)->text("B #{$i}"); // counts to 6
+    ray()->text("C #{$i}"); // counts to 10
+}
+```
+
 ### Display the class name of an object
 
 To quickly send the class name of an object to ray, use the `className` function.
