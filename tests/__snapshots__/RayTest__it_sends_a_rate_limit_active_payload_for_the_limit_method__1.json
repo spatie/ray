@@ -1,0 +1,39 @@
+[
+    {
+        "uuid": "fakeUuid",
+        "payloads": [
+            {
+                "type": "log",
+                "content": {
+                    "values": [
+                        "limited loop iteration 0"
+                    ]
+                },
+                "origin": {
+                    "file": "\/tests\/RayTest.php",
+                    "line_number": "xxx",
+                    "hostname": "fake-hostname"
+                }
+            }
+        ],
+        "meta": []
+    },
+    {
+        "uuid": "rateLimitReachedUuid",
+        "payloads": [
+            {
+                "type": "custom",
+                "content": {
+                    "content": "<div class=\"text-red-600\">Limit reached at <br>filename.php line 999<\/div>",
+                    "label": "RateLimit"
+                },
+                "origin": {
+                    "file": "\/tests\/RayTest.php",
+                    "line_number": "xxx",
+                    "hostname": "fake-hostname"
+                }
+            }
+        ],
+        "meta": []
+    }
+]

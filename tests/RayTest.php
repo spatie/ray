@@ -8,9 +8,11 @@ use Illuminate\Support\Arr;
 use PHPUnit\Framework\TestCase;
 use Spatie\Backtrace\Frame;
 use Spatie\Ray\Origin\Hostname;
+use Spatie\Ray\Origin\Origin;
 use Spatie\Ray\PayloadFactory;
 use Spatie\Ray\Payloads\CallerPayload;
 use Spatie\Ray\Payloads\LogPayload;
+use Spatie\Ray\Payloads\RateLimitingActivePayload;
 use Spatie\Ray\Ray;
 use Spatie\Ray\Settings\SettingsFactory;
 use Spatie\Ray\Tests\TestClasses\FakeClient;
@@ -919,22 +921,45 @@ class RayTest extends TestCase
     /** @test */
     public function it_can_limit_the_number_of_payloads_sent_from_a_loop()
     {
+        $limit = 5;
+
         for($i = 0; $i < 10; $i++) {
-            $this->getNewRay()->limit(5)->send("limited loop iteration $i");
+            $this->getNewRay()->limit($limit)->send("limited loop iteration $i");
         }
 
-        $this->assertCount(5, $this->client->sentPayloads());
+        // +1 because a message is sent to Ray once informing the user the limit has been reached
+        $this->assertCount($limit + 1, $this->client->sentPayloads());
     }
 
     /** @test */
     public function it_only_limits_the_number_of_payloads_sent_from_the_line_that_calls_limit()
     {
-        for($i = 0; $i < 10; $i++) {
-            $this->getNewRay()->limit(5)->send("limited loop iteration $i");
+        $limit = 5;
+        $iterations = 10;
+
+        for($i = 0; $i < $iterations; $i++) {
+            $this->getNewRay()->limit($limit)->send("limited loop iteration $i");
             $this->getNewRay()->send("unlimited loop iteration $i");
         }
 
-        $this->assertCount(15, $this->client->sentPayloads());
+        // +1 because a message is sent to Ray once informing the user the limit has been reached
+        $this->assertCount($limit + $iterations + 1, $this->client->sentPayloads());
+    }
+
+    /** @test */
+    public function it_sends_a_rate_limit_active_payload_for_the_limit_method()
+    {
+        $limit = 1;
+
+        for($i = 0; $i < 10; $i++) {
+            $this->getNewRay()->limit($limit, new Origin('filename.php', 999))
+                ->send("limited loop iteration $i");
+        }
+
+        // +1 because a message is sent to Ray once informing the user the limit has been reached
+        $this->assertCount($limit + 1, $this->client->sentPayloads());
+
+        $this->assertMatchesOsSafeSnapshot($this->client->sentPayloads());
     }
 
     protected function getNewRay(): Ray
