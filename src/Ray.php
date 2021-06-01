@@ -6,6 +6,7 @@ use Carbon\Carbon;
 use Closure;
 use Composer\InstalledVersions;
 use Exception;
+use Ramsey\Uuid\Rfc4122\UuidV4;
 use Ramsey\Uuid\Uuid;
 use Spatie\Backtrace\Backtrace;
 use Spatie\LaravelRay\Ray as LaravelRay;
@@ -499,18 +500,18 @@ class Ray
     {
         $this->limitOrigin = $origin ?? (new DefaultOriginFactory())->getOrigin();
 
-        self::$limiters->initialize($this->limitOrigin, $count);
+        self::$limiters->initialize($this, $this->limitOrigin, $count);
 
         return $this;
     }
 
-    public static function sendRateLimitingActive(?Ray $rayInstance = null, ?Client $client = null)
+    public static function sendRateLimitingActive(?Ray $rayInstance = null, ?string $uuid = null): ?self
     {
         if (self::$sentRateLimitingActive) {
             return $rayInstance;
         }
 
-        if ($rayInstance && self::$limiters->sentRateLimitActiveMessage($rayInstance->limitOrigin)) {
+        if (self::$limiters->sentRateLimitActiveMessage($rayInstance->limitOrigin)) {
             return $rayInstance;
         }
 
@@ -522,12 +523,10 @@ class Ray
             self::$limiters->setSentRateLimitActive($rayInstance->limitOrigin);
         }
 
-        $client = $client ?? self::$client;
-
         $payload = new RateLimitingActivePayload($rayInstance);
-        $request = new Request('rateLimitReachedUuid', [$payload], []);
+        $request = new Request($uuid ?? UuidV4::uuid4()->toString(), [$payload], []);
 
-        $client->send($request);
+        self::$client->send($request);
 
         return $rayInstance;
     }
@@ -593,15 +592,10 @@ class Ray
             return $this;
         }
 
-        if (self::$limiters->sentRateLimitActiveMessage($this->limitOrigin)) {
-            return $this;
-        }
-
         // see above comment
         if (! empty($this->limitOrigin)) {
-
             if (! self::$limiters->canSendPayload($this->limitOrigin)) {
-                return self::sendRateLimitingActive($this);
+                return self::sendRateLimitingActive($this, $this->limitOrigin->fingerPrint());
             }
 
             self::$limiters->increment($this->limitOrigin);
