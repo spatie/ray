@@ -17,7 +17,7 @@ class CacheStore
 
     public function hit(): self
     {
-        $this->store[] = $this->clock->now()::createFromFormat('U.u', microtime(true));
+        $this->store[] = $this->clock->now();
 
         return $this;
     }

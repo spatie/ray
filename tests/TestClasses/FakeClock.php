@@ -11,7 +11,7 @@ class FakeClock implements Clock
 
     public function __construct(DateTimeImmutable $now = null)
     {
-        $this->fixedNow = $now ?: DateTimeImmutable::createFromFormat('U.u', microtime(true));
+        $this->fixedNow = $now ?: new DateTimeImmutable();
     }
 
     public function freeze(DateTimeImmutable $now = null): void
@@ -19,9 +19,13 @@ class FakeClock implements Clock
         $this->fixedNow = $now ?? new DateTimeImmutable();
     }
 
-    public function freezeAtSecond(DateTimeImmutable $now = null): void
+    public function moveForward(string $modifier): void
     {
-        $this->fixedNow = $now ?? DateTimeImmutable::createFromFormat('U.u', microtime(true));
+        $currentTime = $this->now();
+
+        $modifiedTime = $currentTime->modify("+ {$modifier}");
+
+        $this->freeze($modifiedTime);
     }
 
     public function now(): DateTimeImmutable
