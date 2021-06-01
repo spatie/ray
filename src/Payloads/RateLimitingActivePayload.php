@@ -7,7 +7,7 @@ use Spatie\Ray\Ray;
 
 class RateLimitingActivePayload extends Payload
 {
-    /** @var Ray|null  */
+    /** @var Ray|null */
     protected $rayInstance;
 
     public function __construct(?Ray $rayInstance = null)

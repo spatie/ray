@@ -12,7 +12,6 @@ use Spatie\Ray\Origin\Origin;
 use Spatie\Ray\PayloadFactory;
 use Spatie\Ray\Payloads\CallerPayload;
 use Spatie\Ray\Payloads\LogPayload;
-use Spatie\Ray\Payloads\RateLimitingActivePayload;
 use Spatie\Ray\Ray;
 use Spatie\Ray\Settings\SettingsFactory;
 use Spatie\Ray\Tests\TestClasses\FakeClient;
@@ -923,7 +922,7 @@ class RayTest extends TestCase
     {
         $limit = 5;
 
-        for($i = 0; $i < 10; $i++) {
+        for ($i = 0; $i < 10; $i++) {
             $this->getNewRay()->limit($limit)->send("limited loop iteration $i");
         }
 
@@ -937,7 +936,7 @@ class RayTest extends TestCase
         $limit = 5;
         $iterations = 10;
 
-        for($i = 0; $i < $iterations; $i++) {
+        for ($i = 0; $i < $iterations; $i++) {
             $this->getNewRay()->limit($limit)->send("limited loop iteration $i");
             $this->getNewRay()->send("unlimited loop iteration $i");
         }
@@ -951,7 +950,7 @@ class RayTest extends TestCase
     {
         $limit = 1;
 
-        for($i = 0; $i < 10; $i++) {
+        for ($i = 0; $i < 10; $i++) {
             $this->getNewRay()->limit($limit, new Origin('filename.php', 999), )
                 ->send("limited loop iteration $i");
         }
@@ -967,7 +966,7 @@ class RayTest extends TestCase
     {
         $limit = 1;
 
-        for($i = 0; $i < 10; $i++) {
+        for ($i = 0; $i < 10; $i++) {
             $this->getNewRay()->limit($limit, new Origin('filename.php', 123))
                 ->send("limited loop A iteration $i");
 

@@ -73,7 +73,7 @@ class Ray
     /** @var bool */
     public static $sentRateLimitingActive = false;
 
-    /** @var \Spatie\Ray\Origin\Origin|null  */
+    /** @var \Spatie\Ray\Origin\Origin|null */
     public $limitOrigin = null;
 
     /** @var string */
