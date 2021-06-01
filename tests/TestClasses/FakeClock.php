@@ -7,11 +7,17 @@ use Spatie\Ray\Support\Clock;
 
 class FakeClock implements Clock
 {
+    /** @var DateTimeImmutable|null  */
     protected $fixedNow;
 
     public function __construct(DateTimeImmutable $now = null)
     {
-        $this->fixedNow = $now ?: new DateTimeImmutable();
+        $this->fixedNow = $now;
+    }
+
+    public function now(): DateTimeImmutable
+    {
+        return $this->fixedNow ?? new DateTimeImmutable();
     }
 
     public function freeze(DateTimeImmutable $now = null): void
@@ -26,10 +32,5 @@ class FakeClock implements Clock
         $modifiedTime = $currentTime->modify("+ {$modifier}");
 
         $this->freeze($modifiedTime);
-    }
-
-    public function now(): DateTimeImmutable
-    {
-        return $this->fixedNow;
     }
 }
