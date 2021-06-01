@@ -952,12 +952,31 @@ class RayTest extends TestCase
         $limit = 1;
 
         for($i = 0; $i < 10; $i++) {
-            $this->getNewRay()->limit($limit, new Origin('filename.php', 999))
+            $this->getNewRay()->limit($limit, new Origin('filename.php', 999), )
                 ->send("limited loop iteration $i");
         }
 
         // +1 because a message is sent to Ray once informing the user the limit has been reached
         $this->assertCount($limit + 1, $this->client->sentPayloads());
+
+        $this->assertMatchesOsSafeSnapshot($this->client->sentPayloads());
+    }
+
+    /** @test */
+    public function it_sends_multiple_rate_limit_active_payloads_for_multiple_calls_to_limit()
+    {
+        $limit = 1;
+
+        for($i = 0; $i < 10; $i++) {
+            $this->getNewRay()->limit($limit, new Origin('filename.php', 123))
+                ->send("limited loop A iteration $i");
+
+            $this->getNewRay()->limit($limit, new Origin('filename.php', 124))
+                ->send("limited loop B iteration $i");
+        }
+
+        // +2 because a message is sent to Ray for each limit() call informing the user the limit has been reached
+        $this->assertCount(($limit * 2) + 2, $this->client->sentPayloads());
 
         $this->assertMatchesOsSafeSnapshot($this->client->sentPayloads());
     }
