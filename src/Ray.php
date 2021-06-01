@@ -511,12 +511,12 @@ class Ray
             return $rayInstance;
         }
 
-        if (self::$limiters->sentRateLimitActiveMessage($rayInstance->limitOrigin)) {
-            return $rayInstance;
-        }
-
         if (! $rayInstance) {
             self::$sentRateLimitingActive = true;
+        }
+
+        if (self::$limiters->sentRateLimitActiveMessage($rayInstance->limitOrigin)) {
+            return $rayInstance;
         }
 
         if ($rayInstance) {
@@ -592,7 +592,6 @@ class Ray
             return $this;
         }
 
-        // see above comment
         if (! empty($this->limitOrigin)) {
             if (! self::$limiters->canSendPayload($this->limitOrigin)) {
                 return self::sendRateLimitingActive($this, $this->limitOrigin->fingerPrint());
