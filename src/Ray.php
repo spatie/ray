@@ -42,6 +42,7 @@ use Spatie\Ray\Payloads\XmlPayload;
 use Spatie\Ray\Settings\Settings;
 use Spatie\Ray\Settings\SettingsFactory;
 use Spatie\Ray\Support\Counters;
+use Spatie\Ray\Support\Limiters;
 use Symfony\Component\Stopwatch\Stopwatch;
 use Throwable;
 
@@ -60,8 +61,13 @@ class Ray
     /** @var \Spatie\Ray\Support\Counters */
     public static $counters;
 
+    /** @var \Spatie\Ray\Support\Limiters */
+    public static $limiters;
+
     /** @var string */
     public static $fakeUuid;
+
+    public $originFingerprint = '';
 
     /** @var string */
     public $uuid = '';
@@ -86,6 +92,8 @@ class Ray
         self::$client = $client ?? self::$client ?? new Client($settings->port, $settings->host);
 
         self::$counters = self::$counters ?? new Counters();
+
+        self::$limiters = self::$limiters ?? new Limiters();
 
         $this->uuid = $uuid ?? static::$fakeUuid ?? Uuid::uuid4()->toString();
 
@@ -481,6 +489,17 @@ class Ray
         return $this->sendRequest($payloads);
     }
 
+    public function limit(int $count): self
+    {
+        $fingerPrint = (new DefaultOriginFactory())->getOrigin()->fingerPrint();
+
+        $this->originFingerprint = $fingerPrint;
+
+        self::$limiters->initialize($fingerPrint, $count);
+
+        return $this;
+    }
+
     public function send(...$arguments): self
     {
         if (! count($arguments)) {
@@ -535,6 +554,14 @@ class Ray
     {
         if (! $this->enabled()) {
             return $this;
+        }
+
+        if (! empty($this->originFingerprint)) {
+            if (! self::$limiters->canSendPayload($this->originFingerprint)) {
+                return $this;
+            }
+
+            self::$limiters->increment($this->originFingerprint);
         }
 
         if (! is_array($payloads)) {
