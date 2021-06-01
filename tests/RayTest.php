@@ -916,6 +916,27 @@ class RayTest extends TestCase
         $this->assertLessThan(0.005, $after - $before);
     }
 
+    /** @test */
+    public function it_can_limit_the_number_of_payloads_sent_from_a_loop()
+    {
+        for($i = 0; $i < 10; $i++) {
+            $this->getNewRay()->limit(5)->send("limited loop iteration $i");
+        }
+
+        $this->assertCount(5, $this->client->sentPayloads());
+    }
+
+    /** @test */
+    public function it_only_limits_the_number_of_payloads_sent_from_the_line_that_calls_limit()
+    {
+        for($i = 0; $i < 10; $i++) {
+            $this->getNewRay()->limit(5)->send("limited loop iteration $i");
+            $this->getNewRay()->send("unlimited loop iteration $i");
+        }
+
+        $this->assertCount(15, $this->client->sentPayloads());
+    }
+
     protected function getNewRay(): Ray
     {
         return Ray::create($this->client, 'fakeUuid');
