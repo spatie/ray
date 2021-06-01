@@ -2,6 +2,7 @@
 
 namespace Spatie\Ray\Support;
 
+use Spatie\Ray\Origin\Origin;
 use Spatie\Ray\Ray;
 
 class Limiters
@@ -9,30 +10,34 @@ class Limiters
     /** @var array */
     protected $counters = [];
 
-    public function initialize(string $name, ?int $limit = null): void
+    public function initialize(Origin $origin, ?int $limit = null): void
     {
-        if (! isset($this->counters[$name])) {
-            $this->counters[$name] = [ray(), 0, $limit ?? 0];
+        if (! isset($this->counters[$origin->fingerPrint()])) {
+            $this->counters[$origin->fingerPrint()] = [ray(), 0, $limit ?? 0, false];
         }
     }
 
-    public function increment(string $name): array
+    public function increment(Origin $origin): array
     {
+        $name = $origin->fingerPrint();
+
         if (! isset($this->counters[$name])) {
-            return [ray(), -1, 0];
+            return [ray(), -1, 0, false];
         }
 
-        [$ray, $times, $limitValue] = $this->counters[$name];
+        [$ray, $times, $limitValue, $sentMessage] = $this->counters[$name];
 
         $newTimes = $times + 1;
 
-        $this->counters[$name] = [$ray, $newTimes, $limitValue];
+        $this->counters[$name] = [$ray, $newTimes, $limitValue, $sentMessage];
 
-        return [$ray, $newTimes, $limitValue];
+        return [$ray, $newTimes, $limitValue, $sentMessage];
     }
 
-    public function get(string $name): int
+    public function get(Origin $origin): int
     {
+        $name = $origin->fingerPrint();
+
         if (! isset($this->counters[$name])) {
             return 0;
         }
@@ -40,8 +45,10 @@ class Limiters
         return $this->counters[$name][1];
     }
 
-    public function getLimit(string $name): int
+    public function getLimit(Origin $origin): int
     {
+        $name = $origin->fingerPrint();
+
         if (! isset($this->counters[$name])) {
             return 0;
         }
@@ -49,15 +56,30 @@ class Limiters
         return $this->counters[$name][2];
     }
 
-    public function canSendPayload(string $name): bool
+    public function canSendPayload(Origin $origin): bool
     {
+        $name = $origin->fingerPrint();
+
         if (! isset($this->counters[$name])) {
             return true;
         }
 
-        [$ray, $times, $limit] = $this->counters[$name];
+        [$ray, $times, $limit, $sentMessage] = $this->counters[$name];
 
         return $times < $limit || $limit <= 0;
+    }
+
+    public function sentRateLimitActiveMessage(?Origin $origin): bool
+    {
+        if (! $origin) {
+            return false;
+        }
+
+        if (! isset($this->counters[$origin->fingerPrint()])) {
+            return false;
+        }
+
+        return $this->counters[$origin->fingerPrint()][3];
     }
 
     public function clear(): void
@@ -65,13 +87,18 @@ class Limiters
         $this->counters = [];
     }
 
-    public function setRay(string $name, Ray $ray): void
+    public function setRay(Origin $origin, Ray $ray): void
     {
-        $this->counters[$name][0] = $ray;
+        $this->counters[$origin->fingerPrint()][0] = $ray;
     }
 
-    public function setLimit(string $name, int $limit): void
+    public function setLimit(Origin $origin, int $limit): void
     {
-        $this->counters[$name][2] = $limit;
+        $this->counters[$origin->fingerPrint()][2] = $limit;
+    }
+
+    public function setSentRateLimitActive(Origin $origin): void
+    {
+        $this->counters[$origin->fingerPrint()][3] = true;
     }
 }

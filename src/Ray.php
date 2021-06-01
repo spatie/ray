@@ -13,6 +13,7 @@ use Spatie\Macroable\Macroable;
 use Spatie\Ray\Concerns\RayColors;
 use Spatie\Ray\Concerns\RaySizes;
 use Spatie\Ray\Origin\DefaultOriginFactory;
+use Spatie\Ray\Origin\Origin;
 use Spatie\Ray\Payloads\CallerPayload;
 use Spatie\Ray\Payloads\CarbonPayload;
 use Spatie\Ray\Payloads\ClearAllPayload;
@@ -32,6 +33,7 @@ use Spatie\Ray\Payloads\MeasurePayload;
 use Spatie\Ray\Payloads\NewScreenPayload;
 use Spatie\Ray\Payloads\NotifyPayload;
 use Spatie\Ray\Payloads\PhpInfoPayload;
+use Spatie\Ray\Payloads\RateLimitingActivePayload;
 use Spatie\Ray\Payloads\RemovePayload;
 use Spatie\Ray\Payloads\ShowAppPayload;
 use Spatie\Ray\Payloads\SizePayload;
@@ -67,7 +69,11 @@ class Ray
     /** @var string */
     public static $fakeUuid;
 
-    public $originFingerprint = '';
+    /** @var bool */
+    public static $sentRateLimitingActive = false;
+
+    /** @var \Spatie\Ray\Origin\Origin|null  */
+    public $limitOrigin = null;
 
     /** @var string */
     public $uuid = '';
@@ -489,15 +495,41 @@ class Ray
         return $this->sendRequest($payloads);
     }
 
-    public function limit(int $count): self
+    public function limit(int $count, ?Origin $origin = null): self
     {
-        $fingerPrint = (new DefaultOriginFactory())->getOrigin()->fingerPrint();
+        $this->limitOrigin = $origin ?? (new DefaultOriginFactory())->getOrigin();
 
-        $this->originFingerprint = $fingerPrint;
-
-        self::$limiters->initialize($fingerPrint, $count);
+        self::$limiters->initialize($this->limitOrigin, $count);
 
         return $this;
+    }
+
+    public static function sendRateLimitingActive(?Ray $rayInstance = null, ?Client $client = null)
+    {
+        if (self::$sentRateLimitingActive) {
+            return $rayInstance;
+        }
+
+        if ($rayInstance && self::$limiters->sentRateLimitActiveMessage($rayInstance->limitOrigin)) {
+            return $rayInstance;
+        }
+
+        if (! $rayInstance) {
+            self::$sentRateLimitingActive = true;
+        }
+
+        if ($rayInstance) {
+            self::$limiters->setSentRateLimitActive($rayInstance->limitOrigin);
+        }
+
+        $client = $client ?? self::$client;
+
+        $payload = new RateLimitingActivePayload($rayInstance);
+        $request = new Request('rateLimitReachedUuid', [$payload], []);
+
+        $client->send($request);
+
+        return $rayInstance;
     }
 
     public function send(...$arguments): self
@@ -556,12 +588,23 @@ class Ray
             return $this;
         }
 
-        if (! empty($this->originFingerprint)) {
-            if (! self::$limiters->canSendPayload($this->originFingerprint)) {
-                return $this;
+        // check for global rate limiting before instance limit
+        if (self::$sentRateLimitingActive) {
+            return $this;
+        }
+
+        if (self::$limiters->sentRateLimitActiveMessage($this->limitOrigin)) {
+            return $this;
+        }
+
+        // see above comment
+        if (! empty($this->limitOrigin)) {
+
+            if (! self::$limiters->canSendPayload($this->limitOrigin)) {
+                return self::sendRateLimitingActive($this);
             }
 
-            self::$limiters->increment($this->originFingerprint);
+            self::$limiters->increment($this->limitOrigin);
         }
 
         if (! is_array($payloads)) {
