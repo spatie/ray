@@ -48,5 +48,7 @@ class RateLimitingActivePayload extends Payload
 
         $result = 'Limit reached at ' . $this->replaceRemotePathWithLocalPath($origin->file);
         $result .= " line {$origin->lineNumber}";
+
+        return $result;
     }
 }
