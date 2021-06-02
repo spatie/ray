@@ -6,7 +6,6 @@ use Carbon\Carbon;
 use Closure;
 use Composer\InstalledVersions;
 use Exception;
-use Ramsey\Uuid\Rfc4122\UuidV4;
 use Ramsey\Uuid\Uuid;
 use Spatie\Backtrace\Backtrace;
 use Spatie\LaravelRay\Ray as LaravelRay;
@@ -34,7 +33,6 @@ use Spatie\Ray\Payloads\MeasurePayload;
 use Spatie\Ray\Payloads\NewScreenPayload;
 use Spatie\Ray\Payloads\NotifyPayload;
 use Spatie\Ray\Payloads\PhpInfoPayload;
-use Spatie\Ray\Payloads\RateLimitingActivePayload;
 use Spatie\Ray\Payloads\RemovePayload;
 use Spatie\Ray\Payloads\ShowAppPayload;
 use Spatie\Ray\Payloads\SizePayload;
@@ -562,7 +560,6 @@ class Ray
         }
 
         if (! empty($this->limitOrigin)) {
-
             if (! self::$limiters->canSendPayload($this->limitOrigin)) {
                 return $this;
             }
