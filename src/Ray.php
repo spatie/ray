@@ -13,7 +13,6 @@ use Spatie\Macroable\Macroable;
 use Spatie\Ray\Concerns\RayColors;
 use Spatie\Ray\Concerns\RaySizes;
 use Spatie\Ray\Origin\DefaultOriginFactory;
-use Spatie\Ray\Origin\Origin;
 use Spatie\Ray\Payloads\CallerPayload;
 use Spatie\Ray\Payloads\CarbonPayload;
 use Spatie\Ray\Payloads\ClearAllPayload;
