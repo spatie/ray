@@ -3,7 +3,6 @@
 
 namespace Spatie\Ray\Tests\Support;
 
-
 use PHPUnit\Framework\TestCase;
 use Spatie\Ray\Origin\Origin;
 use Spatie\Ray\Support\Limiters;
