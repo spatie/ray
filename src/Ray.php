@@ -491,9 +491,9 @@ class Ray
         return $this->sendRequest($payloads);
     }
 
-    public function limit(int $count, ?Origin $origin = null): self
+    public function limit(int $count): self
     {
-        $this->limitOrigin = $origin ?? (new DefaultOriginFactory())->getOrigin();
+        $this->limitOrigin = (new DefaultOriginFactory())->getOrigin();
 
         self::$limiters->initialize($this->limitOrigin, $count);
 

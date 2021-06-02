@@ -949,10 +949,10 @@ class RayTest extends TestCase
         $limit = 2;
 
         for ($i = 0; $i < 10; $i++) {
-            $this->getNewRay()->limit($limit, new Origin('filename.php', 123))
+            $this->getNewRay()->limit($limit)
                 ->send("limited loop A iteration $i");
 
-            $this->getNewRay()->limit($limit, new Origin('filename.php', 124))
+            $this->getNewRay()->limit($limit)
                 ->send("limited loop B iteration $i");
         }
 
