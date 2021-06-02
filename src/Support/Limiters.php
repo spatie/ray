@@ -10,7 +10,7 @@ class Limiters
     /** @var array */
     protected $counters = [];
 
-    public function initialize(Ray $ray, Origin $origin, ?int $limit = null): void
+    public function initialize(Origin $origin, ?int $limit = null): void
     {
         if (! isset($this->counters[$origin->fingerPrint()])) {
             $this->counters[$origin->fingerPrint()] = [0, $limit ?? 0];

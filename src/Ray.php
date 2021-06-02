@@ -68,9 +68,6 @@ class Ray
     /** @var string */
     public static $fakeUuid;
 
-    /** @var bool */
-    public static $sentRateLimitingActive = false;
-
     /** @var \Spatie\Ray\Origin\Origin|null */
     public $limitOrigin = null;
 
@@ -498,7 +495,7 @@ class Ray
     {
         $this->limitOrigin = $origin ?? (new DefaultOriginFactory())->getOrigin();
 
-        self::$limiters->initialize($this, $this->limitOrigin, $count);
+        self::$limiters->initialize($this->limitOrigin, $count);
 
         return $this;
     }
