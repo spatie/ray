@@ -9,11 +9,13 @@ class Limiters
     /** @var array */
     protected $counters = [];
 
-    public function initialize(Origin $origin, int $limit): void
+    public function initialize(Origin $origin, int $limit): array
     {
         if (! isset($this->counters[$origin->fingerPrint()])) {
             $this->counters[$origin->fingerPrint()] = [0, $limit];
         }
+
+        return $this->counters[$origin->fingerPrint()];
     }
 
     public function increment(Origin $origin): array
@@ -21,7 +23,7 @@ class Limiters
         $name = $origin->fingerPrint();
 
         if (! isset($this->counters[$name])) {
-            return [-1, 0];
+            return [false, false];
         }
 
         [$times, $limit] = $this->counters[$name];
