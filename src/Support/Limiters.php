@@ -9,10 +9,10 @@ class Limiters
     /** @var array */
     protected $counters = [];
 
-    public function initialize(Origin $origin, ?int $limit = null): void
+    public function initialize(Origin $origin, int $limit): void
     {
         if (! isset($this->counters[$origin->fingerPrint()])) {
-            $this->counters[$origin->fingerPrint()] = [0, $limit ?? 0];
+            $this->counters[$origin->fingerPrint()] = [0, $limit];
         }
     }
 
@@ -24,13 +24,13 @@ class Limiters
             return [-1, 0];
         }
 
-        [$times, $limitValue] = $this->counters[$name];
+        [$times, $limit] = $this->counters[$name];
 
         $newTimes = $times + 1;
 
-        $this->counters[$name] = [$newTimes, $limitValue];
+        $this->counters[$name] = [$newTimes, $limit];
 
-        return [$newTimes, $limitValue];
+        return [$newTimes, $limit];
     }
 
     public function canSendPayload(Origin $origin): bool
