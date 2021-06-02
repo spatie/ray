@@ -926,8 +926,7 @@ class RayTest extends TestCase
             $this->getNewRay()->limit($limit)->send("limited loop iteration $i");
         }
 
-        // +1 because a message is sent to Ray once informing the user the limit has been reached
-        $this->assertCount($limit + 1, $this->client->sentPayloads());
+        $this->assertCount($limit, $this->client->sentPayloads());
     }
 
     /** @test */
@@ -941,30 +940,13 @@ class RayTest extends TestCase
             $this->getNewRay()->send("unlimited loop iteration $i");
         }
 
-        // +1 because a message is sent to Ray once informing the user the limit has been reached
-        $this->assertCount($limit + $iterations + 1, $this->client->sentPayloads());
+        $this->assertCount($limit + $iterations, $this->client->sentPayloads());
     }
 
     /** @test */
-    public function it_sends_a_rate_limit_active_payload_for_the_limit_method()
+    public function it_can_handle_multiple_consecutive_calls_to_limit()
     {
-        $limit = 1;
-
-        for ($i = 0; $i < 10; $i++) {
-            $this->getNewRay()->limit($limit, new Origin('filename.php', 999), )
-                ->send("limited loop iteration $i");
-        }
-
-        // +1 because a message is sent to Ray once informing the user the limit has been reached
-        $this->assertCount($limit + 1, $this->client->sentPayloads());
-
-        $this->assertMatchesOsSafeSnapshot($this->client->sentPayloads());
-    }
-
-    /** @test */
-    public function it_sends_multiple_rate_limit_active_payloads_for_multiple_calls_to_limit()
-    {
-        $limit = 1;
+        $limit = 2;
 
         for ($i = 0; $i < 10; $i++) {
             $this->getNewRay()->limit($limit, new Origin('filename.php', 123))
@@ -973,9 +955,6 @@ class RayTest extends TestCase
             $this->getNewRay()->limit($limit, new Origin('filename.php', 124))
                 ->send("limited loop B iteration $i");
         }
-
-        // +2 because a message is sent to Ray for each limit() call informing the user the limit has been reached
-        $this->assertCount(($limit * 2) + 2, $this->client->sentPayloads());
 
         $this->assertMatchesOsSafeSnapshot($this->client->sentPayloads());
     }
