@@ -38,13 +38,14 @@
         "meta": []
     },
     {
-        "uuid": "361781d7ec86ddb2ba16080878cbb6f4",
+        "uuid": "fakeUuid",
         "payloads": [
             {
-                "type": "custom",
+                "type": "log",
                 "content": {
-                    "content": "<div class=\"text-red-600\">Limit reached at filename.php line 123<\/div>",
-                    "label": "RateLimit"
+                    "values": [
+                        "limited loop A iteration 1"
+                    ]
                 },
                 "origin": {
                     "file": "\/tests\/RayTest.php",
@@ -56,13 +57,14 @@
         "meta": []
     },
     {
-        "uuid": "2abe2494ac52775757856f6d93947990",
+        "uuid": "fakeUuid",
         "payloads": [
             {
-                "type": "custom",
+                "type": "log",
                 "content": {
-                    "content": "<div class=\"text-red-600\">Limit reached at filename.php line 124<\/div>",
-                    "label": "RateLimit"
+                    "values": [
+                        "limited loop B iteration 1"
+                    ]
                 },
                 "origin": {
                     "file": "\/tests\/RayTest.php",
