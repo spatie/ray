@@ -3,7 +3,6 @@
 namespace Spatie\Ray\Support;
 
 use Spatie\Ray\Origin\Origin;
-use Spatie\Ray\Ray;
 
 class Limiters
 {
