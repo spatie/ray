@@ -179,6 +179,8 @@ foreach (range(1, 10) as $i) {
 }
 ```
 
+If the argument passed to `limit()` is a negative number or zero, limiting is disabled.
+
 ### Display the class name of an object
 
 To quickly send the class name of an object to ray, use the `className` function.
