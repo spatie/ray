@@ -505,32 +505,6 @@ class Ray
         return $this;
     }
 
-    public static function sendRateLimitingActive(?Ray $rayInstance = null, ?string $uuid = null): ?self
-    {
-        if (self::$sentRateLimitingActive) {
-            return $rayInstance;
-        }
-
-        if (! $rayInstance) {
-            self::$sentRateLimitingActive = true;
-        }
-
-        if (self::$limiters->sentRateLimitActiveMessage($rayInstance->limitOrigin)) {
-            return $rayInstance;
-        }
-
-        if ($rayInstance) {
-            self::$limiters->setSentRateLimitActive($rayInstance->limitOrigin);
-        }
-
-        $payload = new RateLimitingActivePayload($rayInstance);
-        $request = new Request($uuid ?? UuidV4::uuid4()->toString(), [$payload], []);
-
-        self::$client->send($request);
-
-        return $rayInstance;
-    }
-
     public function send(...$arguments): self
     {
         if (! count($arguments)) {
@@ -587,14 +561,10 @@ class Ray
             return $this;
         }
 
-        // check for global rate limiting before instance limit
-        if (self::$sentRateLimitingActive) {
-            return $this;
-        }
-
         if (! empty($this->limitOrigin)) {
+
             if (! self::$limiters->canSendPayload($this->limitOrigin)) {
-                return self::sendRateLimitingActive($this, $this->limitOrigin->fingerPrint());
+                return $this;
             }
 
             self::$limiters->increment($this->limitOrigin);
