@@ -7,7 +7,7 @@ use Spatie\Ray\Support\Clock;
 
 class FakeClock implements Clock
 {
-    /** @var DateTimeImmutable|null  */
+    /** @var DateTimeImmutable|null */
     protected $fixedNow;
 
     public function __construct(DateTimeImmutable $now = null)
