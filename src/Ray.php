@@ -42,6 +42,7 @@ use Spatie\Ray\Payloads\XmlPayload;
 use Spatie\Ray\Settings\Settings;
 use Spatie\Ray\Settings\SettingsFactory;
 use Spatie\Ray\Support\Counters;
+use Spatie\Ray\Support\Limiters;
 use Symfony\Component\Stopwatch\Stopwatch;
 use Throwable;
 
@@ -60,8 +61,14 @@ class Ray
     /** @var \Spatie\Ray\Support\Counters */
     public static $counters;
 
+    /** @var \Spatie\Ray\Support\Limiters */
+    public static $limiters;
+
     /** @var string */
     public static $fakeUuid;
+
+    /** @var \Spatie\Ray\Origin\Origin|null */
+    public $limitOrigin = null;
 
     /** @var string */
     public $uuid = '';
@@ -86,6 +93,8 @@ class Ray
         self::$client = $client ?? self::$client ?? new Client($settings->port, $settings->host);
 
         self::$counters = self::$counters ?? new Counters();
+
+        self::$limiters = self::$limiters ?? new Limiters();
 
         $this->uuid = $uuid ?? static::$fakeUuid ?? Uuid::uuid4()->toString();
 
@@ -481,6 +490,15 @@ class Ray
         return $this->sendRequest($payloads);
     }
 
+    public function limit(int $count): self
+    {
+        $this->limitOrigin = (new DefaultOriginFactory())->getOrigin();
+
+        self::$limiters->initialize($this->limitOrigin, $count);
+
+        return $this;
+    }
+
     public function send(...$arguments): self
     {
         if (! count($arguments)) {
@@ -535,6 +553,14 @@ class Ray
     {
         if (! $this->enabled()) {
             return $this;
+        }
+
+        if (! empty($this->limitOrigin)) {
+            if (! self::$limiters->canSendPayload($this->limitOrigin)) {
+                return $this;
+            }
+
+            self::$limiters->increment($this->limitOrigin);
         }
 
         if (! is_array($payloads)) {
