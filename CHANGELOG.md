@@ -2,6 +2,10 @@
 
 All notable changes to `ray` will be documented in this file
 
+## 1.24.0 - 2021-06-04
+
+- add limit method (#464)
+
 ## 1.23.0 - 2021-05-29
 
 - add `text` method (#460)
