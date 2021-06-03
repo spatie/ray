@@ -633,7 +633,7 @@ class RayTest extends TestCase
     /** @test */
     public function it_can_send_a_carbon_payload()
     {
-        TestTime::freeze('Y-m-d H:i:s', '2020-01-01 00:00:00');
+        $frozenTime = TestTime::freeze('Y-m-d H:i:s', '2020-01-01 00:00:00');
 
         $carbon = new Carbon();
 
@@ -642,9 +642,9 @@ class RayTest extends TestCase
         $this->assertCount(1, $this->client->sentPayloads());
 
         $payload = $this->client->sentPayloads()[0];
-        $this->assertEquals('2020-01-01 00:00:00', $payload['payloads'][0]['content']['formatted']);
-        $this->assertEquals('1577836800', $payload['payloads'][0]['content']['timestamp']);
-        $this->assertEquals('UTC', $payload['payloads'][0]['content']['timezone']);
+        $this->assertEquals($frozenTime, $payload['payloads'][0]['content']['formatted']);
+        $this->assertEquals($frozenTime->getTimestamp(), $payload['payloads'][0]['content']['timestamp']);
+        $this->assertEquals(date_default_timezone_get(), $payload['payloads'][0]['content']['timezone']);
     }
 
     /** @test */
