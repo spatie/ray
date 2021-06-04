@@ -961,7 +961,7 @@ class RayTest extends TestCase
     /** @test */
     public function it_can_conditionally_send_payloads_using_when_with_a_truthy_conditional_and_without_a_callback()
     {
-        for($i = 0; $i < 10; $i++) {
+        for ($i = 0; $i < 10; $i++) {
             $this->ray->when($i < 5)->text("value: {$i}");
         }
 
@@ -971,8 +971,8 @@ class RayTest extends TestCase
     /** @test */
     public function it_can_conditionally_send_payloads_using_when_with_a_callable_conditional_param()
     {
-        for($i = 0; $i < 10; $i++) {
-            $this->ray->when(function() use ($i) {
+        for ($i = 0; $i < 10; $i++) {
+            $this->ray->when(function () use ($i) {
                 return $i < 5;
             })->text("value: {$i}");
         }
@@ -983,11 +983,11 @@ class RayTest extends TestCase
     /** @test */
     public function it_can_conditionally_send_payloads_using_when_with_a_callback()
     {
-        $this->ray->when(true, function($ray) {
+        $this->ray->when(true, function ($ray) {
             $ray->text('one');
         });
 
-        $this->ray->when(false, function($ray) {
+        $this->ray->when(false, function ($ray) {
             $ray->text('two');
         });
 
@@ -997,7 +997,7 @@ class RayTest extends TestCase
     /** @test */
     public function it_can_chain_method_calls_when_using_when_with_a_callback_and_a_false_condition()
     {
-        $this->ray->when(false, function($ray) {
+        $this->ray->when(false, function ($ray) {
             $ray->text('one')->green();
         })
         ->text('two')
@@ -1005,7 +1005,7 @@ class RayTest extends TestCase
 
         $this->ray
             ->text('three')
-            ->when(false, function($ray) {
+            ->when(false, function ($ray) {
                 $ray->green();
             });
 
@@ -1017,13 +1017,13 @@ class RayTest extends TestCase
     {
         $this->ray
             ->text('test')
-            ->when(true, function($ray) {
+            ->when(true, function ($ray) {
                 $ray->green();
             })
-            ->when(false, function($ray) {
+            ->when(false, function ($ray) {
                 $ray->text('text modified');
             })
-            ->when(true, function($ray) {
+            ->when(true, function ($ray) {
                 $ray->large();
             })
             ->hide();
