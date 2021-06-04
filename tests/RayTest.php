@@ -916,6 +916,67 @@ class RayTest extends TestCase
         $this->assertLessThan(0.005, $after - $before);
     }
 
+    /** @test */
+    public function it_can_conditionally_send_payloads_using_when_without_a_callback()
+    {
+        for($i = 0; $i < 10; $i++) {
+            $this->ray->when($i < 5)->text("value: {$i}");
+        }
+
+        $this->assertCount(5, $this->client->sentPayloads());
+    }
+
+    /** @test */
+    public function it_can_conditionally_send_payloads_using_when_with_a_callback()
+    {
+        $this->ray->when(true, function($ray) {
+            $ray->text('one');
+        });
+
+        $this->ray->when(false, function($ray) {
+            $ray->text('two');
+        });
+
+        $this->assertCount(1, $this->client->sentPayloads());
+    }
+
+    /** @test */
+    public function it_can_chain_method_calls_when_using_when_with_a_callback_and_a_false_condition()
+    {
+        $this->ray->when(false, function($ray) {
+            $ray->text('one')->green();
+        })
+        ->text('two')
+        ->blue();
+
+        $this->ray
+            ->text('three')
+            ->when(false, function($ray) {
+                $ray->green();
+            });
+
+        $this->assertMatchesOsSafeSnapshot($this->client->sentPayloads());
+    }
+
+    /** @test */
+    public function it_can_chain_multiple_when_calls_with_callbacks_together()
+    {
+        $this->ray
+            ->text('test')
+            ->when(true, function($ray) {
+                $ray->green();
+            })
+            ->when(false, function($ray) {
+                $ray->text('text modified');
+            })
+            ->when(true, function($ray) {
+                $ray->large();
+            })
+            ->hide();
+
+        $this->assertMatchesOsSafeSnapshot($this->client->sentPayloads());
+    }
+
     protected function getNewRay(): Ray
     {
         return Ray::create($this->client, 'fakeUuid');
