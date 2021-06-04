@@ -959,10 +959,22 @@ class RayTest extends TestCase
     }
 
     /** @test */
-    public function it_can_conditionally_send_payloads_using_when_without_a_callback()
+    public function it_can_conditionally_send_payloads_using_when_with_a_truthy_conditional_and_without_a_callback()
     {
         for($i = 0; $i < 10; $i++) {
             $this->ray->when($i < 5)->text("value: {$i}");
+        }
+
+        $this->assertCount(5, $this->client->sentPayloads());
+    }
+
+    /** @test */
+    public function it_can_conditionally_send_payloads_using_when_with_a_callable_conditional_param()
+    {
+        for($i = 0; $i < 10; $i++) {
+            $this->ray->when(function() use ($i) {
+                return $i < 5;
+            })->text("value: {$i}");
         }
 
         $this->assertCount(5, $this->client->sentPayloads());

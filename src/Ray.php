@@ -334,14 +334,18 @@ class Ray
         return $this->sendRequest($payload);
     }
 
-    public function when(bool $condition, ?callable $callback = null): self
+    public function when($boolOrCallable, ?callable $callback = null): self
     {
-        if ($condition && $callback !== null) {
+        if (is_callable($boolOrCallable)) {
+            $boolOrCallable = (bool)$boolOrCallable();
+        }
+
+        if ($boolOrCallable && $callback !== null) {
             $callback($this);
         }
 
         if ($callback === null) {
-            $this->canSendPayload = $condition;
+            $this->canSendPayload = $boolOrCallable;
         }
 
         return $this;
