@@ -136,6 +136,32 @@ Cache::get('another-key');
 
 To stop showing cache events, call `stopShowingCache`.
 
+### Showing http client requests
+
+You can display all http client requests and responses using `showHttpClientRequests`
+
+```php
+ray()->showHttpClientRequests();
+
+Http::get('https://example.com/api/users');
+```
+
+![screenshot](/docs/ray/v1/images/http.png)
+
+To stop showing http client events, call `stopShowingCache`.
+
+Alternatively, you can pass a callable to `showHttpClientRequests`. Only the http requests made inside that callable will be displayed in Ray.
+
+```php
+Http::get('https://example.com'); // this request won't be displayed.
+
+ray()->showHttpClientRequests(function() {
+    Http::get('https://example.com'); // this request will be displayed.
+});
+
+Http::get('https://example.com'); // this request won't be displayed.
+```
+
 ### Handling models
 
 Using the `model` function, you can display the attributes and relations of a model.
