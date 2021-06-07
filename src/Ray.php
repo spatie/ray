@@ -73,6 +73,9 @@ class Ray
     /** @var string */
     public $uuid = '';
 
+    /** @var bool */
+    public $canSendPayload = true;
+
     /** @var \Symfony\Component\Stopwatch\Stopwatch[] */
     public static $stopWatches = [];
 
@@ -331,6 +334,23 @@ class Ray
         return $this->sendRequest($payload);
     }
 
+    public function when($boolOrCallable, ?callable $callback = null): self
+    {
+        if (is_callable($boolOrCallable)) {
+            $boolOrCallable = (bool)$boolOrCallable();
+        }
+
+        if ($boolOrCallable && $callback !== null) {
+            $callback($this);
+        }
+
+        if ($callback === null) {
+            $this->canSendPayload = $boolOrCallable;
+        }
+
+        return $this;
+    }
+
     public function showWhen($boolOrCallable): self
     {
         if (is_callable($boolOrCallable)) {
@@ -552,6 +572,10 @@ class Ray
     public function sendRequest($payloads, array $meta = []): self
     {
         if (! $this->enabled()) {
+            return $this;
+        }
+
+        if (! $this->canSendPayload) {
             return $this;
         }
 

@@ -1,0 +1,55 @@
+[
+    {
+        "uuid": "fakeUuid",
+        "payloads": [
+            {
+                "type": "custom",
+                "content": {
+                    "content": "two",
+                    "label": "Text"
+                },
+                "origin": {
+                    "file": "\/tests\/RayTest.php",
+                    "line_number": "xxx",
+                    "hostname": "fake-hostname"
+                }
+            }
+        ],
+        "meta": []
+    },
+    {
+        "uuid": "fakeUuid",
+        "payloads": [
+            {
+                "type": "color",
+                "content": {
+                    "color": "blue"
+                },
+                "origin": {
+                    "file": "\/tests\/RayTest.php",
+                    "line_number": "xxx",
+                    "hostname": "fake-hostname"
+                }
+            }
+        ],
+        "meta": []
+    },
+    {
+        "uuid": "fakeUuid",
+        "payloads": [
+            {
+                "type": "custom",
+                "content": {
+                    "content": "three",
+                    "label": "Text"
+                },
+                "origin": {
+                    "file": "\/tests\/RayTest.php",
+                    "line_number": "xxx",
+                    "hostname": "fake-hostname"
+                }
+            }
+        ],
+        "meta": []
+    }
+]
