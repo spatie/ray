@@ -2,6 +2,10 @@
 
 All notable changes to `ray` will be documented in this file
 
+## 1.25.0 - 2021-06-07
+
+- add `if` method
+
 ## 1.24.0 - 2021-06-04
 
 - add limit method (#464)
