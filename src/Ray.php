@@ -334,7 +334,7 @@ class Ray
         return $this->sendRequest($payload);
     }
 
-    public function when($boolOrCallable, ?callable $callback = null): self
+    public function if($boolOrCallable, ?callable $callback = null): self
     {
         if (is_callable($boolOrCallable)) {
             $boolOrCallable = (bool)$boolOrCallable();
@@ -351,6 +351,9 @@ class Ray
         return $this;
     }
 
+    /**
+     * @deprecated Use `if` instead of this method
+     */
     public function showWhen($boolOrCallable): self
     {
         if (is_callable($boolOrCallable)) {
@@ -364,11 +367,17 @@ class Ray
         return $this;
     }
 
+    /**
+     * @deprecated Use `if` instead of this method
+     */
     public function showIf($boolOrCallable): self
     {
         return $this->showWhen($boolOrCallable);
     }
 
+    /**
+     * @deprecated Use `if` instead of this method
+     */
     public function removeWhen($boolOrCallable): self
     {
         if (is_callable($boolOrCallable)) {
@@ -382,6 +391,9 @@ class Ray
         return $this;
     }
 
+    /**
+     * @deprecated Use `if` instead of this method
+     */
     public function removeIf($boolOrCallable): self
     {
         return $this->removeWhen($boolOrCallable);

@@ -384,49 +384,45 @@ not.
 
 ### Conditionally sending items to Ray
 
-If for any reason you do not want to send payloads to Ray _unless_ a condition is met, use the `when()` method.  This method
-differs from the `showWhen()` and `showIf()` methods because they always send payloads _(then remove it if the condition is met)_,
-whereas `when()` only sends payloads when the condition is met.  This is especially important when debugging large loops to avoid 
-Ray from having to process hundreds or thousands of payload items.
+If for any reason you do not want to send payloads to Ray _unless_ a condition is met, use the `if()` method.
 
-
-You can call `when()` in two ways: only with a conditional, or with a conditional and a callback.  A conditional can be either a truthy
+You can call `if()` in two ways: only with a conditional, or with a conditional and a callback.  A conditional can be either a truthy
 value or a callable that returns a truthy value.
 
 
-Note that when `when()` is called with only a conditional, **all** following chained methods will only execute if the conditional 
+Note that when `if()` is called with only a conditional, **all** following chained methods will only execute if the conditional 
 is true.  When using a callback with `when()`, all additional chained methods will be called.
-
 
 ```php
 for($i = 0; $i < 100; $i++) {
-    ray()->when($i < 10)->text("value is less than ten: $i")->blue();
+    ray()->if($i < 10)->text("value is less than ten: $i")->blue();
     
-    ray()->when(function() use ($i) {
+    ray()->if(function() use ($i) {
         return $i == 25;
     })->text("value is twenty-five!")->green();
     
     // display "value: #" for every item, and display 
     // even numbered values as red
     ray()->text("value: $i")
-        ->when($i % 2 === 0)
+        ->if($i % 2 === 0)
         ->red();
 }
 ```
 
-You can even chain multiple `when()` calls without callbacks:
+You can even chain multiple `if()` calls without callbacks:
 
 ```php
 for($i = 0; $i < 100; $i++) {
     // display "value: #" for every item, and display even values as red
     // and odd values as blue, except for 10 -- which is shown with large 
     // text and in green.
-    ray()->text("value: $i")
-        ->when($i % 2 === 0)
+    ray()
+        ->text("value: $i")
+        ->if($i % 2 === 0)
             ->red()
-        ->when($i % 2 !== 0)
+        ->if($i % 2 !== 0)
             ->blue()
-        ->when($i === 10)
+        ->if($i === 10)
             ->large()
             ->green();
 }
@@ -440,13 +436,13 @@ for($i = 0; $i < 100; $i++) {
     // items less than 20 will have their text changed.
     // when the value is an even number, the item will be displayed with large text.
     ray()->text("value: $i")
-        ->when($i < 10, function($ray) use ($i) {
+        ->if($i < 10, function($ray) use ($i) {
             $ray->text("value is less than ten: $i");
         })
-        ->when($i >= 10 && $i < 20, function($ray) use ($i) {
+        ->if($i >= 10 && $i < 20, function($ray) use ($i) {
             $ray->text("value is less than 20: $i");
         })
-        ->when($i % 2 === 0, function($ray) {
+        ->if($i % 2 === 0, function($ray) {
             $ray->large();
         })
         ->green();
