@@ -181,6 +181,27 @@ foreach (range(1, 10) as $i) {
 
 If the argument passed to `limit()` is a negative number or zero, limiting is disabled.
 
+
+### Using a rate limiter
+
+A rate limiter can help to reduce the amount of sent messages. This would avoid spamming the desktop app, which can be helpful when using Ray in loops.
+
+```php
+Ray::rateLimiter()->max(10); // only 10 messages will be sent
+```
+
+```php
+Ray::rateLimiter()->perSecond(10); // only 10 messages per second will be sent
+```
+
+To remove the rate limits again
+```php
+Ray::rateLimiter()->clear();
+```
+
+A message to the desktop app will be sent once to notify the user the rate limit has been reached.
+
+
 ### Display the class name of an object
 
 To quickly send the class name of an object to ray, use the `className` function.
