@@ -66,6 +66,9 @@ To display something in Ray use the `ray()` function. It accepts everything: str
 | `ray()->phpinfo()` | Display PHP info |
 | `ray()->phpinfo($key, $another, …)` | Display specific parts of PHP info |
 | `ray(…)->purple()` | Output in purple |
+| `ray()->rateLimiter()->max(int $maxCalls)` | Limits the amount of calls sent to Ray |
+| `ray()->rateLimiter()->perSecond($maxCalls)` | Limits the amount of calls sent to Ray in a second |
+| `ray()->rateLimiter()->clear()` | Clears the rate limits |
 | `ray()->raw($value)` | Send raw output of a value to Ray without fancy formatting |
 | `ray(…)->red()` | Output in red |
 | `ray()->showApp()` | Bring the app to the foreground |

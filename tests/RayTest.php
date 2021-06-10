@@ -1031,6 +1031,22 @@ class RayTest extends TestCase
         $this->assertMatchesOsSafeSnapshot($this->client->sentPayloads());
     }
 
+    /** @test */
+    public function it_cannot_call_when_rate_limit_max_has_reached()
+    {
+        Ray::rateLimiter()
+            ->clear()
+            ->max(1);
+
+        ray('this can pass');
+        ray('this cannot pass, but triggers a warning call');
+        ray('this cannot pass');
+
+        $this->assertCount(2, $this->client->sentPayloads());
+
+        $this->assertSame('Rate limit has been reached...', $this->client->sentPayloads()[1]['payloads'][0]['content']['content']);
+    }
+
     protected function getNewRay(): Ray
     {
         return Ray::create($this->client, 'fakeUuid');
