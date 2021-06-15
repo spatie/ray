@@ -222,7 +222,7 @@ ray()->markdown('# Hello World');
 
 ### Displaying collections
 
-In a Laravel app, Ray will automatically register a `ray` collection macro to easily send collections to ray.
+Ray will automatically register a `ray` collection macro to easily send collections to ray.
 
 ```php
 collect(['a', 'b', 'c'])
@@ -233,6 +233,16 @@ collect(['a', 'b', 'c'])
 
 ![screenshot](/docs/ray/v1/images/collection.jpg)
 
+### Usage with a `Stringable`
+
+Ray will automatically register a `ray` collection macro to easily send `Stringable`s to ray.
+
+```php
+Str::of('Lorem')
+   ->append(' Ipsum')
+   ->ray()
+   ->append(' Dolor Sit Amen');
+```
 
 ### Displaying environment variables
 
