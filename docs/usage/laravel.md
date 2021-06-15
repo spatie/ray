@@ -235,7 +235,7 @@ collect(['a', 'b', 'c'])
 
 ### Usage with a `Stringable`
 
-Ray will automatically register a `ray` collection macro to easily send `Stringable`s to ray.
+Ray will automatically register a `ray` macro to `Stringable` to easily send `Stringable`s to Ray.
 
 ```php
 Str::of('Lorem')
