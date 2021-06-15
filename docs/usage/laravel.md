@@ -244,6 +244,9 @@ Str::of('Lorem')
    ->append(' Dolor Sit Amen');
 ```
 
+![screenshot](/docs/ray/v1/images/stringable.jpg)
+
+
 ### Displaying environment variables
 
 You can use the `env()` method to display all environment variables as loaded from your `.env` file.  You may optionally pass an array of variable names to exclusively display.
