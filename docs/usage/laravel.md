@@ -43,6 +43,20 @@ ray()->showQueries(function() {
 User::all(); // this query won't be displayed.
 ```
 
+### Counting queries
+
+If you're interested in how many queries a given piece of code executes, and what the runtime of those queries is, you can use `countQueries`. It expects you to pass a closure in which all the executed queries will be counted.
+
+```php
+ray()->countQueries(function() {
+    User::all();
+    User::all();
+    User::all();
+});
+```
+
+![screenshot](/docs/ray/v1/images/query-count.jpg)
+
 ### Showing events
 
 You can display all events that are executed by calling `showEvents` (or `events`).

@@ -548,7 +548,6 @@ class Ray
         }
 
         $payloads = PayloadFactory::createForValues($arguments);
-
         return $this->sendRequest($payloads);
     }
 
