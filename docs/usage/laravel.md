@@ -55,7 +55,7 @@ ray()->countQueries(function() {
 });
 ```
 
-![screenshot](/docs/ray/v1/images/query-count.jpg)
+![screenshot](/docs/ray/v1/images/query-count.png)
 
 ### Showing events
 

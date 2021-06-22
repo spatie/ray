@@ -111,6 +111,7 @@ Read more on [Framework agnostic PHP](/docs/ray/v1/usage/framework-agnostic-php-
 | `ray()->stopShowingJobs()` | Stop displaying jobs  |
 | `ray()->showQueries()` | Display all queries that are executed  |
 | `ray()->showQueries(callable)` | Display all queries that are executed within a callable |
+| `ray()->countQueries(callable)` | Count all queries that are executed within a callable |
 | `ray()->stopShowingQueries()` | Stop displaying queries  |
 | `ray()->showRequests()` | Display all requests  |
 | `ray()->stopShowingRequests()` | Stop displaying requests  |
