@@ -1071,6 +1071,17 @@ class RayTest extends TestCase
         $this->assertEquals(0, $this->client->sentPayloads()[0]['payloads'][0]['content']['content']);
     }
 
+    /** @test */
+    public function it_sends_a_payload_once_while_allowing_calls_to_limit()
+    {
+        for($i = 0; $i < 5; $i++) {
+            $this->ray->once($i);
+            $this->getNewRay()->limit(5)->text($i);
+        }
+
+        $this->assertCount(6, $this->client->sentPayloads());
+    }
+
     protected function getNewRay(): Ray
     {
         return Ray::create($this->client, 'fakeUuid');
