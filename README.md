@@ -6,7 +6,7 @@
 
 This package can be installed in any PHP application to send messages to [the Ray app](https://myray.app). 
 
-[<img src="https://github-ads.s3.eu-central-1.amazonaws.com/ray.jpg?t=1" width="419px" />](https://spatie.be/github-ad-click/ray)
+[<img src="https://github-ads.s3.eu-central-1.amazonaws.com/ray.jpg?t=2" width="419px" />](https://spatie.be/github-ad-click/ray)
 
 
 The desktop app:
