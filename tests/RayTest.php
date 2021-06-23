@@ -43,6 +43,8 @@ class RayTest extends TestCase
         $this->ray = new Ray($this->settings, $this->client, 'fakeUuid');
 
         $this->ray->enable();
+
+        Ray::rateLimiter()->clear();
     }
 
     /** @test */
@@ -1045,6 +1047,28 @@ class RayTest extends TestCase
         $this->assertCount(2, $this->client->sentPayloads());
 
         $this->assertSame('Rate limit has been reached...', $this->client->sentPayloads()[1]['payloads'][0]['content']['content']);
+    }
+
+    /** @test */
+    public function it_sends_a_payload_once_when_called_with_arguments()
+    {
+        for($i = 0; $i < 5; $i++) {
+            $this->ray->once($i);
+        }
+
+        $this->assertCount(1, $this->client->sentPayloads());
+        $this->assertEquals([0], $this->client->sentPayloads()[0]['payloads'][0]['content']['values']);
+    }
+
+    /** @test */
+    public function it_sends_a_payload_once_when_called_without_arguments()
+    {
+        for($i = 0; $i < 5; $i++) {
+            $this->ray->once()->text($i);
+        }
+
+        $this->assertCount(1, $this->client->sentPayloads());
+        $this->assertEquals(0, $this->client->sentPayloads()[0]['payloads'][0]['content']['content']);
     }
 
     protected function getNewRay(): Ray
