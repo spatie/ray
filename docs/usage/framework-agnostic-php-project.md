@@ -211,7 +211,7 @@ To only send a payload once, use the `once` function.  This is useful for debugg
 
 ```php
 foreach (range(1, 10) as $i) {
-    ray()->once($i); // only sends "0"
+    ray()->once($i); // only sends "1"
 }
 ```
 
@@ -219,7 +219,7 @@ You can also use `once` without arguments. Any function you chain on `once` will
 
 ```php
 foreach (range(1, 10) as $i) {
-    ray()->once()->html("<strong>{$i}</strong>"); // only sends "<strong>0</strong>"
+    ray()->once()->html("<strong>{$i}</strong>"); // only sends "<strong>1</strong>"
 }
 ```
 
