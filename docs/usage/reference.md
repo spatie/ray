@@ -60,6 +60,7 @@ To display something in Ray use the `ray()` function. It accepts everything: str
 | `ray()->newScreen()` | Start a new screen |
 | `ray()->newScreen('title')` | Start a new named screen |
 | `ray(…)->notify($message)` | Display a notification |
+| `ray()->once($arg1, …)` | Only send a payload once when in a loop |
 | `ray(…)->orange()` | Output in orange |
 | `ray(…)->pass($variable)` | Display something in Ray and return the value instead of a Ray instance |
 | `ray()->pause()` | Pause execution |
