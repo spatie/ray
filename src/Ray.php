@@ -537,6 +537,19 @@ class Ray
         return $this;
     }
 
+    public function once(...$arguments): self
+    {
+        $this->limitOrigin = (new DefaultOriginFactory())->getOrigin();
+
+        self::$limiters->initialize($this->limitOrigin, 1);
+
+        if (! empty($arguments)) {
+            return $this->send(...$arguments);
+        }
+
+        return $this;
+    }
+
     public function send(...$arguments): self
     {
         if (! count($arguments)) {
