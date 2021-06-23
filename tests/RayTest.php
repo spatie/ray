@@ -1052,7 +1052,7 @@ class RayTest extends TestCase
     /** @test */
     public function it_sends_a_payload_once_when_called_with_arguments()
     {
-        for($i = 0; $i < 5; $i++) {
+        for ($i = 0; $i < 5; $i++) {
             $this->getNewRay()->once($i);
         }
 
@@ -1063,7 +1063,7 @@ class RayTest extends TestCase
     /** @test */
     public function it_sends_a_payload_once_when_called_without_arguments()
     {
-        for($i = 0; $i < 5; $i++) {
+        for ($i = 0; $i < 5; $i++) {
             $this->getNewRay()->once()->text($i);
         }
 
@@ -1074,7 +1074,7 @@ class RayTest extends TestCase
     /** @test */
     public function it_sends_a_payload_once_while_allowing_calls_to_limit()
     {
-        for($i = 0; $i < 5; $i++) {
+        for ($i = 0; $i < 5; $i++) {
             $this->ray->once($i);
             $this->getNewRay()->limit(5)->text($i);
         }
