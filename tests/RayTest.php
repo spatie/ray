@@ -1053,7 +1053,7 @@ class RayTest extends TestCase
     public function it_sends_a_payload_once_when_called_with_arguments()
     {
         for($i = 0; $i < 5; $i++) {
-            $this->ray->once($i);
+            $this->getNewRay()->once($i);
         }
 
         $this->assertCount(1, $this->client->sentPayloads());
@@ -1064,7 +1064,7 @@ class RayTest extends TestCase
     public function it_sends_a_payload_once_when_called_without_arguments()
     {
         for($i = 0; $i < 5; $i++) {
-            $this->ray->once()->text($i);
+            $this->getNewRay()->once()->text($i);
         }
 
         $this->assertCount(1, $this->client->sentPayloads());
