@@ -210,15 +210,15 @@ To only send a payload once, use the `once` function.  This is useful for debugg
 
 
 ```php
-for ($i = 0; $i < 10; $i++) {
+foreach (range(1, 10) as $i) {
     ray()->once($i); // only sends "0"
 }
 ```
 
-or without arguments:
+You can also use `once` without arguments. Any function you chain on `once` will also only be called once.
 
 ```php
-for ($i = 0; $i < 10; $i++) {
+foreach (range(1, 10) as $i) {
     ray()->once()->html("<strong>{$i}</strong>"); // only sends "<strong>0</strong>"
 }
 ```
