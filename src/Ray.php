@@ -490,7 +490,7 @@ class Ray
         return $this->sendRequest($payload);
     }
 
-    public function exception(Throwable $exception, array $meta = []): self
+    public function exception(Throwable $exception, array $meta = [])
     {
         $payload = new ExceptionPayload($exception, $meta);
 
