@@ -2,6 +2,10 @@
 
 All notable changes to `ray` will be documented in this file
 
+## 1.27.1 - 2021-06-24
+
+- remove typehint to allow override
+
 ## 1.27.0 - 2021-06-23
 
 - add `once()` (#481)
