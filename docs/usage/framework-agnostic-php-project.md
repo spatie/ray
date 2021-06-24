@@ -202,6 +202,27 @@ Ray::rateLimiter()->clear();
 A message to the desktop app will be sent once to notify the user the rate limit has been reached.
 
 
+### Sending a payload once
+
+To only send a payload once, use the `once` function.  This is useful for debugging loops.
+
+`once()` may be called with arguments:
+
+
+```php
+foreach (range(1, 10) as $i) {
+    ray()->once($i); // only sends "1"
+}
+```
+
+You can also use `once` without arguments. Any function you chain on `once` will also only be called once.
+
+```php
+foreach (range(1, 10) as $i) {
+    ray()->once()->html("<strong>{$i}</strong>"); // only sends "<strong>1</strong>"
+}
+```
+
 ### Display the class name of an object
 
 To quickly send the class name of an object to ray, use the `className` function.
