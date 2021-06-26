@@ -50,6 +50,20 @@ ray().enable();
 ray('this is also sent');
 ```
 
+You can check if Ray is enabled or disabled with the `enabled` and `disabled` functions.
+
+```js
+ray().disable();
+
+ray().enabled(); // false
+ray().disabled(); // true
+
+ray().enable();
+
+ray().enabled(); // true
+ray().disabled(); // false
+```
+
 ### Working with screens
 
 Ray can create or clear new screens of information.
@@ -351,6 +365,23 @@ ray().stopTime('my timer');
 
 Calling `stopTime()` without specifying a name will delete all existing stopwatches.
 
+### Rendering HTML
+
+To render a piece of HTML directly in Ray, you can use the `html` method.
+
+```js
+ray().html('<b>Bold string<b>');
+```
+
+### Displaying text content
+
+To display raw text while preserving whitespace formatting, use the `text` method.  If the text contains HTML, it will be displayed as-is and is not rendered.
+
+```js
+ray().text('<em>this string is html encoded</em>');
+ray().text('  whitespace formatting' . "\n" . '   is preserved as well.');
+```
+
 ### Showing events
 
 You can information about an event that has executed by calling `event(name, data)`, with `data` being optional.
@@ -360,6 +391,127 @@ ray().event('TestEvent', ['my argument']);
 ```
 
 ![screenshot](/docs/ray/v1/images/event.jpg)
+
+### Limiting the number of sent payloads
+
+To limit the number of payloads sent by a particular `ray()` call, use the `limit` function.  It works well for debugging loops.
+
+```js
+for(let i = 0; i < 10; i++) {
+    ray().limit(3).text(`A #${i}`); // counts to 3
+    ray().limit(6).text(`B #${i}`); // counts to 6
+    ray().text(`C #${i}`); // counts to 10
+}
+```
+
+If the argument passed to `limit()` is a negative number or zero, limiting is disabled.
+
+
+### Using a rate limiter
+
+A rate limiter can help to reduce the amount of sent messages. This would avoid spamming the desktop app, which can be helpful when using Ray in loops.
+
+```js
+Ray.rateLimiter().max(10); // only 10 messages will be sent
+```
+
+```js
+Ray.rateLimiter().perSecond(10); // only 10 messages per second will be sent
+```
+
+To remove the rate limits again
+```js
+Ray.rateLimiter().clear();
+```
+
+A message to the desktop app will be sent once to notify the user the rate limit has been reached.
+
+
+### Sending a payload once
+
+To only send a payload once, use the `once` function.  This is useful for debugging loops.
+
+`once()` may be called with arguments:
+
+
+```js
+for(let i = 0; i < 10; i++) {
+    ray().once($i); // only sends "0"
+}
+```
+
+You can also use `once` without arguments. Any function you chain on `once` will also only be called once.
+
+```php
+for(let i = 0; i < 10; i++) {
+    ray().once().html(`<strong>${i}</strong>`); // only sends "<strong>0</strong>"
+}
+```
+
+### Conditionally sending items to Ray
+
+If for any reason you do not want to send payloads to Ray _unless_ a condition is met, use the `if()` method.
+
+You can call `if()` in two ways: only with a conditional, or with a conditional and a callback.  A conditional can be either a truthy
+value or a callable that returns a truthy value.
+
+
+Note that when `if()` is called with only a conditional, **all** following chained methods will only execute if the conditional 
+is true.  When using a callback with `if()`, all additional chained methods will be called.
+
+```js
+for(let i = 0; i < 100; i++) {
+    ray().if(i < 10).text(`value is less than ten: ${i}`).blue();
+    
+    ray().if(() => i === 25).text("value is twenty-five!").green();
+    
+    // display "value: #" for every item, and display 
+    // even numbered values as red
+    ray().text(`value: ${i}`)
+        .if(i % 2 === 0)
+        .red();
+}
+```
+
+You can even chain multiple `if()` calls without callbacks:
+
+```js
+for(let i = 0; i < 100; i++) {
+    // display "value: #" for every item, and display even values as red
+    // and odd values as blue, except for 10 -- which is shown with large 
+    // text and in green.
+    ray()
+        .text(`value: ${i}`)
+        .if($i % 2 === 0)
+            .red()
+        .if($i % 2 !== 0)
+            .blue()
+        .if($i === 10)
+            .large()
+            .green();
+}
+```
+
+Or chain multiple calls to `if()` with callbacks that don't affect the chained methods following them:
+
+```js
+for(let i = 0; i < 100; i++) {
+    // display "value: #" for all items and make each item green.
+    // items less than 20 will have their text changed.
+    // when the value is an even number, the item will be displayed with large text.
+    ray().text(`value: ${i}`)
+        .if(i < 10, ($ray) => {
+            $ray.text(`value is less than ten: ${i}`);
+        })
+        .if(i >= 10 && i < 20, ($ray) => {
+            $ray->text(`value is less than 20: ${i}`);
+        })
+        .if(i % 2 === 0, ($ray) => {
+            $ray->large();
+        })
+        .green();
+}
+```
 
 ### Feature demo
 
