@@ -1082,6 +1082,15 @@ class RayTest extends TestCase
         $this->assertCount(6, $this->client->sentPayloads());
     }
 
+    /** @test */
+    public function it_sends_url_payloads()
+    {
+        $this->getNewRay()->url('https://localhost:8000/test/1');
+        $this->getNewRay()->url('https://localhost:8000/test/2', 'Test Two');
+
+        $this->assertMatchesOsSafeSnapshot($this->client->sentPayloads());
+    }
+
     protected function getNewRay(): Ray
     {
         return Ray::create($this->client, 'fakeUuid');
