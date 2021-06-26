@@ -38,6 +38,7 @@ use Spatie\Ray\Payloads\SizePayload;
 use Spatie\Ray\Payloads\TablePayload;
 use Spatie\Ray\Payloads\TextPayload;
 use Spatie\Ray\Payloads\TracePayload;
+use Spatie\Ray\Payloads\UrlPayload;
 use Spatie\Ray\Payloads\XmlPayload;
 use Spatie\Ray\Settings\Settings;
 use Spatie\Ray\Settings\SettingsFactory;
@@ -548,6 +549,13 @@ class Ray
         }
 
         return $this;
+    }
+
+    public function url(string $url, ?string $label = null): self
+    {
+        $payload = new UrlPayload($url, $label);
+
+        return $this->sendRequest($payload);
     }
 
     public function send(...$arguments): self
