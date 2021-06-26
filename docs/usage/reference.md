@@ -216,15 +216,21 @@ Read more on [Craft](/docs/ray/v1/usage/craft)
 | `ray(…).hide()` | Display something in Ray and make it collapse immediately |
 | `ray().hideApp()` | Programmatically hide the Ray app window |
 | `ray().html(string)` | Send HTML to Ray |
+| `ray().if(true, callback)` | Conditionally show things based on a truthy value or callable |
 | `ray().image(url)` | Display an image in Ray |
 | `ray().json([…])` | Send JSON to Ray |
+| `ray().limit(N).…` | Limit the number of payloads that can be sent to Ray to N; used for debugging within loops |
 | `ray().measure(callable)` | Measure the performance of a callback function |
 | `ray().measure()` | Begin measuring the overall time and elapsed time since previous `measure()` call |
 | `ray().newScreen()` | Start a new screen |
 | `ray().newScreen('title')` | Start a new named screen |
 | `ray(…).notify(message)` | Display a notification |
+| `ray().once(arg1, …)` | Only send a payload once when in a loop |
 | `ray(…).pass(variable)` | Display something in Ray and return the value instead of a Ray instance |
 | `ray().pause()` | Pause code execution within your code; must be called using `await` |
+| `ray().rateLimiter().max(int maxCalls)` | Limits the amount of calls sent to Ray |
+| `ray().rateLimiter().perSecond(maxCalls)` | Limits the amount of calls sent to Ray in a second |
+| `ray().rateLimiter().clear()` | Clears the rate limits |
 | `ray.remove()` | Remove an item from Ray   |
 | `ray.removeIf(true)` | Conditionally remove an item based on a truthy value or callable   |
 | `ray.removeWhen(true)` | Conditionally remove an item based on a truthy value or callable   |
