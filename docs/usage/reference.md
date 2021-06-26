@@ -78,6 +78,7 @@ To display something in Ray use the `ray()` function. It accepts everything: str
 | `ray()->text($string)` | Display the raw text for a string while preserving whitespace formatting  |
 | `ray()->toJson($variable, $another, … )` | Display the JSON representation of 1 or more values that can be converted |
 | `ray()->trace()` | Check entire backtrace |
+| `ray()->url($url, $label)` | Display a clickable link to a URL with an optional label |
 | `ray()->xml($xmlString)` | Display formatted XML in Ray |
 
 ### Updating a Ray instance

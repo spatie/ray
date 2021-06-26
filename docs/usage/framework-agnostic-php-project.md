@@ -385,6 +385,20 @@ ray()->text('<em>this string is html encoded</em>');
 ray()->text('  whitespace formatting' . PHP_EOL . '   is preserved as well.');
 ```
 
+### Displaying URLs
+
+To display a clickable link to a URL within Ray, use the `url` function.
+
+```php
+ray()->url('https://localhost:8000/products/123');
+```
+
+You may also add an optional label that will be displayed to the left of the link:
+
+```php
+ray()->url('https://localhost:8000/products/123', 'Product 123');
+```
+
 ### Updating displayed items
 
 You can update values that are already displayed in Ray. To do this, you must hold on the instance returned by the `ray`
