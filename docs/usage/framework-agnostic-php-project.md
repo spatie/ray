@@ -433,7 +433,7 @@ value or a callable that returns a truthy value.
 
 
 Note that when `if()` is called with only a conditional, **all** following chained methods will only execute if the conditional 
-is true.  When using a callback with `when()`, all additional chained methods will be called.
+is true.  When using a callback with `if()`, all additional chained methods will be called.
 
 ```php
 for($i = 0; $i < 100; $i++) {
@@ -470,7 +470,7 @@ for($i = 0; $i < 100; $i++) {
 }
 ```
 
-Or chain multiple calls to `when()` with callbacks that don't affect the chained methods following them:
+Or chain multiple calls to `if()` with callbacks that don't affect the chained methods following them:
 
 ```php
 for($i = 0; $i < 100; $i++) {
