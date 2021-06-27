@@ -529,7 +529,7 @@ ray($largeObject)->hide()
 
 ### Returning items
 
-To make all methods chainable, the `ray()` function returns and instance of `Spatie\Ray\Ray`. To quickly send something
+To make all methods chainable, the `ray()` function returns an instance of `Spatie\Ray\Ray`. To quickly send something
 to Ray and have that something return as a value, use the `pass` function.
 
 ```php
