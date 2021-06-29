@@ -23,6 +23,7 @@ To display something in Ray use the `ray()` function. It accepts everything: str
 - [Vue](#vue)
 - [Go](#go)
 - [Alpine.js](#alpinejs)
+- [Bash](#bash)
 
 ## Framework agnostic PHP
 
@@ -298,3 +299,27 @@ All methods available to [NodeJS](#nodejs) are available to the Alpine.js integr
 | `$ray.send()` | Update the content of a Ray instance  |
 
 Read more on [JavaScript](/docs/ray/v1/usage/javascript)
+
+## Bash
+
+| Command | Description |
+| --- | --- |
+| `clear` | Clear the current screen |
+| `clear-all` | Clear the current and all previous screens |
+| `color <uuid> <color>` | Change the color of a payload that has already been sent |
+| `file <filename>` | Show the contents of `filename` |
+| `hide-app` | Hide the Ray app |
+| `html <content>` | Display rendered html |
+| `image <location>` | Display an image from a URL or file |
+| `json <content>` | Display formatted JSON |
+| `notify <message>` | Display a desktop notification |
+| `pause` | Pause code execution |
+| `remove <uuid>` | Remove a payload |
+| `send <payload>` | Send a payload to Ray |
+| `show-app` | Show the Ray app |
+| `size <uuid> <size>` | Change the text size of a payload that has already been sent _(sizes are 'large' or 'small')_ |
+| `text <data>` | Display a text string with whitespace preserved |
+| `xml <data>` | Display formatted XML |
+
+Read more on [Bash](/docs/ray/v1/usage/bash)
+
