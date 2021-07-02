@@ -2,8 +2,6 @@
 
 namespace Spatie\Ray\Payloads;
 
-use Illuminate\Support\Str;
-
 class ImagePayload extends Payload
 {
     /** @var string */
