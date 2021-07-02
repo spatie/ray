@@ -621,6 +621,15 @@ class RayTest extends TestCase
     }
 
     /** @test */
+    public function it_sends_a_base64_encoded_image_payload()
+    {
+        $this->ray->image('dGVzdCBzdHJpbmc=');
+        $this->ray->image('data:image/png;base64,dGVzdCBzdHJpbmc=');
+
+        $this->assertMatchesOsSafeSnapshot($this->client->sentPayloads());
+    }
+
+    /** @test */
     public function it_sends_a_table_payload()
     {
         $this->ray->table([
