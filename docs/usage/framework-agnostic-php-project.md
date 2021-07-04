@@ -361,11 +361,15 @@ ray()->table(['John', 'Paul', 'George', 'Ringo'], 'Beatles');
 
 ### Displaying images
 
-To display an image, call the `image` function and pass either a fully-qualified filename or url as its only argument.
+To display an image, call the `image` function and pass a fully-qualified filename, url, or a valid base64-encoded image as its only argument.
 
 ```php
 ray()->image('https://placekitten.com/200/300');
 ray()->image('/home/user/kitten.jpg');
+
+// display base64-encoded images
+ray()->image('data:image/png;base64,iVBORw0KGgoAAA...truncated');
+ray()->image('iVBORw0KGgoAAA...truncated');
 ```
 
 ### Rendering HTML
