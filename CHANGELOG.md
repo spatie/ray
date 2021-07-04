@@ -2,6 +2,10 @@
 
 All notable changes to `ray` will be documented in this file
 
+## 1.28.0 - 2021-07-04
+
+- add support for base64-encoded images (#499)
+
 ## 1.27.1 - 2021-06-24
 
 - remove typehint to allow override
