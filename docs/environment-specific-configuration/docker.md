@@ -6,8 +6,9 @@ weight: 1
 When developing using Docker, the Ray host should point to the internal IP of your Docker host by using 'host.docker.internal' in [the config file](/docs/ray/v1/configuration/general).
 
 ```php
-// save this in a file called "ray.php"
 <?php
+// Save this in a file called "ray.php"
+
 return [
     /*
      *  The host used to communicate with the Ray app.
