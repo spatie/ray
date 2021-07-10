@@ -6,8 +6,9 @@ weight: 2
 In framework agnostic projects you can use this template as [the ray config file](/docs/ray/v1/configuration/general).
 
 ```php
-// save this in a file called "ray.php"
 <?php
+// Save this in a file called "ray.php"
+
 return [
     /*
     * This settings controls whether data should be sent to Ray.

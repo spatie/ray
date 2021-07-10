@@ -9,7 +9,7 @@ In NodeJS based projects, you can optionally create a `ray.config.js` file in yo
 You can use this template as [the ray config file](/docs/ray/v1/configuration/nodejs):
 
 ```js
-// save this in a file named "ray.config.js"
+// Save this in a file named "ray.config.js"
 module.exports = {
     /*
     * This settings controls whether data should be sent to Ray.
