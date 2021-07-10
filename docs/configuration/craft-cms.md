@@ -6,8 +6,9 @@ weight: 7
 For Craft CMS projects you can create a `craft-ray.php` file in your project's `config` directory.
 
 ```php
-// save this in a file called "craft-ray.php" in the config directory of your project
 <?php
+// Save this in a file called "craft-ray.php" in the config directory of your project
+
 return [
     /*
     * This settings controls whether data should be sent to Ray.

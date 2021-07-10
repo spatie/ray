@@ -8,8 +8,9 @@ For Laravel projects you can create a `ray.php` file in your project directory (
 Note: if everyone working on the project needs the same configuration, you can put the file in the `config` directory as well.
 
 ```php
-// save this in a file called "ray.php" in the root directory of your project; not in the Laravel "config" directory
 <?php
+// Save this in a file called "ray.php" in the root directory of your project; not in the Laravel "config" directory
+
 return [
     /*
     * This settings controls whether data should be sent to Ray.

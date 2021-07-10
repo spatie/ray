@@ -6,8 +6,9 @@ weight: 6
 For Yii projects you can create a `ray.php` file in your project's `config` directory.
 
 ```php
-// save this in a file called "ray.php" in the config directory of your project
 <?php
+// Save this in a file called "ray.php" in the config directory of your project
+
 return [
     /*
     * This settings controls whether data should be sent to Ray.
