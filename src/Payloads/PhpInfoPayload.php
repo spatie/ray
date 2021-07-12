@@ -21,7 +21,7 @@ class PhpInfoPayload extends Payload
     {
         $values = array_flip($this->properties);
 
-        foreach ($values as $property => $value) {
+        foreach (array_keys($values) as $property) {
             $values[$property] = ini_get($property);
         }
 

@@ -14,7 +14,7 @@ class PayloadFactory
     /** @var array */
     protected $values;
 
-    /** @var \Closure|null */
+    /** @var callable|null */
     protected static $payloadFinder = null;
 
     public static function createForValues(array $arguments): array

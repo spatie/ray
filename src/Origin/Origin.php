@@ -7,7 +7,7 @@ class Origin
     /** @var string|null */
     public $file;
 
-    /** @var string|null */
+    /** @var int|null */
     public $lineNumber;
 
     /** @var string|null */

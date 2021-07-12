@@ -40,7 +40,7 @@ class CacheStore
 
         $lastSecond = $this->clock->now()->modify('-1 second');
 
-        foreach ($this->store as $key => $item) {
+        foreach ($this->store as $item) {
             if ($this->isBetween(
                 $item->getTimestamp(),
                 $lastSecond->getTimestamp(),

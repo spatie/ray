@@ -187,7 +187,7 @@ class Ray
     }
 
     /**
-     * @param string|callable $stopwatchName
+     * @param string|Closure $stopwatchName
      *
      * @return $this
      */
