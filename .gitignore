@@ -7,5 +7,4 @@ build
 composer.lock
 coverage
 phpunit.xml
-psalm.xml
 vendor

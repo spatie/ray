@@ -31,7 +31,8 @@
         "phpunit/phpunit": "^9.5",
         "rector/rector": "^0.9.16",
         "spatie/phpunit-snapshot-assertions": "^4.2",
-        "spatie/test-time": "^1.2"
+        "spatie/test-time": "^1.2",
+        "vimeo/psalm": "^4.8"
     },
     "autoload": {
         "psr-4": {
