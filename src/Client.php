@@ -106,7 +106,7 @@ class Client
                 throw new Exception;
             }
 
-            if (! $curlResult) {
+            if (is_bool($curlResult)) {
                 return false;
             }
 

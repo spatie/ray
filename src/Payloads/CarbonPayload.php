@@ -6,7 +6,7 @@ use Carbon\CarbonInterface;
 
 class CarbonPayload extends Payload
 {
-    /** @var \Carbon\CarbonInterface|null */
+    /** @var \Carbon\Carbon|\Carbon\CarbonImmutable|null */
     protected $carbon;
 
     /** @var string */

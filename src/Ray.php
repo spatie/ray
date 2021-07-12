@@ -65,10 +65,10 @@ class Ray
     /** @var \Spatie\Ray\Support\Limiters */
     public static $limiters;
 
-    /** @var string */
+    /** @var string|null */
     public static $fakeUuid;
 
-    /** @var \Spatie\Ray\Origin\Origin|null */
+    /** @var \Spatie\Ray\Origin\Origin */
     public $limitOrigin = null;
 
     /** @var string */
@@ -93,6 +93,7 @@ class Ray
         return new static($settings, $client, $uuid);
     }
 
+    /** @psalm-suppress RedundantPropertyInitializationCheck */
     public function __construct(Settings $settings, Client $client = null, string $uuid = null)
     {
         $this->settings = $settings;
@@ -470,7 +471,7 @@ class Ray
 
     public function pause(): self
     {
-        $lockName = md5(time());
+        $lockName = md5((string) time());
 
         $payload = new CreateLockPayload($lockName);
 
