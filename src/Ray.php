@@ -65,10 +65,10 @@ class Ray
     /** @var \Spatie\Ray\Support\Limiters */
     public static $limiters;
 
-    /** @var string|null */
+    /** @var string */
     public static $fakeUuid;
 
-    /** @var \Spatie\Ray\Origin\Origin */
+    /** @var \Spatie\Ray\Origin\Origin|null */
     public $limitOrigin = null;
 
     /** @var string */
