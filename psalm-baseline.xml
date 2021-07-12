@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<files psalm-version="4.8.1@f73f2299dbc59a3e6c4d66cff4605176e728ee69">
+  <file src="src/Client.php">
+    <NullableReturnStatement occurrences="1">
+      <code>static::$cache[$this-&gt;fingerprint][0] ?? true</code>
+    </NullableReturnStatement>
+  </file>
+  <file src="src/helpers.php">
+    <UndefinedClass occurrences="2">
+      <code>Yii</code>
+      <code>Yii</code>
+    </UndefinedClass>
+    <UndefinedDocblockClass occurrences="2">
+      <code>\Spatie\Ray\Ray|LaravelRay|WordPressRay|YiiRay|SymfonyRay</code>
+      <code>ray(...$args)</code>
+    </UndefinedDocblockClass>
+    <UndefinedFunction occurrences="1">
+      <code>app(LaravelRay::class)</code>
+    </UndefinedFunction>
+  </file>
+</files>
