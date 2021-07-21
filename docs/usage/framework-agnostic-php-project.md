@@ -421,7 +421,7 @@ $ray->red()->large()
 You can conditionally show things using the `showIf` method. If you pass a truthy value, the item will be displayed.
 
 ```php
-ray('will be show')->showIf(true);
+ray('will be shown')->showIf(true);
 ray('will not be shown')->showIf(false);
 ```
 
@@ -540,7 +540,7 @@ to Ray and have that something return as a value, use the `pass` function.
 ray()->pass($anything) // $anything will be returned
 ```
 
-This is handy when, for instance, debuggin return values.
+This is handy when, for instance, debugging return values.
 
 You can change
 
