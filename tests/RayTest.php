@@ -412,6 +412,16 @@ class RayTest extends TestCase
     }
 
     /** @test */
+    public function it_can_clear_screen_before_send_payload()
+    {
+        $data = ['a' => 1, 'b' => 2];
+
+        $this->ray->clearScreenBefore($data);
+
+        $this->assertMatchesOsSafeSnapshot($this->client->sentPayloads());
+    }
+
+    /** @test */
     public function it_can_send_the_clear_all_payload()
     {
         $this->ray->clearAll();
