@@ -158,6 +158,11 @@ class Ray
         return $this->newScreen();
     }
 
+    public function clearScreenBefore(...$args): self
+    {
+        return $this->clearScreen()->send(...$args);
+    }
+
     public function color(string $color): self
     {
         $payload = new ColorPayload($color);

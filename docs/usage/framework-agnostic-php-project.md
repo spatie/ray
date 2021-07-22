@@ -80,6 +80,14 @@ To clear the current screen and all previous screens, call `clearAll`.
 ray()->clearAll(); 
 ```
 
+### Clearing screen before displaying payload
+
+To clear the current screen just before displaying new data, call `clearScreenBefore`.
+
+```php
+ray()->clearScreenBefore('your', 'data'); 
+```
+
 ### See the caller of a function
 
 Sometimes you want to know where your code is being called. You can quickly determine that by using the `caller`
