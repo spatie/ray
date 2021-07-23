@@ -440,17 +440,17 @@ Note that when `if()` is called with only a conditional, **all** following chain
 is true.  When using a callback with `if()`, all additional chained methods will be called.
 
 ```php
-for($i = 0; $i < 100; $i++) {
-    ray()->if($i < 10)->text("value is less than ten: $i")->blue();
+foreach(range(1, 100) as $number) {
+    ray()->if($number < 10)->text("value is less than ten: $number")->blue();
     
-    ray()->if(function() use ($i) {
-        return $i == 25;
+    ray()->if(function() use ($number) {
+        return $number == 25;
     })->text("value is twenty-five!")->green();
     
     // display "value: #" for every item, and display 
     // even numbered values as red
-    ray()->text("value: $i")
-        ->if($i % 2 === 0)
+    ray()->text("value: $number")
+        ->if($number % 2 === 0)
         ->red();
 }
 ```
@@ -458,17 +458,17 @@ for($i = 0; $i < 100; $i++) {
 You can even chain multiple `if()` calls without callbacks:
 
 ```php
-for($i = 0; $i < 100; $i++) {
+foreach(range(1, 10) as $number) {
     // display "value: #" for every item, and display even values as red
     // and odd values as blue, except for 10 -- which is shown with large 
     // text and in green.
     ray()
-        ->text("value: $i")
-        ->if($i % 2 === 0)
+        ->text("value: $number")
+        ->if($number % 2 === 0)
             ->red()
-        ->if($i % 2 !== 0)
+        ->if($number % 2 !== 0)
             ->blue()
-        ->if($i === 10)
+        ->if($number === 10)
             ->large()
             ->green();
 }
@@ -477,18 +477,18 @@ for($i = 0; $i < 100; $i++) {
 Or chain multiple calls to `if()` with callbacks that don't affect the chained methods following them:
 
 ```php
-for($i = 0; $i < 100; $i++) {
+foreach(range(1, 100) as $number) {
     // display "value: #" for all items and make each item green.
     // items less than 20 will have their text changed.
     // when the value is an even number, the item will be displayed with large text.
-    ray()->text("value: $i")
-        ->if($i < 10, function($ray) use ($i) {
-            $ray->text("value is less than ten: $i");
+    ray()->text("value: $number")
+        ->if($number < 10, function($ray) use ($number) {
+            $ray->text("value is less than ten: $number");
         })
-        ->if($i >= 10 && $i < 20, function($ray) use ($i) {
-            $ray->text("value is less than 20: $i");
+        ->if($number >= 10 && $number < 20, function($ray) use ($number) {
+            $ray->text("value is less than 20: $number");
         })
-        ->if($i % 2 === 0, function($ray) {
+        ->if($number % 2 === 0, function($ray) {
             $ray->large();
         })
         ->green();
