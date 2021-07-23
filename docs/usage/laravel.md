@@ -57,6 +57,32 @@ ray()->countQueries(function() {
 
 ![screenshot](/docs/ray/v1/images/query-count.png)
 
+### Manually showing a query
+
+You can manually send a query to Ray by calling `ray()` on a query. 
+
+```php
+User::query()
+    ->where('email', 'john@example.com')
+    ->ray()
+    ->first();
+```
+
+![screenshot](/docs/ray/v1/images/single-query.png)
+
+You can call `ray()` multiple times to see how a query is being built up.
+
+```php
+User::query()
+    ->where('first_name', 'John')
+    ->ray()
+    ->where('last_name', 'Doe')
+    ->ray()
+    ->first();
+```
+
+![screenshot](/docs/ray/v1/images/single-query-multiple-calls.png)
+
 ### Showing events
 
 You can display all events that are executed by calling `showEvents` (or `events`).
