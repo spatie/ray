@@ -1099,6 +1099,56 @@ class RayTest extends TestCase
         $this->assertCount(6, $this->client->sentPayloads());
     }
 
+    /** @test */
+    public function it_does_nothing_if_no_exceptions_are_thrown_using_try_and_catch_with_a_callback()
+    {
+        $this->getNewRay()->try(function($ray) {
+            $ray->text('hello world');
+        })->catch(function($ray, $exception) {
+            $ray->text($exception->getMessage());
+        });
+
+        $this->assertCount(1, $this->client->sentPayloads());
+        $this->assertMatchesOsSafeSnapshot($this->client->sentPayloads());
+    }
+
+    /** @test */
+    public function it_handles_exceptions_using_try_and_catch_with_a_callback()
+    {
+        $this->getNewRay()->try(function($ray) {
+            throw new \Exception('test');
+        })->catch(function($ray, $exception) {
+            $ray->text($exception->getMessage());
+        });
+
+        $this->assertCount(1, $this->client->sentPayloads());
+        $this->assertMatchesOsSafeSnapshot($this->client->sentPayloads());
+    }
+
+    /** @test */
+    public function it_handles_exceptions_using_try_and_catch_without_a_callback()
+    {
+        $this->getNewRay()->try(function($ray) {
+            throw new \Exception('test');
+        })->catch();
+
+        // 2 payloads are sent when ray->exception() is called
+        $this->assertCount(2, $this->client->sentPayloads());
+        $this->assertMatchesOsSafeSnapshot($this->client->sentPayloads());
+    }
+
+    /** @test */
+    public function it_allows_chaining_additional_methods_after_handling_an_exception()
+    {
+        $this->getNewRay()->try(function($ray) {
+            $ray->text('hello world');
+            throw new \Exception('test');
+        })->catch()->blue()->small();
+
+        $this->assertCount(5, $this->client->sentPayloads());
+        $this->assertMatchesOsSafeSnapshot($this->client->sentPayloads());
+    }
+
     protected function getNewRay(): Ray
     {
         return Ray::create($this->client, 'fakeUuid');
