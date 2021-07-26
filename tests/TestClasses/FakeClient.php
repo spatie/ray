@@ -37,6 +37,10 @@ class FakeClient extends Client
                 }
             }
 
+            if (isset($payload['content']['frames']) && isset($payload['content']['frames'][0])) {
+                $payload['content']['frames'] = [];
+            }
+
             $payload['origin']['file'] = $this->convertToUnixPath($payload['origin']['file']);
             $payload['origin']['line_number'] = 'xxx';
         }
