@@ -77,6 +77,9 @@ class Ray
     /** @var bool */
     public $canSendPayload = true;
 
+    /** @var \Exception|null */
+    public $caughtException = null;
+
     /** @var \Symfony\Component\Stopwatch\Stopwatch[] */
     public static $stopWatches = [];
 
@@ -548,6 +551,41 @@ class Ray
         }
 
         return $this;
+    }
+
+    public function try(callable $callback)
+    {
+        $result = $this;
+        $this->caughtException = null;
+
+        try {
+            $callback($this);
+        } catch(\Exception $e) {
+            $this->caughtException = $e;
+        }
+
+        return $result;
+    }
+
+    public function catch(?callable $callback = null)
+    {
+        if ($this->caughtException === null) {
+            return $this;
+        }
+
+        $result = $this;
+
+        if (! $callback) {
+            $result = $this->exception($this->caughtException);
+        }
+
+        if ($callback) {
+            $callback($this, $this->caughtException);
+        }
+
+        $this->caughtException = null;
+
+        return $result;
     }
 
     public function send(...$arguments): self
