@@ -607,6 +607,46 @@ try {
 }
 ```
 
+### Handling exceptions
+
+You can use Ray to handle exceptions using the `try` and `catch` functions.  These methods work in a similar manner to the way that `try...catch` blocks do in PHP.
+
+- The `try` function accepts a single `$ray` parameter which may be used to access the current `Ray` instance.
+- The `catch` function accepts either no parameters _(see below)_ or two parameters: `$ray` and `$exception`, which are the current `Ray` instance and the caught `Exception`, respectively.
+
+```php
+function myfunc($value) {
+    if ($value > 5) {
+        throw new \Exception('hello exception ' . $value);
+    }
+    
+    return 'hello world ' . $value;
+}
+
+foreach(range(1, 10) as $num) {
+    ray()->try(function($ray) use ($num) {
+        $ray->text(myfunc($num))->blue();
+    })->catch(function($ray, $exception) {
+        // display collapsed exceptions in Ray
+        $ray->exception($exception)->hide();
+    })->small();
+}
+```
+
+You can call `catch` without any parameters to automatically send Exceptions directly to Ray:
+
+```php
+foreach(range(1, 10) as $num) {
+    ray()->try(function($ray) use ($num) {
+        $ray->text(myfunc($num))->blue();
+    })
+    ->catch()
+    ->small();
+}
+```
+
+After calling `catch`, you may continue to chain methods that will be called regardless of whether or not there was an exception handled.
+
 ### Showing raw values
 
 When you sent certain values to Ray, such as Carbon instances or Eloquent models, these values will be displayed in nice way. To see all private, protected, and public properties of such values, you can use the `raw()` method.
