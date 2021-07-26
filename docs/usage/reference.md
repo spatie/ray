@@ -35,6 +35,7 @@ To display something in Ray use the `ray()` function. It accepts everything: str
 | `ray(…)->blue()` | Output in blue |
 | `ray()->caller()` | Discover where code is being called |
 | `ray()->carbon($carbon)` | Send `Carbon` instances to Ray |
+| `ray()->catch($callback)` | Handle any exceptions encountered by `try` |
 | `ray()->className($object)` | Send the classname of an object to Ray |
 | `ray()->clearScreen()` | Clear current screen |
 | `ray()->clearAll()` | Clear current and all previous screens |
@@ -79,6 +80,7 @@ To display something in Ray use the `ray()` function. It accepts everything: str
 | `ray()->text($string)` | Display the raw text for a string while preserving whitespace formatting  |
 | `ray()->toJson($variable, $another, … )` | Display the JSON representation of 1 or more values that can be converted |
 | `ray()->trace()` | Check entire backtrace |
+| `ray()->try($callback)` | Call `$callback` with a `$ray` parameter, and handle exceptions using `catch` |
 | `ray()->xml($xmlString)` | Display formatted XML in Ray |
 
 ### Updating a Ray instance
