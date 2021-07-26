@@ -624,12 +624,12 @@ function myfunc($value) {
 }
 
 foreach(range(1, 10) as $num) {
-    ray()->try(function($ray) use ($num) {
-        $ray->text(myfunc($num))->blue();
+    ray()->try(function() use ($num) {
+        ray()->text(myfunc($num))->blue();
     })->catch(function($ray, $exception) {
         // display collapsed exceptions in Ray
-        $ray->exception($exception)->hide();
-    })->small();
+        ray()->exception($exception)->hide();
+    });
 }
 ```
 
@@ -637,11 +637,9 @@ You can call `catch` without any parameters to automatically send Exceptions dir
 
 ```php
 foreach(range(1, 10) as $num) {
-    ray()->try(function($ray) use ($num) {
-        $ray->text(myfunc($num))->blue();
-    })
-    ->catch()
-    ->small();
+    ray()->try(function() use ($num) {
+        ray()->text(myfunc($num))->blue();
+    })->catch();
 }
 ```
 
