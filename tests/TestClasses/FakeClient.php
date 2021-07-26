@@ -29,7 +29,7 @@ class FakeClient extends Client
         $requestProperties = $request->toArray();
 
         foreach ($requestProperties['payloads'] as &$payload) {
-            $payload['origin']['file'] = $payload['origin']['file'] = $this->convertToRelativeFilename($payload['origin']['file']);
+            $payload['origin']['file'] = $this->convertToRelativeFilename($payload['origin']['file']);
 
             if (isset($payload['content']['values']) && isset($payload['content']['values'][0])) {
                 if (! is_bool($payload['content']['values'][0])) {
@@ -39,7 +39,7 @@ class FakeClient extends Client
 
             if (isset($payload['content']['frames'])) {
                 foreach($payload['content']['frames'] as &$frame) {
-                    $frame['file_name'] = $this->convertToRelativeFilename($frame['file_name']);
+                    $frame['file_name'] = $this->convertToUnixPath($this->convertToRelativeFilename($frame['file_name']));
                     $frame['line_number'] = 'xxx';
                     $frame['snippet'] = [];
                 }
