@@ -1102,9 +1102,9 @@ class RayTest extends TestCase
     /** @test */
     public function it_does_nothing_if_no_exceptions_are_thrown_using_try_and_catch_with_a_callback()
     {
-        $this->getNewRay()->try(function($ray) {
+        $this->getNewRay()->try(function ($ray) {
             $ray->text('hello world');
-        })->catch(function($ray, $exception) {
+        })->catch(function ($ray, $exception) {
             $ray->text($exception->getMessage());
         });
 
@@ -1115,9 +1115,9 @@ class RayTest extends TestCase
     /** @test */
     public function it_handles_exceptions_using_try_and_catch_with_a_callback()
     {
-        $this->getNewRay()->try(function($ray) {
+        $this->getNewRay()->try(function ($ray) {
             throw new \Exception('test');
-        })->catch(function($ray, $exception) {
+        })->catch(function ($ray, $exception) {
             $ray->text($exception->getMessage());
         });
 
@@ -1128,7 +1128,7 @@ class RayTest extends TestCase
     /** @test */
     public function it_handles_exceptions_using_try_and_catch_without_a_callback()
     {
-        $this->getNewRay()->try(function($ray) {
+        $this->getNewRay()->try(function ($ray) {
             throw new \Exception('test');
         })->catch();
 
@@ -1140,8 +1140,9 @@ class RayTest extends TestCase
     /** @test */
     public function it_allows_chaining_additional_methods_after_handling_an_exception()
     {
-        $this->getNewRay()->try(function($ray) {
+        $this->getNewRay()->try(function ($ray) {
             $ray->text('hello world');
+
             throw new \Exception('test');
         })->catch()->blue()->small();
 

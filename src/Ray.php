@@ -568,7 +568,7 @@ class Ray
 
         try {
             $callback($this);
-        } catch(\Exception $e) {
+        } catch (\Exception $e) {
             $this->caughtException = $e;
         }
 
