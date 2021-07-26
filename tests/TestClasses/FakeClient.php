@@ -38,7 +38,7 @@ class FakeClient extends Client
             }
 
             if (isset($payload['content']['frames'])) {
-                foreach($payload['content']['frames'] as &$frame) {
+                foreach ($payload['content']['frames'] as &$frame) {
                     $frame['file_name'] = $this->convertToUnixPath($this->convertToRelativeFilename($frame['file_name']));
                     $frame['line_number'] = 'xxx';
                     $frame['snippet'] = [];
