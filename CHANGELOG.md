@@ -2,6 +2,10 @@
 
 All notable changes to `ray` will be documented in this file
 
+## 1.29.0 - 2021-08-02
+
+- add `label` method
+
 ## 1.28.0 - 2021-07-04
 
 - add support for base64-encoded images (#499)

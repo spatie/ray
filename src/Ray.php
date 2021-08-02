@@ -27,6 +27,7 @@ use Spatie\Ray\Payloads\HidePayload;
 use Spatie\Ray\Payloads\HtmlPayload;
 use Spatie\Ray\Payloads\ImagePayload;
 use Spatie\Ray\Payloads\JsonStringPayload;
+use Spatie\Ray\Payloads\LabelPayload;
 use Spatie\Ray\Payloads\LogPayload;
 use Spatie\Ray\Payloads\MeasurePayload;
 use Spatie\Ray\Payloads\NewScreenPayload;
@@ -161,6 +162,13 @@ class Ray
     public function color(string $color): self
     {
         $payload = new ColorPayload($color);
+
+        return $this->sendRequest($payload);
+    }
+
+    public function label(string $label): self
+    {
+        $payload = new LabelPayload($label);
 
         return $this->sendRequest($payload);
     }

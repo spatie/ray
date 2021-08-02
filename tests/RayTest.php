@@ -92,6 +92,14 @@ class RayTest extends TestCase
         $this->assertMatchesOsSafeSnapshot($this->client->sentPayloads());
     }
 
+    /** @test */
+    public function it_can_send_a_label()
+    {
+        $this->ray->send('my value')->label('my label');
+
+        $this->assertMatchesOsSafeSnapshot($this->client->sentPayloads());
+    }
+
     public function it_has_a_helper_function()
     {
         $this->assertInstanceOf(Ray::class, ray());
