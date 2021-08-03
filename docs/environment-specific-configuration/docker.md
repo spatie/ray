@@ -40,9 +40,11 @@ In your `docker-compose.yml` you mount the volume as follows:
 volumes:
   - .:/var/www
 ```
-Then `remote_path` should be `/var/www` and `local_path` should be the absolute path to the directory where your `docker-compose.yml` is located (you can find this by running `pwd` inside that directoy if you are on Linux).
+Then `remote_path` should be `/var/www` and `local_path` should be the absolute path to the directory that you
+mount as `/var/www`, which is where your `docker-compose.yml` is located in the example (you can find this by 
+running `pwd` inside that directoy if you are on Linux).
 
-On Linux, you will also need to add an 'extra_hosts' parameter to your container definitions to expose 'host.docker.internal'. Please make sure you are using Docker `20.03` or higher.
+On Linux, you will also need to add an 'extra_hosts' parameter to your PHP container definitions to expose 'host.docker.internal'. Please make sure you are using Docker `20.03` or higher.
 ```
 #docker-compose.yml
 
@@ -57,6 +59,15 @@ services:
       - db
     networks:
       - packt-api
-    extra_hosts: # <-- this is required
-      - "host.docker.internal:host-gateway" # <-- this is required
+    extra_hosts: # <-- does no harm
+      - "host.docker.internal:host-gateway" # <-- does no harm
+  
+  php:
+    image: php:fpm-alpine
+    ...
+    networks:
+      - packt-api
+    extra_hosts: # <--- this is required
+      - "host.docker.internal:host-gateway" # <--- this is required
+
 ```
