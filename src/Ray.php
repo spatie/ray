@@ -598,13 +598,9 @@ class Ray
             try {
                 $result = $argument($this);
 
-                if ($result instanceof Ray) {
-                    // use a specific class we can filter out instead of null so that null
-                    // payloads can still be sent.
-                    return IgnoredValue::make();
-                }
-
-                return $result;
+                // use a specific class we can filter out instead of null so that null
+                // payloads can still be sent.
+                return $result instanceof Ray ? IgnoredValue::make() : $result;
             } catch(\Exception $e) {
                 $this->caughtException = $e;
 
