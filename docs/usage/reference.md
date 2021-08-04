@@ -55,6 +55,7 @@ To display something in Ray use the `ray()` function. It accepts everything: str
 | `ray()->image($path)` | Display an image from a path or URL  |
 | `ray()->if(true, callback)` | Conditionally show things based on a truthy value or callable |
 | `ray()->json($json, $another, …)` | Send one or more valid JSON strings to Ray |
+| `ray(…)->label($name)` | Set the label name |
 | `ray(…)->large()` | Output text bigger |
 | `ray()->limit(N)->…` | Limit the number of payloads that can be sent to Ray to N; used for debugging within loops |
 | `ray()->measure()` | Display runtime and memory usage. When measure is called again, the time between this and previous call is also displayed |

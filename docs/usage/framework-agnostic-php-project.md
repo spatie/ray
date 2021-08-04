@@ -48,6 +48,18 @@ ray('large')->large();
 
 ![screenshot](/docs/ray/v1/images/sizes.jpg)
 
+### Adding a label
+
+You can customize the label displayed next to item with the `label` function.
+
+```php
+ray(['John', 'Paul', 'George', 'Ringo'])->label('Beatles');
+```
+
+![screenshot](/docs/ray/v1/images/label.png)
+
+
+
 ### Creating a new screen
 
 You can use `newScreen` (or `clearScreen`) to programmatically create a new screen.
