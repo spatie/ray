@@ -43,6 +43,8 @@ use Spatie\Ray\Payloads\XmlPayload;
 use Spatie\Ray\Settings\Settings;
 use Spatie\Ray\Settings\SettingsFactory;
 use Spatie\Ray\Support\Counters;
+use Spatie\Ray\Support\ExceptionHandler;
+use Spatie\Ray\Support\IgnoredValue;
 use Spatie\Ray\Support\Limiters;
 use Spatie\Ray\Support\RateLimiter;
 use Symfony\Component\Stopwatch\Stopwatch;
@@ -561,39 +563,19 @@ class Ray
         return $this;
     }
 
-    public function try(callable $callback)
+    /**
+     * @param callable|string|null $callback
+     * @return \Spatie\Ray\Ray
+     */
+    public function catch($callback = null)
     {
-        $result = $this;
-        $this->caughtException = null;
+        $result = (new ExceptionHandler())->catch($this, $callback);
 
-        try {
-            $callback($this);
-        } catch (\Exception $e) {
-            $this->caughtException = $e;
+        if ($result instanceof Ray) {
+            return $result;
         }
 
-        return $result;
-    }
-
-    public function catch(?callable $callback = null)
-    {
-        if ($this->caughtException === null) {
-            return $this;
-        }
-
-        $result = $this;
-
-        if (! $callback) {
-            $result = $this->exception($this->caughtException);
-        }
-
-        if ($callback) {
-            $callback($this, $this->caughtException);
-        }
-
-        $this->caughtException = null;
-
-        return $result;
+        return $this;
     }
 
     public function send(...$arguments): self
@@ -604,6 +586,38 @@ class Ray
 
         if ($this->settings->always_send_raw_values) {
             return $this->raw(...$arguments);
+        }
+
+        $this->caughtException = null;
+
+        $arguments = array_map(function($argument) {
+            if (! is_callable($argument)) {
+                return $argument;
+            }
+
+            try {
+                $result = $argument($this);
+
+                if ($result instanceof Ray) {
+                    // use a specific class we can filter out instead of null so that null
+                    // payloads can still be sent.
+                    return IgnoredValue::make();
+                }
+
+                return $result;
+            } catch(\Exception $e) {
+                $this->caughtException = $e;
+
+                return IgnoredValue::make();
+            }
+        }, $arguments);
+
+        $arguments = array_filter($arguments, function($arg) {
+            return ! $arg instanceof IgnoredValue;
+        });
+
+        if (empty($arguments)) {
+            return $this;
         }
 
         $payloads = PayloadFactory::createForValues($arguments);
