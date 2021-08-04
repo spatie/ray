@@ -59,10 +59,6 @@ class PayloadFactory
             return new CarbonPayload($value);
         }
 
-        if (is_callable($value)) {
-
-        }
-
         $primitiveValue = ArgumentConverter::convertToPrimitive($value);
 
         return new LogPayload($primitiveValue);
