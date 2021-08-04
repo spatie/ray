@@ -658,6 +658,10 @@ class Ray
      */
     public function sendRequest($payloads, array $meta = []): self
     {
+        if (empty($payloads)) {
+            return $this;
+        }
+
         if (! $this->enabled()) {
             return $this;
         }
