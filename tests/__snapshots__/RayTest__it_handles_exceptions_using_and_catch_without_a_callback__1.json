@@ -1,0 +1,168 @@
+[
+    {
+        "uuid": "fakeUuid",
+        "payloads": [
+            {
+                "type": "exception",
+                "content": {
+                    "class": "Exception",
+                    "message": "test",
+                    "frames": [
+                        {
+                            "file_name": "\/tests\/RayTest.php",
+                            "line_number": "xxx",
+                            "class": "Spatie\\Ray\\Tests\\RayTest",
+                            "method": "Spatie\\Ray\\Tests\\{closure}",
+                            "vendor_frame": false,
+                            "snippet": []
+                        },
+                        {
+                            "file_name": "\/src\/Ray.php",
+                            "line_number": "xxx",
+                            "class": "Spatie\\Ray\\Ray",
+                            "method": "Spatie\\Ray\\{closure}",
+                            "vendor_frame": false,
+                            "snippet": []
+                        },
+                        {
+                            "file_name": "unknown",
+                            "line_number": "xxx",
+                            "class": null,
+                            "method": "array_map",
+                            "vendor_frame": false,
+                            "snippet": []
+                        },
+                        {
+                            "file_name": "\/src\/Ray.php",
+                            "line_number": "xxx",
+                            "class": "Spatie\\Ray\\Ray",
+                            "method": "send",
+                            "vendor_frame": false,
+                            "snippet": []
+                        },
+                        {
+                            "file_name": "\/tests\/RayTest.php",
+                            "line_number": "xxx",
+                            "class": "Spatie\\Ray\\Tests\\RayTest",
+                            "method": "it_handles_exceptions_using_and_catch_without_a_callback",
+                            "vendor_frame": false,
+                            "snippet": []
+                        },
+                        {
+                            "file_name": "\/vendor\/phpunit\/phpunit\/src\/Framework\/TestCase.php",
+                            "line_number": "xxx",
+                            "class": "PHPUnit\\Framework\\TestCase",
+                            "method": "runTest",
+                            "vendor_frame": false,
+                            "snippet": []
+                        },
+                        {
+                            "file_name": "\/vendor\/phpunit\/phpunit\/src\/Framework\/TestCase.php",
+                            "line_number": "xxx",
+                            "class": "PHPUnit\\Framework\\TestCase",
+                            "method": "runBare",
+                            "vendor_frame": false,
+                            "snippet": []
+                        },
+                        {
+                            "file_name": "\/vendor\/phpunit\/phpunit\/src\/Framework\/TestResult.php",
+                            "line_number": "xxx",
+                            "class": "PHPUnit\\Framework\\TestResult",
+                            "method": "run",
+                            "vendor_frame": false,
+                            "snippet": []
+                        },
+                        {
+                            "file_name": "\/vendor\/phpunit\/phpunit\/src\/Framework\/TestCase.php",
+                            "line_number": "xxx",
+                            "class": "PHPUnit\\Framework\\TestCase",
+                            "method": "run",
+                            "vendor_frame": false,
+                            "snippet": []
+                        },
+                        {
+                            "file_name": "\/vendor\/phpunit\/phpunit\/src\/Framework\/TestSuite.php",
+                            "line_number": "xxx",
+                            "class": "PHPUnit\\Framework\\TestSuite",
+                            "method": "run",
+                            "vendor_frame": false,
+                            "snippet": []
+                        },
+                        {
+                            "file_name": "\/vendor\/phpunit\/phpunit\/src\/Framework\/TestSuite.php",
+                            "line_number": "xxx",
+                            "class": "PHPUnit\\Framework\\TestSuite",
+                            "method": "run",
+                            "vendor_frame": false,
+                            "snippet": []
+                        },
+                        {
+                            "file_name": "\/vendor\/phpunit\/phpunit\/src\/Framework\/TestSuite.php",
+                            "line_number": "xxx",
+                            "class": "PHPUnit\\Framework\\TestSuite",
+                            "method": "run",
+                            "vendor_frame": false,
+                            "snippet": []
+                        },
+                        {
+                            "file_name": "\/vendor\/phpunit\/phpunit\/src\/TextUI\/TestRunner.php",
+                            "line_number": "xxx",
+                            "class": "PHPUnit\\TextUI\\TestRunner",
+                            "method": "run",
+                            "vendor_frame": false,
+                            "snippet": []
+                        },
+                        {
+                            "file_name": "\/vendor\/phpunit\/phpunit\/src\/TextUI\/Command.php",
+                            "line_number": "xxx",
+                            "class": "PHPUnit\\TextUI\\Command",
+                            "method": "run",
+                            "vendor_frame": false,
+                            "snippet": []
+                        },
+                        {
+                            "file_name": "\/vendor\/phpunit\/phpunit\/src\/TextUI\/Command.php",
+                            "line_number": "xxx",
+                            "class": "PHPUnit\\TextUI\\Command",
+                            "method": "main",
+                            "vendor_frame": false,
+                            "snippet": []
+                        },
+                        {
+                            "file_name": "\/vendor\/phpunit\/phpunit\/phpunit",
+                            "line_number": "xxx",
+                            "class": null,
+                            "method": "[top]",
+                            "vendor_frame": true,
+                            "snippet": []
+                        }
+                    ],
+                    "meta": []
+                },
+                "origin": {
+                    "file": "\/tests\/RayTest.php",
+                    "line_number": "xxx",
+                    "hostname": "fake-hostname"
+                }
+            }
+        ],
+        "meta": []
+    },
+    {
+        "uuid": "fakeUuid",
+        "payloads": [
+            {
+                "type": "color",
+                "content": {
+                    "color": "red"
+                },
+                "origin": {
+                    "file": "\/tests\/RayTest.php",
+                    "line_number": "xxx",
+                    "hostname": "fake-hostname"
+                }
+            }
+        ],
+        "meta": []
+    }
+]
