@@ -159,6 +159,12 @@ class Ray
         return $this->newScreen();
     }
 
+    public function clearRateLimiter(): self
+    {
+        self::rateLimiter()->clear();
+        return $this;
+    }
+
     public function color(string $color): self
     {
         $payload = new ColorPayload($color);
