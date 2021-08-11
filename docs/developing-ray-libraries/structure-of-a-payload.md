@@ -8,7 +8,7 @@ Every time any data is sent to Ray, a payload is generated with the same basic s
 If you run the following test PHP script, you'll get the payload example below sent via `HTTP POST` to the Ray app.
 
 ```php
-ray()->html('<em>hello world!</em>);
+ray()->html('<em>hello world!</em>');
 ```
 
 ## Payload example 
