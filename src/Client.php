@@ -48,7 +48,7 @@ class Client
 
             curl_exec($curlHandle);
 
-            $success = curl_errno($curlHandle) === CURLE_HTTP_NOT_FOUND;
+            $success = curl_errno($curlHandle) !== CURLE_HTTP_NOT_FOUND;
             // expire the cache entry after 30 sec
             $expiresAt = microtime(true) + 30.0;
 

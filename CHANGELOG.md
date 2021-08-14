@@ -2,6 +2,10 @@
 
 All notable changes to `ray` will be documented in this file
 
+## 1.29.1 - 2021-08-14
+
+- fix curl check
+
 ## 1.29.0 - 2021-08-02
 
 - add `label` method
