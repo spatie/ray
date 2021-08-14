@@ -7,7 +7,7 @@ There are several ways to install Ray in WordPress.
 
 ## Manually cloning the repo
 
-Inside the `wp-contents/plugin` directory run this command
+Inside the `wp-contents/plugins` directory run this command
 
 ```bash
 git clone git@github.com:spatie/wordpress-ray

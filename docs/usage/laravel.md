@@ -188,7 +188,7 @@ Http::get('https://example.com/api/users');
 
 ![screenshot](/docs/ray/v1/images/http.png)
 
-To stop showing http client events, call `stopShowingCache`.
+To stop showing http client events, call `stopShowingHttpClientRequests`.
 
 Alternatively, you can pass a callable to `showHttpClientRequests`. Only the http requests made inside that callable will be displayed in Ray.
 
