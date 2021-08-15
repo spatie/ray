@@ -2,6 +2,10 @@
 
 All notable changes to `ray` will be documented in this file
 
+## 1.29.2 - 2021-08-15
+
+- revert curl check
+
 ## 1.29.1 - 2021-08-14
 
 - fix curl check
