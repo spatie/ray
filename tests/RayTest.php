@@ -1253,6 +1253,21 @@ class RayTest extends TestCase
         $this->assertMatchesOsSafeSnapshot($this->client->sentPayloads());
     }
 
+    /** @test */
+    public function it_does_not_swallow_exceptions_without_catch()
+    {
+        $this->expectException(\Exception::class);
+
+        $this->getNewRay()->send(function ($ray) {
+            $ray->text('hello world');
+
+            throw new \Exception('test');
+        });
+
+        ray('test');
+
+    }
+
     protected function getNewRay(): Ray
     {
         return Ray::create($this->client, 'fakeUuid');
