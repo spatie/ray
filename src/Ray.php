@@ -81,7 +81,7 @@ class Ray
     public $canSendPayload = true;
 
     /** @var \Exception|null */
-    public $caughtException = null;
+    public static $caughtException = null;
 
     /** @var \Symfony\Component\Stopwatch\Stopwatch[] */
     public static $stopWatches = [];
@@ -567,12 +567,21 @@ class Ray
      * @param callable|string|null $callback
      * @return \Spatie\Ray\Ray
      */
-    public function catch($callback = null)
+    public function catch($callback = null): self
     {
         $result = (new ExceptionHandler())->catch($this, $callback);
 
         if ($result instanceof Ray) {
             return $result;
+        }
+
+        return $this;
+    }
+
+    public function throwExceptions(): self
+    {
+        if (self::$caughtException !== null) {
+            throw self::$caughtException;
         }
 
         return $this;
@@ -588,8 +597,6 @@ class Ray
             return $this->raw(...$arguments);
         }
 
-        $this->caughtException = null;
-
         $arguments = array_map(function($argument) {
             if (! is_callable($argument)) {
                 return $argument;
@@ -602,7 +609,7 @@ class Ray
                 // payloads can still be sent.
                 return $result instanceof Ray ? IgnoredValue::make() : $result;
             } catch(\Exception $e) {
-                $this->caughtException = $e;
+                self::$caughtException = $e;
 
                 return IgnoredValue::make();
             }
@@ -658,11 +665,15 @@ class Ray
      */
     public function sendRequest($payloads, array $meta = []): self
     {
-        if (empty($payloads)) {
+        if (! $this->enabled()) {
             return $this;
         }
 
-        if (! $this->enabled()) {
+        if (self::$caughtException !== null) {
+            throw self::$caughtException;
+        }
+
+        if (empty($payloads)) {
             return $this;
         }
 
