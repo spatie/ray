@@ -51,7 +51,7 @@ if (! function_exists('ray')) {
         return (new $rayClass($settings))->send(...$args);
     }
 
-    register_shutdown_function(function(){
+    register_shutdown_function(function () {
         ray()->throwExceptions();
     });
 }

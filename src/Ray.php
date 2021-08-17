@@ -580,7 +580,7 @@ class Ray
 
     public function throwExceptions(): self
     {
-        while(! empty(self::$caughtExceptions)) {
+        while (! empty(self::$caughtExceptions)) {
             throw array_shift(self::$caughtExceptions);
         }
 

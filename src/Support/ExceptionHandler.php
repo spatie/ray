@@ -10,7 +10,7 @@ class ExceptionHandler
     {
         $this->processCallback($ray, $callback);
 
-        if (!empty(Ray::$caughtExceptions)) {
+        if (! empty(Ray::$caughtExceptions)) {
             throw array_shift(Ray::$caughtExceptions);
         }
 
@@ -26,9 +26,10 @@ class ExceptionHandler
             $isExpected = false;
 
             foreach ($expectedClasses as $expectedClass) {
-                foreach(Ray::$caughtExceptions as $caughtException) {
+                foreach (Ray::$caughtExceptions as $caughtException) {
                     if (is_a($caughtException, $expectedClass, true)) {
                         $isExpected = true;
+
                         break 2;
                     }
                 }
@@ -68,7 +69,7 @@ class ExceptionHandler
         }
 
         // handle class names
-        foreach(Ray::$caughtExceptions as $caughtException) {
+        foreach (Ray::$caughtExceptions as $caughtException) {
             if (is_string($callback) && is_a($caughtException, $callback, true)) {
                 return $this->sendExceptionPayload($ray);
             }
