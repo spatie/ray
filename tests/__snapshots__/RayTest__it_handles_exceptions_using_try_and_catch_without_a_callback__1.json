@@ -3,24 +3,6 @@
         "uuid": "fakeUuid",
         "payloads": [
             {
-                "type": "custom",
-                "content": {
-                    "content": "hello&nbsp;world",
-                    "label": "Text"
-                },
-                "origin": {
-                    "file": "\/tests\/RayTest.php",
-                    "line_number": "xxx",
-                    "hostname": "fake-hostname"
-                }
-            }
-        ],
-        "meta": []
-    },
-    {
-        "uuid": "fakeUuid",
-        "payloads": [
-            {
                 "type": "exception",
                 "content": {
                     "class": "Exception",
@@ -38,27 +20,7 @@
                             "file_name": "\/src\/Ray.php",
                             "line_number": "xxx",
                             "class": "Spatie\\Ray\\Ray",
-<<<<<<< HEAD
-                            "method": "Spatie\\Ray\\{closure}",
-                            "vendor_frame": false,
-                            "snippet": []
-                        },
-                        {
-                            "file_name": "unknown",
-                            "line_number": "xxx",
-                            "class": null,
-                            "method": "array_map",
-                            "vendor_frame": false,
-                            "snippet": []
-                        },
-                        {
-                            "file_name": "\/src\/Ray.php",
-                            "line_number": "xxx",
-                            "class": "Spatie\\Ray\\Ray",
-                            "method": "send",
-=======
                             "method": "try",
->>>>>>> 944c51d80b5bdb69b6db8286f47923490a74897d
                             "vendor_frame": false,
                             "snippet": []
                         },
@@ -66,7 +28,7 @@
                             "file_name": "\/tests\/RayTest.php",
                             "line_number": "xxx",
                             "class": "Spatie\\Ray\\Tests\\RayTest",
-                            "method": "it_allows_chaining_additional_methods_after_handling_an_exception",
+                            "method": "it_handles_exceptions_using_try_and_catch_without_a_callback",
                             "vendor_frame": false,
                             "snippet": []
                         },
@@ -177,40 +139,6 @@
                 "type": "color",
                 "content": {
                     "color": "red"
-                },
-                "origin": {
-                    "file": "\/tests\/RayTest.php",
-                    "line_number": "xxx",
-                    "hostname": "fake-hostname"
-                }
-            }
-        ],
-        "meta": []
-    },
-    {
-        "uuid": "fakeUuid",
-        "payloads": [
-            {
-                "type": "color",
-                "content": {
-                    "color": "blue"
-                },
-                "origin": {
-                    "file": "\/tests\/RayTest.php",
-                    "line_number": "xxx",
-                    "hostname": "fake-hostname"
-                }
-            }
-        ],
-        "meta": []
-    },
-    {
-        "uuid": "fakeUuid",
-        "payloads": [
-            {
-                "type": "size",
-                "content": {
-                    "size": "sm"
                 },
                 "origin": {
                     "file": "\/tests\/RayTest.php",
