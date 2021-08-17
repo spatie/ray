@@ -80,8 +80,8 @@ class Ray
     /** @var bool */
     public $canSendPayload = true;
 
-    /** @var \Exception|null */
-    public static $caughtException = null;
+    /** @var array|\Exception[] */
+    public static $caughtExceptions = [];
 
     /** @var \Symfony\Component\Stopwatch\Stopwatch[] */
     public static $stopWatches = [];
@@ -580,8 +580,8 @@ class Ray
 
     public function throwExceptions(): self
     {
-        if (self::$caughtException !== null) {
-            throw self::$caughtException;
+        while(! empty(self::$caughtExceptions)) {
+            throw array_shift(self::$caughtExceptions);
         }
 
         return $this;
@@ -597,7 +597,7 @@ class Ray
             return $this->raw(...$arguments);
         }
 
-        $arguments = array_map(function($argument) {
+        $arguments = array_map(function ($argument) {
             if (! is_callable($argument)) {
                 return $argument;
             }
@@ -608,14 +608,14 @@ class Ray
                 // use a specific class we can filter out instead of null so that null
                 // payloads can still be sent.
                 return $result instanceof Ray ? IgnoredValue::make() : $result;
-            } catch(\Exception $e) {
-                self::$caughtException = $e;
+            } catch (\Exception $e) {
+                self::$caughtExceptions[] = $e;
 
                 return IgnoredValue::make();
             }
         }, $arguments);
 
-        $arguments = array_filter($arguments, function($arg) {
+        $arguments = array_filter($arguments, function ($arg) {
             return ! $arg instanceof IgnoredValue;
         });
 
@@ -667,10 +667,6 @@ class Ray
     {
         if (! $this->enabled()) {
             return $this;
-        }
-
-        if (self::$caughtException !== null) {
-            throw self::$caughtException;
         }
 
         if (empty($payloads)) {

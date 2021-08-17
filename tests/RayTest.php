@@ -1143,7 +1143,7 @@ class RayTest extends TestCase
     {
         $this->getNewRay()->send(function () {
             throw new \Exception('test');
-        })->catch(function($e, $ray) {
+        })->catch(function ($e, $ray) {
             return $ray->text($e->getMessage());
         });
 
@@ -1156,7 +1156,7 @@ class RayTest extends TestCase
     {
         $this->getNewRay()->send(function () {
             throw new \Exception('test');
-        })->catch(function(\Exception $e, $ray) {
+        })->catch(function (\Exception $e, $ray) {
             return $ray->text($e->getMessage());
         });
 
@@ -1185,10 +1185,10 @@ class RayTest extends TestCase
         $this->getNewRay()->send(function () {
             throw new \InvalidArgumentException('test');
         })->catch([
-            function(\BadMethodCallException $e, $ray) {
+            function (\BadMethodCallException $e, $ray) {
                 return $ray->text(get_class($e));
             },
-            function(\InvalidArgumentException $e, $ray) {
+            function (\InvalidArgumentException $e, $ray) {
                 $ray->text(get_class($e));
             },
         ]);
@@ -1233,7 +1233,7 @@ class RayTest extends TestCase
 
         $this->getNewRay()->send(function () {
             throw new \Exception('test');
-        })->catch(function(\InvalidArgumentException $e, $ray) {
+        })->catch(function (\InvalidArgumentException $e, $ray) {
             return $ray->text($e->getMessage());
         });
 
@@ -1250,11 +1250,10 @@ class RayTest extends TestCase
         })->catch()->blue()->small();
 
         $this->assertCount(5, $this->client->sentPayloads());
-        $this->assertMatchesOsSafeSnapshot($this->client->sentPayloads());
     }
 
     /** @test */
-    public function it_does_not_swallow_exceptions_without_catch()
+    public function it_throws_exceptions_when_calling_throwExceptions()
     {
         $this->expectException(\Exception::class);
 
@@ -1262,10 +1261,7 @@ class RayTest extends TestCase
             $ray->text('hello world');
 
             throw new \Exception('test');
-        });
-
-        ray('test');
-
+        })->throwExceptions();
     }
 
     protected function getNewRay(): Ray

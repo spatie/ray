@@ -607,43 +607,58 @@ try {
 }
 ```
 
-### Handling exceptions
+### Callables and handling exceptions 
 
-You can use Ray to handle exceptions using the `try` and `catch` functions.  These methods work in a similar manner to the way that `try...catch` blocks do in PHP.
+You can use Ray to handle exceptions using when passing a callable to `ray` using the `catch` function.  If no exceptions are thrown, the result of the callable is sent to the Ray app.
 
-- The `try` function accepts a single `$ray` parameter which may be used to access the current `Ray` instance.
-- The `catch` function accepts either no parameters _(see below)_ or two parameters: `$ray` and `$exception`, which are the current `Ray` instance and the caught `Exception`, respectively.
-
-```php
-function myfunc($value) {
-    if ($value > 5) {
-        throw new \Exception('hello exception ' . $value);
-    }
-    
-    return 'hello world ' . $value;
-}
-
-foreach(range(1, 10) as $num) {
-    ray()->try(function() use ($num) {
-        ray()->text(myfunc($num))->blue();
-    })->catch(function($ray, $exception) {
-        // display collapsed exceptions in Ray
-        ray()->exception($exception)->hide();
-    });
-}
-```
-
-You can call `catch` without any parameters to automatically send Exceptions directly to Ray:
+`catch` accepts several parameters to customize how and which exceptions are handled.  If no parameters are passed, all Exceptions are swallowed and execution continues.
 
 ```php
-foreach(range(1, 10) as $num) {
-    ray()->try(function() use ($num) {
-        ray()->text(myfunc($num))->blue();
-    })->catch();
-}
+ray($callable)->catch();
+// execution will continue. 
 ```
 
-After calling `catch`, you may continue to chain methods that will be called regardless of whether or not there was an exception handled.
+You can also pass a callable to `catch` to customize the handling of an Exception.  If you typehint the `$exception` variable, only Exceptions of that type will be handled.  PHP 8 union types are supported.
+
+```php
+ray($callable)->catch(function(MyException $exception) {
+   // do something with $exception if it is of the MyException type 
+});
+
+ray($callable)->catch(function($exception) {
+   // handle any exception type
+});
+```
+
+The `catch` callable also accepts a second, optional parameter - `$ray` - that provides access to the current instance of the `Ray` class if you'd like more control over
+
+If you prefer to swallow all exceptions of a given type without specifying a callback, simply pass the Exception class name or names:
+```php
+ray($callable)->catch(CustomExceptionOne::class);
+
+ray($callable)->catch([
+    CustomExceptionOne::class,
+    CustomExceptionTwo::class,
+]);
+```
+
+You can even pass multiple callables and/or classnames as an array to `catch` and they will be treated as possible handlers for any Exceptions:
+
+```php
+ray($callable)->catch([
+    function(CustomExceptionOne $exception) {
+       // handle CustomExceptionOne exceptions
+    },
+    function(CustomExceptionTwo $exception) {
+       // handle CustomExceptionTwo exceptions
+    },    
+    \Exception::class,
+]);
+```
+
+If you would like to immediately throw any unhandled exceptions from the callable after calling `ray`, chain the `throwExceptions` function onto the `ray` call.  If `throwExceptions` is not chained, it will be called when PHP finishes executing the script or application.
+
+After calling `catch`, you may continue to chain methods that will be called regardless of whether there was an exception handled or not.
 
 ### Showing raw values
 

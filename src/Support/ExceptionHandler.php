@@ -10,8 +10,8 @@ class ExceptionHandler
     {
         $this->processCallback($ray, $callback);
 
-        if (Ray::$caughtException) {
-            throw Ray::$caughtException;
+        if (!empty(Ray::$caughtExceptions)) {
+            throw array_shift(Ray::$caughtExceptions);
         }
 
         return $ray;
@@ -26,8 +26,11 @@ class ExceptionHandler
             $isExpected = false;
 
             foreach ($expectedClasses as $expectedClass) {
-                if (is_a(Ray::$caughtException, $expectedClass, true)) {
-                    $isExpected = true;
+                foreach(Ray::$caughtExceptions as $caughtException) {
+                    if (is_a($caughtException, $expectedClass, true)) {
+                        $isExpected = true;
+                        break 2;
+                    }
                 }
             }
 
@@ -36,29 +39,27 @@ class ExceptionHandler
             }
 
             if (! $isExpected && $rethrow) {
-                throw Ray::$caughtException;
+                throw array_shift(Ray::$caughtExceptions);
             }
         }
 
-        $callbackResult = $callback(Ray::$caughtException, $ray);
+        $exception = array_shift(Ray::$caughtExceptions);
 
-        Ray::$caughtException = null;
+        $callbackResult = $callback($exception, $ray);
 
         return $callbackResult instanceof Ray ? $callbackResult : $ray;
     }
 
     protected function sendExceptionPayload(Ray $ray): Ray
     {
-        $exception = Ray::$caughtException;
-
-        Ray::$caughtException = null;
+        $exception = array_shift(Ray::$caughtExceptions);
 
         return $ray->exception($exception);
     }
 
     protected function processCallback(Ray $ray, $callback, $rethrow = true): Ray
     {
-        if (! Ray::$caughtException) {
+        if (empty(Ray::$caughtExceptions)) {
             return $ray;
         }
 
@@ -67,8 +68,10 @@ class ExceptionHandler
         }
 
         // handle class names
-        if (is_string($callback) && is_a(Ray::$caughtException, $callback, true)) {
-            return $this->sendExceptionPayload($ray);
+        foreach(Ray::$caughtExceptions as $caughtException) {
+            if (is_string($callback) && is_a($caughtException, $callback, true)) {
+                return $this->sendExceptionPayload($ray);
+            }
         }
 
         if (is_callable($callback)) {
@@ -77,11 +80,11 @@ class ExceptionHandler
 
         // support arrays of both class names and callables
         if (is_array($callback)) {
-            foreach($callback as $item) {
+            foreach ($callback as $item) {
                 $result = $this->processCallback($ray, $item, false);
 
                 // the array item handled the exception
-                if (! Ray::$caughtException) {
+                if (empty(Ray::$caughtExceptions)) {
                     return $result instanceof Ray ? $result : $ray;
                 }
             }
