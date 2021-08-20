@@ -3,8 +3,8 @@
 namespace Spatie\Ray\Support;
 
 use Exception;
-use Spatie\Ray\Ray;
 use ReflectionFunction;
+use Spatie\Ray\Ray;
 
 class ExceptionHandler
 {
@@ -84,7 +84,8 @@ class ExceptionHandler
             return $this->executeArrayOfExceptionHandlers($ray, $callback) ?? $ray;
         }
 
-        return $this->sendCallbackExceptionPayload($ray, $callback);;
+        return $this->sendCallbackExceptionPayload($ray, $callback);
+        ;
     }
 
     protected function executeArrayOfExceptionHandlers(Ray $ray, array $callbacks): ?Ray
