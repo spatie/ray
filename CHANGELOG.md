@@ -2,6 +2,10 @@
 
 All notable changes to `ray` will be documented in this file
 
+## 1.30.0 - 2021-08-20
+
+- add `catch` method
+
 ## 1.29.2 - 2021-08-15
 
 - revert curl check
