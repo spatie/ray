@@ -2,7 +2,9 @@
 
 namespace Spatie\Ray\Support;
 
+use Exception;
 use Spatie\Ray\Ray;
+use ReflectionFunction;
 
 class ExceptionHandler
 {
@@ -19,14 +21,16 @@ class ExceptionHandler
 
     protected function executeCallableExceptionHandler(Ray $ray, $callback, $rethrow = true): Ray
     {
-        $paramType = $this->getParamType(new \ReflectionFunction($callback));
+        $paramType = $this->getParamType(new ReflectionFunction($callback));
         $expectedClasses = $this->getExpectedClasses($paramType);
 
         if (count($expectedClasses)) {
             $isExpected = false;
 
             foreach ($expectedClasses as $class) {
-                if ($this->isExpectedExceptionClass($class)) {
+                $isExpected = $this->isExpectedExceptionClass($class);
+
+                if ($isExpected) {
                     break;
                 }
             }
@@ -47,7 +51,7 @@ class ExceptionHandler
         return $callbackResult instanceof Ray ? $callbackResult : $ray;
     }
 
-    protected function isExpectedExceptionClass(string $expectedClass): bool
+    protected function isExpectedExceptionClass($expectedClass): bool
     {
         foreach (Ray::$caughtExceptions as $caughtException) {
             if (is_a($caughtException, $expectedClass, true)) {
@@ -71,18 +75,16 @@ class ExceptionHandler
             return $ray;
         }
 
-        $result = $this->sendCallbackExceptionPayload($ray, $callback);
-
-        if (! $result && is_callable($callback)) {
+        if (is_callable($callback)) {
             return $this->executeCallableExceptionHandler($ray, $callback, $rethrow);
         }
 
         // support arrays of both class names and callables
-        if (! $result && is_array($callback)) {
-            $result = $this->executeArrayOfExceptionHandlers($ray, $callback) ?? $ray;
+        if (is_array($callback)) {
+            return $this->executeArrayOfExceptionHandlers($ray, $callback) ?? $ray;
         }
 
-        return $result;
+        return $this->sendCallbackExceptionPayload($ray, $callback);;
     }
 
     protected function executeArrayOfExceptionHandlers(Ray $ray, array $callbacks): ?Ray
@@ -96,10 +98,10 @@ class ExceptionHandler
             }
         }
 
-        return null;
+        return $ray;
     }
 
-    protected function sendCallbackExceptionPayload(Ray $ray, $callback): ?Ray
+    protected function sendCallbackExceptionPayload(Ray $ray, $callback): Ray
     {
         if (! $callback) {
             return $this->sendExceptionPayload($ray);
@@ -112,13 +114,13 @@ class ExceptionHandler
             }
         }
 
-        return null;
+        return $ray;
     }
 
     protected function getExpectedClasses($paramType): array
     {
         if (! $paramType) {
-            return [\Exception::class];
+            return [Exception::class];
         }
 
         $result = is_a($paramType, '\\ReflectionUnionType') ? $paramType->getTypes() : [$paramType->getName()];
@@ -132,7 +134,7 @@ class ExceptionHandler
         }, $result);
     }
 
-    protected function getParamType(\ReflectionFunction $reflection)
+    protected function getParamType(ReflectionFunction $reflection)
     {
         $paramType = null;
 
