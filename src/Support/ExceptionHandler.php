@@ -8,7 +8,7 @@ class ExceptionHandler
 {
     public function catch(Ray $ray, $callback): Ray
     {
-        $this->processCallback($ray, $callback);
+        $this->executeExceptionHandlerCallback($ray, $callback);
 
         if (! empty(Ray::$caughtExceptions)) {
             throw array_shift(Ray::$caughtExceptions);
@@ -17,7 +17,7 @@ class ExceptionHandler
         return $ray;
     }
 
-    protected function handleCallable(Ray $ray, $callback, $rethrow = true): Ray
+    protected function executeCallableExceptionHandler(Ray $ray, $callback, $rethrow = true): Ray
     {
         $paramType = $this->getParamType(new \ReflectionFunction($callback));
         $expectedClasses = $this->getExpectedClasses($paramType);
@@ -25,13 +25,9 @@ class ExceptionHandler
         if (count($expectedClasses)) {
             $isExpected = false;
 
-            foreach ($expectedClasses as $expectedClass) {
-                foreach (Ray::$caughtExceptions as $caughtException) {
-                    if (is_a($caughtException, $expectedClass, true)) {
-                        $isExpected = true;
-
-                        break 2;
-                    }
+            foreach ($expectedClasses as $class) {
+                if ($this->isExpectedExceptionClass($class)) {
+                    break;
                 }
             }
 
@@ -51,6 +47,17 @@ class ExceptionHandler
         return $callbackResult instanceof Ray ? $callbackResult : $ray;
     }
 
+    protected function isExpectedExceptionClass(string $expectedClass): bool
+    {
+        foreach (Ray::$caughtExceptions as $caughtException) {
+            if (is_a($caughtException, $expectedClass, true)) {
+                return true;
+            }
+        }
+
+        return false;
+    }
+
     protected function sendExceptionPayload(Ray $ray): Ray
     {
         $exception = array_shift(Ray::$caughtExceptions);
@@ -58,12 +65,42 @@ class ExceptionHandler
         return $ray->exception($exception);
     }
 
-    protected function processCallback(Ray $ray, $callback, $rethrow = true): Ray
+    protected function executeExceptionHandlerCallback(Ray $ray, $callback, $rethrow = true): Ray
     {
         if (empty(Ray::$caughtExceptions)) {
             return $ray;
         }
 
+        $result = $this->sendCallbackExceptionPayload($ray, $callback);
+
+        if (! $result && is_callable($callback)) {
+            return $this->executeCallableExceptionHandler($ray, $callback, $rethrow);
+        }
+
+        // support arrays of both class names and callables
+        if (! $result && is_array($callback)) {
+            $result = $this->executeArrayOfExceptionHandlers($ray, $callback) ?? $ray;
+        }
+
+        return $result;
+    }
+
+    protected function executeArrayOfExceptionHandlers(Ray $ray, array $callbacks): ?Ray
+    {
+        foreach ($callbacks as $item) {
+            $result = $this->executeExceptionHandlerCallback($ray, $item, false);
+
+            // the array item handled the exception
+            if (empty(Ray::$caughtExceptions)) {
+                return $result instanceof Ray ? $result : $ray;
+            }
+        }
+
+        return null;
+    }
+
+    protected function sendCallbackExceptionPayload(Ray $ray, $callback): ?Ray
+    {
         if (! $callback) {
             return $this->sendExceptionPayload($ray);
         }
@@ -75,23 +112,7 @@ class ExceptionHandler
             }
         }
 
-        if (is_callable($callback)) {
-            return $this->handleCallable($ray, $callback, $rethrow);
-        }
-
-        // support arrays of both class names and callables
-        if (is_array($callback)) {
-            foreach ($callback as $item) {
-                $result = $this->processCallback($ray, $item, false);
-
-                // the array item handled the exception
-                if (empty(Ray::$caughtExceptions)) {
-                    return $result instanceof Ray ? $result : $ray;
-                }
-            }
-        }
-
-        return $ray;
+        return null;
     }
 
     protected function getExpectedClasses($paramType): array
