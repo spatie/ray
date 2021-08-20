@@ -2,9 +2,12 @@
 
 namespace Spatie\Ray\Tests;
 
+use BadFunctionCallException;
+use BadMethodCallException;
 use Carbon\Carbon;
 use Exception;
 use Illuminate\Support\Arr;
+use InvalidArgumentException;
 use PHPUnit\Framework\TestCase;
 use Spatie\Backtrace\Frame;
 use Spatie\Ray\Origin\Hostname;
@@ -1099,6 +1102,171 @@ class RayTest extends TestCase
         $this->assertCount(6, $this->client->sentPayloads());
     }
 
+    /** @test */
+    public function it_does_nothing_if_no_exceptions_are_thrown_from_a_callable_while_using_catch_with_a_callback()
+    {
+        $ray = $this->getNewRay();
+
+        $ray->send(function () use ($ray) {
+            return $ray->text('hello world');
+        })->catch(function ($exception, $ray) {
+            $ray->text($exception->getMessage());
+        });
+
+        $this->assertCount(1, $this->client->sentPayloads());
+        $this->assertMatchesOsSafeSnapshot($this->client->sentPayloads());
+    }
+
+    /** @test */
+    public function it_handles_exceptions_using_catch_with_a_callback_and_classname_parameter()
+    {
+        $this->getNewRay()->send(function () {
+            throw new Exception('test');
+        })->catch(Exception::class);
+
+        // 2 payloads for exceptions
+        $this->assertCount(2, $this->client->sentPayloads());
+        $this->assertMatchesOsSafeSnapshot($this->client->sentPayloads());
+    }
+
+    /** @test */
+    public function it_handles_exceptions_using_and_catch_without_a_callback()
+    {
+        $this->getNewRay()->send(function () {
+            throw new Exception('test');
+        })->catch();
+
+        // 2 payloads are sent when ray->exception() is called
+        $this->assertCount(2, $this->client->sentPayloads());
+        $this->assertMatchesOsSafeSnapshot($this->client->sentPayloads());
+    }
+
+    /** @test */
+    public function it_handles_exceptions_using_catch_with_a_callback()
+    {
+        $this->getNewRay()->send(function () {
+            throw new Exception('test');
+        })->catch(function ($e, $ray) {
+            return $ray->text($e->getMessage());
+        });
+
+        $this->assertCount(1, $this->client->sentPayloads());
+        $this->assertMatchesOsSafeSnapshot($this->client->sentPayloads());
+    }
+
+    /** @test */
+    public function it_handles_exceptions_using_catch_with_a_callback_and_a_typed_parameter()
+    {
+        $this->getNewRay()->send(function () {
+            throw new Exception('test');
+        })->catch(function (Exception $e, $ray) {
+            return $ray->text($e->getMessage());
+        });
+
+        $this->assertCount(1, $this->client->sentPayloads());
+        $this->assertMatchesOsSafeSnapshot($this->client->sentPayloads());
+    }
+
+    /** @test */
+    public function it_handles_exceptions_using_catch_with_a_callback_and_a_union_type_parameter_on_php8_and_higher()
+    {
+        if (PHP_MAJOR_VERSION < 8) {
+            $this->markTestSkipped('test requires PHP 8+');
+        }
+
+        // we need to use include here to avoid PHP 7.x parsing/syntax errors for union types/other PHP 8 features
+        include __DIR__ . '/includes/Php8OnlyTests.php';
+
+        // the included file has a function with the same name as this method, so call it
+        $function = __FUNCTION__;
+        $function($this, $this->getNewRay(), $this->client);
+    }
+
+    /** @test */
+    public function it_handles_exceptions_using_catch_with_an_array_of_callbacks_with_typed_parameters()
+    {
+        $this->getNewRay()->send(function () {
+            throw new InvalidArgumentException('test');
+        })->catch([
+            function (BadMethodCallException $e, $ray) {
+                return $ray->text(get_class($e));
+            },
+            function (InvalidArgumentException $e, $ray) {
+                $ray->text(get_class($e));
+            },
+        ]);
+
+        $this->assertCount(1, $this->client->sentPayloads());
+        $this->assertMatchesOsSafeSnapshot($this->client->sentPayloads());
+    }
+
+    /** @test */
+    public function it_handles_exceptions_using_catch_with_an_array_of_exception_classnames()
+    {
+        $this->getNewRay()->send(function () {
+            throw new InvalidArgumentException('test');
+        })->catch([
+            BadMethodCallException::class,
+            InvalidArgumentException::class,
+        ]);
+
+        $this->assertCount(2, $this->client->sentPayloads());
+        $this->assertMatchesOsSafeSnapshot($this->client->sentPayloads());
+    }
+
+    /** @test */
+    public function it_does_not_handle_exceptions_using_catch_with_an_array_of_exception_classnames_that_do_not_match_the_exception()
+    {
+        $this->expectException(\InvalidArgumentException::class);
+
+        $this->getNewRay()->send(function () {
+            throw new InvalidArgumentException('test');
+        })->catch([
+            BadMethodCallException::class,
+            BadFunctionCallException::class,
+        ]);
+
+        $this->assertCount(0, $this->client->sentPayloads());
+    }
+
+    /** @test */
+    public function it_does_not_handle_exceptions_using_catch_with_a_callback_and_a_typed_parameter_different_than_the_exception_class()
+    {
+        $this->expectException(\Exception::class);
+
+        $this->getNewRay()->send(function () {
+            throw new Exception('test');
+        })->catch(function (InvalidArgumentException $e, $ray) {
+            return $ray->text($e->getMessage());
+        });
+
+        $this->assertCount(0, $this->client->sentPayloads());
+    }
+
+    /** @test */
+    public function it_allows_chaining_additional_methods_after_handling_an_exception()
+    {
+        $this->getNewRay()->send(function ($ray) {
+            $ray->text('hello world');
+
+            throw new Exception('test');
+        })->catch()->blue()->small();
+
+        $this->assertCount(5, $this->client->sentPayloads());
+    }
+
+    /** @test */
+    public function it_throws_exceptions_when_calling_throwExceptions()
+    {
+        $this->expectException(\Exception::class);
+
+        $this->getNewRay()->send(function ($ray) {
+            $ray->text('hello world');
+
+            throw new Exception('test');
+        })->throwExceptions();
+    }
+
     protected function getNewRay(): Ray
     {
         return Ray::create($this->client, 'fakeUuid');
@@ -1117,7 +1285,7 @@ class RayTest extends TestCase
         return Arr::get($lastPayload, "payloads.0.content.{$contentKey}");
     }
 
-    protected function assertMatchesOsSafeSnapshot($data)
+    public function assertMatchesOsSafeSnapshot($data)
     {
         $this->assertMatchesJsonSnapshot(json_encode($data));
     }

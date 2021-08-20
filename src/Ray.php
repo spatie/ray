@@ -43,6 +43,8 @@ use Spatie\Ray\Payloads\XmlPayload;
 use Spatie\Ray\Settings\Settings;
 use Spatie\Ray\Settings\SettingsFactory;
 use Spatie\Ray\Support\Counters;
+use Spatie\Ray\Support\ExceptionHandler;
+use Spatie\Ray\Support\IgnoredValue;
 use Spatie\Ray\Support\Limiters;
 use Spatie\Ray\Support\RateLimiter;
 use Symfony\Component\Stopwatch\Stopwatch;
@@ -77,6 +79,9 @@ class Ray
 
     /** @var bool */
     public $canSendPayload = true;
+
+    /** @var array|\Exception[] */
+    public static $caughtExceptions = [];
 
     /** @var \Symfony\Component\Stopwatch\Stopwatch[] */
     public static $stopWatches = [];
@@ -558,6 +563,30 @@ class Ray
         return $this;
     }
 
+    /**
+     * @param callable|string|null $callback
+     * @return \Spatie\Ray\Ray
+     */
+    public function catch($callback = null): self
+    {
+        $result = (new ExceptionHandler())->catch($this, $callback);
+
+        if ($result instanceof Ray) {
+            return $result;
+        }
+
+        return $this;
+    }
+
+    public function throwExceptions(): self
+    {
+        while (! empty(self::$caughtExceptions)) {
+            throw array_shift(self::$caughtExceptions);
+        }
+
+        return $this;
+    }
+
     public function send(...$arguments): self
     {
         if (! count($arguments)) {
@@ -566,6 +595,32 @@ class Ray
 
         if ($this->settings->always_send_raw_values) {
             return $this->raw(...$arguments);
+        }
+
+        $arguments = array_map(function ($argument) {
+            if (! is_callable($argument)) {
+                return $argument;
+            }
+
+            try {
+                $result = $argument($this);
+
+                // use a specific class we can filter out instead of null so that null
+                // payloads can still be sent.
+                return $result instanceof Ray ? IgnoredValue::make() : $result;
+            } catch (Exception $exception) {
+                self::$caughtExceptions[] = $exception;
+
+                return IgnoredValue::make();
+            }
+        }, $arguments);
+
+        $arguments = array_filter($arguments, function ($argument) {
+            return ! $argument instanceof IgnoredValue;
+        });
+
+        if (empty($arguments)) {
+            return $this;
         }
 
         $payloads = PayloadFactory::createForValues($arguments);
@@ -611,6 +666,10 @@ class Ray
     public function sendRequest($payloads, array $meta = []): self
     {
         if (! $this->enabled()) {
+            return $this;
+        }
+
+        if (empty($payloads)) {
             return $this;
         }
 

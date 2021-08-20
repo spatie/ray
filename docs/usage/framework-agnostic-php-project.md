@@ -619,6 +619,59 @@ try {
 }
 ```
 
+### Callables and handling exceptions 
+
+You can use Ray to handle exceptions using when passing a callable to `ray` using the `catch` function.  If no exceptions are thrown, the result of the callable is sent to the Ray app.
+
+`catch` accepts several parameters to customize how and which exceptions are handled.  If no parameters are passed, all Exceptions are swallowed and execution continues.
+
+```php
+ray($callable)->catch();
+// execution will continue. 
+```
+
+You can also pass a callable to `catch` to customize the handling of an Exception.  If you typehint the `$exception` variable, only Exceptions of that type will be handled.  PHP 8 union types are supported.
+
+```php
+ray($callable)->catch(function(MyException $exception) {
+   // do something with $exception if it is of the MyException type 
+});
+
+ray($callable)->catch(function($exception) {
+   // handle any exception type
+});
+```
+
+The `catch` callable also accepts a second, optional parameter - `$ray` - that provides access to the current instance of the `Ray` class if you'd like more control over
+
+If you prefer to swallow all exceptions of a given type without specifying a callback, simply pass the Exception class name or names:
+```php
+ray($callable)->catch(CustomExceptionOne::class);
+
+ray($callable)->catch([
+    CustomExceptionOne::class,
+    CustomExceptionTwo::class,
+]);
+```
+
+You can even pass multiple callables and/or classnames as an array to `catch` and they will be treated as possible handlers for any Exceptions:
+
+```php
+ray($callable)->catch([
+    function(CustomExceptionOne $exception) {
+       // handle CustomExceptionOne exceptions
+    },
+    function(CustomExceptionTwo $exception) {
+       // handle CustomExceptionTwo exceptions
+    },    
+    \Exception::class,
+]);
+```
+
+If you would like to immediately throw any unhandled exceptions from the callable after calling `ray`, chain the `throwExceptions` function onto the `ray` call.  If `throwExceptions` is not chained, it will be called when PHP finishes executing the script or application.
+
+After calling `catch`, you may continue to chain methods that will be called regardless of whether there was an exception handled or not.
+
 ### Showing raw values
 
 When you sent certain values to Ray, such as Carbon instances or Eloquent models, these values will be displayed in nice way. To see all private, protected, and public properties of such values, you can use the `raw()` method.

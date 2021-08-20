@@ -50,6 +50,10 @@ if (! function_exists('ray')) {
 
         return (new $rayClass($settings))->send(...$args);
     }
+
+    register_shutdown_function(function () {
+        ray()->throwExceptions();
+    });
 }
 
 if (! function_exists('rd')) {

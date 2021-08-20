@@ -35,6 +35,7 @@ To display something in Ray use the `ray()` function. It accepts everything: str
 | `ray(…)->blue()` | Output in blue |
 | `ray()->caller()` | Discover where code is being called |
 | `ray()->carbon($carbon)` | Send `Carbon` instances to Ray |
+| `ray($callable)->catch([$callable, $classname, …])` | Handle any exceptions encountered by `try` |
 | `ray()->className($object)` | Send the classname of an object to Ray |
 | `ray()->clearScreen()` | Clear current screen |
 | `ray()->clearAll()` | Clear current and all previous screens |
