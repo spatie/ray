@@ -608,15 +608,15 @@ class Ray
                 // use a specific class we can filter out instead of null so that null
                 // payloads can still be sent.
                 return $result instanceof Ray ? IgnoredValue::make() : $result;
-            } catch (\Exception $e) {
-                self::$caughtExceptions[] = $e;
+            } catch (Exception $exception) {
+                self::$caughtExceptions[] = $exception;
 
                 return IgnoredValue::make();
             }
         }, $arguments);
 
-        $arguments = array_filter($arguments, function ($arg) {
-            return ! $arg instanceof IgnoredValue;
+        $arguments = array_filter($arguments, function ($argument) {
+            return ! $argument instanceof IgnoredValue;
         });
 
         if (empty($arguments)) {

@@ -2,9 +2,12 @@
 
 namespace Spatie\Ray\Tests;
 
+use BadFunctionCallException;
+use BadMethodCallException;
 use Carbon\Carbon;
 use Exception;
 use Illuminate\Support\Arr;
+use InvalidArgumentException;
 use PHPUnit\Framework\TestCase;
 use Spatie\Backtrace\Frame;
 use Spatie\Ray\Origin\Hostname;
@@ -1118,8 +1121,8 @@ class RayTest extends TestCase
     public function it_handles_exceptions_using_catch_with_a_callback_and_classname_parameter()
     {
         $this->getNewRay()->send(function () {
-            throw new \Exception('test');
-        })->catch(\Exception::class);
+            throw new Exception('test');
+        })->catch(Exception::class);
 
         // 2 payloads for exceptions
         $this->assertCount(2, $this->client->sentPayloads());
@@ -1130,7 +1133,7 @@ class RayTest extends TestCase
     public function it_handles_exceptions_using_and_catch_without_a_callback()
     {
         $this->getNewRay()->send(function () {
-            throw new \Exception('test');
+            throw new Exception('test');
         })->catch();
 
         // 2 payloads are sent when ray->exception() is called
@@ -1142,7 +1145,7 @@ class RayTest extends TestCase
     public function it_handles_exceptions_using_catch_with_a_callback()
     {
         $this->getNewRay()->send(function () {
-            throw new \Exception('test');
+            throw new Exception('test');
         })->catch(function ($e, $ray) {
             return $ray->text($e->getMessage());
         });
@@ -1155,8 +1158,8 @@ class RayTest extends TestCase
     public function it_handles_exceptions_using_catch_with_a_callback_and_a_typed_parameter()
     {
         $this->getNewRay()->send(function () {
-            throw new \Exception('test');
-        })->catch(function (\Exception $e, $ray) {
+            throw new Exception('test');
+        })->catch(function (Exception $e, $ray) {
             return $ray->text($e->getMessage());
         });
 
@@ -1183,12 +1186,12 @@ class RayTest extends TestCase
     public function it_handles_exceptions_using_catch_with_an_array_of_callbacks_with_typed_parameters()
     {
         $this->getNewRay()->send(function () {
-            throw new \InvalidArgumentException('test');
+            throw new InvalidArgumentException('test');
         })->catch([
-            function (\BadMethodCallException $e, $ray) {
+            function (BadMethodCallException $e, $ray) {
                 return $ray->text(get_class($e));
             },
-            function (\InvalidArgumentException $e, $ray) {
+            function (InvalidArgumentException $e, $ray) {
                 $ray->text(get_class($e));
             },
         ]);
@@ -1201,10 +1204,10 @@ class RayTest extends TestCase
     public function it_handles_exceptions_using_catch_with_an_array_of_exception_classnames()
     {
         $this->getNewRay()->send(function () {
-            throw new \InvalidArgumentException('test');
+            throw new InvalidArgumentException('test');
         })->catch([
-            \BadMethodCallException::class,
-            \InvalidArgumentException::class,
+            BadMethodCallException::class,
+            InvalidArgumentException::class,
         ]);
 
         $this->assertCount(2, $this->client->sentPayloads());
@@ -1217,10 +1220,10 @@ class RayTest extends TestCase
         $this->expectException(\InvalidArgumentException::class);
 
         $this->getNewRay()->send(function () {
-            throw new \InvalidArgumentException('test');
+            throw new InvalidArgumentException('test');
         })->catch([
-            \BadMethodCallException::class,
-            \BadFunctionCallException::class,
+            BadMethodCallException::class,
+            BadFunctionCallException::class,
         ]);
 
         $this->assertCount(0, $this->client->sentPayloads());
@@ -1232,8 +1235,8 @@ class RayTest extends TestCase
         $this->expectException(\Exception::class);
 
         $this->getNewRay()->send(function () {
-            throw new \Exception('test');
-        })->catch(function (\InvalidArgumentException $e, $ray) {
+            throw new Exception('test');
+        })->catch(function (InvalidArgumentException $e, $ray) {
             return $ray->text($e->getMessage());
         });
 
@@ -1246,7 +1249,7 @@ class RayTest extends TestCase
         $this->getNewRay()->send(function ($ray) {
             $ray->text('hello world');
 
-            throw new \Exception('test');
+            throw new Exception('test');
         })->catch()->blue()->small();
 
         $this->assertCount(5, $this->client->sentPayloads());
@@ -1260,7 +1263,7 @@ class RayTest extends TestCase
         $this->getNewRay()->send(function ($ray) {
             $ray->text('hello world');
 
-            throw new \Exception('test');
+            throw new Exception('test');
         })->throwExceptions();
     }
 
