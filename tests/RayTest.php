@@ -87,7 +87,6 @@ class RayTest extends TestCase
         $this->assertMatchesOsSafeSnapshot($this->client->sentPayloads());
     }
 
-    /** @test */
     public function it_can_send_a_color_and_a_size()
     {
         $this->ray->send('test', 'test2')->color('green')->size('big');
