@@ -670,6 +670,13 @@ ray($callable)->catch([
 
 If you would like to immediately throw any unhandled exceptions from the callable after calling `ray`, chain the `throwExceptions` function onto the `ray` call.  If `throwExceptions` is not chained, it will be called when PHP finishes executing the script or application.
 
+```php
+// immediately throw unhandled exceptions
+ray($callable)
+    ->catch(CustomExceptionOne::class)
+    ->throwExceptions();
+```
+
 After calling `catch`, you may continue to chain methods that will be called regardless of whether there was an exception handled or not.
 
 ### Showing raw values

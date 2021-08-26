@@ -1257,7 +1257,7 @@ class RayTest extends TestCase
     /** @test */
     public function it_throws_exceptions_when_calling_throwExceptions()
     {
-        $this->expectException(\Exception::class);
+        $this->expectException(Exception::class);
 
         $this->getNewRay()->send(function ($ray) {
             $ray->text('hello world');
