@@ -36,9 +36,9 @@ class FileContentsPayload extends Payload
 
     protected function encodeContent(string $content): string
     {
-        $result = htmlentities($content);
+        $result = htmlentities($content, ENT_QUOTES | ENT_SUBSTITUTE);
 
-        // using nl2br() causes tests to fail on windows, so use <br> only
+        // using nl2br() causes tests to fail on Windows, so use <br> only
         return str_replace(PHP_EOL, '<br />', $result);
     }
 }
