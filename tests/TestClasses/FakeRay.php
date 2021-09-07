@@ -1,6 +1,5 @@
 <?php
 
-
 namespace Spatie\Ray\Tests\TestClasses;
 
 use Spatie\Ray\Concerns\RayColors;

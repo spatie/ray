@@ -47,7 +47,7 @@ class XmlPayload extends Payload
             return $xml;
         }
 
-        $dom = new \DOMDocument;
+        $dom = new \DOMDocument();
 
         $dom->preserveWhiteSpace = false;
         $dom->strictErrorChecking = false;

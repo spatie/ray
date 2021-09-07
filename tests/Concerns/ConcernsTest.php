@@ -1,6 +1,5 @@
 <?php
 
-
 namespace Spatie\Ray\Tests\Concerns;
 
 use PHPUnit\Framework\TestCase;

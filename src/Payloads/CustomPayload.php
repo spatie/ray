@@ -1,6 +1,5 @@
 <?php
 
-
 namespace Spatie\Ray\Payloads;
 
 class CustomPayload extends Payload

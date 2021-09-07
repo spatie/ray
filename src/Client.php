@@ -103,7 +103,7 @@ class Client
             }
 
             if ($curlError) {
-                throw new Exception;
+                throw new Exception();
             }
 
             if (! $curlResult) {
