@@ -2,6 +2,10 @@
 
 All notable changes to `ray` will be documented in this file
 
+## 1.30.1 - 2021-09-07
+
+- support PHP 8.1
+
 ## 1.30.0 - 2021-08-20
 
 - add `catch` method
