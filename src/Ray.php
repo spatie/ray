@@ -2,7 +2,7 @@
 
 namespace Spatie\Ray;
 
-use Carbon\Carbon;
+use Carbon\CarbonInterface;
 use Closure;
 use Composer\InstalledVersions;
 use Exception;
@@ -418,7 +418,7 @@ class Ray
         return $this->removeWhen($boolOrCallable);
     }
 
-    public function carbon(?Carbon $carbon): self
+    public function carbon(?CarbonInterface $carbon): self
     {
         $payload = new CarbonPayload($carbon);
 
