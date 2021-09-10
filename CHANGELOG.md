@@ -2,6 +2,10 @@
 
 All notable changes to `ray` will be documented in this file
 
+## 1.30.2 - 2021-09-10
+
+- align carbon call argument type with carbon payload (#556)
+
 ## 1.30.1 - 2021-09-07
 
 - support PHP 8.1
