@@ -83,7 +83,7 @@ User::query()
 
 ![screenshot](/docs/ray/v1/images/single-query-multiple-calls.png)
 
-### Showing only duplicate queries
+### Showing duplicate queries
 
 You can display all duplicate queries by calling `showDuplicateQueries`.
 
