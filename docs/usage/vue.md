@@ -108,7 +108,7 @@ export default {
         </div>
         <div ref="div1" class="w-full flex flex-wrap">
             <div ref="div1a" class="w-4/12 inline-flex">one</div>
-            <div ref="div1b" class="w-4/12 inline-flex">two</divr>
+            <div ref="div1b" class="w-4/12 inline-flex">two</div>
         </div>
     </div>
 </template>

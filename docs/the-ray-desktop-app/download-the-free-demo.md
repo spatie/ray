@@ -3,7 +3,7 @@ title: Download the app
 weight: 1
 ---
 
-You can download the Ray destop application in these flavours:
+You can download the Ray desktop application in these flavours:
 
 - [macOS (Intel)](https://spatie.be/products/ray/download/macosIntel/latest)
 - [macOS (Apple Silicon)](https://spatie.be/products/ray/download/macosAppleSilicon/latest)

@@ -172,4 +172,4 @@ ray().notify('This is my notification');
 
 ![screenshot](/docs/ray/v1/images/notification.jpg)
 
-> Note: The JS ray client does not support getting the caller of a function, pausing execution, performance and memory measurements, or halting the JS process. There's also no current support for showing the origin of the js request, althrough we hope to add that in soon.
+> Note: The JS ray client does not support getting the caller of a function, pausing execution, performance and memory measurements, or halting the JS process. There's also no current support for showing the origin of the js request, although we hope to add that in soon.
