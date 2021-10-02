@@ -42,7 +42,7 @@ volumes:
 ```
 Then `remote_path` should be `/var/www` and `local_path` should be the absolute path to the directory that you
 mount as `/var/www`, which is where your `docker-compose.yml` is located in the example (you can find this by 
-running `pwd` inside that directoy if you are on Linux).
+running `pwd` inside that directory if you are on Linux).
 
 Add `127.0.0.1 	host.docker.internal` to `/etc/hosts`file.
 
