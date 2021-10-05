@@ -628,6 +628,13 @@ class Ray
         return $this->sendRequest($payloads);
     }
 
+    /**
+     * @template T
+     *
+     * @param T $argument
+     *
+     * @return T
+     */
     public function pass($argument)
     {
         $this->send($argument);
