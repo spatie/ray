@@ -6,6 +6,7 @@ use Carbon\CarbonInterface;
 use Closure;
 use Composer\InstalledVersions;
 use Exception;
+use TypeError;
 use Ramsey\Uuid\Uuid;
 use Spatie\Backtrace\Backtrace;
 use Spatie\LaravelRay\Ray as LaravelRay;
@@ -612,6 +613,8 @@ class Ray
                 self::$caughtExceptions[] = $exception;
 
                 return IgnoredValue::make();
+            } catch (TypeError $error) {
+                return $argument;
             }
         }, $arguments);
 
