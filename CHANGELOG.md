@@ -2,6 +2,10 @@
 
 All notable changes to `ray` will be documented in this file
 
+## 1.30.3 - 2021-10-08
+
+- Bug/567 global functions (#573)
+
 ## 1.30.2 - 2021-09-10
 
 - align carbon call argument type with carbon payload (#556)
