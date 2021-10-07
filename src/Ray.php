@@ -6,7 +6,6 @@ use Carbon\CarbonInterface;
 use Closure;
 use Composer\InstalledVersions;
 use Exception;
-use TypeError;
 use Ramsey\Uuid\Uuid;
 use Spatie\Backtrace\Backtrace;
 use Spatie\LaravelRay\Ray as LaravelRay;
@@ -50,6 +49,7 @@ use Spatie\Ray\Support\Limiters;
 use Spatie\Ray\Support\RateLimiter;
 use Symfony\Component\Stopwatch\Stopwatch;
 use Throwable;
+use TypeError;
 
 class Ray
 {
