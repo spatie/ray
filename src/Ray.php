@@ -49,6 +49,7 @@ use Spatie\Ray\Support\Limiters;
 use Spatie\Ray\Support\RateLimiter;
 use Symfony\Component\Stopwatch\Stopwatch;
 use Throwable;
+use TypeError;
 
 class Ray
 {
@@ -612,6 +613,8 @@ class Ray
                 self::$caughtExceptions[] = $exception;
 
                 return IgnoredValue::make();
+            } catch (TypeError $error) {
+                return $argument;
             }
         }, $arguments);
 

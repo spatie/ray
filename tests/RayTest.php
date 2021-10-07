@@ -1266,6 +1266,18 @@ class RayTest extends TestCase
         })->throwExceptions();
     }
 
+    /** @test */
+    public function it_can_dump_a_string_with_a_global_function_name()
+    {
+        if (PHP_MAJOR_VERSION < 8) {
+            $this->markTestSkipped('test requires PHP 8+');
+        }
+
+        $this->ray->send('array_map');
+
+        $this->assertMatchesOsSafeSnapshot($this->client->sentPayloads());
+    }
+
     protected function getNewRay(): Ray
     {
         return Ray::create($this->client, 'fakeUuid');
