@@ -2,6 +2,15 @@
 
 All notable changes to `ray` will be documented in this file
 
+## 1.30.4 - 2021-11-11
+
+## What's Changed
+
+- Point to "servers" instead of singular "server" by @jmslbam in https://github.com/spatie/ray/pull/583
+- Fix for sending "value" (by @freekmurze)
+
+**Full Changelog**: https://github.com/spatie/ray/compare/1.30.3...1.30.4
+
 ## 1.30.3 - 2021-10-08
 
 - Bug/567 global functions (#573)
