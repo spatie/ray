@@ -599,6 +599,10 @@ class Ray
         }
 
         $arguments = array_map(function ($argument) {
+            if (is_string($argument)) {
+                return $argument;
+            }
+
             if (! is_callable($argument)) {
                 return $argument;
             }

@@ -59,6 +59,14 @@ class RayTest extends TestCase
     }
 
     /** @test */
+    public function it_can_send_a_strings_that_might_be_interpreted_as_callables_to_ray()
+    {
+        $this->ray->send('value');
+
+        $this->assertMatchesOsSafeSnapshot($this->client->sentPayloads());
+    }
+
+    /** @test */
     public function the_ray_function_also_works()
     {
         Ray::$fakeUuid = 'fakeUuid';
