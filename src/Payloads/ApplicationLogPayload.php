@@ -6,7 +6,7 @@ class ApplicationLogPayload extends Payload
 {
     /** @var string */
     protected $value;
-    
+
     /** @var array */
     protected $context;
 
