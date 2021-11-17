@@ -83,6 +83,34 @@ User::query()
 
 ![screenshot](/docs/ray/v1/images/single-query-multiple-calls.png)
 
+### Showing duplicate queries
+
+You can display all duplicate queries by calling `showDuplicateQueries`.
+
+```php
+ray()->showDuplicateQueries();
+
+User::firstWhere('email', 'john@example.com'); // this query won't be displayed in Ray
+User::firstWhere('email', 'john@example.com'); // this query will be displayed in Ray.
+```
+
+To stop showing duplicate queries, call `stopShowingDuplicateQueries`.
+
+Alternatively, you can pass a callable to `showDuplicateQueries`. Only the duplicate queries performed inside that callable will be displayed in Ray.
+
+```php
+User::all();
+User::all(); // this query won't be displayed.
+
+ray()->showQueries(function() {
+    User::where('id', 1)->get('id');
+    User::where('id', 1)->get('id'); // this query will be displayed.
+});
+
+User::all();
+User::all(); // this query won't be displayed.
+```
+
 ### Showing events
 
 You can display all events that are executed by calling `showEvents` (or `events`).
