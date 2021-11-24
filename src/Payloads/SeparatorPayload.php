@@ -7,6 +7,5 @@ class SeparatorPayload extends Payload
     public function getType(): string
     {
         return 'separator';
-
     }
 }
