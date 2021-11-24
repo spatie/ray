@@ -58,6 +58,19 @@ ray(['John', 'Paul', 'George', 'Ringo'])->label('Beatles');
 
 ![screenshot](/docs/ray/v1/images/label.png)
 
+### Showing a separator
+
+Another way to visually separate items in Ray, is to call  `seperator`.
+
+```php
+ray('first item');
+
+ray()->separator();
+
+ray('second item');
+```
+
+![screenshot](/docs/ray/v1/images/separator.png)
 
 
 ### Creating a new screen
@@ -193,7 +206,6 @@ foreach (range(1, 10) as $i) {
 
 If the argument passed to `limit()` is a negative number or zero, limiting is disabled.
 
-
 ### Using a rate limiter
 
 A rate limiter can help to reduce the amount of sent messages. This would avoid spamming the desktop app, which can be helpful when using Ray in loops.
@@ -212,7 +224,6 @@ Ray::rateLimiter()->clear();
 ```
 
 A message to the desktop app will be sent once to notify the user the rate limit has been reached.
-
 
 ### Sending a payload once
 
