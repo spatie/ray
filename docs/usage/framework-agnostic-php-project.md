@@ -68,6 +68,8 @@ ray('first item');
 ray()->separator();
 
 ray('second item');
+
+ray('third item');
 ```
 
 ![screenshot](/docs/ray/v1/images/separator.png)
