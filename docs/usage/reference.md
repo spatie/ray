@@ -75,6 +75,7 @@ To display something in Ray use the `ray()` function. It accepts everything: str
 | `ray()->rateLimiter()->clear()` | Clears the rate limits |
 | `ray()->raw($value)` | Send raw output of a value to Ray without fancy formatting |
 | `ray(…)->red()` | Output in red |
+| `ray()->separator()` | Add a visual separator |
 | `ray()->showApp()` | Bring the app to the foreground |
 | `ray(…)->small()` | Output text smaller |
 | `ray()->table($array, $label)` | Format an associative array with optional label  |

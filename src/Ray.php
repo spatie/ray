@@ -34,6 +34,7 @@ use Spatie\Ray\Payloads\NewScreenPayload;
 use Spatie\Ray\Payloads\NotifyPayload;
 use Spatie\Ray\Payloads\PhpInfoPayload;
 use Spatie\Ray\Payloads\RemovePayload;
+use Spatie\Ray\Payloads\SeparatorPayload;
 use Spatie\Ray\Payloads\ShowAppPayload;
 use Spatie\Ray\Payloads\SizePayload;
 use Spatie\Ray\Payloads\TablePayload;
@@ -495,6 +496,13 @@ class Ray
         } while (self::$client->lockExists($lockName));
 
         return $this;
+    }
+
+    public function separator(): self
+    {
+        $payload = new SeparatorPayload();
+
+        return $this->sendRequest($payload);
     }
 
     public function html(string $html = ''): self

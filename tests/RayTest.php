@@ -1286,6 +1286,14 @@ class RayTest extends TestCase
         $this->assertMatchesOsSafeSnapshot($this->client->sentPayloads());
     }
 
+    /** @test */
+    public function it_can_send_a_separator()
+    {
+        $this->ray->send('separator');
+
+        $this->assertMatchesOsSafeSnapshot($this->client->sentPayloads());
+    }
+
     protected function getNewRay(): Ray
     {
         return Ray::create($this->client, 'fakeUuid');
