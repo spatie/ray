@@ -2,6 +2,14 @@
 
 All notable changes to `ray` will be documented in this file
 
+## 1.32.0 - 2021-11-26
+
+## What's Changed
+
+- Add separator payload by @freekmurze in https://github.com/spatie/ray/pull/599
+
+**Full Changelog**: https://github.com/spatie/ray/compare/1.31.0...1.32.0
+
 ## 1.31.0 - 2021-11-17
 
 ## What's Changed
