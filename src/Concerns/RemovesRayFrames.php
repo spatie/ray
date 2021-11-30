@@ -18,7 +18,7 @@ trait RemovesRayFrames
     protected function isRayFrame(Frame $frame): bool
     {
         foreach ($this->rayNamespaces() as $rayNamespace) {
-            if (substr($frame->class, 0, strlen($rayNamespace)) === $rayNamespace) {
+            if (substr((string)$frame->class, 0, strlen($rayNamespace)) === $rayNamespace) {
                 return true;
             }
         }
