@@ -2,6 +2,10 @@
 
 All notable changes to `ray` will be documented in this file
 
+## 1.32.1 - 2021-11-30
+
+- fix deprecation warning in PHP 8.1
+
 ## 1.32.0 - 2021-11-26
 
 ## What's Changed
