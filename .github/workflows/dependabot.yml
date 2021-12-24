@@ -1,4 +1,10 @@
 version: 2
+
+on:
+  push:
+    paths:
+      - '.github/workflows/dependabot.yml'
+
 updates:
 
   - package-ecosystem: "github-actions"
