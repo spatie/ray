@@ -132,6 +132,14 @@
                             "file_name": "\/vendor\/phpunit\/phpunit\/phpunit",
                             "line_number": "xxx",
                             "class": null,
+                            "method": "include",
+                            "vendor_frame": false,
+                            "snippet": []
+                        },
+                        {
+                            "file_name": "\/vendor\/bin\/phpunit",
+                            "line_number": "xxx",
+                            "class": null,
                             "method": "[top]",
                             "vendor_frame": true,
                             "snippet": []
