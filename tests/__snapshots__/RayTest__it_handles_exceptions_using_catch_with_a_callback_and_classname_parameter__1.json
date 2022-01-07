@@ -129,7 +129,7 @@
                             "snippet": []
                         },
                         {
-                            "file_name": "\/vendor\/phpunit\/phpunit\/phpunit",
+                            "file_name": "phpvfscomposer:\/\/\/vendor\/phpunit\/phpunit\/phpunit",
                             "line_number": "xxx",
                             "class": null,
                             "method": "include",
