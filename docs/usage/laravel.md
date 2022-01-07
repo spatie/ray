@@ -122,6 +122,17 @@ ray()->showSlowQueries(100);
 User::firstWhere('email', 'john@example.com');
 ```
 
+Alternatively, you can also pass a callable to `showSlowQueries`. Only the slow queries performed inside that callable will be displayed in Ray.
+
+```php
+User::all();
+User::all(); // this query won't be displayed.
+
+ray()->showSlowQueries(100, function() {
+    User::where('id', 1)->get('id'); // this query will be displayed if it takes longer than 100ms.
+});
+```
+
 You can also use the shorthand method, `slowQueries()`:
 
 ```php
