@@ -111,6 +111,36 @@ User::all();
 User::all(); // this query won't be displayed.
 ```
 
+### Showing slow queries
+
+You can display all queries that took longer than a specified number of milliseconds to execute by calling `showSlowQueries`.
+
+```php
+ray()->showSlowQueries(100);
+
+// this query will only be displayed in Ray if it takes longer than 100ms to execute.
+User::firstWhere('email', 'john@example.com');
+```
+
+Alternatively, you can also pass a callable to `showSlowQueries`. Only the slow queries performed inside that callable will be displayed in Ray.
+
+```php
+User::all();
+User::all(); // this query won't be displayed.
+
+ray()->showSlowQueries(100, function() {
+    User::where('id', 1)->get('id'); // this query will be displayed if it takes longer than 100ms.
+});
+```
+
+You can also use the shorthand method, `slowQueries()`:
+
+```php
+ray()->slowQueries(); // equivalent to calling 'showSlowQueries'.
+```
+
+To stop showing slow queries, call `stopShowingSlowQueries`.
+
 ### Showing events
 
 You can display all events that are executed by calling `showEvents` (or `events`).
