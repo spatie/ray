@@ -2,9 +2,15 @@
 
 All notable changes to `ray` will be documented in this file
 
+## 1.33.0 - 2022-01-13
+
+- add support for screen colors
+- add support for project names
+- send hostname along with request
+
 ## 1.32.3 - 2022-01-09
 
-Allow Laravel 9
+- allow Laravel 9
 
 ## 1.32.2 - 2021-12-20
 
