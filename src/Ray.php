@@ -11,6 +11,7 @@ use Spatie\Backtrace\Backtrace;
 use Spatie\LaravelRay\Ray as LaravelRay;
 use Spatie\Macroable\Macroable;
 use Spatie\Ray\Concerns\RayColors;
+use Spatie\Ray\Concerns\RayScreenColors;
 use Spatie\Ray\Concerns\RaySizes;
 use Spatie\Ray\Origin\DefaultOriginFactory;
 use Spatie\Ray\Payloads\CallerPayload;
@@ -34,6 +35,7 @@ use Spatie\Ray\Payloads\NewScreenPayload;
 use Spatie\Ray\Payloads\NotifyPayload;
 use Spatie\Ray\Payloads\PhpInfoPayload;
 use Spatie\Ray\Payloads\RemovePayload;
+use Spatie\Ray\Payloads\ScreenColorPayload;
 use Spatie\Ray\Payloads\SeparatorPayload;
 use Spatie\Ray\Payloads\ShowAppPayload;
 use Spatie\Ray\Payloads\SizePayload;
@@ -55,6 +57,7 @@ use TypeError;
 class Ray
 {
     use RayColors;
+    use RayScreenColors;
     use RaySizes;
     use Macroable;
 
@@ -169,6 +172,13 @@ class Ray
     public function color(string $color): self
     {
         $payload = new ColorPayload($color);
+
+        return $this->sendRequest($payload);
+    }
+
+    public function screenColor(string $color): self
+    {
+        $payload = new ScreenColorPayload($color);
 
         return $this->sendRequest($payload);
     }

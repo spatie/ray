@@ -36,4 +36,23 @@ class ConcernsTest extends TestCase
 
         $this->assertEquals($colors, $ray->getColorHistory());
     }
+
+    /** @test */
+    public function it_sets_the_same_screen_color_payload_as_the_method_name()
+    {
+        $colors = [
+            'blue', 'gray', 'green', 'orange', 'purple', 'red',
+        ];
+
+        $ray = new FakeRay();
+
+        foreach ($colors as $colorName) {
+            $methodName = 'screen' . ucfirst($colorName);
+
+            $ray->{$methodName}();
+            $this->assertEquals($colorName, $ray->getLastScreenColor());
+        }
+
+        $this->assertEquals($colors, $ray->getScreenColorHistory());
+    }
 }
