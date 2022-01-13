@@ -8,6 +8,9 @@ use Spatie\Ray\Request;
 class FakeClient extends Client
 {
     /** @var array */
+    protected $sentPayloads = [];
+
+    /** @var array */
     protected $sentRequests = [];
 
     public function serverIsAvailable(): bool
@@ -27,6 +30,8 @@ class FakeClient extends Client
     public function send(Request $request): void
     {
         $requestProperties = $request->toArray();
+
+        $this->sentRequests[] = $requestProperties;
 
         foreach ($requestProperties['payloads'] as &$payload) {
             $payload['origin']['file'] = $this->convertToRelativeFilename($payload['origin']['file']);
@@ -51,17 +56,22 @@ class FakeClient extends Client
 
         $requestProperties['meta'] = [];
 
-        $this->sentRequests[] = $requestProperties;
+        $this->sentPayloads[] = $requestProperties;
     }
 
     public function sentPayloads(): array
+    {
+        return $this->sentPayloads;
+    }
+
+    public function sentRequests(): array
     {
         return $this->sentRequests;
     }
 
     public function reset(): self
     {
-        $this->sentRequests = [];
+        $this->sentPayloads = [];
 
         return $this;
     }

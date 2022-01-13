@@ -1318,6 +1318,18 @@ class RayTest extends TestCase
         return Arr::get($lastPayload, "payloads.0.content.{$contentKey}");
     }
 
+    /** @test */
+    public function it_can_set_the_project_name()
+    {
+        ray()->projectName('my project');
+
+        $this->assertEquals('my project', Ray::$projectName);
+
+        ray('send request');
+
+        $this->assertEquals('my project', $this->client->sentRequests()[0]['meta']['project_name']);
+    }
+
     public function assertMatchesOsSafeSnapshot($data)
     {
         $this->assertMatchesJsonSnapshot(json_encode($data));

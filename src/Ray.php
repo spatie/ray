@@ -742,6 +742,7 @@ class Ray
         $allMeta = array_merge([
             'php_version' => phpversion(),
             'php_version_id' => PHP_VERSION_ID,
+            'project_name' => static::$projectName,
         ], $meta);
 
         foreach ($payloads as $payload) {
