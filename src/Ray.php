@@ -97,6 +97,9 @@ class Ray
     /** @var RateLimiter */
     public static $rateLimiter;
 
+    /** @var string */
+    public static $projectName = '';
+
     public static function create(Client $client = null, string $uuid = null): self
     {
         $settings = SettingsFactory::createFromConfigFile();
@@ -119,6 +122,13 @@ class Ray
         static::$enabled = static::$enabled ?? $this->settings->enable ?? true;
 
         static::$rateLimiter = static::$rateLimiter ?? RateLimiter::disabled();
+    }
+
+    public function projectName($projectName): self
+    {
+        static::$projectName = $projectName;
+
+        return $this;
     }
 
     public function enable(): self

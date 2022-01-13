@@ -95,6 +95,7 @@ class Client
 
         $queryString = http_build_query([
             'hostname' => Hostname::get(),
+            'project_name' => Ray::$projectName,
         ]);
 
         $curlHandle = $this->getCurlHandleForUrl('get', "locks/{$lockName}?{$queryString}");
