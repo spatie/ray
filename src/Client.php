@@ -94,7 +94,7 @@ class Client
         }
 
         $queryString = http_build_query([
-            'host_name' => Hostname::get(),
+            'hostname' => Hostname::get(),
         ]);
 
         $curlHandle = $this->getCurlHandleForUrl('get', "locks/{$lockName}?{$queryString}");
