@@ -1142,7 +1142,6 @@ class RayTest extends TestCase
 
         // 2 payloads for exceptions
         $this->assertCount(2, $this->client->sentPayloads());
-        $this->assertMatchesOsSafeSnapshot($this->client->sentPayloads());
     }
 
     /** @test */
@@ -1154,7 +1153,6 @@ class RayTest extends TestCase
 
         // 2 payloads are sent when ray->exception() is called
         $this->assertCount(2, $this->client->sentPayloads());
-        $this->assertMatchesOsSafeSnapshot($this->client->sentPayloads());
     }
 
     /** @test */
@@ -1227,7 +1225,6 @@ class RayTest extends TestCase
         ]);
 
         $this->assertCount(2, $this->client->sentPayloads());
-        $this->assertMatchesOsSafeSnapshot($this->client->sentPayloads());
     }
 
     /** @test */

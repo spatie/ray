@@ -2,6 +2,14 @@
 
 All notable changes to `ray` will be documented in this file
 
+## 1.32.3 - 2022-01-09
+
+Allow Laravel 9
+
+## 1.32.2 - 2021-12-20
+
+- allow symfony 6
+
 ## 1.32.1 - 2021-11-30
 
 - fix deprecation warning in PHP 8.1
