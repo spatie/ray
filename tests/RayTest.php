@@ -1321,7 +1321,7 @@ class RayTest extends TestCase
     /** @test */
     public function it_can_set_the_project_name()
     {
-        ray()->projectName('my project');
+        ray()->project('my project');
 
         $this->assertEquals('my project', Ray::$projectName);
 
