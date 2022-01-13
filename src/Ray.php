@@ -124,7 +124,12 @@ class Ray
         static::$rateLimiter = static::$rateLimiter ?? RateLimiter::disabled();
     }
 
-    public function projectName($projectName): self
+    /**
+     * @param string $projectName
+     *
+     * @return $this
+     */
+    public function project($projectName): self
     {
         static::$projectName = $projectName;
 
