@@ -2,6 +2,18 @@
 
 All notable changes to `ray` will be documented in this file
 
+## 1.33.1 - 2022-01-17
+
+## What's Changed
+
+- Ignore docs folder on package install by @fschirinzi in https://github.com/spatie/ray/pull/625
+
+## New Contributors
+
+- @fschirinzi made their first contribution in https://github.com/spatie/ray/pull/625
+
+**Full Changelog**: https://github.com/spatie/ray/compare/1.33.0...1.33.1
+
 ## 1.33.0 - 2022-01-13
 
 1.33.0
