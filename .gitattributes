@@ -6,6 +6,7 @@
 /.gitignore         export-ignore
 /phpunit.xml.dist   export-ignore
 /tests              export-ignore
+/docs               export-ignore
 /.editorconfig      export-ignore
 /.php_cs            export-ignore
 /.github            export-ignore
