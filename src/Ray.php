@@ -318,6 +318,29 @@ class Ray
         return $this;
     }
 
+    /**
+     * Iterates over the iterator and sends the first $max values
+     */
+
+    public function iterateOver(iterable $iterable, int $max = 10)
+    {
+        $count = 0;
+        $items = [];
+        foreach($iterable as $item) {
+            if ($count >= $max) {
+                break;
+            }
+
+            $items[] = $item;
+
+            $count++;
+        }
+        
+        $payloads = PayloadFactory::createForValues($items);
+
+        return $this->sendRequest($payloads);        
+    }
+
     public function notify(string $text): self
     {
         $payload = new NotifyPayload($text);

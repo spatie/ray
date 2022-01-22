@@ -345,6 +345,20 @@ class RayTest extends TestCase
     }
 
     /** @test */
+    public function it_can_iterate_over_an_iterable()
+    {
+        $iterable = range(1,5);
+
+        $this->ray->iterateOver($iterable);
+        $this->assertCount(5, $this->client->sentPayloads()[0]['payloads']);
+
+        $this->client->reset();
+
+        $this->ray->iterateOver($iterable, 2);
+        $this->assertCount(2, $this->client->sentPayloads()[0]['payloads']);
+    }
+
+    /** @test */
     public function it_can_send_the_notify_payload()
     {
         $this->ray->notify('notification text');
