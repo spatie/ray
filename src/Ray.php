@@ -322,7 +322,7 @@ class Ray
     {
         $count = 0;
         $items = [];
-        foreach($iterable as $item) {
+        foreach ($iterable as $item) {
             if ($count >= $max) {
                 break;
             }
@@ -331,10 +331,10 @@ class Ray
 
             $count++;
         }
-        
+
         $payloads = PayloadFactory::createForValues($items);
 
-        return $this->sendRequest($payloads);        
+        return $this->sendRequest($payloads);
     }
 
     public function notify(string $text): self
