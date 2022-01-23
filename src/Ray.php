@@ -318,10 +318,6 @@ class Ray
         return $this;
     }
 
-    /**
-     * Iterates over the iterator and sends the first $max values
-     */
-
     public function iterateOver(iterable $iterable, int $max = 10)
     {
         $count = 0;
