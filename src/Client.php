@@ -57,7 +57,7 @@ class Client
         } finally {
             curl_close($curlHandle);
 
-            return $success;
+            return $success ?? false;
         }
     }
 
