@@ -2,6 +2,18 @@
 
 All notable changes to `ray` will be documented in this file
 
+## 1.33.2 - 2022-02-02
+
+## What's Changed
+
+- Return false if success variable not defined by @cmgmyr in https://github.com/spatie/ray/pull/635
+
+## New Contributors
+
+- @cmgmyr made their first contribution in https://github.com/spatie/ray/pull/635
+
+**Full Changelog**: https://github.com/spatie/ray/compare/1.33.1...1.33.2
+
 ## 1.33.1 - 2022-01-17
 
 ## What's Changed
