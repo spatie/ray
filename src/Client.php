@@ -55,7 +55,9 @@ class Client
 
             static::$cache[$this->fingerprint] = [$success, $expiresAt];
         } finally {
-            curl_close($curlHandle);
+            if (isset($curlHandle)) {
+                curl_close($curlHandle);
+            }
 
             return $success ?? false;
         }
@@ -83,7 +85,9 @@ class Client
                 // do nothing for now
             }
         } finally {
-            curl_close($curlHandle);
+            if (isset($curlHandle)) {
+                curl_close($curlHandle);
+            }
         }
     }
 

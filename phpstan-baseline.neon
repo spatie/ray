@@ -1,16 +1,6 @@
 parameters:
 	ignoreErrors:
 		-
-			message: "#^Variable \\$curlHandle might not be defined\\.$#"
-			count: 2
-			path: src/Client.php
-
-		-
-			message: "#^Variable \\$success might not be defined\\.$#"
-			count: 1
-			path: src/Client.php
-
-		-
 			message: "#^Function base_path not found\\.$#"
 			count: 1
 			path: src/Ray.php
