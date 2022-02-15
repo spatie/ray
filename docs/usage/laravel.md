@@ -287,7 +287,7 @@ Alternatively, you can use `models()` which is an alias for `model()`.
 
 ### Displaying mailables
 
-You can see the rendered version of mailable in Ray by passing a mailable to the `mailable` function.
+Mails that are sent to the log mailer are automatically shown in Ray, you can also display the rendered version of a specific mailable in Ray by passing a mailable to the `mailable` function.
 
 ```php
 ray()->mailable(new TestMailable());
