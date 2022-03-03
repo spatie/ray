@@ -25,7 +25,7 @@ class DefaultOriginFactory implements OriginFactory
     protected function getFrame()
     {
         $frames = $this->getAllFrames();
-        print_r($frames);
+
         $indexOfRay = $this->getIndexOfRayFrame($frames);
 
         return $frames[$indexOfRay] ?? null;
