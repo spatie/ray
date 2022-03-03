@@ -5,6 +5,24 @@ weight: 4
 
 There are several ways to install Ray in WordPress.
 
+## Global installation
+
+The easiest ways is the global installation. This will make the `ray()` function available in any WordPress (and PHP file on your system).
+
+Issue these commands to install [the global-ray package](https://github.com/spatie/global-ray):
+
+```bash
+composer global require spatie/global-ray
+global-ray install
+```
+
+You can now use the `ray()` function and all of its [framework agnostic capabilities](https://spatie.be/docs/ray/v1/usage/framework-agnostic-php). In each WordPress app you can also use these functions:
+
+- `dump($variable)`: dump any kind of variable to the CLI.
+- `dd($variable)`: dump any kind of variable to the CLI and terminate the script.
+
+To use [the WordPress specific capabilities of Ray](https://spatie.be/docs/ray/v1/usage/wordpress), you should install `wordpress-ray` into the a WordPress app.
+
 ## Manually cloning the repo
 
 Inside the `wp-contents/plugins` directory run this command
