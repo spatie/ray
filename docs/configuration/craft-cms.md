@@ -4,6 +4,7 @@ weight: 7
 ---
 
 For Craft CMS projects you can create a `craft-ray.php` file in your project's `config` directory.
+use craft\helpers\App;
 
 ```php
 <?php
@@ -14,15 +15,17 @@ return [
     * This settings controls whether data should be sent to Ray.
     *
     * By default, `ray()` will only transmit data in non-production environments.
+    * Add `RAY_ENABLED=true` in your .env file.
     */
-    'enable' => true,
+    'enable' => App::parseBooleanEnv('$RAY_ENABLED'),
 
     /*
     * The host used to communicate with the Ray app.
     * For usage in Docker on Mac or Windows, you can replace host with 'host.docker.internal'
     * For usage in Homestead on Mac or Windows, you can replace host with '10.0.2.2'
+    * Add `RAY_HOST=localhost` in your .env file.
     */
-    'host' => 'localhost',
+    'host' => App::env('RAY_HOST'),
 
     /*
     * The port number used to communicate with the Ray app.
