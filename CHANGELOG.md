@@ -2,6 +2,10 @@
 
 All notable changes to `ray` will be documented in this file
 
+## 1.34.1 - 2022-03-03
+
+- remove stray `print_r` call
+
 ## 1.34.0 - 2022-03-03
 
 - add support for global Ray
