@@ -5,7 +5,7 @@ weight: 3
 
 If you use Laravel, this is the way.
 
-## Installing the package
+## Installing the package in single Laravel project
 
 ```bash
 composer require spatie/laravel-ray
@@ -18,6 +18,10 @@ You could opt to install `laravel-ray` as a dev dependency. If you go this route
 ```bash
 composer require spatie/laravel-ray --dev
 ```
+
+## Use `ray()`, `dd()` and `dump()` in any file.
+
+Head over to the [global installation instructions](https://spatie.be/docs/ray/v1/configuration/framework-agnostic-php#global-installation) to learn how to enable `ray()`, `dd()` and `dump()` in any file.
 
 ## Creating a config file
 

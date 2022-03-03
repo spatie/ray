@@ -3,6 +3,8 @@ title: Framework agnostic PHP
 weight: 2
 ---
 
+To communicate with the Ray desktop app, we're going to use a function named `ray()`. 
+
 ## Global installation
 
 To make the `ray()`, `dump()` and `ray()` functions available in an PHP file and project on your system, you can install the `spatie/global` package.

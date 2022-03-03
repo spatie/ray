@@ -20,3 +20,7 @@ You could opt to install `craft-ray` as a dev dependency. If you go this route, 
 ```bash
 composer require spatie/craft-ray --dev
 ```
+
+## Use `ray()`, `dd()` and `dump()` in any file.
+
+Head over to the [global installation instructions](https://spatie.be/docs/ray/v1/configuration/framework-agnostic-php#global-installation) to learn how to enable `ray()`, `dd()` and `dump()` in any file.

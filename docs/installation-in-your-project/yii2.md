@@ -18,3 +18,7 @@ You could opt to install `yii-ray` as a dev dependency. If you go this route, ma
 ```bash
 composer require spatie/yii-ray --dev
 ```
+
+## Use `ray()`, `dd()` and `dump()` in any file.
+
+Head over to the [global installation instructions](https://spatie.be/docs/ray/v1/configuration/framework-agnostic-php#global-installation) to learn how to enable `ray()`, `dd()` and `dump()` in any file.
