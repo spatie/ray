@@ -25,9 +25,8 @@ class DefaultOriginFactory implements OriginFactory
     protected function getFrame()
     {
         $frames = $this->getAllFrames();
-
+print_r($frames);
         $indexOfRay = $this->getIndexOfRayFrame($frames);
-
         return $frames[$indexOfRay] ?? null;
     }
 
@@ -45,6 +44,10 @@ class DefaultOriginFactory implements OriginFactory
      */
     protected function getIndexOfRayFrame(array $frames)
     {
+       if ($this->isUsingGlobalRay($frames)) {
+           return $this->getIndexOfGlobalRayFrame($frames) + 1;
+       }
+
         $index = $this->search(function (Frame $frame) {
             if ($frame->class === Ray::class) {
                 return true;
@@ -63,6 +66,31 @@ class DefaultOriginFactory implements OriginFactory
     public function startsWith(string $hayStack, string $needle): bool
     {
         return strpos($hayStack, $needle) === 0;
+    }
+
+    public function isUsingGlobalRay(array $frames)
+    {
+        return $this->getIndexOfGlobalRayFrame($frames) !== null;
+    }
+
+    /**
+     * @param array<int, Frame> $frames
+     *
+     * @return int|null
+     */
+    protected function getIndexOfGlobalRayFrame(array $frames)
+    {
+        return $this->search(function (Frame $frame) {
+            if (!$this->startsWith($frame->file, 'phar:')) {
+                return false;
+            }
+
+            if (strpos($frame->file, 'global-ray/ray-phars') === false) {
+                return false;
+            }
+
+            return true;
+        }, $frames);
     }
 
     /**
