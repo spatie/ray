@@ -25,8 +25,9 @@ class DefaultOriginFactory implements OriginFactory
     protected function getFrame()
     {
         $frames = $this->getAllFrames();
-print_r($frames);
+        print_r($frames);
         $indexOfRay = $this->getIndexOfRayFrame($frames);
+
         return $frames[$indexOfRay] ?? null;
     }
 
@@ -44,9 +45,9 @@ print_r($frames);
      */
     protected function getIndexOfRayFrame(array $frames)
     {
-       if ($this->isUsingGlobalRay($frames)) {
-           return $this->getIndexOfGlobalRayFrame($frames) + 1;
-       }
+        if ($this->isUsingGlobalRay($frames)) {
+            return $this->getIndexOfGlobalRayFrame($frames) + 1;
+        }
 
         $index = $this->search(function (Frame $frame) {
             if ($frame->class === Ray::class) {
@@ -81,7 +82,7 @@ print_r($frames);
     protected function getIndexOfGlobalRayFrame(array $frames)
     {
         return $this->search(function (Frame $frame) {
-            if (!$this->startsWith($frame->file, 'phar:')) {
+            if (! $this->startsWith($frame->file, 'phar:')) {
                 return false;
             }
 
