@@ -2,6 +2,10 @@
 
 All notable changes to `ray` will be documented in this file
 
+## 1.34.0 - 2022-03-03
+
+- add support for global Ray
+
 ## 1.33.2 - 2022-02-02
 
 ## What's Changed
