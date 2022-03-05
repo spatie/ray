@@ -21,7 +21,7 @@ You can now use the `ray()` function and all of its [framework agnostic capabili
 - `dump($variable)`: dump any kind of variable to the CLI.
 - `dd($variable)`: dump any kind of variable to the CLI and terminate the script.
 
-To use [the WordPress specific capabilities of Ray](https://spatie.be/docs/ray/v1/usage/wordpress), you should install `wordpress-ray` into the a WordPress app.
+To use [the WordPress specific capabilities of Ray](https://spatie.be/docs/ray/v1/usage/wordpress), you should install `wordpress-ray` into the WordPress app.
 
 ## Manually cloning the repo
 
