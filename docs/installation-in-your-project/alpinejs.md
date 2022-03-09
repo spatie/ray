@@ -9,11 +9,34 @@ You can send information from Alpine.js to Ray via this third party package:
 
 ### Installation via CDN
 
-The preferred way to use this package is to load it via a CDN.  You'll need to load the `axios` library as well:
+The preferred way to use this package is to load it via a CDN.  You'll need to load the `axios` library as well.
+
+For Alpine version 2 use:
 
 ```html
-<script src="https://cdn.jsdelivr.net/npm/axios@latest"></script>
+<script src="https://cdn.jsdelivr.net/npm/axios@latest/dist/axios.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/alpinejs-ray@latest/dist/standalone.min.js"></script>
+```
+
+For Alpine version 3 use:
+
+```html
+<script src="https://cdn.jsdelivr.net/npm/axios@latest/dist/axios.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/alpinejs-ray@2/dist/standalone.min.js"></script>
+```
+
+You can also configure aspects of Alpine by creating a config object before loading the Alpine Ray library:
+
+```html
+<script>
+    window.alpineRayConfig = {
+        logComponentsInit: true,
+        logErrors: true,
+        logEvents: ['abc'],
+    };
+</script>
+
+<!-- load axios and alpinejs-ray -->
 ```
 
 ### Installation with package manager
