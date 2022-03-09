@@ -15,7 +15,9 @@ For Alpine version 2 use:
 
 ```html
 <script src="https://cdn.jsdelivr.net/npm/axios@latest/dist/axios.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/alpinejs-ray@latest/dist/standalone.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/alpinejs-ray@2/dist/standalone.min.js"></script>
+
+<!-- load alpine.js here -->
 ```
 
 For Alpine version 3 use:
@@ -47,28 +49,25 @@ Install with npm:
 npm install alpinejs-ray
 ```
 
-or yarn:
-
-```bash
-yarn add alpinejs-ray
-```
-
 #### Importing the plugin
 
-Although not the recommended way, you can import package normally if installed with a package manager _(along with `node-ray`, `alpinejs` and `axios`)_:
+Although not the recommended way, you can import package normally if installed with a package manager _(along with `alpinejs` and `axios`)_:
+
+First, install `alpinejs-ray` with npm _(or your preferred package manager)_:
+
+```bash
+npm install alpinejs-ray
+```
 
 ```js 
-import { Ray, ray } from 'node-ray/web';
 import Alpine from 'alpinejs';
 import AlpineRayPlugin from 'alpinejs-ray';
 
-window.ray = ray;
-window.Ray = Ray;
 window.axios = require('axios');
 window.axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
 
 window.Alpine = Alpine;
-window.AlpineRayPlugin = AlpineRayPlugin;
-window.AlpineRayPlugin.init();
-window.AlpineRayPlugin.start();
+
+Alpine.plugin(AlpineRayPlugin);
+Alpine.start();
 ```

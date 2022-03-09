@@ -11,7 +11,7 @@ Once the plugin is installed, you may access the helper function as `$ray()` fro
 ## Example Component
 
 ```html
-<div x-data="onClickData()" x-init="init()">
+<div x-data="onClickData()">
     <div x-show="show">Hi There Ray!</div>
     <button x-on:click="toggle()">Show/Hide (Ray)</button>
     <button @click="$ray('hello from alpine')">Send to Ray</button>
@@ -33,20 +33,42 @@ function onClickData() {
 </script>
 ```
 
-## Tracking Spruce Data Stores
+## Tracking Data Stores
 
-Spruce data store are automatically tracked if [Spruce](https://github.com/ryangjchandler/spruce) is installed.  Consider the following:
+You may automatically send Alpine stores to Ray whenever the store data is updated.  Consider the following:
 
 ```js
-window.Spruce.store('mydata', {
+window.Alpine.store('mydata', {
     showing: false,
-    toggle() {
-        this.showing = !this.showing;
-        ray().html('<strong>[spruce]</strong> showing = ' + this.showing);
-    }
 });
  
 setInterval( () => {
-    window.Spruce.stores.mydata.showing = !window.Spruce.stores.mydata.showing;
+    window.Alpine.store('mydata').showing = !window.Alpine.store('mydata').showing;
 }, 3000);
+```
+
+To watch the store and display changes in Ray, use the `$ray().watchStore('name')` method:
+
+```html
+<div x-data="componentData()">
+    <div x-show="$store.mydata.showing">Hi There Ray!</div>
+    <button x-on:click="toggle()">Show/Hide (Ray)</button>
+</div>
+
+<script>      
+window.Alpine.store('mydata', {
+    showing: false,
+});
+  
+function componentData() {
+    return {
+        init() {
+            this.$ray().watchStore('mydata');
+        },
+        toggle() {
+            this.$store.mydata.showing = !this.$store.mydata.showing;
+        },
+    };
+}
+</script>
 ```
