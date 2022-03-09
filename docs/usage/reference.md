@@ -14,15 +14,19 @@ We assume you have completed the [installation](/docs/ray/v1/installation-in-you
 To display something in Ray use the `ray()` function. It accepts everything: strings, arrays, objects, ... you name it.
 
 - [Framework agnostic PHP](#framework-agnostic-php)
+  - [Updating a Ray instance](#updating-a-ray-instance)
 - [Laravel](#laravel)
-- [WordPress](#wordpress)
+  - [Macros &amp; Blade](#macros--blade)
+- [Wordpress](#wordpress)
 - [Yii](#yii)
 - [Craft](#craft)
-- [Javascript](#javascript)
+  - [Twig](#twig)
+- [JavaScript](#javascript)
 - [NodeJS](#nodejs)
 - [Vue](#vue)
 - [Go](#go)
-- [Alpine.js](#alpinejs)
+- [AlpineJS](#alpinejs)
+  - [Updating a Ray instance](#updating-a-ray-instance-1)
 - [Bash](#bash)
 
 ## Framework agnostic PHP
@@ -293,6 +297,11 @@ Read more on [Craft](/docs/ray/v1/usage/craft)
 ## AlpineJS
 
 All methods available to [NodeJS](#nodejs) are available to the Alpine.js integration.
+
+| Call | Description |
+| --- | --- |
+| `$ray.watchStore(name)` | Watch an Alpine data store and send all changes to Ray |
+| `$ray.unwatchStore(name)` | Stop watching an Alpine data store for changes |
 
 ### Updating a Ray instance
 
