@@ -49,7 +49,7 @@ class SettingsFactory
 
         $configDirectory = $configDirectory ?? getcwd();
 
-        if ($configDirectory == '/') {
+        if (($configDirectory == '/') || str_contains($configDirectory,'/cgi-bin/')) {
             return '';
         }
 
