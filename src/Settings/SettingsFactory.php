@@ -49,6 +49,10 @@ class SettingsFactory
 
         $configDirectory = $configDirectory ?? getcwd();
 
+        if ($configDirectory == '/') {
+            return '';
+        }
+
         while (@is_dir($configDirectory)) {
             foreach ($configNames as $configName) {
                 $configFullPath = $configDirectory.DIRECTORY_SEPARATOR.$configName;
