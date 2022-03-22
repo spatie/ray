@@ -4,11 +4,12 @@ weight: 7
 ---
 
 For Craft CMS projects you can create a `craft-ray.php` file in your project's `config` directory.
-use craft\helpers\App;
 
 ```php
 <?php
 // Save this in a file called "craft-ray.php" in the config directory of your project
+
+use craft\helpers\App;
 
 return [
     /*
