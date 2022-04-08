@@ -2,6 +2,27 @@
 
 All notable changes to `ray` will be documented in this file
 
+## 1.34.2 - 2022-04-08
+
+## What's Changed
+
+- Fix typo by @jeffreyvr in https://github.com/spatie/ray/pull/647
+- Update alpinejs.md by @peterfox in https://github.com/spatie/ray/pull/649
+- Update documentation for Alpine.js integration by @patinthehat in https://github.com/spatie/ray/pull/650
+- Minor Documentation Update by @patinthehat in https://github.com/spatie/ray/pull/651
+- Update Javascript Documentation by @patinthehat in https://github.com/spatie/ray/pull/652
+- Add docs for express.js integration by @patinthehat in https://github.com/spatie/ray/pull/654
+- Fix class import outside of code block by @rostockahoi in https://github.com/spatie/ray/pull/663
+- Added a verification that the Yii class exists by @FR6 in https://github.com/spatie/ray/pull/675
+
+## New Contributors
+
+- @jeffreyvr made their first contribution in https://github.com/spatie/ray/pull/647
+- @peterfox made their first contribution in https://github.com/spatie/ray/pull/649
+- @rostockahoi made their first contribution in https://github.com/spatie/ray/pull/663
+
+**Full Changelog**: https://github.com/spatie/ray/compare/1.34.1...1.34.2
+
 ## 1.34.1 - 2022-03-03
 
 - remove stray `print_r` call
