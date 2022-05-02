@@ -192,7 +192,7 @@ Read more on [Craft](/docs/ray/v1/usage/craft)
 | `ray(variable)` | Display a string, array or object |
 | `ray(variable, another, …)` | Ray accepts multiple arguments |
 | `ray(…).blue()` | Output in color. Use `green`, `orange`, `red`, `blue`,`purple` or `gray` |
-| `ray()->caller()` | Discover where code is being called |
+| `ray().caller()` | Discover where code is being called |
 | `ray().clearScreen()` | Clear current screen |
 | `ray().clearAll()` | Clear current and all previous screens |
 | `ray().count(name)` | Count how many times a piece of code is called, with optional name |
@@ -232,7 +232,7 @@ Read more on [Craft](/docs/ray/v1/usage/craft)
 | `ray(…).small()` | Output text smaller or bigger. Use `large` or `small`|
 | `ray().stopTime(name)` | Removes a named stopwatch if specified, otherwise removes all stopwatches |
 | `ray().table(…)` | Display an array of items or an object formatted as a table; Objects and arrays are pretty-printed |
-| `ray()->trace()` | Check entire backtrace |
+| `ray().trace()` | Check entire backtrace |
 | `ray().xml(string)` | Send XML to Ray |
 
 ## NodeJS
@@ -242,7 +242,7 @@ Read more on [Craft](/docs/ray/v1/usage/craft)
 | `ray(variable)` | Display a string, array or object |
 | `ray(variable, another, …)` | Ray accepts multiple arguments |
 | `ray(…).blue()` | Output in color. Use `green`, `orange`, `red`, `blue`,`purple` or `gray` |
-| `ray()->caller()` | Discover where code is being called |
+| `ray().caller()` | Discover where code is being called |
 | `ray().clearScreen()` | Clear current screen |
 | `ray().clearAll()` | Clear current and all previous screens |
 | `ray().count(name)` | Count how many times a piece of code is called, with optional name |
@@ -282,7 +282,7 @@ Read more on [Craft](/docs/ray/v1/usage/craft)
 | `ray(…).small()` | Output text smaller or bigger. Use `large` or `small`|
 | `ray().stopTime(name)` | Removes a named stopwatch if specified, otherwise removes all stopwatches |
 | `ray().table(…)` | Display an array of items or an object formatted as a table; Objects and arrays are pretty-printed |
-| `ray()->trace()` | Check entire backtrace |
+| `ray().trace()` | Check entire backtrace |
 | `ray().xml(string)` | Send XML to Ray |
 
 ## Vue
