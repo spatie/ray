@@ -95,9 +95,9 @@ ray().hideApp();
 Ray can display payloads of several types, including JSON, file contents, images, XML, and HTML.
 
 ```js
-ray().json('['a' => 1, 'b' => ['c' => 3]]');
+ray().json('{ "name": "my object" }');
 
-ray().toJson({name: 'my object'});
+ray().toJson({ name: 'my object' });
 
 ray().file('test.txt');
 
@@ -172,7 +172,7 @@ ray().table(['John', 'Paul', 'George', 'Ringo'], 'Beatles');
 Ray can count the number of times a piece of code is called, optionally with a specific name.
 
 ```js
-for(const n in [...Array(12).keys()]) {
+for (const n in [...Array(12).keys()]) {
     ray().count('first');
 }
 
@@ -435,15 +435,15 @@ To only send a payload once, use the `once` function.  This is useful for debugg
 
 
 ```js
-for(let i = 0; i < 10; i++) {
+for (let i = 0; i < 10; i++) {
     ray().once($i); // only sends "0"
 }
 ```
 
 You can also use `once` without arguments. Any function you chain on `once` will also only be called once.
 
-```php
-for(let i = 0; i < 10; i++) {
+```js
+for (let i = 0; i < 10; i++) {
     ray().once().html(`<strong>${i}</strong>`); // only sends "<strong>0</strong>"
 }
 ```
