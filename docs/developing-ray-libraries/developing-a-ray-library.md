@@ -47,7 +47,7 @@ Next, create a PHP script for testing:
 require_once(__DIR__.'/vendor/autoload.php');
 
 ray('test one')->color('red');
-ray()->html('<strong>this is a bold</string>')->color('blue');
+ray()->html('<strong>this is a bold</strong>')->color('blue');
 ray()->send('this is a test');
 ```
 
