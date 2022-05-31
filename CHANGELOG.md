@@ -2,6 +2,22 @@
 
 All notable changes to `ray` will be documented in this file
 
+## 1.34.3 - 2022-05-31
+
+### What's Changed
+
+- Fix small JavaScript related documentations by @Yago in https://github.com/spatie/ray/pull/687
+- Fix tiny typo by @jrmajor in https://github.com/spatie/ray/pull/700
+- Revert version of spatie/macroable to ^1.0 by @SebKay in https://github.com/spatie/ray/pull/703
+
+### New Contributors
+
+- @Yago made their first contribution in https://github.com/spatie/ray/pull/687
+- @jrmajor made their first contribution in https://github.com/spatie/ray/pull/700
+- @SebKay made their first contribution in https://github.com/spatie/ray/pull/703
+
+**Full Changelog**: https://github.com/spatie/ray/compare/1.34.2...1.34.3
+
 ## 1.34.2 - 2022-04-08
 
 ## What's Changed
