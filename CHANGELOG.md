@@ -2,6 +2,10 @@
 
 All notable changes to `ray` will be documented in this file
 
+## 1.34.4 - 2022-06-03
+
+- allow v2 of macroable
+
 ## 1.34.3 - 2022-05-31
 
 ### What's Changed
