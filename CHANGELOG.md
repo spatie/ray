@@ -2,6 +2,14 @@
 
 All notable changes to `ray` will be documented in this file
 
+## 1.34.5 - 2022-06-03
+
+### What's Changed
+
+- Bug/702 long integers by @Nielsvanpach in https://github.com/spatie/ray/pull/704
+
+**Full Changelog**: https://github.com/spatie/ray/compare/1.34.4...1.34.5
+
 ## 1.34.4 - 2022-06-03
 
 - allow v2 of macroable
