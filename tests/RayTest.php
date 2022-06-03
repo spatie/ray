@@ -1330,6 +1330,16 @@ class RayTest extends TestCase
         $this->assertEquals('my project', $this->client->sentRequests()[0]['meta']['project_name']);
     }
 
+    /** @test */
+    public function it_can_dump_long_integers_as_string()
+    {
+        $this->ray->send(11111111111111110);
+        $this->ray->send(11111111111111111);
+
+        $this->assertSame([11111111111111110], $this->client->sentRequests()[0]['payloads'][0]['content']['values']);
+        $this->assertSame(["11111111111111111"], $this->client->sentRequests()[1]['payloads'][0]['content']['values']);
+    }
+
     public function assertMatchesOsSafeSnapshot($data)
     {
         $this->assertMatchesJsonSnapshot(json_encode($data));
