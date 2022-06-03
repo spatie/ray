@@ -6,11 +6,6 @@ parameters:
 			path: src/Ray.php
 
 		-
-			message: "#^Access to static property \\$container on an unknown class Yii\\.$#"
-			count: 2
-			path: src/helpers.php
-
-		-
 			message: "#^Function app not found\\.$#"
 			count: 1
 			path: src/helpers.php
