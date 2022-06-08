@@ -13,7 +13,7 @@ Note: if everyone working on the project needs the same configuration, you can p
 
 return [
     /*
-    * This settings controls whether data should be sent to Ray.
+    * This setting controls whether data should be sent to Ray.
     *
     * By default, `ray()` will only transmit data in non-production environments.
     */
@@ -45,17 +45,27 @@ return [
     * When enabled, all queries will automatically be sent to Ray.
     */
     'send_queries_to_ray' => env('SEND_QUERIES_TO_RAY', false),
-    
+
     /**
      * When enabled, all duplicate queries will automatically be sent to Ray.
      */
     'send_duplicate_queries_to_ray' => env('SEND_DUPLICATE_QUERIES_TO_RAY', false),
 
     /*
+     * When enabled, slow queries will automatically be sent to Ray.
+     */
+    'send_slow_queries_to_ray' => env('SEND_SLOW_QUERIES_TO_RAY', false),
+
+    /*
     * When enabled, all requests made to this app will automatically be sent to Ray.
     */
     'send_requests_to_ray' => env('SEND_REQUESTS_TO_RAY', false),
-    
+
+    /**
+     * When enabled, all Http Client requests made by this app will be automatically sent to Ray.
+     */
+    'send_http_client_requests_to_ray' => env('SEND_HTTP_CLIENT_REQUESTS_TO_RAY', false),
+
     /*
     * When enabled, all views that are rendered automatically be sent to Ray.
     */
@@ -65,6 +75,11 @@ return [
      * When enabled, all exceptions will be automatically sent to Ray.
      */
     'send_exceptions_to_ray' => env('SEND_EXCEPTIONS_TO_RAY', true),
+
+    /*
+     * When enabled, all deprecation notices will be automatically sent to Ray.
+     */
+    'send_deprecated_notices_to_ray' => env('SEND_DEPRECATED_NOTICES_TO_RAY', false),
 
     /*
     * The host used to communicate with the Ray app.
@@ -90,7 +105,7 @@ return [
      * computer where your IDE or code editor is running on.
      */
     'local_path' => env('RAY_LOCAL_PATH', null),
-    
+
     /*
      * When this setting is enabled, the package will not try to format values sent to Ray.
      */
