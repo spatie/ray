@@ -6,11 +6,16 @@ class SettingsFactory
 {
     public static $cache = [];
 
+    public static function createFromArray(array $settings = []): Settings
+    {
+        return new Settings($settings);
+    }
+
     public static function createFromConfigFile(string $configDirectory = null): Settings
     {
         $settingValues = (new static())->getSettingsFromConfigFile($configDirectory);
 
-        $settings = new Settings($settingValues);
+        $settings = static::createFromArray($settingValues);
 
         if (count($settingValues)) {
             $settings->markAsLoadedUsingSettingsFile();

@@ -2,6 +2,10 @@
 
 All notable changes to `ray` will be documented in this file
 
+## Unreleased
+### Added
+- Added a `createFromArray()` method on the `SettingsFactory`.
+
 ## 1.34.5 - 2022-06-03
 
 ### What's Changed
