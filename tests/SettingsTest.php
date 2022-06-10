@@ -44,6 +44,15 @@ class SettingsTest extends TestCase
         $this->assertEquals('http://otherhost', $settings2->host);
     }
 
+    /** @test */
+    public function it_can_create_settings_from_an_array()
+    {
+        $settings = SettingsFactory::createFromArray(['enabled' => false, 'port' => 1234]);
+
+        self::assertFalse($settings->enabled);
+        self::assertSame(1234, $settings->port);
+    }
+
     protected function skipOnGitHubActions(): void
     {
         if (getenv('CI')) {
