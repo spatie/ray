@@ -45,7 +45,7 @@ class SettingsTest extends TestCase
     }
 
     /** @test */
-    public function it_can_create_settings_from_an_Array()
+    public function it_can_create_settings_from_an_array()
     {
         $settings = SettingsFactory::createFromArray(['enabled' => false, 'port' => 1234]);
 
