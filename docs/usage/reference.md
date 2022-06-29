@@ -25,7 +25,7 @@ To display something in Ray use the `ray()` function. It accepts everything: str
 - [NodeJS](#nodejs)
 - [Vue](#vue)
 - [Go](#go)
-- [AlpineJS](#alpinejs)
+- [AlpineJS](#content-alpinejs)
   - [Updating a Ray instance](#updating-a-ray-instance-1)
 - [Bash](#bash)
 
