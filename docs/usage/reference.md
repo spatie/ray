@@ -13,21 +13,21 @@ We assume you have completed the [installation](/docs/ray/v1/installation-in-you
 
 To display something in Ray use the `ray()` function. It accepts everything: strings, arrays, objects, ... you name it.
 
-- [Framework agnostic PHP](#framework-agnostic-php)
-  - [Updating a Ray instance](#updating-a-ray-instance)
-- [Laravel](#laravel)
-  - [Macros &amp; Blade](#macros--blade)
-- [Wordpress](#wordpress)
-- [Yii](#yii)
-- [Craft](#craft)
-  - [Twig](#twig)
-- [JavaScript](#javascript)
-- [NodeJS](#nodejs)
-- [Vue](#vue)
-- [Go](#go)
+- [Framework agnostic PHP](#content-framework-agnostic-php)
+  - [Updating a Ray instance](#content-updating-a-ray-instance)
+- [Laravel](#content-laravel)
+  - [Macros &amp; Blade](#content-macros--blade)
+- [Wordpress](#content-wordpress)
+- [Yii](#content-yii)
+- [Craft](#content-craft)
+  - [Twig](#content-twig)
+- [JavaScript](#content-javascript)
+- [NodeJS](#content-nodejs)
+- [Vue](#content-vue)
+- [Go](#content-go)
 - [AlpineJS](#content-alpinejs)
-  - [Updating a Ray instance](#updating-a-ray-instance-1)
-- [Bash](#bash)
+  - [Updating a Ray instance](#content-updating-a-ray-instance-1)
+- [Bash](#content-bash)
 
 ## Framework agnostic PHP
 
