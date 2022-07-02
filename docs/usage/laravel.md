@@ -102,7 +102,7 @@ Alternatively, you can pass a callable to `showDuplicateQueries`. Only the dupli
 User::all();
 User::all(); // this query won't be displayed.
 
-ray()->showQueries(function() {
+ray()->showDuplicateQueries(function() {
     User::where('id', 1)->get('id');
     User::where('id', 1)->get('id'); // this query will be displayed.
 });
