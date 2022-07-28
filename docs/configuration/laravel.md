@@ -56,6 +56,11 @@ return [
      */
     'send_slow_queries_to_ray' => env('SEND_SLOW_QUERIES_TO_RAY', false),
 
+    /**
+     * The default time, in milliseconds, after which a query will classed as "slow".
+     */
+    'slow_query_threshold' => env('RAY_SLOW_QUERY_THRESHOLD', 500),
+
     /*
     * When enabled, all requests made to this app will automatically be sent to Ray.
     */
