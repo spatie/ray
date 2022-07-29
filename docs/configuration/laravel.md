@@ -56,6 +56,11 @@ return [
      */
     'send_slow_queries_to_ray' => env('SEND_SLOW_QUERIES_TO_RAY', false),
 
+    /**
+     * Queries that are longer than this number of milliseconds will be regarded as slow.
+     */
+    'slow_query_threshold_in_ms' => env('RAY_SLOW_QUERY_THRESHOLD_IN_MS', 500),
+
     /*
     * When enabled, all requests made to this app will automatically be sent to Ray.
     */
