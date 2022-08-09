@@ -6,6 +6,7 @@ use Carbon\CarbonInterface;
 use Closure;
 use Composer\InstalledVersions;
 use Exception;
+use Illuminate\Support\Str;
 use Ramsey\Uuid\Uuid;
 use Spatie\Backtrace\Backtrace;
 use Spatie\LaravelRay\Ray as LaravelRay;
@@ -528,6 +529,26 @@ class Ray
         $payload = new SeparatorPayload();
 
         return $this->sendRequest($payload);
+    }
+
+    public function url(string $url, string $label = ''): self
+    {
+        if (! Str::startsWith($url, 'http')) {
+            $url = "https//{$url}";
+        }
+
+        if (empty($label)) {
+            $label = $url;
+        }
+
+        $link = "<a href='{$url}'>{$label}</a>";
+
+        return $this->html($link);
+    }
+
+    public function link(string $url, string $label = '')
+    {
+        return $this->url($url, $label);
     }
 
     public function html(string $html = ''): self
