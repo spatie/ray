@@ -534,7 +534,7 @@ class Ray
     public function url(string $url, string $label = ''): self
     {
         if (! Str::startsWith($url, 'http')) {
-            $url = "https//{$url}";
+            $url = "https://{$url}";
         }
 
         if (empty($label)) {

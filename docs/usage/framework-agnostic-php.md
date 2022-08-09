@@ -397,6 +397,16 @@ ray()->image('data:image/png;base64,iVBORw0KGgoAAA...truncated');
 ray()->image('iVBORw0KGgoAAA...truncated');
 ```
 
+### Displaying a link
+
+You can render a clickable link in Ray, by using the `link` (or `url`) methods.
+
+```php
+ray()->link('spatie.be'); // we'll assume that you meant `https://spatie.be`
+ray()->link('spatie.be', 'Spatie homepage'); // optionally, you can pass a label
+ray()->url('myray.app'); // `url` is an alias of `link`
+```
+
 ### Rendering HTML
 
 To render a piece of HTML directly in Ray, you can use the `html` method.

@@ -751,6 +751,38 @@ class RayTest extends TestCase
     }
 
     /** @test */
+    public function it_sends_an_url_payload()
+    {
+        $this->ray->url('https://spatie.be');
+
+        $this->assertMatchesOsSafeSnapshot($this->client->sentPayloads());
+    }
+
+    /** @test */
+    public function it_sends_a_correct_url_payload_even_without_a_protocol()
+    {
+        $this->ray->url('spatie.be');
+
+        $this->assertMatchesOsSafeSnapshot($this->client->sentPayloads());
+    }
+
+    /** @test */
+    public function it_sends_an_url_with_label_payload()
+    {
+        $this->ray->url('https://spatie.be', 'Spatie');
+
+        $this->assertMatchesOsSafeSnapshot($this->client->sentPayloads());
+    }
+
+    /** @test */
+    public function it_sends_a_link_payload()
+    {
+        $this->ray->link('https://spatie.be', 'Spatie');
+
+        $this->assertMatchesOsSafeSnapshot($this->client->sentPayloads());
+    }
+
+    /** @test */
     public function it_sends_a_text_payload()
     {
         $this->ray->text('text string');
