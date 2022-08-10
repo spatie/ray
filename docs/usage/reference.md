@@ -32,7 +32,7 @@ To display something in Ray use the `ray()` function. It accepts everything: str
 ## Framework agnostic PHP
 
 | Call                                                | Description                                                                                                               |
-|-----------------------------------------------------|---------------------------------------------------------------------------------------------------------------------------|
+| --------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------- |
 | `ray($variable)`                                    | Display a string, array or object                                                                                         |
 | `ray($variable, $another, …)`                       | Ray accepts multiple arguments                                                                                            |
 | `ray()->backtrace()`                                | Check entire backtrace                                                                                                    |
@@ -64,7 +64,6 @@ To display something in Ray use the `ray()` function. It accepts everything: str
 | `ray(…)->large()`                                   | Output text bigger                                                                                                        |
 | `ray()->limit(N)->…`                                | Limit the number of payloads that can be sent to Ray to N; used for debugging within loops                                |
 | `ray()->link($url, $label = null)`                  | Display a clickable URL in Ray                                                                                            |
-
 | `ray()->measure()`                                  | Display runtime and memory usage. When measure is called again, the time between this and previous call is also displayed |
 | `ray()->newScreen()`                                | Start a new screen                                                                                                        |
 | `ray()->newScreen('title')`                         | Start a new named screen                                                                                                  |
