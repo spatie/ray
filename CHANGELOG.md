@@ -2,6 +2,24 @@
 
 All notable changes to `ray` will be documented in this file
 
+## 1.35.0 - 2022-08-09
+
+### What's Changed
+
+- Sync Laravel sample config `ray.php` with the latest in `laravel-ray` by @squatto in https://github.com/spatie/ray/pull/706
+- Added createFromArray method on SettingsFactory by @doekenorg in https://github.com/spatie/ray/pull/708
+- Update reference.md by @WouterBrouwers in https://github.com/spatie/ray/pull/712
+- Fixed typo showQueries to showDuplicateQueries by @xitox97 in https://github.com/spatie/ray/pull/714
+- Add slow_query_threshold to laravel docs by @fullstackfool in https://github.com/spatie/ray/pull/718
+
+### New Contributors
+
+- @doekenorg made their first contribution in https://github.com/spatie/ray/pull/708
+- @xitox97 made their first contribution in https://github.com/spatie/ray/pull/714
+- @fullstackfool made their first contribution in https://github.com/spatie/ray/pull/718
+
+**Full Changelog**: https://github.com/spatie/ray/compare/1.34.5...1.35.0
+
 ## 1.34.5 - 2022-06-03
 
 ### What's Changed
