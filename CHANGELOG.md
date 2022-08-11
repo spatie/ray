@@ -2,6 +2,10 @@
 
 All notable changes to `ray` will be documented in this file
 
+## 1.36.0 - 2022-08-11
+
+- preparation for upcoming feature
+
 ## 1.35.0 - 2022-08-09
 
 ### What's Changed
