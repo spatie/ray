@@ -19,6 +19,7 @@ use Spatie\Ray\Payloads\CallerPayload;
 use Spatie\Ray\Payloads\CarbonPayload;
 use Spatie\Ray\Payloads\ClearAllPayload;
 use Spatie\Ray\Payloads\ColorPayload;
+use Spatie\Ray\Payloads\ConfettiPayload;
 use Spatie\Ray\Payloads\CreateLockPayload;
 use Spatie\Ray\Payloads\CustomPayload;
 use Spatie\Ray\Payloads\DecodedJsonPayload;
@@ -556,6 +557,11 @@ class Ray
         $payload = new HtmlPayload($html);
 
         return $this->sendRequest($payload);
+    }
+
+    public function confetti(): self
+    {
+        return $this->sendRequest(new ConfettiPayload());
     }
 
     public function exception(Throwable $exception, array $meta = [])
