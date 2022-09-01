@@ -603,6 +603,16 @@ ray()->notify('This is my notification');
 
 ![screenshot](/docs/ray/v1/images/notification.jpg)
 
+### Shooting confetti
+
+For those times that success is to be celebrated.
+
+```php
+ray()->confetti();
+```
+
+![screenshot](/docs/ray/v1/images/confetti.jpg)
+
 ### Halting the PHP process
 
 You can stop the PHP process by calling `die`.
