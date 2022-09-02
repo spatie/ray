@@ -611,7 +611,7 @@ For those times that success is to be celebrated.
 ray()->confetti();
 ```
 
-![screenshot](/docs/ray/v1/images/confetti.jpg)
+![screenshot](/docs/ray/v1/images/confetti.png)
 
 ### Halting the PHP process
 
