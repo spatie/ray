@@ -41,7 +41,7 @@ Install and activate the plugin.
 
 ## Must use Plugins
 
-By default Wordpress loads your plugins in the following order:
+By default WordPress loads your plugins in the following order:
 - Checks for any must-use plugins directory (default = /wp-content/mu-plugins).
 - Then, if you're running a multisite installation, it checks for plugins that are network-activated and loads those.
 - Then it checks for all other active plugins by looking at the active_plugins entry of the wp_options database table, and loops through those. The plugins will be listed alphabetically.

@@ -17,7 +17,7 @@ To display something in Ray use the `ray()` function. It accepts everything: str
   - [Updating a Ray instance](#content-updating-a-ray-instance)
 - [Laravel](#content-laravel)
   - [Macros &amp; Blade](#content-macros--blade)
-- [Wordpress](#content-wordpress)
+- [WordPress](#content-wordpress)
 - [Yii](#content-yii)
 - [Craft](#content-craft)
   - [Twig](#content-twig)
@@ -143,7 +143,7 @@ Read more on [Framework agnostic PHP](/docs/ray/v1/usage/framework-agnostic-php-
 
 Read more on [Laravel](/docs/ray/v1/usage/laravel)
 
-## Wordpress
+## WordPress
 
 | Call | Description |
 | --- | --- |
