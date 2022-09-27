@@ -1378,7 +1378,7 @@ class RayTest extends TestCase
     {
         Ray::$fakeUuid = 'fakeUuid';
 
-        $class = new class {
+        $class = new class () {
             use Rayable;
 
             public $foo = 'bar';
