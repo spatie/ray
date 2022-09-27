@@ -16,6 +16,7 @@ use Spatie\Ray\Payloads\CallerPayload;
 use Spatie\Ray\Payloads\LogPayload;
 use Spatie\Ray\Ray;
 use Spatie\Ray\Settings\SettingsFactory;
+use Spatie\Ray\Support\Rayable;
 use Spatie\Ray\Tests\TestClasses\FakeClient;
 use Spatie\Snapshots\MatchesSnapshots;
 use Spatie\TestTime\TestTime;
@@ -1370,6 +1371,24 @@ class RayTest extends TestCase
 
         $this->assertSame([11111111111111110], $this->client->sentRequests()[0]['payloads'][0]['content']['values']);
         $this->assertSame(["11111111111111111"], $this->client->sentRequests()[1]['payloads'][0]['content']['values']);
+    }
+
+    /** @test */
+    public function it_can_add_the_ray_and_rd_methods_to_a_class_using_the_rayable_trait()
+    {
+        Ray::$fakeUuid = 'fakeUuid';
+
+        $class = new class {
+            use Rayable;
+
+            public $foo = 'bar';
+        };
+
+        $this->assertTrue(method_exists($class, 'rd'));
+
+        $class->ray();
+
+        $this->assertMatchesOsSafeSnapshot($this->client->sentPayloads());
     }
 
     public function assertMatchesOsSafeSnapshot($data)

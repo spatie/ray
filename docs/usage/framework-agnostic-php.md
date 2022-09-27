@@ -21,6 +21,22 @@ ray($anObject);
 ray('as', 'many' , 'arguments', 'as', 'you', 'like');
 ```
 
+### Rayable Trait
+
+Instead of passing arguments to the `ray()` function, you may also add the `Rayable` trait to a class and call it fluently.
+
+```php
+use Spatie\Ray\Support\Rayable;
+
+class User
+{
+    use Rayable;
+}
+
+$user = new User;
+$user->ray()->doSomething();
+```
+
 ### Using colors
 
 You can colorize things you sent to ray by using one of the color functions.
