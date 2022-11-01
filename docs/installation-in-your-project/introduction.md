@@ -7,8 +7,10 @@ To send information to the Ray desktop app, you'll need to install a package or 
 
 - [Framework agnostic PHP](/docs/ray/v1/installation-in-your-project/framework-agnostic-php)
 - [Laravel](/docs/ray/v1/installation-in-your-project/laravel)
+- [Drupal](/docs/ray/v1/installation-in-your-project/drupal)
 - [WordPress](/docs/ray/v1/installation-in-your-project/wordpress)
 - [Yii](/docs/ray/v1/installation-in-your-project/yii)
+- [Craft CMS](/docs/ray/v1/installation-in-your-project/craft-cms)
 - [Ruby](/docs/ray/v1/installation-in-your-project/ruby)
 - [JavaScript](/docs/ray/v1/installation-in-your-project/javascript)
 - [Typescript](/docs/ray/v1/installation-in-your-project/nodejs)
@@ -17,3 +19,4 @@ To send information to the Ray desktop app, you'll need to install a package or 
 - [Vue](/docs/ray/v1/installation-in-your-project/vue)
 - [Go](/docs/ray/v1/installation-in-your-project/go)
 - [Bash](/docs/ray/v1/installation-in-your-project/bash)
+- [Express.js](/docs/ray/v1/installation-in-your-project/expressjs)
