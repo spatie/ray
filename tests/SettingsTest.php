@@ -1,10 +1,11 @@
 <?php
 
-use Spatie\Ray\Ray;
-use Spatie\Ray\Settings\SettingsFactory;
 use function PHPUnit\Framework\assertEquals;
 use function PHPUnit\Framework\assertFalse;
 use function PHPUnit\Framework\assertSame;
+
+use Spatie\Ray\Ray;
+use Spatie\Ray\Settings\SettingsFactory;
 
 function skipOnGitHubActions(): void
 {

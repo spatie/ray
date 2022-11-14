@@ -1,10 +1,11 @@
 <?php
 
-use Spatie\Ray\ArgumentConverter;
 use function PHPUnit\Framework\assertEquals;
 use function PHPUnit\Framework\assertFalse;
 use function PHPUnit\Framework\assertNull;
 use function PHPUnit\Framework\assertTrue;
+
+use Spatie\Ray\ArgumentConverter;
 
 it('returns null for null values', function () {
     assertNull(ArgumentConverter::convertToPrimitive(null));

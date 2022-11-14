@@ -2,15 +2,7 @@
 
 use Carbon\Carbon;
 use Illuminate\Support\Arr;
-use PHPUnit\Framework\TestCase;
-use Spatie\Backtrace\Frame;
-use Spatie\Ray\Origin\Hostname;
-use Spatie\Ray\PayloadFactory;
-use Spatie\Ray\Payloads\CallerPayload;
-use Spatie\Ray\Payloads\LogPayload;
-use Spatie\Ray\Ray;
-use Spatie\Ray\Settings\SettingsFactory;
-use Spatie\Ray\Tests\TestClasses\FakeClient;
+
 use function PHPUnit\Framework\assertArrayHasKey;
 use function PHPUnit\Framework\assertCount;
 use function PHPUnit\Framework\assertEquals;
@@ -25,7 +17,18 @@ use function PHPUnit\Framework\assertNull;
 use function PHPUnit\Framework\assertSame;
 use function PHPUnit\Framework\assertStringContainsString;
 use function PHPUnit\Framework\assertTrue;
+
+use Spatie\Backtrace\Frame;
+
 use function Spatie\PestPluginTestTime\testTime;
+
+use Spatie\Ray\Origin\Hostname;
+use Spatie\Ray\PayloadFactory;
+use Spatie\Ray\Payloads\CallerPayload;
+use Spatie\Ray\Payloads\LogPayload;
+use Spatie\Ray\Ray;
+use Spatie\Ray\Settings\SettingsFactory;
+use Spatie\Ray\Tests\TestClasses\FakeClient;
 
 function getNewRay(): Ray
 {
@@ -485,8 +488,8 @@ it('can determine how many times a particular piece of code was called for a giv
         ray()->count('first');
 
         foreach (range(1, 2) as $j) {
-        ray()->count('second');
-        ray()->count('another');
+            ray()->count('second');
+            ray()->count('another');
         }
 
         ray()->count('another');
@@ -502,7 +505,7 @@ it('can determine how many times a particular piece of code was called without a
         ray()->count();
 
         foreach (range(1, 2) as $j) {
-        ray()->count();
+            ray()->count();
         }
     }
 
@@ -879,7 +882,7 @@ it('can conditionally send payloads using if with a truthy conditional and witho
 it('can conditionally send payloads using if with a callable conditional param', function () {
     for ($i = 0; $i < 10; $i++) {
         $this->ray->if(function () use ($i) {
-        return $i < 5;
+            return $i < 5;
         })->text("value: {$i}");
     }
 
@@ -908,7 +911,7 @@ it('can chain method calls when using if with a callback and a false condition',
     $this->ray
         ->text('three')
         ->if(false, function ($ray) {
-        $ray->green();
+            $ray->green();
         });
 
     assertMatchesOsSafeSnapshot($this->client->sentPayloads());
@@ -918,13 +921,13 @@ it('can chain multiple when calls with callbacks together', function () {
     $this->ray
         ->text('test')
         ->if(true, function ($ray) {
-        $ray->green();
+            $ray->green();
         })
         ->if(false, function ($ray) {
-        $ray->text('text modified');
+            $ray->text('text modified');
         })
         ->if(true, function ($ray) {
-        $ray->large();
+            $ray->large();
         })
         ->hide();
 
@@ -1043,10 +1046,10 @@ it('handles exceptions using catch with an array of callbacks with typed paramet
         throw new InvalidArgumentException('test');
     })->catch([
         function (BadMethodCallException $e, $ray) {
-        return $ray->text(get_class($e));
+            return $ray->text(get_class($e));
         },
         function (InvalidArgumentException $e, $ray) {
-        $ray->text(get_class($e));
+            $ray->text(get_class($e));
         },
     ]);
 

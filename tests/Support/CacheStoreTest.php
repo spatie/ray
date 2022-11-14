@@ -1,8 +1,9 @@
 <?php
 
+use function PHPUnit\Framework\assertSame;
+
 use Spatie\Ray\Support\CacheStore;
 use Spatie\Ray\Tests\TestClasses\FakeClock;
-use function PHPUnit\Framework\assertSame;
 
 beforeEach(function () {
     $this->clock = new FakeClock();

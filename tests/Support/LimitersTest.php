@@ -1,10 +1,11 @@
 <?php
 
-use Spatie\Ray\Origin\Origin;
-use Spatie\Ray\Support\Limiters;
 use function PHPUnit\Framework\assertEquals;
 use function PHPUnit\Framework\assertFalse;
 use function PHPUnit\Framework\assertTrue;
+
+use Spatie\Ray\Origin\Origin;
+use Spatie\Ray\Support\Limiters;
 
 function createOrigin(string $filename, int $line, bool $initialize = true, int $limit = 5): Origin
 {

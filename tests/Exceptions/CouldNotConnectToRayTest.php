@@ -1,7 +1,8 @@
 <?php
 
-use Spatie\Ray\Exceptions\CouldNotConnectToRay;
 use function PHPUnit\Framework\assertStringContainsString;
+
+use Spatie\Ray\Exceptions\CouldNotConnectToRay;
 
 it('displays the hostname and port it failed to connect to', function () {
     $exception = CouldNotConnectToRay::make('myhost', 12345);

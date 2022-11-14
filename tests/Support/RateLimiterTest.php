@@ -1,8 +1,9 @@
 <?php
 
-use Spatie\Ray\Support\RateLimiter;
 use function PHPUnit\Framework\assertFalse;
 use function PHPUnit\Framework\assertTrue;
+
+use Spatie\Ray\Support\RateLimiter;
 
 it('can initialize a disabled rate limit', function () {
     $rateLimiter = RateLimiter::disabled();

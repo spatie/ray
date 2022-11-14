@@ -1,7 +1,8 @@
 <?php
 
-use Spatie\Ray\Tests\TestClasses\FakeRay;
 use function PHPUnit\Framework\assertEquals;
+
+use Spatie\Ray\Tests\TestClasses\FakeRay;
 
 it('sets small and large payload sizes', function () {
     $ray = new FakeRay();
