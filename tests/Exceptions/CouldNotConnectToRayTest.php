@@ -1,17 +1,10 @@
 <?php
 
-namespace Spatie\Ray\Tests\Exceptions;
-
-use PHPUnit\Framework\TestCase;
 use Spatie\Ray\Exceptions\CouldNotConnectToRay;
+use function PHPUnit\Framework\assertStringContainsString;
 
-class CouldNotConnectToRayTest extends TestCase
-{
-    /** @test */
-    public function it_displays_the_hostname_and_port_it_failed_to_connect_to()
-    {
-        $exception = CouldNotConnectToRay::make('myhost', 12345);
+it('it displays the hostname and port it failed to connect to', function () {
+    $exception = CouldNotConnectToRay::make('myhost', 12345);
 
-        $this->assertStringContainsString('myhost:12345', $exception->getMessage());
-    }
-}
+    assertStringContainsString('myhost:12345', $exception->getMessage());
+});
