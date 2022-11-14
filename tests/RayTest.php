@@ -243,9 +243,11 @@ it('can measure a closure', function () {
 
 it('removes a named stopwatch when stopping time', function () {
     $this->ray->measure('test-timer');
+    /** @phpstan-ignore-next-line */
     assertTrue(isset($this->ray::$stopWatches['test-timer']));
 
     $this->ray->stopTime('test-timer');
+    /** @phpstan-ignore-next-line */
     assertFalse(isset($this->ray::$stopWatches['test-timer']));
 });
 
