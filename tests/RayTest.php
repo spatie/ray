@@ -1116,14 +1116,10 @@ it('throws exceptions when calling throwExceptions', function () {
 });
 
 it('can dump a string with a global function name', function () {
-    if (PHP_MAJOR_VERSION < 8) {
-        $this->markTestSkipped('test requires PHP 8+');
-    }
-
     $this->ray->send('array_map');
 
     assertMatchesOsSafeSnapshot($this->client->sentPayloads());
-});
+})->skip(PHP_MAJOR_VERSION < 8, 'test requires PHP 8+');
 
 it('can send a separator', function () {
     $this->ray->send('separator');

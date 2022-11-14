@@ -7,13 +7,6 @@ use function PHPUnit\Framework\assertSame;
 use Spatie\Ray\Ray;
 use Spatie\Ray\Settings\SettingsFactory;
 
-function skipOnGitHubActions(): void
-{
-    if (getenv('CI')) {
-        test()->skip('Test does not run on GitHub actions');
-    }
-}
-
 it('can use the default settings', function () {
     $settings = SettingsFactory::createFromConfigFile();
 
@@ -22,17 +15,13 @@ it('can use the default settings', function () {
 });
 
 it('can find the settings file', function () {
-    skipOnGitHubActions();
-
     $settings = SettingsFactory::createFromConfigFile(__DIR__ . Ray::makePathOsSafe('/testSettings/subDirectory/subSubDirectory'));
 
     assertEquals(12345, $settings->port);
     assertEquals('http://otherhost', $settings->host);
-});
+})->skip(getenv('CI'), 'Test does not run on GitHub actions');
 
 it('can find the settings file more than once', function () {
-    skipOnGitHubActions();
-
     $settings1 = SettingsFactory::createFromConfigFile(__DIR__ . Ray::makePathOsSafe('/testSettings/subDirectory/subSubDirectory'));
 
     assertEquals(12345, $settings1->port);
@@ -42,7 +31,7 @@ it('can find the settings file more than once', function () {
 
     assertEquals(12345, $settings2->port);
     assertEquals('http://otherhost', $settings2->host);
-});
+})->skip(getenv('CI'), 'Test does not run on GitHub actions');
 
 it('can create settings from an array', function () {
     $settings = SettingsFactory::createFromArray(['enabled' => false, 'port' => 1234]);
