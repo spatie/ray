@@ -1,58 +1,47 @@
 <?php
 
-namespace Spatie\Ray\Tests\Concerns;
-
-use PHPUnit\Framework\TestCase;
 use Spatie\Ray\Tests\TestClasses\FakeRay;
+use function PHPUnit\Framework\assertEquals;
 
-class ConcernsTest extends TestCase
-{
-    /** @test */
-    public function it_sets_small_and_large_payload_sizes()
-    {
-        $ray = new FakeRay();
+it('sets small and large payload sizes', function () {
+    $ray = new FakeRay();
 
-        $ray->small();
-        $this->assertEquals('sm', $ray->getLastSize());
+    $ray->small();
+    assertEquals('sm', $ray->getLastSize());
 
-        $ray->large();
-        $this->assertEquals('lg', $ray->getLastSize());
-        $this->assertEquals(['sm', 'lg'], $ray->getSizeHistory());
+    $ray->large();
+    assertEquals('lg', $ray->getLastSize());
+    assertEquals(['sm', 'lg'], $ray->getSizeHistory());
+});
+
+it('sets the same color payload as the method name', function () {
+    $colors = [
+        'blue', 'gray', 'green', 'orange', 'purple', 'red',
+    ];
+
+    $ray = new FakeRay();
+
+    foreach ($colors as $colorName) {
+        $ray->{$colorName}();
+        assertEquals($colorName, $ray->getLastColor());
     }
 
-    /** @test */
-    public function it_sets_the_same_color_payload_as_the_method_name()
-    {
-        $colors = [
-            'blue', 'gray', 'green', 'orange', 'purple', 'red',
-        ];
+    assertEquals($colors, $ray->getColorHistory());
+});
 
-        $ray = new FakeRay();
+it('sets the same screen color payload as the method name', function () {
+    $colors = [
+        'blue', 'gray', 'green', 'orange', 'purple', 'red',
+    ];
 
-        foreach ($colors as $colorName) {
-            $ray->{$colorName}();
-            $this->assertEquals($colorName, $ray->getLastColor());
-        }
+    $ray = new FakeRay();
 
-        $this->assertEquals($colors, $ray->getColorHistory());
+    foreach ($colors as $colorName) {
+        $methodName = 'screen' . ucfirst($colorName);
+
+        $ray->{$methodName}();
+        assertEquals($colorName, $ray->getLastScreenColor());
     }
 
-    /** @test */
-    public function it_sets_the_same_screen_color_payload_as_the_method_name()
-    {
-        $colors = [
-            'blue', 'gray', 'green', 'orange', 'purple', 'red',
-        ];
-
-        $ray = new FakeRay();
-
-        foreach ($colors as $colorName) {
-            $methodName = 'screen' . ucfirst($colorName);
-
-            $ray->{$methodName}();
-            $this->assertEquals($colorName, $ray->getLastScreenColor());
-        }
-
-        $this->assertEquals($colors, $ray->getScreenColorHistory());
-    }
-}
+    assertEquals($colors, $ray->getScreenColorHistory());
+});
