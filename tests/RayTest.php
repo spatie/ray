@@ -1071,8 +1071,6 @@ it('handles exceptions using catch with an array of exception classnames', funct
 });
 
 it('does not handle exceptions using catch with an array of exception classnames that do not match the exception', function () {
-    $this->expectException(\InvalidArgumentException::class);
-
     getNewRay()->send(function () {
         throw new InvalidArgumentException('test');
     })->catch([
@@ -1081,11 +1079,9 @@ it('does not handle exceptions using catch with an array of exception classnames
     ]);
 
     assertCount(0, $this->client->sentPayloads());
-});
+})->throws(InvalidArgumentException::class);
 
 it('does not handle exceptions using catch with a callback and a typed parameter different than the exception class', function () {
-    $this->expectException(\Exception::class);
-
     getNewRay()->send(function () {
         throw new Exception('test');
     })->catch(function (InvalidArgumentException $e, $ray) {
@@ -1093,7 +1089,7 @@ it('does not handle exceptions using catch with a callback and a typed parameter
     });
 
     assertCount(0, $this->client->sentPayloads());
-});
+})->throws(Exception::class);
 
 it('allows chaining additional methods after handling an exception', function () {
     getNewRay()->send(function ($ray) {
@@ -1106,14 +1102,12 @@ it('allows chaining additional methods after handling an exception', function ()
 });
 
 it('throws exceptions when calling throwExceptions', function () {
-    $this->expectException(Exception::class);
-
     getNewRay()->send(function ($ray) {
         $ray->text('hello world');
 
         throw new Exception('test');
     })->throwExceptions();
-});
+})->throws(Exception::class);
 
 it('can dump a string with a global function name', function () {
     $this->ray->send('array_map');
