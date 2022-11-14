@@ -1,5 +1,7 @@
 <?php
 
+use function Spatie\Snapshots\assertMatchesJsonSnapshot;
+
 /*
 |--------------------------------------------------------------------------
 | Test Case
@@ -17,3 +19,8 @@
 | Functions
 |--------------------------------------------------------------------------
 */
+
+function assertMatchesOsSafeSnapshot($data): void
+{
+    assertMatchesJsonSnapshot(json_encode($data));
+}
