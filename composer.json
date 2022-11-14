@@ -31,8 +31,6 @@
         "pestphp/pest": "^1.22",
         "phpstan/phpstan": "^0.12.92",
         "phpunit/phpunit": "^9.5",
-        "spatie/pest-plugin-snapshots": "^1.1",
-        "spatie/pest-plugin-test-time": "^1.1",
         "spatie/phpunit-snapshot-assertions": "^4.2",
         "spatie/test-time": "^1.2"
     },

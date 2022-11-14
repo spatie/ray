@@ -3,6 +3,7 @@
 use Carbon\Carbon;
 use Illuminate\Support\Arr;
 
+use Spatie\TestTime\TestTime;
 use function PHPUnit\Framework\assertArrayHasKey;
 use function PHPUnit\Framework\assertCount;
 use function PHPUnit\Framework\assertEquals;
@@ -19,8 +20,6 @@ use function PHPUnit\Framework\assertStringContainsString;
 use function PHPUnit\Framework\assertTrue;
 
 use Spatie\Backtrace\Frame;
-
-use function Spatie\PestPluginTestTime\testTime;
 
 use Spatie\Ray\Origin\Hostname;
 use Spatie\Ray\PayloadFactory;
@@ -578,7 +577,7 @@ it('sends a table payload', function () {
 });
 
 it('can send a carbon payload', function () {
-    $frozenTime = testTime()->freeze('2020-01-01 00:00:00');
+    $frozenTime = TestTime::freeze('Y-m-d H:i:s', '2020-01-01 00:00:00');
 
     $carbon = new Carbon();
 

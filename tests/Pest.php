@@ -1,12 +1,14 @@
 <?php
 
-use function Spatie\Snapshots\assertMatchesJsonSnapshot;
-
 /*
 |--------------------------------------------------------------------------
 | Test Case
 |--------------------------------------------------------------------------
 */
+
+use Spatie\Snapshots\MatchesSnapshots;
+
+uses(MatchesSnapshots::class)->in('.');
 
 /*
 |--------------------------------------------------------------------------
@@ -22,5 +24,5 @@ use function Spatie\Snapshots\assertMatchesJsonSnapshot;
 
 function assertMatchesOsSafeSnapshot($data): void
 {
-    assertMatchesJsonSnapshot(json_encode($data));
+    test()->assertMatchesJsonSnapshot(json_encode($data));
 }
