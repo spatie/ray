@@ -3,7 +3,6 @@
 use Carbon\Carbon;
 use Illuminate\Support\Arr;
 
-use Spatie\TestTime\TestTime;
 use function PHPUnit\Framework\assertArrayHasKey;
 use function PHPUnit\Framework\assertCount;
 use function PHPUnit\Framework\assertEquals;
@@ -22,12 +21,14 @@ use function PHPUnit\Framework\assertTrue;
 use Spatie\Backtrace\Frame;
 
 use Spatie\Ray\Origin\Hostname;
+
 use Spatie\Ray\PayloadFactory;
 use Spatie\Ray\Payloads\CallerPayload;
 use Spatie\Ray\Payloads\LogPayload;
 use Spatie\Ray\Ray;
 use Spatie\Ray\Settings\SettingsFactory;
 use Spatie\Ray\Tests\TestClasses\FakeClient;
+use Spatie\TestTime\TestTime;
 
 function getNewRay(): Ray
 {
