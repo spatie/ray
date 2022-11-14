@@ -48,6 +48,10 @@ function getValueOfLastSentContent(string $contentKey)
     return Arr::get($lastPayload, "payloads.0.content.{$contentKey}");
 }
 
+if (PHP_MAJOR_VERSION >= 8) {
+    include __DIR__ . '/includes/Php8OnlyTests.php';
+}
+
 beforeEach(function () {
     Hostname::set('fake-hostname');
 
@@ -1029,19 +1033,6 @@ it('handles exceptions using catch with a callback and a typed parameter', funct
     assertCount(1, $this->client->sentPayloads());
     assertMatchesOsSafeSnapshot($this->client->sentPayloads());
 });
-
-it('handles exceptions using catch with a callback and a union type parameter on php8 and higher', function () {
-    $newRay = getNewRay();
-
-    $newRay->send(function () {
-        throw new \Exception('test');
-    })->catch(function (\InvalidArgumentException | \Exception $e, $ray) {
-        return $ray->text($e->getMessage());
-    });
-
-    assertCount(1, $this->client->sentPayloads());
-    assertMatchesOsSafeSnapshot($this->client->sentPayloads());
-})->skip(PHP_MAJOR_VERSION < 8, 'test requires PHP 8+');
 
 it('handles exceptions using catch with an array of callbacks with typed parameters', function () {
     getNewRay()->send(function () {
