@@ -1,6 +1,5 @@
 <?php
 
-use function PHPUnit\Framework\assertStringContainsString;
 
 use Spatie\Ray\Exceptions\CouldNotConnectToRay;
 

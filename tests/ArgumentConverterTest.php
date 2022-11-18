@@ -1,9 +1,5 @@
 <?php
 
-use function PHPUnit\Framework\assertEquals;
-use function PHPUnit\Framework\assertFalse;
-use function PHPUnit\Framework\assertNull;
-use function PHPUnit\Framework\assertTrue;
 
 use Spatie\Ray\ArgumentConverter;
 

@@ -3,7 +3,6 @@
 use Carbon\Carbon;
 use Carbon\CarbonImmutable;
 
-use function PHPUnit\Framework\assertContainsOnlyInstancesOf;
 
 use Spatie\Ray\PayloadFactory;
 use Spatie\Ray\Payloads\CarbonPayload;

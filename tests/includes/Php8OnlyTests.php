@@ -1,6 +1,5 @@
 <?php
 
-use function PHPUnit\Framework\assertCount;
 
 it('handles exceptions using catch with a callback and a union type parameter on php8 and higher', function () {
     $newRay = getNewRay();

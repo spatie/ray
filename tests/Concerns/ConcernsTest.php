@@ -1,6 +1,5 @@
 <?php
 
-use function PHPUnit\Framework\assertEquals;
 
 use Spatie\Ray\Tests\TestClasses\FakeRay;
 

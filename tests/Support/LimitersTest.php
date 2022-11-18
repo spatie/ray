@@ -1,8 +1,5 @@
 <?php
 
-use function PHPUnit\Framework\assertEquals;
-use function PHPUnit\Framework\assertFalse;
-use function PHPUnit\Framework\assertTrue;
 
 use Spatie\Ray\Origin\Origin;
 use Spatie\Ray\Support\Limiters;

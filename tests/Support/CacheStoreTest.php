@@ -1,6 +1,5 @@
 <?php
 
-use function PHPUnit\Framework\assertSame;
 
 use Spatie\Ray\Support\CacheStore;
 use Spatie\Ray\Tests\TestClasses\FakeClock;
