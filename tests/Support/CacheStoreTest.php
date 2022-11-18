@@ -15,13 +15,13 @@ it('can count per seconds', function () {
 
     $this->store->hit()->hit()->hit();
 
-    assertSame(3, $this->store->countLastSecond());
+    expect($this->store->countLastSecond())->toBe(3);
 
     $this->clock->moveForward('1 second');
 
-    assertSame(3, $this->store->countLastSecond());
+    expect($this->store->countLastSecond())->toBe(3);
 
     $this->clock->moveForward('1 second');
 
-    assertSame(0, $this->store->countLastSecond());
+    expect($this->store->countLastSecond())->toBe(0);
 });

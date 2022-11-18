@@ -8,8 +8,8 @@ use Spatie\Ray\Support\RateLimiter;
 it('can initialize a disabled rate limit', function () {
     $rateLimiter = RateLimiter::disabled();
 
-    assertFalse($rateLimiter->isMaxReached());
-    assertFalse($rateLimiter->isMaxPerSecondReached());
+    expect($rateLimiter->isMaxReached())->toBeFalse();
+    expect($rateLimiter->isMaxPerSecondReached())->toBeFalse();
 });
 
 it('can update the max calls', function () {
@@ -17,11 +17,11 @@ it('can update the max calls', function () {
         ->clear()
         ->max(1);
 
-    assertFalse($rateLimiter->isMaxReached());
+    expect($rateLimiter->isMaxReached())->toBeFalse();
 
     $rateLimiter->hit();
 
-    assertTrue($rateLimiter->isMaxReached());
+    expect($rateLimiter->isMaxReached())->toBeTrue();
 });
 
 it('can update the per second calls', function () {
@@ -29,11 +29,11 @@ it('can update the per second calls', function () {
         ->clear()
         ->perSecond(1);
 
-    assertFalse($rateLimiter->isMaxPerSecondReached());
+    expect($rateLimiter->isMaxPerSecondReached())->toBeFalse();
 
     $rateLimiter->hit();
 
-    assertTrue($rateLimiter->isMaxPerSecondReached());
+    expect($rateLimiter->isMaxPerSecondReached())->toBeTrue();
 });
 
 it('can clear all limits', function () {
@@ -42,11 +42,11 @@ it('can clear all limits', function () {
         ->perSecond(1)
         ->hit();
 
-    assertTrue($rateLimiter->isMaxReached());
-    assertTrue($rateLimiter->isMaxPerSecondReached());
+    expect($rateLimiter->isMaxReached())->toBeTrue();
+    expect($rateLimiter->isMaxPerSecondReached())->toBeTrue();
 
     $rateLimiter->clear();
 
-    assertFalse($rateLimiter->isMaxReached());
-    assertFalse($rateLimiter->isMaxPerSecondReached());
+    expect($rateLimiter->isMaxReached())->toBeFalse();
+    expect($rateLimiter->isMaxPerSecondReached())->toBeFalse();
 });

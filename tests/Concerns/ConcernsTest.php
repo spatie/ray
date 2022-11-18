@@ -8,11 +8,11 @@ it('sets small and large payload sizes', function () {
     $ray = new FakeRay();
 
     $ray->small();
-    assertEquals('sm', $ray->getLastSize());
+    expect($ray->getLastSize())->toEqual('sm');
 
     $ray->large();
-    assertEquals('lg', $ray->getLastSize());
-    assertEquals(['sm', 'lg'], $ray->getSizeHistory());
+    expect($ray->getLastSize())->toEqual('lg');
+    expect($ray->getSizeHistory())->toEqual(['sm', 'lg']);
 });
 
 it('sets the same color payload as the method name', function () {
@@ -24,10 +24,10 @@ it('sets the same color payload as the method name', function () {
 
     foreach ($colors as $colorName) {
         $ray->{$colorName}();
-        assertEquals($colorName, $ray->getLastColor());
+        expect($ray->getLastColor())->toEqual($colorName);
     }
 
-    assertEquals($colors, $ray->getColorHistory());
+    expect($ray->getColorHistory())->toEqual($colors);
 });
 
 it('sets the same screen color payload as the method name', function () {
@@ -41,8 +41,8 @@ it('sets the same screen color payload as the method name', function () {
         $methodName = 'screen' . ucfirst($colorName);
 
         $ray->{$methodName}();
-        assertEquals($colorName, $ray->getLastScreenColor());
+        expect($ray->getLastScreenColor())->toEqual($colorName);
     }
 
-    assertEquals($colors, $ray->getScreenColorHistory());
+    expect($ray->getScreenColorHistory())->toEqual($colors);
 });

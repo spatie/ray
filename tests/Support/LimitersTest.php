@@ -30,8 +30,8 @@ it('initializes a limiter for an origin', function () {
         $this->limiters->initialize($origins[1], 8),
     ];
 
-    assertEquals([0, 5], $initResults[0]);
-    assertEquals([0, 8], $initResults[1]);
+    expect($initResults[0])->toEqual([0, 5]);
+    expect($initResults[1])->toEqual([0, 8]);
 });
 
 it('increments a limiter counter for an origin', function () {
@@ -41,7 +41,7 @@ it('increments a limiter counter for an origin', function () {
     $this->limiters->increment($origin);
     [$counter, $limit] = $this->limiters->increment($origin);
 
-    assertEquals(3, $counter);
+    expect($counter)->toEqual(3);
 });
 
 it('does not increment a limiter counter for an uninitialized origin', function () {
@@ -49,15 +49,15 @@ it('does not increment a limiter counter for an uninitialized origin', function 
 
     $incrementResult = $this->limiters->increment($origin);
 
-    assertEquals([false, false], $incrementResult);
+    expect($incrementResult)->toEqual([false, false]);
 });
 
 it('determines if a payload can be sent for a given origin', function () {
     $origin = createOrigin('test.php', 123, true, 2);
 
     $this->limiters->increment($origin);
-    assertTrue($this->limiters->canSendPayload($origin));
+    expect($this->limiters->canSendPayload($origin))->toBeTrue();
 
     $this->limiters->increment($origin);
-    assertFalse($this->limiters->canSendPayload($origin));
+    expect($this->limiters->canSendPayload($origin))->toBeFalse();
 });

@@ -91,8 +91,8 @@ it('can send an array to ray', function () {
 
     $dumpedValue = getValueOfLastSentContent('values')[0];
 
-    assertStringContainsString('<span class=sf-dump-key>a</span>', $dumpedValue);
-    assertStringContainsString('<span class=sf-dump-key>b</span>', $dumpedValue);
+    expect($dumpedValue)->toContain('<span class=sf-dump-key>a</span>');
+    expect($dumpedValue)->toContain('<span class=sf-dump-key>b</span>');
 });
 
 it('can send multiple things in one go to ray', function () {
@@ -120,7 +120,7 @@ it('can send a label', function () {
 });
 
 it('has a helper function', function () {
-    assertInstanceOf(Ray::class, ray());
+    expect(ray())->toBeInstanceOf(Ray::class);
 });
 
 it('can send a hide payload to ray', function () {
@@ -137,98 +137,95 @@ it('can send a remove payload to ray', function () {
 
 it('can conditionally show something using a boolean', function () {
     $this->ray->send('hey')->showIf(true);
-    assertCount(1, $this->client->sentPayloads());
+    expect($this->client->sentPayloads())->toHaveCount(1);
 
     $this->client->reset();
     $this->ray->send('hey')->showIf(false);
-    assertCount(2, $this->client->sentPayloads());
+    expect($this->client->sentPayloads())->toHaveCount(2);
 });
 
 it('can conditionally show something using a callable', function () {
     $this->ray->send('hey')->showIf(function () {
         return true;
     });
-    assertCount(1, $this->client->sentPayloads());
+    expect($this->client->sentPayloads())->toHaveCount(1);
 
     $this->client->reset();
     $this->ray->send('hey')->showIf(function () {
         return false;
     });
-    assertCount(2, $this->client->sentPayloads());
+    expect($this->client->sentPayloads())->toHaveCount(2);
 });
 
 it('can conditionally remove something using a boolean', function () {
     $this->ray->send('hey')->removeWhen(true);
-    assertCount(2, $this->client->sentPayloads());
+    expect($this->client->sentPayloads())->toHaveCount(2);
 
     $this->client->reset();
     $this->ray->send('hey')->removeWhen(false);
-    assertCount(1, $this->client->sentPayloads());
+    expect($this->client->sentPayloads())->toHaveCount(1);
 
     $this->client->reset();
     $this->ray->send('hey')->removeIf(true);
-    assertCount(2, $this->client->sentPayloads());
+    expect($this->client->sentPayloads())->toHaveCount(2);
 });
 
 it('can conditionally remove something using a callable', function () {
     $this->ray->send('hey')->removeWhen(function () {
         return true;
     });
-    assertCount(2, $this->client->sentPayloads());
+    expect($this->client->sentPayloads())->toHaveCount(2);
 
     $this->client->reset();
     $this->ray->send('hey')->removeWhen(function () {
         return false;
     });
-    assertCount(1, $this->client->sentPayloads());
+    expect($this->client->sentPayloads())->toHaveCount(1);
 
     $this->client->reset();
     $this->ray->send('hey')->removeIf(function () {
         return true;
     });
-    assertCount(2, $this->client->sentPayloads());
+    expect($this->client->sentPayloads())->toHaveCount(2);
 });
 
 it('can measure time and memory', function () {
     $this->ray->measure();
-    assertCount(1, $this->client->sentPayloads());
-    assertTrue(getValueOfLastSentContent('is_new_timer'));
-    assertEquals(0, getValueOfLastSentContent('total_time'));
-    assertEquals(0, getValueOfLastSentContent('max_memory_usage_during_total_time'));
-    assertEquals(0, getValueOfLastSentContent('time_since_last_call'));
-    assertEquals(0, getValueOfLastSentContent('max_memory_usage_since_last_call'));
+    expect($this->client->sentPayloads())->toHaveCount(1);
+    expect(getValueOfLastSentContent('is_new_timer'))->toBeTrue();
+    expect(getValueOfLastSentContent('total_time'))->toEqual(0);
+    expect(getValueOfLastSentContent('max_memory_usage_during_total_time'))->toEqual(0);
+    expect(getValueOfLastSentContent('time_since_last_call'))->toEqual(0);
+    expect(getValueOfLastSentContent('max_memory_usage_since_last_call'))->toEqual(0);
 
     usleep(1000);
 
     $this->ray->measure();
-    assertCount(2, $this->client->sentPayloads());
-    assertFalse(getValueOfLastSentContent('is_new_timer'));
-    assertNotEquals(0, getValueOfLastSentContent('total_time'));
-    assertNotEquals(0, getValueOfLastSentContent('max_memory_usage_during_total_time'));
-    assertNotEquals(0, getValueOfLastSentContent('time_since_last_call'));
-    assertNotEquals(0, getValueOfLastSentContent('max_memory_usage_since_last_call'));
+    expect($this->client->sentPayloads())->toHaveCount(2);
+    expect(getValueOfLastSentContent('is_new_timer'))->toBeFalse();
+    expect(getValueOfLastSentContent('total_time'))->not->toEqual(0);
+    expect(getValueOfLastSentContent('max_memory_usage_during_total_time'))->not->toEqual(0);
+    expect(getValueOfLastSentContent('time_since_last_call'))->not->toEqual(0);
+    expect(getValueOfLastSentContent('max_memory_usage_since_last_call'))->not->toEqual(0);
 
     usleep(1000);
     $this->ray->measure();
-    assertCount(3, $this->client->sentPayloads());
-    assertGreaterThan(
-        getValueOfLastSentContent('time_since_last_call'),
-        getValueOfLastSentContent('total_time'),
-    );
+    expect($this->client->sentPayloads())->toHaveCount(3);
+    expect(getValueOfLastSentContent('total_time'))->toBeGreaterThanOrEqual(getValueOfLastSentContent('time_since_last_call'));
 
     $this->ray->stopTime();
 
     $this->ray->measure();
-    assertTrue(getValueOfLastSentContent('is_new_timer'));
-    assertEquals(0, getValueOfLastSentContent('total_time'));
-    assertEquals(0, getValueOfLastSentContent('max_memory_usage_during_total_time'));
-    assertEquals(0, getValueOfLastSentContent('time_since_last_call'));
-    assertEquals(0, getValueOfLastSentContent('max_memory_usage_since_last_call'));
+    expect(getValueOfLastSentContent('is_new_timer'))->toBeTrue();
+    expect(getValueOfLastSentContent('total_time'))->toEqual(0);
+    expect(getValueOfLastSentContent('max_memory_usage_during_total_time'))->toEqual(0);
+    expect(getValueOfLastSentContent('time_since_last_call'))->toEqual(0);
+    expect(getValueOfLastSentContent('max_memory_usage_since_last_call'))->toEqual(0);
 });
 
 it('can measure using multiple timers', function () {
     $this->ray->measure('my-timer');
-    assertEquals('my-timer', getValueOfLastSentContent('name'));
+    expect(getValueOfLastSentContent('name'))->toEqual('my-timer');
 });
 
 it('can measure a closure', function () {
@@ -238,33 +235,33 @@ it('can measure a closure', function () {
 
     $this->ray->measure($closure);
 
-    assertCount(1, $this->client->sentPayloads());
-    assertNotEquals(0, getValueOfLastSentContent('total_time'));
-    assertNotEquals(0, getValueOfLastSentContent('max_memory_usage_during_total_time'));
-    assertNotEquals(0, getValueOfLastSentContent('time_since_last_call'));
-    assertNotEquals(0, getValueOfLastSentContent('max_memory_usage_since_last_call'));
+    expect($this->client->sentPayloads())->toHaveCount(1);
+    expect(getValueOfLastSentContent('total_time'))->not->toEqual(0);
+    expect(getValueOfLastSentContent('max_memory_usage_during_total_time'))->not->toEqual(0);
+    expect(getValueOfLastSentContent('time_since_last_call'))->not->toEqual(0);
+    expect(getValueOfLastSentContent('max_memory_usage_since_last_call'))->not->toEqual(0);
 });
 
 it('removes a named stopwatch when stopping time', function () {
     $this->ray->measure('test-timer');
     /** @phpstan-ignore-next-line */
-    assertTrue(isset($this->ray::$stopWatches['test-timer']));
+    expect(isset($this->ray::$stopWatches['test-timer']))->toBeTrue();
 
     $this->ray->stopTime('test-timer');
     /** @phpstan-ignore-next-line */
-    assertFalse(isset($this->ray::$stopWatches['test-timer']));
+    expect(isset($this->ray::$stopWatches['test-timer']))->toBeFalse();
 });
 
 it('can send backtrace to ray', function () {
     $this->ray->trace();
     $frames = getValueOfLastSentContent('frames');
 
-    assertGreaterThanOrEqual(10, count($frames));
+    expect(count($frames))->toBeGreaterThanOrEqual(10);
 
     $firstFrame = $frames[0];
 
-    assertEquals('P\Tests\RayTest', $firstFrame['class']);
-    assertEquals('{closure}', $firstFrame['method']);
+    expect($firstFrame['class'])->toEqual('P\Tests\RayTest');
+    expect($firstFrame['method'])->toEqual('{closure}');
 });
 
 it('can send backtrace frames starting from a specific frame', function () {
@@ -276,20 +273,20 @@ it('can send backtrace frames starting from a specific frame', function () {
 
     $firstFrame = $frames[0];
 
-    assertEquals('PHPUnit\TextUI\TestRunner', $firstFrame['class']);
-    assertEquals('run', $firstFrame['method']);
+    expect($firstFrame['class'])->toEqual('PHPUnit\TextUI\TestRunner');
+    expect($firstFrame['method'])->toEqual('run');
 });
 
 it('has a backtrace alias for trace', function () {
     $this->ray->backtrace();
     $frames = getValueOfLastSentContent('frames');
 
-    assertGreaterThanOrEqual(10, count($frames));
+    expect(count($frames))->toBeGreaterThanOrEqual(10);
 
     $firstFrame = $frames[0];
 
-    assertEquals('P\Tests\RayTest', $firstFrame['class']);
-    assertEquals('{closure}', $firstFrame['method']);
+    expect($firstFrame['class'])->toEqual('P\Tests\RayTest');
+    expect($firstFrame['method'])->toEqual('{closure}');
 });
 
 it('can send the caller to ray', function () {
@@ -297,8 +294,8 @@ it('can send the caller to ray', function () {
 
     $frame = getValueOfLastSentContent('frame');
 
-    assertEquals('call_user_func', $frame['method']);
-    assertEquals(null, $frame['class']);
+    expect($frame['method'])->toEqual('call_user_func');
+    expect($frame['class'])->toEqual(null);
 });
 
 it('can send the ban payload', function () {
@@ -324,10 +321,10 @@ it('can send the exception payload', function () {
 
     $payloads = $this->client->sentPayloads();
 
-    assertCount(2, $payloads);
-    assertEquals('exception', $payloads[0]['payloads'][0]['type']);
-    assertEquals(Exception::class, $payloads[0]['payloads'][0]['content']['class']);
-    assertEquals('This is an exception', $payloads[0]['payloads'][0]['content']['message']);
+    expect($payloads)->toHaveCount(2);
+    expect($payloads[0]['payloads'][0]['type'])->toEqual('exception');
+    expect($payloads[0]['payloads'][0]['content']['class'])->toEqual(Exception::class);
+    expect($payloads[0]['payloads'][0]['content']['message'])->toEqual('This is an exception');
 });
 
 it('can send the json payload', function () {
@@ -335,8 +332,8 @@ it('can send the json payload', function () {
 
     $dumpedValue = $this->client->sentPayloads()[0]['payloads'][0]['content']['content'];
 
-    assertStringContainsString('<span class=sf-dump-key>message</span>', $dumpedValue);
-    assertStringContainsString('<span class=sf-dump-str title="14 characters">message text 2</span>', $dumpedValue);
+    expect($dumpedValue)->toContain('<span class=sf-dump-key>message</span>');
+    expect($dumpedValue)->toContain('<span class=sf-dump-str title="14 characters">message text 2</span>');
 });
 
 it('can send multiple json payloads', function () {
@@ -348,10 +345,10 @@ it('can send multiple json payloads', function () {
     $dumpedValue1 = $this->client->sentPayloads()[0]['payloads'][0]['content']['content'];
     $dumpedValue2 = $this->client->sentPayloads()[0]['payloads'][1]['content']['content'];
 
-    assertStringContainsString('<span class=sf-dump-key>message</span>', $dumpedValue1);
-    assertStringContainsString('<span class=sf-dump-key>message</span>', $dumpedValue2);
-    assertStringContainsString('<span class=sf-dump-str title="14 characters">message text 1</span>', $dumpedValue1);
-    assertStringContainsString('<span class=sf-dump-str title="14 characters">message text 2</span>', $dumpedValue2);
+    expect($dumpedValue1)->toContain('<span class=sf-dump-key>message</span>');
+    expect($dumpedValue2)->toContain('<span class=sf-dump-key>message</span>');
+    expect($dumpedValue1)->toContain('<span class=sf-dump-str title="14 characters">message text 1</span>');
+    expect($dumpedValue2)->toContain('<span class=sf-dump-str title="14 characters">message text 2</span>');
 });
 
 it('can send the toJson payload', function () {
@@ -424,7 +421,7 @@ it('is macroable', function () {
 it('when ray is not running the pause call will not blow up', function () {
     $this->ray->pause();
 
-    assertEquals('create_lock', $this->client->sentPayloads()[0]['payloads'][0]['type']);
+    expect($this->client->sentPayloads()[0]['payloads'][0]['type'])->toEqual('create_lock');
 });
 
 it('can send custom stuff to ray', function () {
@@ -440,12 +437,12 @@ it('can send data to ray and return the data', function () {
 
     $result = $this->ray->pass($data);
 
-    assertEquals($data, $result);
+    expect($result)->toEqual($data);
 
     $dumpedValue = getValueOfLastSentContent('values')[0];
 
-    assertStringContainsString('<span class=sf-dump-key>a</span>', $dumpedValue);
-    assertStringContainsString('<span class=sf-dump-key>b</span>', $dumpedValue);
+    expect($dumpedValue)->toContain('<span class=sf-dump-key>a</span>');
+    expect($dumpedValue)->toContain('<span class=sf-dump-key>b</span>');
 });
 
 it('can rewrite the file paths using the config values', function () {
@@ -457,7 +454,7 @@ it('can rewrite the file paths using the config values', function () {
     $payload->remotePath = '/app';
     $payload->localPath = '/some/local/path';
 
-    assertEquals('/some/local/path/app/MyFile.php', $payload->getContent()['frame']['file_name']);
+    expect($payload->getContent()['frame']['file_name'])->toEqual('/some/local/path/app/MyFile.php');
 });
 
 it('only rewrites paths for matching remote paths', function () {
@@ -469,12 +466,12 @@ it('only rewrites paths for matching remote paths', function () {
     $payload->remotePath = '/files';
     $payload->localPath = '/some/local/path';
 
-    assertEquals('/app/files/MyFile.php', $payload->getContent()['frame']['file_name']);
+    expect($payload->getContent()['frame']['file_name'])->toEqual('/app/files/MyFile.php');
 
     $payload->remotePath = '/app';
     $payload->localPath = '/some/local/path';
 
-    assertEquals('/some/local/path/files/MyFile.php', $payload->getContent()['frame']['file_name']);
+    expect($payload->getContent()['frame']['file_name'])->toEqual('/some/local/path/files/MyFile.php');
 });
 
 it('returns itself and does not send anything when calling send without arguments', function () {
@@ -484,9 +481,9 @@ it('returns itself and does not send anything when calling send without argument
 
     $result = $this->ray->send();
 
-    assertCount(0, $this->client->sentPayloads());
-    assertEquals($this->ray, $result);
-    assertNull(getValueOfLastSentContent('values'));
+    expect($this->client->sentPayloads())->toHaveCount(0);
+    expect($result)->toEqual($this->ray);
+    expect(getValueOfLastSentContent('values'))->toBeNull();
 });
 
 it('can determine how many times a particular piece of code was called for a given name', function () {
@@ -501,9 +498,9 @@ it('can determine how many times a particular piece of code was called for a giv
         ray()->count('another');
     }
 
-    assertEquals(2, Ray::$counters->get('first'));
-    assertEquals(4, Ray::$counters->get('second'));
-    assertEquals(6, Ray::$counters->get('another'));
+    expect(Ray::$counters->get('first'))->toEqual(2);
+    expect(Ray::$counters->get('second'))->toEqual(4);
+    expect(Ray::$counters->get('another'))->toEqual(6);
 });
 
 it('can determine how many times a particular piece of code was called without a name', function () {
@@ -515,27 +512,27 @@ it('can determine how many times a particular piece of code was called without a
         }
     }
 
-    assertEquals("Called 4 times.", $this->client->sentPayloads()[5]['payloads'][0]['content']['content']);
+    expect($this->client->sentPayloads()[5]['payloads'][0]['content']['content'])->toEqual("Called 4 times.");
 });
 
 it('creates a Ray instance with default settings when create is called without arguments', function () {
     $ray = Ray::create(null, '1-2-3-4');
 
-    assertNotNull($ray);
-    assertEquals('1-2-3-4', $ray->uuid);
-    assertEquals($ray->settings, SettingsFactory::createFromConfigFile());
+    expect($ray)->not->toBeNull();
+    expect($ray->uuid)->toEqual('1-2-3-4');
+    expect(SettingsFactory::createFromConfigFile())->toEqual($ray->settings);
 });
 
 it('merges default settings into existing settings', function () {
     $settings = SettingsFactory::createFromConfigFile();
 
-    assertNull($settings->test);
-    assertEquals(23517, $settings->port);
+    expect($settings->test)->toBeNull();
+    expect($settings->port)->toEqual(23517);
 
     $settings->setDefaultSettings(['test' => 'testvalue']);
 
-    assertEquals('testvalue', $settings->test);
-    assertEquals(23517, $settings->port);
+    expect($settings->test)->toEqual('testvalue');
+    expect($settings->port)->toEqual(23517);
 });
 
 it('can send the php info payload', function () {
@@ -543,9 +540,9 @@ it('can send the php info payload', function () {
 
     $payloads = $this->client->sentPayloads();
 
-    assertCount(1, $payloads);
+    expect($payloads)->toHaveCount(1);
 
-    assertEquals('table', $payloads[0]['payloads'][0]['type']);
+    expect($payloads[0]['payloads'][0]['type'])->toEqual('table');
 });
 
 it('the php info can report specific options', function () {
@@ -553,9 +550,9 @@ it('the php info can report specific options', function () {
 
     $payloads = $this->client->sentPayloads();
 
-    assertCount(1, $payloads);
+    expect($payloads)->toHaveCount(1);
 
-    assertArrayHasKey('default_mimetype', $payloads[0]['payloads'][0]['content']['values']);
+    expect($payloads[0]['payloads'][0]['content']['values'])->toHaveKey('default_mimetype');
 });
 
 it('sends an image payload', function () {
@@ -588,12 +585,12 @@ it('can send a carbon payload', function () {
 
     ray()->carbon($carbon);
 
-    assertCount(1, $this->client->sentPayloads());
+    expect($this->client->sentPayloads())->toHaveCount(1);
 
     $payload = $this->client->sentPayloads()[0];
-    assertEquals($frozenTime, $payload['payloads'][0]['content']['formatted']);
-    assertEquals($frozenTime->getTimestamp(), $payload['payloads'][0]['content']['timestamp']);
-    assertEquals(date_default_timezone_get(), $payload['payloads'][0]['content']['timezone']);
+    expect($payload['payloads'][0]['content']['formatted'])->toEqual($frozenTime);
+    expect($payload['payloads'][0]['content']['timestamp'])->toEqual($frozenTime->getTimestamp());
+    expect($payload['payloads'][0]['content']['timezone'])->toEqual(date_default_timezone_get());
 });
 
 it('sends an xml payload', function () {
@@ -607,15 +604,15 @@ it('can send the raw values', function () {
 
     $payloads = $this->client->sentPayloads();
 
-    assertEquals('log', $payloads[0]['payloads'][0]['type']);
-    assertEquals('log', $payloads[0]['payloads'][1]['type']);
-    assertEquals('log', $payloads[0]['payloads'][2]['type']);
+    expect($payloads[0]['payloads'][0]['type'])->toEqual('log');
+    expect($payloads[0]['payloads'][1]['type'])->toEqual('log');
+    expect($payloads[0]['payloads'][2]['type'])->toEqual('log');
 });
 
 it('returns a ray instance when calling raw without arguments', function () {
     $instance = $this->ray->raw();
 
-    assertInstanceOf(Ray::class, $instance);
+    expect($instance)->toBeInstanceOf(Ray::class);
     assertMatchesOsSafeSnapshot($this->client->sentPayloads());
 });
 
@@ -624,9 +621,9 @@ it('will send a specialized payloads by default', function () {
 
     $payloads = $this->client->sentPayloads();
 
-    assertEquals('carbon', $payloads[0]['payloads'][0]['type']);
-    assertEquals('log', $payloads[0]['payloads'][1]['type']);
-    assertEquals('log', $payloads[0]['payloads'][2]['type']);
+    expect($payloads[0]['payloads'][0]['type'])->toEqual('carbon');
+    expect($payloads[0]['payloads'][1]['type'])->toEqual('log');
+    expect($payloads[0]['payloads'][2]['type'])->toEqual('log');
 });
 
 it('sends the hide application payload', function () {
@@ -677,8 +674,8 @@ it('sends a text payload', function () {
 
     $lastPayload = $this->client->sentPayloads()[1]['payloads'][0];
 
-    assertStringContainsString('&nbsp;&nbsp;&nbsp;&lt;strong&gt;', $lastPayload['content']['content']);
-    assertStringContainsString('<br>', $lastPayload['content']['content']);
+    expect($lastPayload['content']['content'])->toContain('&nbsp;&nbsp;&nbsp;&lt;strong&gt;');
+    expect($lastPayload['content']['content'])->toContain('<br>');
     assertMatchesOsSafeSnapshot($this->client->sentPayloads());
 });
 
@@ -689,9 +686,9 @@ it('sends a null payload', function () {
 });
 
 it('returns zero when accessing a missing counter', function () {
-    assertEquals(0, Ray::$counters->get('missing'));
+    expect(Ray::$counters->get('missing'))->toEqual(0);
     ray()->count('missing');
-    assertEquals(1, Ray::$counters->get('missing'));
+    expect(Ray::$counters->get('missing'))->toEqual(1);
 });
 
 it('sets the ray instance for a counter', function () {
@@ -702,43 +699,43 @@ it('sets the ray instance for a counter', function () {
 
     $ray1::$counters->setRay('first', $ray1);
 
-    assertEquals($ray1, $ray1::$counters->increment('first')[0]);
+    expect($ray1::$counters->increment('first')[0])->toEqual($ray1);
 
     $ray1::$counters->setRay('first', $ray2);
 
-    assertEquals($ray2, $ray1::$counters->increment('first')[0]);
+    expect($ray1::$counters->increment('first')[0])->toEqual($ray2);
 });
 
 it('clears all counters', function () {
     Ray::$counters->clear();
 
-    assertEquals(0, Ray::$counters->get('first'));
+    expect(Ray::$counters->get('first'))->toEqual(0);
 
     ray()->count('first');
 
-    assertEquals(1, Ray::$counters->get('first'));
+    expect(Ray::$counters->get('first'))->toEqual(1);
 
     ray()->clearCounters();
 
-    assertEquals(0, Ray::$counters->get('first'));
+    expect(Ray::$counters->get('first'))->toEqual(0);
 });
 
 it('returns the value of a named counter', function () {
-    assertEquals(0, ray()->counterValue('first'));
+    expect(ray()->counterValue('first'))->toEqual(0);
 
     ray()->count('first');
 
-    assertEquals(1, ray()->counterValue('first'));
+    expect(ray()->counterValue('first'))->toEqual(1);
 
     ray()->count('first');
 
-    assertEquals(2, ray()->counterValue('first'));
+    expect(ray()->counterValue('first'))->toEqual(2);
 });
 
 it('will respect the raw values config setting', function () {
     $this->settings->always_send_raw_values = true;
     $this->ray->send(new Carbon());
-    assertEquals('log',  $this->client->sentPayloads()[0]['payloads'][0]['type']);
+    expect($this->client->sentPayloads()[0]['payloads'][0]['type'])->toEqual('log');
 });
 
 it('can be disabled', function () {
@@ -746,7 +743,7 @@ it('can be disabled', function () {
     $this->ray->disable();
     $this->ray->send('test payload 2');
 
-    assertCount(1, $this->client->sentPayloads());
+    expect($this->client->sentPayloads())->toHaveCount(1);
 });
 
 it('can be reenabled after being disabled', function () {
@@ -757,53 +754,53 @@ it('can be reenabled after being disabled', function () {
     $this->ray->enable();
     $this->ray->send('test payload 3');
 
-    assertCount(2, $this->client->sentPayloads());
+    expect($this->client->sentPayloads())->toHaveCount(2);
 });
 
 it('returns the correct enabled state', function () {
     Ray::$enabled = true;
-    assertTrue($this->ray->enabled());
-    assertFalse($this->ray->disabled());
+    expect($this->ray->enabled())->toBeTrue();
+    expect($this->ray->disabled())->toBeFalse();
 
     Ray::$enabled = false;
-    assertFalse($this->ray->enabled());
-    assertTrue($this->ray->disabled());
+    expect($this->ray->enabled())->toBeFalse();
+    expect($this->ray->disabled())->toBeTrue();
 });
 
 it('defaults to enabled state', function () {
-    assertTrue($this->ray->enabled());
+    expect($this->ray->enabled())->toBeTrue();
 });
 
 it('checks the availablity of the Ray server', function () {
     $this->client->changePortAndReturnOriginal(34993);
 
-    assertFalse($this->client->performAvailabilityCheck());
+    expect($this->client->performAvailabilityCheck())->toBeFalse();
 });
 
 it('respects the enabled property', function () {
     $ray = getNewRay()->disable();
 
-    assertFalse($ray->enabled());
-    assertFalse(getNewRay()->enabled());
+    expect($ray->enabled())->toBeFalse();
+    expect(getNewRay()->enabled())->toBeFalse();
 
     getNewRay()->enable();
 
-    assertTrue($ray->enabled());
-    assertTrue(getNewRay()->enabled());
+    expect($ray->enabled())->toBeTrue();
+    expect(getNewRay()->enabled())->toBeTrue();
 });
 
 it('respects the enabled property when sending payloads', function () {
     $ray = getNewRay()->disable();
     $ray->send('test message 1');
-    assertCount(0, $this->client->sentPayloads());
+    expect($this->client->sentPayloads())->toHaveCount(0);
 
     $ray->enable();
     $ray->send('test message 2');
-    assertCount(1, $this->client->sentPayloads());
+    expect($this->client->sentPayloads())->toHaveCount(1);
 
     $ray->disable();
     $ray->send('test message 3');
-    assertCount(1, $this->client->sentPayloads());
+    expect($this->client->sentPayloads())->toHaveCount(1);
 });
 
 it('can quickly send a request', function () {
@@ -818,7 +815,7 @@ it('can quickly send a request', function () {
 
     $after = microtime(true);
 
-    assertLessThan(0.005, $after - $before);
+    expect($after - $before)->toBeLessThan(0.005);
 });
 
 it('can quickly call the ray helper', function () {
@@ -828,7 +825,7 @@ it('can quickly call the ray helper', function () {
 
     $after = microtime(true);
 
-    assertLessThan(0.05, $after - $before);
+    expect($after - $before)->toBeLessThan(0.05);
 });
 
 it('can quickly call send function', function () {
@@ -838,7 +835,7 @@ it('can quickly call send function', function () {
 
     $after = microtime(true);
 
-    assertLessThan(0.005, $after - $before);
+    expect($after - $before)->toBeLessThan(0.005);
 });
 
 it('can limit the number of payloads sent from a loop', function () {
@@ -848,7 +845,7 @@ it('can limit the number of payloads sent from a loop', function () {
         getNewRay()->limit($limit)->send("limited loop iteration $i");
     }
 
-    assertCount($limit, $this->client->sentPayloads());
+    expect($this->client->sentPayloads())->toHaveCount($limit);
 });
 
 it('only limits the number of payloads sent from the line that calls limit', function () {
@@ -860,7 +857,7 @@ it('only limits the number of payloads sent from the line that calls limit', fun
         getNewRay()->send("unlimited loop iteration $i");
     }
 
-    assertCount($limit + $iterations, $this->client->sentPayloads());
+    expect($this->client->sentPayloads())->toHaveCount($limit + $iterations);
 });
 
 it('can handle multiple consecutive calls to limit', function () {
@@ -882,7 +879,7 @@ it('can conditionally send payloads using if with a truthy conditional and witho
         $this->ray->if($i < 5)->text("value: {$i}");
     }
 
-    assertCount(5, $this->client->sentPayloads());
+    expect($this->client->sentPayloads())->toHaveCount(5);
 });
 
 it('can conditionally send payloads using if with a callable conditional param', function () {
@@ -892,7 +889,7 @@ it('can conditionally send payloads using if with a callable conditional param',
         })->text("value: {$i}");
     }
 
-    assertCount(5, $this->client->sentPayloads());
+    expect($this->client->sentPayloads())->toHaveCount(5);
 });
 
 it('can conditionally send payloads using if with a callback', function () {
@@ -904,7 +901,7 @@ it('can conditionally send payloads using if with a callback', function () {
         $ray->text('two');
     });
 
-    assertCount(1, $this->client->sentPayloads());
+    expect($this->client->sentPayloads())->toHaveCount(1);
 });
 
 it('can chain method calls when using if with a callback and a false condition', function () {
@@ -949,9 +946,9 @@ it('cannot call when rate limit max has reached', function () {
     ray('this cannot pass, but triggers a warning call');
     ray('this cannot pass');
 
-    assertCount(2, $this->client->sentPayloads());
+    expect($this->client->sentPayloads())->toHaveCount(2);
 
-    assertSame('Rate limit has been reached...', $this->client->sentPayloads()[1]['payloads'][0]['content']['content']);
+    expect($this->client->sentPayloads()[1]['payloads'][0]['content']['content'])->toBe('Rate limit has been reached...');
 });
 
 it('sends a payload once when called with arguments', function () {
@@ -959,8 +956,8 @@ it('sends a payload once when called with arguments', function () {
         getNewRay()->once($i);
     }
 
-    assertCount(1, $this->client->sentPayloads());
-    assertEquals([0], $this->client->sentPayloads()[0]['payloads'][0]['content']['values']);
+    expect($this->client->sentPayloads())->toHaveCount(1);
+    expect($this->client->sentPayloads()[0]['payloads'][0]['content']['values'])->toEqual([0]);
 });
 
 it('sends a payload once when called without arguments', function () {
@@ -968,8 +965,8 @@ it('sends a payload once when called without arguments', function () {
         getNewRay()->once()->text($i);
     }
 
-    assertCount(1, $this->client->sentPayloads());
-    assertEquals(0, $this->client->sentPayloads()[0]['payloads'][0]['content']['content']);
+    expect($this->client->sentPayloads())->toHaveCount(1);
+    expect($this->client->sentPayloads()[0]['payloads'][0]['content']['content'])->toEqual(0);
 });
 
 it('sends a payload once while allowing calls to limit', function () {
@@ -978,7 +975,7 @@ it('sends a payload once while allowing calls to limit', function () {
         getNewRay()->limit(5)->text($i);
     }
 
-    assertCount(6, $this->client->sentPayloads());
+    expect($this->client->sentPayloads())->toHaveCount(6);
 });
 
 it('does nothing if no exceptions are thrown from a callable while using catch with a callback', function () {
@@ -990,7 +987,7 @@ it('does nothing if no exceptions are thrown from a callable while using catch w
         $ray->text($exception->getMessage());
     });
 
-    assertCount(1, $this->client->sentPayloads());
+    expect($this->client->sentPayloads())->toHaveCount(1);
     assertMatchesOsSafeSnapshot($this->client->sentPayloads());
 });
 
@@ -1000,7 +997,7 @@ it('handles exceptions using catch with a callback and classname parameter', fun
     })->catch(Exception::class);
 
     // 2 payloads for exceptions
-    assertCount(2, $this->client->sentPayloads());
+    expect($this->client->sentPayloads())->toHaveCount(2);
 });
 
 it('handles exceptions using and catch without a callback', function () {
@@ -1009,7 +1006,7 @@ it('handles exceptions using and catch without a callback', function () {
     })->catch();
 
     // 2 payloads are sent when ray->exception() is called
-    assertCount(2, $this->client->sentPayloads());
+    expect($this->client->sentPayloads())->toHaveCount(2);
 });
 
 it('handles exceptions using catch with a callback', function () {
@@ -1019,7 +1016,7 @@ it('handles exceptions using catch with a callback', function () {
         return $ray->text($e->getMessage());
     });
 
-    assertCount(1, $this->client->sentPayloads());
+    expect($this->client->sentPayloads())->toHaveCount(1);
     assertMatchesOsSafeSnapshot($this->client->sentPayloads());
 });
 
@@ -1030,7 +1027,7 @@ it('handles exceptions using catch with a callback and a typed parameter', funct
         return $ray->text($e->getMessage());
     });
 
-    assertCount(1, $this->client->sentPayloads());
+    expect($this->client->sentPayloads())->toHaveCount(1);
     assertMatchesOsSafeSnapshot($this->client->sentPayloads());
 });
 
@@ -1046,7 +1043,7 @@ it('handles exceptions using catch with an array of callbacks with typed paramet
         },
     ]);
 
-    assertCount(1, $this->client->sentPayloads());
+    expect($this->client->sentPayloads())->toHaveCount(1);
     assertMatchesOsSafeSnapshot($this->client->sentPayloads());
 });
 
@@ -1058,7 +1055,7 @@ it('handles exceptions using catch with an array of exception classnames', funct
         InvalidArgumentException::class,
     ]);
 
-    assertCount(2, $this->client->sentPayloads());
+    expect($this->client->sentPayloads())->toHaveCount(2);
 });
 
 it('does not handle exceptions using catch with an array of exception classnames that do not match the exception', function () {
@@ -1069,7 +1066,7 @@ it('does not handle exceptions using catch with an array of exception classnames
         BadFunctionCallException::class,
     ]);
 
-    assertCount(0, $this->client->sentPayloads());
+    expect($this->client->sentPayloads())->toHaveCount(0);
 })->throws(InvalidArgumentException::class);
 
 it('does not handle exceptions using catch with a callback and a typed parameter different than the exception class', function () {
@@ -1079,7 +1076,7 @@ it('does not handle exceptions using catch with a callback and a typed parameter
         return $ray->text($e->getMessage());
     });
 
-    assertCount(0, $this->client->sentPayloads());
+    expect($this->client->sentPayloads())->toHaveCount(0);
 })->throws(Exception::class);
 
 it('allows chaining additional methods after handling an exception', function () {
@@ -1089,7 +1086,7 @@ it('allows chaining additional methods after handling an exception', function ()
         throw new Exception('test');
     })->catch()->blue()->small();
 
-    assertCount(5, $this->client->sentPayloads());
+    expect($this->client->sentPayloads())->toHaveCount(5);
 });
 
 it('throws exceptions when calling throwExceptions', function () {
@@ -1115,17 +1112,17 @@ it('can send a separator', function () {
 it('can set the project name', function () {
     ray()->project('my project');
 
-    assertEquals('my project', Ray::$projectName);
+    expect(Ray::$projectName)->toEqual('my project');
 
     ray('send request');
 
-    assertEquals('my project', $this->client->sentRequests()[0]['meta']['project_name']);
+    expect($this->client->sentRequests()[0]['meta']['project_name'])->toEqual('my project');
 });
 
 it('can dump long integers as string', function () {
     $this->ray->send(11111111111111110);
     $this->ray->send(11111111111111111);
 
-    assertSame([11111111111111110], $this->client->sentRequests()[0]['payloads'][0]['content']['values']);
-    assertSame(["11111111111111111"], $this->client->sentRequests()[1]['payloads'][0]['content']['values']);
+    expect($this->client->sentRequests()[0]['payloads'][0]['content']['values'])->toBe([11111111111111110]);
+    expect($this->client->sentRequests()[1]['payloads'][0]['content']['values'])->toBe(["11111111111111111"]);
 });

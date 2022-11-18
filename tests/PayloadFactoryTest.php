@@ -15,5 +15,5 @@ it('accepts carboninterface instances as carbonpayload argument', function () {
         CarbonImmutable::now(),
     ]))->getPayloads();
 
-    assertContainsOnlyInstancesOf(CarbonPayload::class, $payloads);
+    expect($payloads)->each->toBeInstanceOf(CarbonPayload::class);
 });

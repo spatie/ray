@@ -10,32 +10,32 @@ use Spatie\Ray\Settings\SettingsFactory;
 it('can use the default settings', function () {
     $settings = SettingsFactory::createFromConfigFile();
 
-    assertEquals(23517, $settings->port);
-    assertEquals('localhost', $settings->host);
+    expect($settings->port)->toEqual(23517);
+    expect($settings->host)->toEqual('localhost');
 });
 
 it('can find the settings file', function () {
     $settings = SettingsFactory::createFromConfigFile(__DIR__ . Ray::makePathOsSafe('/testSettings/subDirectory/subSubDirectory'));
 
-    assertEquals(12345, $settings->port);
-    assertEquals('http://otherhost', $settings->host);
+    expect($settings->port)->toEqual(12345);
+    expect($settings->host)->toEqual('http://otherhost');
 })->skip(getenv('CI'), 'Test does not run on GitHub actions');
 
 it('can find the settings file more than once', function () {
     $settings1 = SettingsFactory::createFromConfigFile(__DIR__ . Ray::makePathOsSafe('/testSettings/subDirectory/subSubDirectory'));
 
-    assertEquals(12345, $settings1->port);
-    assertEquals('http://otherhost', $settings1->host);
+    expect($settings1->port)->toEqual(12345);
+    expect($settings1->host)->toEqual('http://otherhost');
 
     $settings2 = SettingsFactory::createFromConfigFile(__DIR__ . Ray::makePathOsSafe('/testSettings/subDirectory/subSubDirectory'));
 
-    assertEquals(12345, $settings2->port);
-    assertEquals('http://otherhost', $settings2->host);
+    expect($settings2->port)->toEqual(12345);
+    expect($settings2->host)->toEqual('http://otherhost');
 })->skip(getenv('CI'), 'Test does not run on GitHub actions');
 
 it('can create settings from an array', function () {
     $settings = SettingsFactory::createFromArray(['enabled' => false, 'port' => 1234]);
 
-    assertFalse($settings->enabled);
-    assertSame(1234, $settings->port);
+    expect($settings->enabled)->toBeFalse();
+    expect($settings->port)->toBe(1234);
 });

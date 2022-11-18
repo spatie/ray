@@ -11,6 +11,6 @@ it('handles exceptions using catch with a callback and a union type parameter on
         return $ray->text($e->getMessage());
     });
 
-    assertCount(1, $this->client->sentPayloads());
+    expect($this->client->sentPayloads())->toHaveCount(1);
     assertMatchesOsSafeSnapshot($this->client->sentPayloads());
 });
