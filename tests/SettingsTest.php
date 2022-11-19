@@ -1,62 +1,38 @@
 <?php
 
-namespace Spatie\Ray\Tests;
 
-use PHPUnit\Framework\TestCase;
 use Spatie\Ray\Ray;
 use Spatie\Ray\Settings\SettingsFactory;
 
-class SettingsTest extends TestCase
-{
-    /** @test */
-    public function it_can_use_the_default_settings()
-    {
-        $settings = SettingsFactory::createFromConfigFile();
+it('can use the default settings', function () {
+    $settings = SettingsFactory::createFromConfigFile();
 
-        $this->assertEquals(23517, $settings->port);
-        $this->assertEquals('localhost', $settings->host);
-    }
+    expect($settings->port)->toEqual(23517);
+    expect($settings->host)->toEqual('localhost');
+});
 
-    /** @test */
-    public function it_can_find_the_settings_file()
-    {
-        $this->skipOnGitHubActions();
+it('can find the settings file', function () {
+    $settings = SettingsFactory::createFromConfigFile(__DIR__ . Ray::makePathOsSafe('/testSettings/subDirectory/subSubDirectory'));
 
-        $settings = SettingsFactory::createFromConfigFile(__DIR__ . Ray::makePathOsSafe('/testSettings/subDirectory/subSubDirectory'));
+    expect($settings->port)->toEqual(12345);
+    expect($settings->host)->toEqual('http://otherhost');
+})->skip(getenv('CI'), 'Test does not run on GitHub actions');
 
-        $this->assertEquals(12345, $settings->port);
-        $this->assertEquals('http://otherhost', $settings->host);
-    }
+it('can find the settings file more than once', function () {
+    $settings1 = SettingsFactory::createFromConfigFile(__DIR__ . Ray::makePathOsSafe('/testSettings/subDirectory/subSubDirectory'));
 
-    /** @test */
-    public function it_can_find_the_settings_file_more_than_once()
-    {
-        $this->skipOnGitHubActions();
+    expect($settings1->port)->toEqual(12345);
+    expect($settings1->host)->toEqual('http://otherhost');
 
-        $settings1 = SettingsFactory::createFromConfigFile(__DIR__ . Ray::makePathOsSafe('/testSettings/subDirectory/subSubDirectory'));
+    $settings2 = SettingsFactory::createFromConfigFile(__DIR__ . Ray::makePathOsSafe('/testSettings/subDirectory/subSubDirectory'));
 
-        $this->assertEquals(12345, $settings1->port);
-        $this->assertEquals('http://otherhost', $settings1->host);
+    expect($settings2->port)->toEqual(12345);
+    expect($settings2->host)->toEqual('http://otherhost');
+})->skip(getenv('CI'), 'Test does not run on GitHub actions');
 
-        $settings2 = SettingsFactory::createFromConfigFile(__DIR__ . Ray::makePathOsSafe('/testSettings/subDirectory/subSubDirectory'));
+it('can create settings from an array', function () {
+    $settings = SettingsFactory::createFromArray(['enabled' => false, 'port' => 1234]);
 
-        $this->assertEquals(12345, $settings2->port);
-        $this->assertEquals('http://otherhost', $settings2->host);
-    }
-
-    /** @test */
-    public function it_can_create_settings_from_an_array()
-    {
-        $settings = SettingsFactory::createFromArray(['enabled' => false, 'port' => 1234]);
-
-        self::assertFalse($settings->enabled);
-        self::assertSame(1234, $settings->port);
-    }
-
-    protected function skipOnGitHubActions(): void
-    {
-        if (getenv('CI')) {
-            $this->markTestSkipped('Test does not run on GitHub actions');
-        }
-    }
-}
+    expect($settings->enabled)->toBeFalse();
+    expect($settings->port)->toBe(1234);
+});

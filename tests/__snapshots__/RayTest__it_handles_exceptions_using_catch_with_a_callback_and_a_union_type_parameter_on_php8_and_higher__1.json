@@ -9,7 +9,7 @@
                     "label": "Text"
                 },
                 "origin": {
-                    "file": "\/tests\/includes\/Php8OnlyTests.php",
+                    "file": "\/tests\/RayTest.php",
                     "line_number": "xxx",
                     "hostname": "fake-hostname"
                 }

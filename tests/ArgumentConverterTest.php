@@ -1,36 +1,23 @@
 <?php
 
-namespace Spatie\Ray\Tests;
 
-use PHPUnit\Framework\TestCase;
 use Spatie\Ray\ArgumentConverter;
 
-class ArgumentConverterTest extends TestCase
-{
-    /** @test */
-    public function it_returns_null_for_null_values()
-    {
-        $this->assertNull(ArgumentConverter::convertToPrimitive(null));
-    }
+it('returns null for null values', function () {
+    expect(ArgumentConverter::convertToPrimitive(null))->toBeNull();
+});
 
-    /** @test */
-    public function it_returns_int_values_unchanged()
-    {
-        $this->assertEquals(1, ArgumentConverter::convertToPrimitive(1));
-        $this->assertEquals(PHP_INT_MAX, ArgumentConverter::convertToPrimitive(PHP_INT_MAX));
-    }
+it('returns int values unchanged', function () {
+    expect(ArgumentConverter::convertToPrimitive(1))->toEqual(1);
+    expect(ArgumentConverter::convertToPrimitive(PHP_INT_MAX))->toEqual(PHP_INT_MAX);
+});
 
-    /** @test */
-    public function it_returns_string_values_unchanged()
-    {
-        $this->assertEquals('test string', ArgumentConverter::convertToPrimitive('test string'));
-        $this->assertEquals('', ArgumentConverter::convertToPrimitive(''));
-    }
+it('returns string values unchanged', function () {
+    expect(ArgumentConverter::convertToPrimitive('test string'))->toEqual('test string');
+    expect(ArgumentConverter::convertToPrimitive(''))->toEqual('');
+});
 
-    /** @test */
-    public function it_returns_bool_values_unchanged()
-    {
-        $this->assertTrue(ArgumentConverter::convertToPrimitive(true));
-        $this->assertFalse(ArgumentConverter::convertToPrimitive(false));
-    }
-}
+it('returns bool values unchanged', function () {
+    expect(ArgumentConverter::convertToPrimitive(true))->toBeTrue();
+    expect(ArgumentConverter::convertToPrimitive(false))->toBeFalse();
+});

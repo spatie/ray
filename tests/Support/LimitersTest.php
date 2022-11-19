@@ -1,79 +1,60 @@
 <?php
 
-namespace Spatie\Ray\Tests\Support;
 
-use PHPUnit\Framework\TestCase;
 use Spatie\Ray\Origin\Origin;
 use Spatie\Ray\Support\Limiters;
 
-class LimitersTest extends TestCase
+function createOrigin(string $filename, int $line, bool $initialize = true, int $limit = 5): Origin
 {
-    /** @var Limiters */
-    public $limiters;
+    $result = new Origin($filename, $line);
 
-    protected function setUp(): void
-    {
-        parent::setUp();
-
-        $this->limiters = new Limiters();
+    if ($initialize) {
+        test()->limiters->initialize($result, $limit);
     }
 
-    /** @test */
-    public function it_initializes_a_limiter_for_an_origin()
-    {
-        $origins = [new Origin('test.php', 123), new Origin('test.php', 124)];
-
-        $initResults = [
-            $this->limiters->initialize($origins[0], 5),
-            $this->limiters->initialize($origins[1], 8),
-        ];
-
-        $this->assertEquals([0, 5], $initResults[0]);
-        $this->assertEquals([0, 8], $initResults[1]);
-    }
-
-    /** @test */
-    public function it_increments_a_limiter_counter_for_an_origin()
-    {
-        $origin = $this->createOrigin('test.php', 123);
-
-        $this->limiters->increment($origin);
-        $this->limiters->increment($origin);
-        [$counter, $limit] = $this->limiters->increment($origin);
-
-        $this->assertEquals(3, $counter);
-    }
-
-    /** @test */
-    public function it_does_not_increment_a_limiter_counter_for_an_uninitialized_origin()
-    {
-        $origin = new Origin('test.php', 456);
-
-        $incrementResult = $this->limiters->increment($origin);
-
-        $this->assertEquals([false, false], $incrementResult);
-    }
-
-    /** @test */
-    public function it_determines_if_a_payload_can_be_sent_for_a_given_origin()
-    {
-        $origin = $this->createOrigin('test.php', 123, true, 2);
-
-        $this->limiters->increment($origin);
-        $this->assertTrue($this->limiters->canSendPayload($origin));
-
-        $this->limiters->increment($origin);
-        $this->assertFalse($this->limiters->canSendPayload($origin));
-    }
-
-    protected function createOrigin(string $filename, int $line, bool $initialize = true, int $limit = 5)
-    {
-        $result = new Origin($filename, $line);
-
-        if ($initialize) {
-            $this->limiters->initialize($result, $limit);
-        }
-
-        return $result;
-    }
+    return $result;
 }
+
+beforeEach(function () {
+    $this->limiters = new Limiters();
+});
+
+it('initializes a limiter for an origin', function () {
+    $origins = [new Origin('test.php', 123), new Origin('test.php', 124)];
+
+    $initResults = [
+        $this->limiters->initialize($origins[0], 5),
+        $this->limiters->initialize($origins[1], 8),
+    ];
+
+    expect($initResults[0])->toEqual([0, 5]);
+    expect($initResults[1])->toEqual([0, 8]);
+});
+
+it('increments a limiter counter for an origin', function () {
+    $origin = createOrigin('test.php', 123);
+
+    $this->limiters->increment($origin);
+    $this->limiters->increment($origin);
+    [$counter, $limit] = $this->limiters->increment($origin);
+
+    expect($counter)->toEqual(3);
+});
+
+it('does not increment a limiter counter for an uninitialized origin', function () {
+    $origin = new Origin('test.php', 456);
+
+    $incrementResult = $this->limiters->increment($origin);
+
+    expect($incrementResult)->toEqual([false, false]);
+});
+
+it('determines if a payload can be sent for a given origin', function () {
+    $origin = createOrigin('test.php', 123, true, 2);
+
+    $this->limiters->increment($origin);
+    expect($this->limiters->canSendPayload($origin))->toBeTrue();
+
+    $this->limiters->increment($origin);
+    expect($this->limiters->canSendPayload($origin))->toBeFalse();
+});
