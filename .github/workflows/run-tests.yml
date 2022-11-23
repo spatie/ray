@@ -34,6 +34,10 @@ jobs:
           echo "::add-matcher::${{ runner.tool_cache }}/php.json"
           echo "::add-matcher::${{ runner.tool_cache }}/phpunit.json"
 
+      - name: Configure for PHP 8.2
+        run: composer require "illuminate/support:8.*" --no-interaction --no-update
+        if: matrix.php == '8.2' && matrix.dependency-version == 'prefer-lowest'
+
       - name: Install dependencies
         run: composer update --${{ matrix.dependency-version }} --prefer-dist --no-interaction
 
