@@ -22,7 +22,7 @@ jobs:
         uses: shivammathur/setup-php@v2
         with:
           php-version: ${{ matrix.php }}
-          extensions: dom, curl, libxml, mbstring, zip, pcntl, pdo, sqlite, pdo_sqlite, bcmath, soap, intl, gd, exif, iconv, imagick
+          extensions: dom, curl, libxml, mbstring, zip, pcntl, pdo, sqlite, pdo_sqlite, bcmath, soap, intl, gd, exif, iconv, imagick, fileinfo
           coverage: none
 
       - name: Configure for PHP 8.1
@@ -35,7 +35,7 @@ jobs:
           echo "::add-matcher::${{ runner.tool_cache }}/phpunit.json"
 
       - name: Configure for PHP 8.2
-        run: composer require "illuminate/support:8.*" --no-interaction --no-update
+        run: composer require "illuminate/support:9.*" "nesbot/carbon:^2.63" --no-interaction --no-update
         if: matrix.php == '8.2' && matrix.dependency-version == 'prefer-lowest'
 
       - name: Install dependencies
