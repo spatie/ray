@@ -27,7 +27,7 @@
     },
     "require-dev": {
         "illuminate/support": "6.x|^8.18|^9.0",
-        "nesbot/carbon": "^2.43",
+        "nesbot/carbon": "^2.63",
         "pestphp/pest": "^1.22",
         "phpstan/phpstan": "^0.12.92",
         "phpunit/phpunit": "^9.5",
