@@ -32,7 +32,7 @@ return [
 ];
 ```
 
-To make sure that Ray uses the correct file path for creating the links, you will also need to setup the `remote_path` and `local_path` variables. `remote_path` is the absolute path of your project in the Docker container. `local_path` is the absolute path of your project on the local file system.
+To make sure that Ray uses the correct file path for creating the links, you will also need to set up the `remote_path` and `local_path` variables. `remote_path` is the absolute path of your project in the Docker container. `local_path` is the absolute path of your project on the local file system.
 
 **Example:**
 In your `docker-compose.yml` you mount the volume as follows:
