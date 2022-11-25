@@ -47,7 +47,7 @@ running `pwd` inside that directory if you are on Linux).
 Add `127.0.0.1 	host.docker.internal` to `/etc/hosts`file.
 
 On Linux, you will also need to add an 'extra_hosts' parameter to your PHP container definitions to expose 'host.docker.internal'. Please make sure you are using Docker `20.03` or higher.
-```
+```yaml
 #docker-compose.yml
 
 services:
@@ -72,4 +72,13 @@ services:
     extra_hosts: # <--- this is required
       - "host.docker.internal:host-gateway" # <--- this is required
 
+```
+
+If you are using Lando, you can add this to your overrides:
+```yaml
+services:
+    appserver:
+        overrides:
+            extra_hosts:
+                - "host.docker.internal:host-gateway"
 ```
