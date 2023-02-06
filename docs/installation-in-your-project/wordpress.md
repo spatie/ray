@@ -48,10 +48,16 @@ By default WordPress loads your plugins in the following order:
 
 If you wish to debug your plugins within the Ray app it is recommended that you install the plugin into your `/wp-content/mu-plugins` directory. Further details on Must Use Plugins can be [found here](https://wordpress.org/support/article/must-use-plugins/):
 
-To install, inside the `wp-content/mu-plugins` directory run this command
+To install, inside the `wp-content/mu-plugins` directory run this command:
 
 ```bash
 git clone git@github.com:spatie/wordpress-ray
+```
+
+Next, from the just created `wordpress-ray` directory, run this command:
+
+```bash
+composer install -o --no-dev
 ```
 
 You'll then need to create `ray-loader.php` within `/wp-content/mu-plugins` and include the following code:
