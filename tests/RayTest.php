@@ -64,7 +64,7 @@ it('can send a strings that might be interpreted as callables to ray', function 
     assertMatchesOsSafeSnapshot($this->client->sentPayloads());
 });
 
-it('the ray function also works', function () {
+test('the ray function also works', function () {
     Ray::$fakeUuid = 'fakeUuid';
 
     ray('a');

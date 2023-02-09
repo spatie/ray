@@ -2,6 +2,8 @@
 
 namespace Spatie\Ray\Payloads;
 
+use Spatie\Ray\ArgumentConverter;
+
 class ApplicationLogPayload extends Payload
 {
     /** @var string */
@@ -25,7 +27,7 @@ class ApplicationLogPayload extends Payload
     {
         return [
             'value' => $this->value,
-            'context' => $this->context,
+            'context' => ArgumentConverter::convertToPrimitive($this->context),
         ];
     }
 }
