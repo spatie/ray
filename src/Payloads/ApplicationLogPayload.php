@@ -25,9 +25,14 @@ class ApplicationLogPayload extends Payload
 
     public function getContent(): array
     {
-        return [
+        $content = [
             'value' => $this->value,
-            'context' => ArgumentConverter::convertToPrimitive($this->context),
         ];
+
+        if (count($this->context)) {
+            $content['context'] = ArgumentConverter::convertToPrimitive($this->context);
+        }
+
+        return $content;
     }
 }
