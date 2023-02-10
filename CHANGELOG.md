@@ -2,6 +2,10 @@
 
 All notable changes to `ray` will be documented in this file
 
+## 1.36.1 - 2023-02-09
+
+- support log context
+
 ## 1.36.0 - 2022-08-11
 
 - preparation for upcoming feature
