@@ -2,6 +2,10 @@
 
 All notable changes to `ray` will be documented in this file
 
+## 1.37.0 - 2023-03-03
+
+- add `invade` method
+
 ## 1.36.2 - 2023-02-10
 
 - do not send context if there is none
