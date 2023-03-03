@@ -286,6 +286,50 @@ ray()->measure(function() {
 
 ![screenshot](/docs/ray/v1/images/measure-closure.jpg)
 
+## Displaying the private properties / methods
+
+Using Ray, you can easily see the value of a private property or the result of a private method.
+
+Consider this simple class:
+
+```php
+class PrivateClass
+{
+    private string $privateProperty = 'this is the value of the private property';
+
+    private function privateMethod()
+    {
+        return 'this is the result of the private method';
+    }
+}
+```
+
+Here's how you can send the value of the private property to Ray.
+
+```php
+$privateClass = new PrivateClass();
+
+ray()->invade($privateClass)->privateProperty;
+```
+
+The `invade()` method can also display the results of private methods in Ray.
+
+```php
+$privateClass = new PrivateClass();
+
+ray()->invade($privateClass)->privateMethod();
+```
+
+If you want to colorize the result, simply tack on one of the color methods.
+
+```php
+$privateClass = new PrivateClass();
+
+ray()->invade($privateClass)->privateProperty->red();
+ray()->invade($privateClass)->privateMethod()->green();
+
+```
+
 ### Working with JSON
 
 Want to display the JSON representation of anything you'd like in Ray? Use `toJson`. You can provide any value that can

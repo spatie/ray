@@ -14,6 +14,7 @@ use Spatie\Ray\Payloads\LogPayload;
 use Spatie\Ray\Ray;
 use Spatie\Ray\Settings\SettingsFactory;
 use Spatie\Ray\Tests\TestClasses\FakeClient;
+use Spatie\Ray\Tests\TestClasses\PrivateClass;
 use Spatie\TestTime\TestTime;
 
 function getNewRay(): Ray
@@ -1111,4 +1112,22 @@ it('can dump long integers as string', function () {
 
     expect($this->client->sentRequests()[0]['payloads'][0]['content']['values'])->toBe([11111111111111110]);
     expect($this->client->sentRequests()[1]['payloads'][0]['content']['values'])->toBe(["11111111111111111"]);
+});
+
+it('can invade private properties', function() {
+    $this->ray->invade(new PrivateClass())->privateProperty->red();
+
+    $sentRequests = $this->client->sentRequests();
+    expect($sentRequests)->toHaveCount(2);
+
+    expect($sentRequests[0]['payloads'][0]['content']['values'])->toBe(['this is the value of the private property']);
+});
+
+it('can invade private methods', function() {
+    $this->ray->invade(new PrivateClass())->privateMethod()->red();
+
+    $sentRequests = $this->client->sentRequests();
+    expect($sentRequests)->toHaveCount(2);
+
+    expect($sentRequests[0]['payloads'][0]['content']['values'])->toBe(['this is the result of the private method']);
 });

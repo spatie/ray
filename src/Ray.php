@@ -50,6 +50,7 @@ use Spatie\Ray\Settings\SettingsFactory;
 use Spatie\Ray\Support\Counters;
 use Spatie\Ray\Support\ExceptionHandler;
 use Spatie\Ray\Support\IgnoredValue;
+use Spatie\Ray\Support\Invador;
 use Spatie\Ray\Support\Limiters;
 use Spatie\Ray\Support\RateLimiter;
 use Symfony\Component\Stopwatch\Stopwatch;
@@ -646,6 +647,11 @@ class Ray
         }
 
         return $this;
+    }
+
+    public function invade($object): Invador
+    {
+        return new Invador($object, $this);
     }
 
     public function send(...$arguments): self

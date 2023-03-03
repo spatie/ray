@@ -32,7 +32,7 @@ To display something in Ray use the `ray()` function. It accepts everything: str
 ## Framework agnostic PHP
 
 | Call                                                | Description                                                                                                               |
-| --------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------- |
+|-----------------------------------------------------|---------------------------------------------------------------------------------------------------------------------------|
 | `ray($variable)`                                    | Display a string, array or object                                                                                         |
 | `ray($variable, $another, …)`                       | Ray accepts multiple arguments                                                                                            |
 | `ray()->backtrace()`                                | Check entire backtrace                                                                                                    |
@@ -60,6 +60,7 @@ To display something in Ray use the `ray()` function. It accepts everything: str
 | `ray()->html($html)`                                | Render a piece of HTML                                                                                                    |
 | `ray()->image($path)`                               | Display an image from a path or URL                                                                                       |
 | `ray()->if(true, callback)`                         | Conditionally show things based on a truthy value or callable                                                             |
+| `ray()->invade(object)->privateProperty`            | Display the value of a private property or the result of a private method                                                 |
 | `ray()->json($json, $another, …)`                   | Send one or more valid JSON strings to Ray                                                                                |
 | `ray(…)->label($name)`                              | Set the label name                                                                                                        |
 | `ray(…)->large()`                                   | Output text bigger                                                                                                        |
