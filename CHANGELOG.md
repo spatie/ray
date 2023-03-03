@@ -2,6 +2,12 @@
 
 All notable changes to `ray` will be documented in this file
 
+## 1.36.2 - 2023-02-10
+
+- do not send context if there is none
+
+**Full Changelog**: https://github.com/spatie/ray/compare/1.36.1...1.36.2
+
 ## 1.36.1 - 2023-02-09
 
 - support log context
