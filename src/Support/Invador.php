@@ -38,6 +38,5 @@ class Invador
         $result = $method->invoke($this->obj, ...$params);
 
         return $this->ray->send($result);
-
     }
 }
