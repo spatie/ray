@@ -9,3 +9,6 @@ parameters:
 
 	ignoreErrors:
 		- '#Unsafe usage of new static\(\)#'
+		-
+		    message: '#Undefined variable\: \$this#'
+		    path: test
