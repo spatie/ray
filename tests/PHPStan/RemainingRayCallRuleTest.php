@@ -24,8 +24,8 @@ class RemainingRayCallRuleTest extends RuleTestCase
                 Remaining ray call in application code
                     💡 Remove ray call
                 EOF,
-                $line
-            ]
+                $line,
+            ],
         ]);
     }
 

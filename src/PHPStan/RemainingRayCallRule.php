@@ -16,7 +16,7 @@ class RemainingRayCallRule implements Rule
 
     public function processNode(Node $node, Scope $scope): array
     {
-        if (!$node instanceof Node\Expr\FuncCall) {
+        if (! $node instanceof Node\Expr\FuncCall) {
             return [];
         }
 
@@ -27,7 +27,7 @@ class RemainingRayCallRule implements Rule
         return [
             RuleErrorBuilder::message('Remaining ray call in application code')
                 ->tip('Remove ray call')
-                ->build()
+                ->build(),
         ];
     }
 }
