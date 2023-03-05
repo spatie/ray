@@ -26,7 +26,6 @@ class RemainingRayCallRule implements Rule
 
         return [
             RuleErrorBuilder::message('Remaining ray call in application code')
-                ->tip('Remove ray call')
                 ->build(),
         ];
     }

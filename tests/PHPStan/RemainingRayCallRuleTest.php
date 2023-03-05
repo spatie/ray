@@ -20,10 +20,7 @@ class RemainingRayCallRuleTest extends RuleTestCase
     {
         $this->analyse([$path], [
             [
-                <<<'EOF'
-                Remaining ray call in application code
-                    💡 Remove ray call
-                EOF,
+                'Remaining ray call in application code',
                 $line,
             ],
         ]);
