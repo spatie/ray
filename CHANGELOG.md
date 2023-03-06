@@ -2,6 +2,14 @@
 
 All notable changes to `ray` will be documented in this file
 
+## 1.37.1 - 2023-03-06
+
+### What's Changed
+
+- [1.x] Add phpstan rule to detect ray calls by @abenerd in https://github.com/spatie/ray/pull/781
+
+**Full Changelog**: https://github.com/spatie/ray/compare/1.37.0...1.37.1
+
 ## 1.37.0 - 2023-03-03
 
 - add `invade` method
