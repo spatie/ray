@@ -1,14 +1,6 @@
 parameters:
 	ignoreErrors:
 		-
-			message: "#^Undefined variable\\: \\$this$#"
-			path: */tests/*.php
-		-
-			message: "#^Function base_path not found\\.$#"
-			count: 1
-			path: src/Ray.php
-
-		-
 			message: "#^Function app not found\\.$#"
 			count: 1
 			path: src/helpers.php

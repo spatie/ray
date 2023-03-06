@@ -29,7 +29,7 @@
         "illuminate/support": "6.x|^8.18|^9.0",
         "nesbot/carbon": "^2.63",
         "pestphp/pest": "^1.22",
-        "phpstan/phpstan": "^0.12.92",
+        "phpstan/phpstan": "^1.10",
         "phpunit/phpunit": "^9.5",
         "spatie/phpunit-snapshot-assertions": "^4.2",
         "spatie/test-time": "^1.2"
