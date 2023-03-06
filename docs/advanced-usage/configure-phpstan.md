@@ -12,7 +12,7 @@ rules:
 
 All remaining ray calls would then be reported by [phpstan](https://phpstan.org)
 
-![screenshot](/docs/ray/v1/images/phpstan-failing-result.png)
+![screenshot](/docs/ray/v1/images/phpstan-failing-result.jpg)
 
 
 
