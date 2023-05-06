@@ -24,6 +24,7 @@ To display something in Ray use the `ray()` function. It accepts everything: str
 - [JavaScript](#content-javascript)
 - [NodeJS](#content-nodejs)
 - [Vue](#content-vue)
+- [React](#content-react)
 - [Go](#content-go)
 - [AlpineJS](#content-alpinejs)
   - [Updating a Ray instance](#content-updating-a-ray-instance-1)
@@ -299,6 +300,13 @@ Read more on [Craft](/docs/ray/v1/usage/craft)
 | `this.$ray().ref(name)` | Display the `innerHTML` of a named ref in Ray |
 | `this.$ray().track(name)` | Display changes to a component's data variable in real time |
 | `this.$ray().untrack(name)` | Stop displaying changes to a component's data variable |
+
+## React
+
+| Call | Description |
+| --- | --- |
+| `useRay()` | React hook to send data to the Ray app whenever it updates |
+| `useRayWithElement()` | React hook to send the contents of an element ref to Ray, optionally updating the item in place |.
 
 ## Go
 
