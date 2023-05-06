@@ -17,6 +17,7 @@ To send information to the Ray desktop app, you'll need to install a package or 
 - [NodeJS](/docs/ray/v1/installation-in-your-project/nodejs)
 - [Alpine.js](/docs/ray/v1/installation-in-your-project/alpinejs)
 - [Vue](/docs/ray/v1/installation-in-your-project/vue)
+- [React](/docs/ray/v1/installation-in-your-project/react)
 - [Go](/docs/ray/v1/installation-in-your-project/go)
 - [Bash](/docs/ray/v1/installation-in-your-project/bash)
 - [Express.js](/docs/ray/v1/installation-in-your-project/expressjs)
