@@ -2,6 +2,10 @@
 
 All notable changes to `ray` will be documented in this file
 
+## 1.37.2 - 2023-05-17
+
+- improve handling of Pest test screen names
+
 ## 1.37.1 - 2023-03-06
 
 ### What's Changed
