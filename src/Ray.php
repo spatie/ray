@@ -170,9 +170,22 @@ class Ray
 
     public function newScreen(string $name = ''): self
     {
+        $name = $this->sanitizeNewScreenName($name);
+
         $payload = new NewScreenPayload($name);
 
         return $this->sendRequest($payload);
+    }
+
+    protected function sanitizeNewScreenName(string $name): string
+    {
+        if (strpos($name, '__pest_evaluable_') === 0) {
+            $name = substr($name, 17);
+
+            $name = str_replace('_', ' ', $name);
+        }
+
+        return $name;
     }
 
     public function clearAll(): self

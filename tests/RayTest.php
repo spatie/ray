@@ -367,6 +367,15 @@ it('can send the new screen payload', function () {
     assertMatchesOsSafeSnapshot($this->client->sentPayloads());
 });
 
+it('can sanitize the name of a new screen', function() {
+   $this->ray->newScreen('__pest_evaluable_this_is_the_test_name');
+
+   $usedName = $this->client->sentPayloads()[0]['payloads'][0]['content']['name'];
+
+   expect($usedName)->toBe('this is the test name');
+});
+
+
 it('can send the clear screen payload', function () {
     $this->ray->clearScreen();
 
