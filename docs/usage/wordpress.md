@@ -50,6 +50,16 @@ ray()->showWordPressErrors();
 
 To stop showing errors, call `stopShowingWordPressErrors()`.
 
+## Displaying WordPress hooks
+
+To display all WordPress hooks, call `showHooks()`
+
+```php
+ray()->showHooks();
+```
+
+To stop showing hooks, call `stopShowingHooks()`.
+
 ## Production environments
 
 By default, Ray is disabled in production environments. If you want to use Ray in a production environment, you must explicitly enable it with `ray()->enable()`.
