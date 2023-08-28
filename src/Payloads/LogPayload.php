@@ -51,7 +51,7 @@ class LogPayload extends Payload
         ];
     }
 
-    protected function getClipboardData(mixed $value): string
+    protected function getClipboardData($value): string
     {
         if (is_string($value) || is_numeric($value)) {
             return (string) $value;
