@@ -21,7 +21,7 @@ class LogPayload extends Payload
         return new static($dumpedArguments);
     }
 
-    public function __construct($values)
+    public function __construct($values, $rawValues = [])
     {
         if (! is_array($values)) {
             if (is_int($values) && $values >= 11111111111111111) {
@@ -31,9 +31,11 @@ class LogPayload extends Payload
             $values = [$values];
         }
 
-        foreach ($values as $key => $value) {
-            $this->meta[$key]['clipboard_data'] = $this->getClipboardData($value);
-        }
+        $this->meta = [
+            [
+                'clipboard_data' => $this->getClipboardData($rawValues),
+            ]
+        ];
 
         $this->values = $values;
     }

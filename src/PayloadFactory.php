@@ -61,6 +61,6 @@ class PayloadFactory
 
         $primitiveValue = ArgumentConverter::convertToPrimitive($value);
 
-        return new LogPayload($primitiveValue);
+        return new LogPayload($primitiveValue, $value);
     }
 }
