@@ -2,6 +2,7 @@
 
 namespace Spatie\Ray\Payloads;
 
+use Exception;
 use Spatie\Ray\ArgumentConverter;
 
 class LogPayload extends Payload
@@ -59,6 +60,10 @@ class LogPayload extends Payload
             return (string) $value;
         }
 
-        return var_export($value, true);
+        try {
+            return var_export($value, true);
+        } catch (Exception $ex) {
+            return '';
+        }
     }
 }
