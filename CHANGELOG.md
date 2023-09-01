@@ -2,6 +2,20 @@
 
 All notable changes to `ray` will be documented in this file
 
+## 1.37.3 - 2023-09-01
+
+### What's Changed
+
+- Bump dependabot/fetch-metadata from 1.4.0 to 1.5.1 by @dependabot in https://github.com/spatie/ray/pull/800
+- Bump dependabot/fetch-metadata from 1.5.1 to 1.6.0 by @dependabot in https://github.com/spatie/ray/pull/806
+- Feature/clipboard by @timvandijck in https://github.com/spatie/ray/pull/829
+
+### New Contributors
+
+- @timvandijck made their first contribution in https://github.com/spatie/ray/pull/829
+
+**Full Changelog**: https://github.com/spatie/ray/compare/1.37.2...1.37.3
+
 ## 1.37.2 - 2023-05-17
 
 - improve handling of Pest test screen names
