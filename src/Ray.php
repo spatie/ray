@@ -682,7 +682,7 @@ class Ray
                 return $argument;
             }
 
-            if (! is_callable($argument)) {
+            if (! $argument instanceof Closure) {
                 return $argument;
             }
 
