@@ -2,6 +2,12 @@
 
 All notable changes to `ray` will be documented in this file
 
+## 1.37.4 - 2023-09-04
+
+- Fix a bug with Livewire 3 components being rendered instead of sent to Ray as a class
+
+**Full Changelog**: https://github.com/spatie/ray/compare/1.37.3...1.37.4
+
 ## 1.37.3 - 2023-09-01
 
 ### What's Changed
