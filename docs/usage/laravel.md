@@ -5,7 +5,7 @@ weight: 3
 
 Inside a Laravel application, you can use all methods from [the framework agnostic version](/docs/ray/v1/usage/framework-agnostic-php-project).
 
-Additionally, you can use these Laravel specific methods.
+Additionally, you can use these Laravel specific methods. Sometimes you may want to log something to ray and get the resulting return value of your closure instead of an instance of `Ray`. You can achieve this by adding a return value type to your closure. See the examples for `showQueries()` and `countQueries()` below. Any other methods that accept a closure will function the same way.
 
 ### Showing queries
 
@@ -31,13 +31,17 @@ ray()->stopShowingQueries();
 User::firstWhere('email', 'jane@example.com'); // this query won't be displayed.
 ```
 
-Alternatively, you can pass a callable to `showQueries`. Only the queries performed inside that callable will be displayed in Ray.
+Alternatively, you can pass a callable to `showQueries`. Only the queries performed inside that callable will be displayed in Ray. If you include a return type in the callable, the return value will also be returned.
 
 ```php
 User::all(); // this query won't be displayed.
 
 ray()->showQueries(function() {
     User::all(); // this query will be displayed.
+});
+
+$users = ray()->showQueries(function (): Illuminate\Support\Collection {
+    return User::all(); // this query will be displayed and the collection will be returned.
 });
 
 User::all(); // this query won't be displayed.
@@ -47,11 +51,17 @@ User::all(); // this query won't be displayed.
 
 If you're interested in how many queries a given piece of code executes, and what the runtime of those queries is, you can use `countQueries`. It expects you to pass a closure in which all the executed queries will be counted.
 
+Similar to `showQueries`, you can also add a return type to your closure to return the result of the closure.
+
 ```php
 ray()->countQueries(function() {
     User::all();
     User::all();
     User::all();
+});
+
+$user = ray()->countQueries(function (): User {
+    return User::where('condition', true)->first();
 });
 ```
 
@@ -59,7 +69,7 @@ ray()->countQueries(function() {
 
 ### Manually showing a query
 
-You can manually send a query to Ray by calling `ray()` on a query. 
+You can manually send a query to Ray by calling `ray()` on a query.
 
 ```php
 User::query()
@@ -367,7 +377,7 @@ You can use the `@ray` directive to easily send variables to Ray from inside a B
 
 ### Using Ray with test responses
 
-When testing responses, you can send a `TestResponse` to Ray using the `ray()` method. 
+When testing responses, you can send a `TestResponse` to Ray using the `ray()` method.
 
 `ray()` is chainable, so you can chain on any of Laravel's assertion methods.
 
@@ -379,7 +389,7 @@ Route::get('api/my-endpoint', function () {
 
 // somewhere in a test
 /** test */
-public function my_endpoint_works_correctly() 
+public function my_endpoint_works_correctly()
 {
     $this
         ->get('api/my-endpoint')
