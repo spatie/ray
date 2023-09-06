@@ -4,7 +4,6 @@ namespace Spatie\Ray\Payloads;
 
 use Exception;
 use Spatie\Ray\ArgumentConverter;
-use Symfony\Component\VarExporter\VarExporter;
 
 class LogPayload extends Payload
 {
@@ -72,7 +71,7 @@ class LogPayload extends Payload
         }
     }
 
-    function isRecursive($value): bool
+    public function isRecursive($value): bool
     {
         $dump = print_r($value, true);
 
