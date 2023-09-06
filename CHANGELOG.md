@@ -2,6 +2,19 @@
 
 All notable changes to `ray` will be documented in this file
 
+## 1.37.5 - 2023-09-06
+
+### What's Changed
+
+- Add details about returning the closure return value by @grantholle in https://github.com/spatie/ray/pull/834
+- Check for recursiveness before creating clipboard data.
+
+### New Contributors
+
+- @grantholle made their first contribution in https://github.com/spatie/ray/pull/834
+
+**Full Changelog**: https://github.com/spatie/ray/compare/1.37.4...1.37.5
+
 ## 1.37.4 - 2023-09-04
 
 - Fix a bug with Livewire 3 components being rendered instead of sent to Ray as a class
