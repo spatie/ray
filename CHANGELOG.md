@@ -2,6 +2,14 @@
 
 All notable changes to `ray` will be documented in this file
 
+## 1.37.6 - 2023-09-08
+
+### What's Changed
+
+- Fix/issue 832 by @timvandijck in https://github.com/spatie/ray/pull/839
+
+**Full Changelog**: https://github.com/spatie/ray/compare/1.37.5...1.37.6
+
 ## 1.37.5 - 2023-09-06
 
 ### What's Changed
