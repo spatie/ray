@@ -65,18 +65,20 @@ class PlainTextDumper
 
             case 'array':
                 if (self::$depth <= $level) {
-                    self::$output .= '[...]';
+
+                    self::$output .= '[...],';
                 } elseif (empty($var)) {
-                    self::$output .= '[]';
+                    self::$output .= '[],';
                 } else {
                     $keys = array_keys($var);
                     $spaces = str_repeat(' ', $level * 4);
-                    self::$output .= "[\n" . $spaces;
+                    self::$output .= "[" . $spaces;
                     foreach ($keys as $key) {
                         self::$output .= "\n" . $spaces . '    ';
                         self::dumpInternal($key, 0);
                         self::$output .= ' => ';
                         self::dumpInternal($var[$key], $level + 1);
+                        self::$output .= ',';
                     }
                     self::$output .= "\n" . $spaces . ']';
                 }
