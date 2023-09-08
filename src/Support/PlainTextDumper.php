@@ -35,22 +35,28 @@ class PlainTextDumper
         switch (gettype($var)) {
             case 'boolean':
                 self::$output .= $var ? 'true' : 'false';
+
                 break;
             case 'double':
             case 'integer':
                 self::$output .= "$var";
+
                 break;
             case 'string':
                 self::$output .= "'" . addslashes($var) . "'";
+
                 break;
             case 'resource':
                 self::$output .= '{resource}';
+
                 break;
             case 'NULL':
                 self::$output .= "null";
+
                 break;
             case 'unknown type':
                 self::$output .= '{unknown}';
+
                 break;
             case 'array':
                 if (self::$depth <= $level) {
@@ -69,6 +75,7 @@ class PlainTextDumper
                     }
                     self::$output .= "\n" . $spaces . ']';
                 }
+
                 break;
             case 'object':
                 if (($id = array_search($var, self::$objects, true)) !== false) {
@@ -82,7 +89,7 @@ class PlainTextDumper
                     self::$output .= "$className#$id\n" . $spaces . '(';
                     if ('__PHP_Incomplete_Class' !== get_class($var) && method_exists($var, '__debugInfo')) {
                         $members = $var->__debugInfo();
-                        if (!is_array($members)) {
+                        if (! is_array($members)) {
                             throw new Exception('vardumper_not_array');
                         }
                     } else {
@@ -95,6 +102,7 @@ class PlainTextDumper
                     }
                     self::$output .= "\n" . $spaces . ')';
                 }
+
                 break;
         }
     }
