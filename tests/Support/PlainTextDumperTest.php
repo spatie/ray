@@ -42,11 +42,13 @@ it('can dump scalar types', function () {
 });
 
 it('can handle circular references', function () {
-    class A {
+    class A
+    {
         public $b;
     }
 
-    class B {
+    class B
+    {
         public $a;
     }
 
