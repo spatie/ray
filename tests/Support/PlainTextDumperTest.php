@@ -40,3 +40,21 @@ it('can dump scalar types', function () {
     $result = PlainTextDumper::dump(true);
     assertMatchesOsSafeSnapshot($result);
 });
+
+it('can handle circular references', function () {
+    class A {
+        public $b;
+    }
+
+    class B {
+        public $a;
+    }
+
+    $a = new A();
+    $b = new B();
+    $a->b = $b;
+    $b->a = $a;
+
+    $result = PlainTextDumper::dump($a);
+    assertMatchesOsSafeSnapshot($result);
+});
