@@ -4,6 +4,7 @@ namespace Spatie\Ray\Payloads;
 
 use Exception;
 use Spatie\Ray\ArgumentConverter;
+use Spatie\Ray\Support\PlainTextDumper;
 
 class LogPayload extends Payload
 {
@@ -60,21 +61,10 @@ class LogPayload extends Payload
             return (string) $value;
         }
 
-        if ($this->isRecursive($value)) {
-            return '';
-        }
-
         try {
-            return var_export($value, true);
+            return PlainTextDumper::dump($value);
         } catch (Exception $ex) {
             return '';
         }
-    }
-
-    public function isRecursive($value): bool
-    {
-        $dump = print_r($value, true);
-
-        return (strpos($dump, '*RECURSION*') !== false);
     }
 }
