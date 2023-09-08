@@ -2,6 +2,12 @@
 
 All notable changes to `ray` will be documented in this file
 
+## 1.37.7 - 2023-09-08
+
+- Fix issue with outputing arrays for copying.
+
+**Full Changelog**: https://github.com/spatie/ray/compare/1.37.6...1.37.7
+
 ## 1.37.6 - 2023-09-08
 
 ### What's Changed
