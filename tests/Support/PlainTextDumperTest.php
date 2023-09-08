@@ -11,7 +11,7 @@ it('can dump an array', function () {
         [
             'name' => 'Foo',
             'age' => 42,
-        ]
+        ],
     ];
 
     $result = PlainTextDumper::dump($test);
