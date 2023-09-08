@@ -17,7 +17,7 @@ class PlainTextDumper
      * @return string the string representation of the variable
      * @throws Exception
      */
-    public static function dump($var, int $depth = 10): string
+    public static function dump($var, int $depth = 5): string
     {
         self::$output = '';
         self::$objects = [];
