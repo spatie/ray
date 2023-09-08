@@ -35,15 +35,18 @@ class PlainTextDumper
         switch (gettype($var)) {
             case 'boolean':
                 self::$output .= $var ? 'true' : 'false';
+
                 break;
 
             case 'double':
             case 'integer':
                 self::$output .= "$var";
+
                 break;
 
             case 'string':
                 self::$output .= "'" . addslashes($var) . "'";
+
                 break;
 
             case 'resource':
@@ -52,10 +55,12 @@ class PlainTextDumper
                 break;
             case 'NULL':
                 self::$output .= "null";
+
                 break;
 
             case 'unknown type':
                 self::$output .= '{unknown}';
+
                 break;
 
             case 'array':
@@ -75,6 +80,7 @@ class PlainTextDumper
                     }
                     self::$output .= "\n" . $spaces . ']';
                 }
+
                 break;
 
             case 'object':
@@ -102,6 +108,7 @@ class PlainTextDumper
                     }
                     self::$output .= "\n" . $spaces . ')';
                 }
+
                 break;
 
         }
