@@ -2,6 +2,14 @@
 
 All notable changes to `ray` will be documented in this file
 
+## 1.38.0 - 2023-09-12
+
+### What's Changed
+
+- Add expand payload by @freekmurze in https://github.com/spatie/ray/pull/843
+
+**Full Changelog**: https://github.com/spatie/ray/compare/1.37.7...1.38.0
+
 ## 1.37.7 - 2023-09-08
 
 - Fix issue with outputing arrays for copying.
