@@ -1140,3 +1140,29 @@ it('can invade private methods', function () {
 
     expect($sentRequests[0]['payloads'][0]['content']['values'])->toBe(['this is the result of the private method']);
 });
+
+it('can send the expand payload', function(
+    ?array $expandArguments,
+    ?int $expectedLevel,
+    array $expectedKeys
+) {
+
+    $expandArguments === null
+        ? $this->ray->expand()
+        : $this->ray->expand(...$expandArguments);
+
+    $sentRequests = $this->client->sentRequests();
+
+    expect($sentRequests)->toHaveCount(1);
+
+    expect($sentRequests[0]['payloads'][0]['content']['level'])->toBe($expectedLevel);
+    expect($sentRequests[0]['payloads'][0]['content']['keys'])->toBe($expectedKeys);
+})->with([
+    [null, 1, []],
+    [[1], 1, []],
+    [[1,2,3], 3, []],
+    [['key'], null, ['key']],
+    [['key', 'anotherKey'], null, ['key', 'anotherKey']],
+    [['key', 'anotherKey', 2], 2, ['key', 'anotherKey']],
+    [['key', 'anotherKey', 2, 3], 3, ['key', 'anotherKey']],
+]);

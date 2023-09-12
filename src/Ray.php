@@ -24,6 +24,7 @@ use Spatie\Ray\Payloads\CreateLockPayload;
 use Spatie\Ray\Payloads\CustomPayload;
 use Spatie\Ray\Payloads\DecodedJsonPayload;
 use Spatie\Ray\Payloads\ExceptionPayload;
+use Spatie\Ray\Payloads\ExpandPayload;
 use Spatie\Ray\Payloads\FileContentsPayload;
 use Spatie\Ray\Payloads\HideAppPayload;
 use Spatie\Ray\Payloads\HidePayload;
@@ -313,6 +314,17 @@ class Ray
         $event = $stopwatch->stop('closure');
 
         $payload = new MeasurePayload('closure', $event);
+
+        return $this->sendRequest($payload);
+    }
+
+    public function expand(...$levelOrKey): self
+    {
+        if (empty($levelOrKey)) {
+            $levelOrKey = [1];
+        }
+
+        $payload = new ExpandPayload($levelOrKey);
 
         return $this->sendRequest($payload);
     }
