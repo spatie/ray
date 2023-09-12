@@ -1141,7 +1141,7 @@ it('can invade private methods', function () {
     expect($sentRequests[0]['payloads'][0]['content']['values'])->toBe(['this is the result of the private method']);
 });
 
-it('can send the expand payload', function(
+it('can send the expand payload', function (
     ?array $expandArguments,
     ?int $expectedLevel,
     array $expectedKeys
