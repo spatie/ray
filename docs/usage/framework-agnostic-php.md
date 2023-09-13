@@ -28,10 +28,17 @@ When sending an array or object to Ray, it will be displayed in a collapsed stat
 To open up a node, you can use the `expand` method. 
 
 ```php
-ray($arrayOrObject)->expand(); // will open up the first level of nodes
-ray($arrayOrObject)->expand(3); // will open up the first three levels of nodes
-ray($arrayOrObject)->expand('myKey'); // will open the node with key named `myKey`
-ray($arrayOrObject)->expand('myKey', 'anotherKey'); // open up all nodes with the given names
+// will open up the first level of nodes
+ray($arrayOrObject)->expand(); 
+
+// will open up the first three levels of nodes
+ray($arrayOrObject)->expand(3); 
+
+// will open the node with key named `myKey`
+ray($arrayOrObject)->expand('myKey'); 
+
+// open up all nodes with the given names
+ray($arrayOrObject)->expand('myKey', 'anotherKey'); 
 
 // you can use dot notation to expand deeper nodes
 ray($arrayOrObject)->expand('myKey.nestedKey');
