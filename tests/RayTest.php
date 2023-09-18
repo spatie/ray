@@ -1166,3 +1166,13 @@ it('can send the expand payload', function (
     [['key', 'anotherKey', 2], 2, ['key', 'anotherKey']],
     [['key', 'anotherKey', 2, 3], 3, ['key', 'anotherKey']],
 ]);
+
+it('it has a method to expand everything', function () {
+    $this->ray->expandAll();
+
+    $sentRequests = $this->client->sentRequests();
+
+    expect($sentRequests)->toHaveCount(1);
+
+    expect($sentRequests[0]['payloads'][0]['content']['level'])->toBe(999);
+});

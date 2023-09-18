@@ -44,6 +44,8 @@ ray($arrayOrObject)->expand('myKey', 'anotherKey');
 ray($arrayOrObject)->expand('myKey.nestedKey');
 ```
 
+You can also use the `expandAll()` method to expand all levels.
+
 ### Using colors
 
 You can colorize things you sent to ray by using one of the color functions.

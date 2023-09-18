@@ -329,6 +329,11 @@ class Ray
         return $this->sendRequest($payload);
     }
 
+    public function expandAll(): self
+    {
+        return $this->expand(999);
+    }
+
     public function stopTime(string $stopwatchName = ''): self
     {
         if ($stopwatchName === '') {
