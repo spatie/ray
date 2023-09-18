@@ -2,6 +2,10 @@
 
 All notable changes to `ray` will be documented in this file
 
+## 1.39.0 - 2023-09-18
+
+- add `expandAll()`
+
 ## 1.38.0 - 2023-09-12
 
 ### What's Changed
