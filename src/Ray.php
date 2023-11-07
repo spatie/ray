@@ -105,7 +105,7 @@ class Ray
     public static $projectName = '';
 
     /** @var Closure|null */
-    public static null|Closure $beforeSendRequest = null;
+    public static Closure|null $beforeSendRequest = null;
 
     public static function create(Client $client = null, string $uuid = null): self
     {
@@ -859,7 +859,7 @@ class Ray
         self::rateLimiter()->notify();
     }
 
-    public static function beforeSendRequest(null|Closure $closure): void
+    public static function beforeSendRequest(Closure|null $closure): void
     {
         static::$beforeSendRequest = $closure;
     }
