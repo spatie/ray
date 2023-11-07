@@ -859,7 +859,7 @@ class Ray
         self::rateLimiter()->notify();
     }
 
-    public static function beforeSendRequest(Closure $closure): void
+    public static function beforeSendRequest(null|Closure $closure): void
     {
         static::$beforeSendRequest = $closure;
     }
