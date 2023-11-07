@@ -1176,3 +1176,17 @@ it('it has a method to expand everything', function () {
 
     expect($sentRequests[0]['payloads'][0]['content']['level'])->toBe(999);
 });
+
+it('can add a closure for before send and actually calls it', function () {
+    $this->closureCalled = false;
+
+    $this->ray::beforeSendRequest(function () {
+        $this->closureCalled = true;
+    });
+
+    $this->ray->send(function ($ray) {
+        $ray->text('Hello world');
+    });
+
+    expect($this->closureCalled)->toBeTrue();
+});

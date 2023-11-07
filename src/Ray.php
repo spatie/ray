@@ -817,7 +817,7 @@ class Ray
         ], $meta);
 
         if ($closure = static::$beforeSendRequest) {
-            $closure($payloads, $meta);
+            $closure($payloads, $allMeta);
         }
 
         foreach ($payloads as $payload) {
