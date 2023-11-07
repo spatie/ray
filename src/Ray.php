@@ -105,7 +105,7 @@ class Ray
     public static $projectName = '';
 
     /** @var Closure|null */
-    public static ?Closure $beforeSendRequest = null;
+    public static null|Closure $beforeSendRequest = null;
 
     public static function create(Client $client = null, string $uuid = null): self
     {
