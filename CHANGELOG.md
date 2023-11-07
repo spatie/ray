@@ -2,6 +2,15 @@
 
 All notable changes to `ray` will be documented in this file
 
+## 1.40.0 - 2023-11-07
+
+### What's Changed
+
+- Add support for calling closures before doing a ray request by @SebastiaanKloos in https://github.com/spatie/ray/pull/859
+- Bump stefanzweifel/git-auto-commit-action from 4 to 5 by @dependabot in https://github.com/spatie/ray/pull/850
+
+**Full Changelog**: https://github.com/spatie/ray/compare/1.39.0...1.40.0
+
 ## 1.39.0 - 2023-09-18
 
 - add `expandAll()`
