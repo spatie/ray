@@ -2,6 +2,20 @@
 
 All notable changes to `ray` will be documented in this file
 
+## 1.40.1 - 2023-11-20
+
+### What's Changed
+
+- Add showDuplicateQueries() to reference page by @AndreasHerss in https://github.com/spatie/ray/pull/865
+- Implement cURL Handle Caching by @JSlush611 in https://github.com/spatie/ray/pull/864
+
+### New Contributors
+
+- @AndreasHerss made their first contribution in https://github.com/spatie/ray/pull/865
+- @JSlush611 made their first contribution in https://github.com/spatie/ray/pull/864
+
+**Full Changelog**: https://github.com/spatie/ray/compare/1.40.0...1.40.1
+
 ## 1.40.0 - 2023-11-07
 
 ### What's Changed
