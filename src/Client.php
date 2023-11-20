@@ -144,7 +144,7 @@ class Client
 
     protected function getCurlHandle(string $method, string $fullUrl)
     {
-        if (!$this->curlHandle) {
+        if (! $this->curlHandle) {
             $this->curlHandle = curl_init();
         }
 
