@@ -19,6 +19,9 @@ class Client
     /** @var string */
     protected $fingerprint;
 
+    /** @var mixed */
+    protected $curlHandle = null;
+
     public function __construct(int $portNumber = 23517, string $host = 'localhost')
     {
         $this->fingerprint = $host . ':' . $portNumber;
@@ -26,6 +29,14 @@ class Client
         $this->portNumber = $portNumber;
 
         $this->host = $host;
+    }
+
+    public function __destruct()
+    {
+        if ($this->curlHandle) {
+            curl_close($this->curlHandle);
+            $this->curlHandle = null;
+        }
     }
 
     public function serverIsAvailable(): bool
@@ -55,10 +66,6 @@ class Client
 
             static::$cache[$this->fingerprint] = [$success, $expiresAt];
         } finally {
-            if (isset($curlHandle)) {
-                curl_close($curlHandle);
-            }
-
             return $success ?? false;
         }
     }
@@ -69,25 +76,19 @@ class Client
             return;
         }
 
-        try {
-            $curlHandle = $this->getCurlHandleForUrl('get', '');
+        $curlHandle = $this->getCurlHandleForUrl('get', '');
 
-            $curlError = null;
+        $curlError = null;
 
-            curl_setopt($curlHandle, CURLOPT_POSTFIELDS, $request->toJson());
-            curl_exec($curlHandle);
+        curl_setopt($this->curlHandle, CURLOPT_POSTFIELDS, $request->toJson());
+        curl_exec($curlHandle);
 
-            if (curl_errno($curlHandle)) {
-                $curlError = curl_error($curlHandle);
-            }
+        if (curl_errno($curlHandle)) {
+            $curlError = curl_error($curlHandle);
+        }
 
-            if ($curlError) {
-                // do nothing for now
-            }
-        } finally {
-            if (isset($curlHandle)) {
-                curl_close($curlHandle);
-            }
+        if ($curlError) {
+            // do nothing for now
         }
     }
 
@@ -131,8 +132,6 @@ class Client
             if ($exception instanceof StopExecutionRequested) {
                 throw $exception;
             }
-        } finally {
-            curl_close($curlHandle);
         }
 
         return false;
@@ -145,28 +144,31 @@ class Client
 
     protected function getCurlHandle(string $method, string $fullUrl)
     {
-        $curlHandle = curl_init();
+        if (!$this->curlHandle) {
+            $this->curlHandle = curl_init();
+        }
 
-        curl_setopt($curlHandle, CURLOPT_URL, $fullUrl);
+        curl_reset($this->curlHandle);
+        curl_setopt($this->curlHandle, CURLOPT_URL, $fullUrl);
 
-        curl_setopt($curlHandle, CURLOPT_HTTPHEADER, array_merge([
+        curl_setopt($this->curlHandle, CURLOPT_HTTPHEADER, array_merge([
             'Accept: application/json',
             'Content-Type: application/json',
         ]));
 
-        curl_setopt($curlHandle, CURLOPT_USERAGENT, 'Ray 1.0');
-        curl_setopt($curlHandle, CURLOPT_RETURNTRANSFER, true);
-        curl_setopt($curlHandle, CURLOPT_TIMEOUT, 2);
-        curl_setopt($curlHandle, CURLOPT_SSL_VERIFYPEER, true);
-        curl_setopt($curlHandle, CURLOPT_HTTP_VERSION, CURL_HTTP_VERSION_1_1);
-        curl_setopt($curlHandle, CURLOPT_ENCODING, '');
-        curl_setopt($curlHandle, CURLINFO_HEADER_OUT, true);
-        curl_setopt($curlHandle, CURLOPT_FAILONERROR, true);
+        curl_setopt($this->curlHandle, CURLOPT_USERAGENT, 'Ray 1.0');
+        curl_setopt($this->curlHandle, CURLOPT_RETURNTRANSFER, true);
+        curl_setopt($this->curlHandle, CURLOPT_TIMEOUT, 2);
+        curl_setopt($this->curlHandle, CURLOPT_SSL_VERIFYPEER, true);
+        curl_setopt($this->curlHandle, CURLOPT_HTTP_VERSION, CURL_HTTP_VERSION_1_1);
+        curl_setopt($this->curlHandle, CURLOPT_ENCODING, '');
+        curl_setopt($this->curlHandle, CURLINFO_HEADER_OUT, true);
+        curl_setopt($this->curlHandle, CURLOPT_FAILONERROR, true);
 
         if ($method === 'post') {
-            curl_setopt($curlHandle, CURLOPT_POST, true);
+            curl_setopt($this->curlHandle, CURLOPT_POST, true);
         }
 
-        return $curlHandle;
+        return $this->curlHandle;
     }
 }
