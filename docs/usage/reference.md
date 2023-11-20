@@ -125,6 +125,8 @@ Read more on [Framework agnostic PHP](/docs/ray/v1/usage/framework-agnostic-php-
 | `ray()->stopShowingJobs()` | Stop displaying jobs  |
 | `ray()->showQueries()` | Display all queries that are executed  |
 | `ray()->showQueries(callable)` | Display all queries that are executed within a callable |
+| `ray()->showDuplicateQueries()` | Display all duplicate queries |
+| `ray()->showDuplicateQueries(callable)` | Display all duplicate queries that are executed within a callable |
 | `ray()->slowQueries(N)` | Display all queries that take longer than N milliseconds to execute |
 | `ray()->showSlowQueries(N)` | Display all queries that take longer than N milliseconds to execute |
 | `ray()->countQueries(callable)` | Count all queries that are executed within a callable |
