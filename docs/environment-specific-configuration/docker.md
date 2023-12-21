@@ -83,9 +83,9 @@ services:
                 - "host.docker.internal:host-gateway"
 ```
 
-You will, probably need to open your *GatewayPorts* inside your ssh config. 
+If it does not work after that, you could try to open your *GatewayPorts* inside your ssh config. 
 
-Go to your ssh config : 
+Go to your SSH config: 
 
 ```shell
 nano /etc/hosts/sshd_config
