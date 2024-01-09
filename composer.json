@@ -31,6 +31,7 @@
         "pestphp/pest": "^1.22",
         "phpstan/phpstan": "^1.10",
         "phpunit/phpunit": "^9.5",
+        "rector/rector": "^0.18.4",
         "spatie/phpunit-snapshot-assertions": "^4.2",
         "spatie/test-time": "^1.2"
     },
