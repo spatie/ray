@@ -13,3 +13,10 @@ use Spatie\Ray\Rector\RemoveRayCallRector;
 
 $rectorConfig->rule(RemoveRayCallRector::class);
 ```
+
+## If you are not using Rector
+If you are not using Rector you can use the script provided by the package:
+
+```bash
+./vendor/bin/remove-ray.sh <path>
+```
