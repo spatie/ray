@@ -34,11 +34,11 @@ CODE_SAMPLE
     {
         $expr = $node->expr;
 
-        if (!$expr instanceof FuncCall) {
+        if (! $expr instanceof FuncCall) {
             return null;
         }
 
-        if (!$this->isName($expr->name, 'ray')) {
+        if (! $this->isName($expr->name, 'ray')) {
             return null;
         }
 
