@@ -35,7 +35,7 @@ CODE_SAMPLE
     {
         $expr = $node->expr;
 
-        if (! $expr instanceof FuncCall && !$expr instanceof MethodCall) {
+        if (! $expr instanceof FuncCall && ! $expr instanceof MethodCall) {
             return null;
         }
 
