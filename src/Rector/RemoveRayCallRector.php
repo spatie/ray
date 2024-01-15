@@ -4,6 +4,7 @@ namespace Spatie\Ray\Rector;
 
 use PhpParser\Node;
 use PhpParser\Node\Expr\FuncCall;
+use PhpParser\Node\Expr\MethodCall;
 use PhpParser\Node\Stmt\Expression;
 use PhpParser\NodeTraverser;
 use Rector\Core\Contract\Rector\RectorInterface;
@@ -34,14 +35,18 @@ CODE_SAMPLE
     {
         $expr = $node->expr;
 
-        if (! $expr instanceof FuncCall) {
+        if (! $expr instanceof FuncCall && !$expr instanceof MethodCall) {
             return null;
         }
 
-        if (! $this->isName($expr->name, 'ray')) {
-            return null;
+        if ($this->isName($expr->name, 'ray')) {
+            return NodeTraverser::REMOVE_NODE;
         }
 
-        return NodeTraverser::REMOVE_NODE;
+        if ($expr->var->name->parts && in_array('ray', $expr->var->name->parts)) {
+            return NodeTraverser::REMOVE_NODE;
+        }
+
+        return null;
     }
 }
