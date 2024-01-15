@@ -15,7 +15,7 @@ class RemoveRayCallRector extends AbstractRector implements RectorInterface
 {
     public function getRuleDefinition(): \Symplify\RuleDocGenerator\ValueObject\RuleDefinition
     {
-        return new RuleDefinition('Remove function', [new ConfiguredCodeSample(<<<'CODE_SAMPLE'
+        return new RuleDefinition('Remove Ray calls', [new ConfiguredCodeSample(<<<'CODE_SAMPLE'
 $x = 'something';
 ray($x);
 CODE_SAMPLE
