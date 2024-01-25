@@ -2,6 +2,10 @@
 
 All notable changes to `ray` will be documented in this file
 
+## 1.41.1 - 2024-01-25
+
+**Full Changelog**: https://github.com/spatie/ray/compare/1.41.0...1.41.1
+
 ## 1.41.0 - 2024-01-24
 
 ### What's Changed
