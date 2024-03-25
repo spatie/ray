@@ -26,7 +26,7 @@
         "spatie/backtrace": "^1.1",
         "spatie/macroable": "^1.0|^2.0",
         "symfony/stopwatch": "^4.0|^5.1|^6.0|^7.0",
-        "symfony/var-dumper": "^4.2|^5.1|^6.0|^7.0"
+        "symfony/var-dumper": "^4.2|^5.1|^6.0|^7.0.3"
     },
     "require-dev": {
         "illuminate/support": "6.x|^8.18|^9.0",
