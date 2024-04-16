@@ -107,14 +107,14 @@ class Ray
     /** @var Closure|null */
     public static $beforeSendRequest = null;
 
-    public static function create(Client $client = null, string $uuid = null): self
+    public static function create(?Client $client = null, string $uuid = null): self
     {
         $settings = SettingsFactory::createFromConfigFile();
 
         return new static($settings, $client, $uuid);
     }
 
-    public function __construct(Settings $settings, Client $client = null, string $uuid = null)
+    public function __construct(Settings $settings, ?Client $client = null, ?string $uuid = null)
     {
         $this->settings = $settings;
 

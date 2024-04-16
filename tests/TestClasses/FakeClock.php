@@ -10,7 +10,7 @@ class FakeClock implements Clock
     /** @var DateTimeImmutable|null */
     protected $fixedNow;
 
-    public function __construct(DateTimeImmutable $now = null)
+    public function __construct(?DateTimeImmutable $now = null)
     {
         $this->fixedNow = $now;
     }
@@ -20,7 +20,7 @@ class FakeClock implements Clock
         return $this->fixedNow ?? new DateTimeImmutable();
     }
 
-    public function freeze(DateTimeImmutable $now = null): void
+    public function freeze(?DateTimeImmutable $now = null): void
     {
         $this->fixedNow = $now ?? new DateTimeImmutable();
     }
