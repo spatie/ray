@@ -107,7 +107,7 @@ class Ray
     /** @var Closure|null */
     public static $beforeSendRequest = null;
 
-    public static function create(?Client $client = null, string $uuid = null): self
+    public static function create(?Client $client = null, ?string $uuid = null): self
     {
         $settings = SettingsFactory::createFromConfigFile();
 
