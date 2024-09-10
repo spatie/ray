@@ -46,7 +46,8 @@ if (! function_exists('ray')) {
             $rayClass = SymfonyRay::class;
         }
 
-        $settings = SettingsFactory::createFromConfigFile();
+        $configDir = (isset($_SERVER['RAY_CONFIG_DIR'])) ? $_SERVER['RAY_CONFIG_DIR'] : null;
+        $settings = SettingsFactory::createFromConfigFile($configDir);
 
         return (new $rayClass($settings))->send(...$args);
     }

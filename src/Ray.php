@@ -109,7 +109,8 @@ class Ray
 
     public static function create(?Client $client = null, ?string $uuid = null): self
     {
-        $settings = SettingsFactory::createFromConfigFile();
+        $configDir = (isset($_SERVER['RAY_CONFIG_DIR'])) ? $_SERVER['RAY_CONFIG_DIR'] : null;
+        $settings = SettingsFactory::createFromConfigFile($configDir);
 
         return new static($settings, $client, $uuid);
     }
