@@ -20,7 +20,7 @@ class RemainingRayCallRule implements Rule
             return [];
         }
 
-        if ($node->name->parts[0] !== 'ray') {
+        if ($node->name->getParts()[0] !== 'ray') {
             return [];
         }
 
