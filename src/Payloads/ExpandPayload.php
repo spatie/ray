@@ -12,7 +12,7 @@ class ExpandPayload extends Payload
 
     public function __construct(array $values = [])
     {
-        foreach($values as $value) {
+        foreach ($values as $value) {
             if (is_numeric($value)) {
                 $this->level = max($this->level, $value);
 
