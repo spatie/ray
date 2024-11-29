@@ -2,12 +2,8 @@
 
 use Carbon\Carbon;
 use Illuminate\Support\Arr;
-
-
 use Spatie\Backtrace\Frame;
-
 use Spatie\Ray\Origin\Hostname;
-
 use Spatie\Ray\PayloadFactory;
 use Spatie\Ray\Payloads\CallerPayload;
 use Spatie\Ray\Payloads\LogPayload;
