@@ -2,6 +2,21 @@
 
 All notable changes to `ray` will be documented in this file
 
+## 1.41.3 - 2024-12-02
+
+### What's Changed
+
+* Fixes an issue where some complex variables would not be shown in Ray.
+* Bump dependabot/fetch-metadata from 2.0.0 to 2.1.0 by @dependabot in https://github.com/spatie/ray/pull/909
+* Bump dependabot/fetch-metadata from 2.1.0 to 2.2.0 by @dependabot in https://github.com/spatie/ray/pull/928
+* Add support for PHPStan 2.0 by @sweptsquash in https://github.com/spatie/ray/pull/946
+
+### New Contributors
+
+* @sweptsquash made their first contribution in https://github.com/spatie/ray/pull/946
+
+**Full Changelog**: https://github.com/spatie/ray/compare/1.41.2...1.41.3
+
 ## 1.41.2 - 2024-04-24
 
 ### What's Changed
