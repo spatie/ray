@@ -4,6 +4,7 @@ namespace Spatie\Ray\Tests\PHPStan;
 
 use PHPStan\Rules\Rule;
 use PHPStan\Testing\RuleTestCase;
+use PHPUnit\Framework\Attributes\DataProvider;
 use Spatie\Ray\PHPStan\RemainingRayCallRule;
 
 class RemainingRayCallRuleTest extends RuleTestCase
@@ -13,9 +14,7 @@ class RemainingRayCallRuleTest extends RuleTestCase
         return new RemainingRayCallRule();
     }
 
-    /**
-     * @dataProvider failingTestCasesProvider
-     */
+    #[DataProvider('failingTestCasesProvider')]
     public function testTheRuleCanDetectRayCalls(string $path, int $line): void
     {
         $this->analyse([$path], [
@@ -26,9 +25,7 @@ class RemainingRayCallRuleTest extends RuleTestCase
         ]);
     }
 
-    /**
-     * @dataProvider passingTestCasesProvider
-     */
+    #[DataProvider('passingTestCasesProvider')]
     public function testTheRuleWillNotRaiseWhenNoRayCallIsPerformed(string $path): void
     {
         $this->analyse([$path], []);
