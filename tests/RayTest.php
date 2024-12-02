@@ -244,7 +244,7 @@ it('can send backtrace to ray', function () {
     $firstFrame = $frames[0];
 
     expect($firstFrame['class'])->toEqual('P\Tests\RayTest');
-    expect($firstFrame['method'])->toContain('{closure');
+    expect($firstFrame['method'])->toStartWith('{closure');
 });
 
 it('can send backtrace frames starting from a specific frame', function () {
@@ -269,7 +269,7 @@ it('has a backtrace alias for trace', function () {
     $firstFrame = $frames[0];
 
     expect($firstFrame['class'])->toEqual('P\Tests\RayTest');
-    expect($firstFrame['method'])->toContain('{closure');
+    expect($firstFrame['method'])->toStartWith('{closure');
 });
 
 it('can send the caller to ray', function () {
