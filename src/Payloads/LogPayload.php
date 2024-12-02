@@ -35,7 +35,7 @@ class LogPayload extends Payload
 
         $this->meta = [
             [
-                'clipboard_data' => $this->getClipboardData($rawValues),
+                'clipboard_data' => substr($this->getClipboardData($rawValues), 0, 20000),
             ],
         ];
 
