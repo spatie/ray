@@ -2,6 +2,18 @@
 
 All notable changes to `ray` will be documented in this file
 
+## 1.41.4 - 2024-12-09
+
+### What's Changed
+
+* Provide backwards compatibility with PHPStan 1.x. by @pfrenssen in https://github.com/spatie/ray/pull/952
+
+### New Contributors
+
+* @pfrenssen made their first contribution in https://github.com/spatie/ray/pull/952
+
+**Full Changelog**: https://github.com/spatie/ray/compare/1.41.3...1.41.4
+
 ## 1.41.3 - 2024-12-02
 
 ### What's Changed
