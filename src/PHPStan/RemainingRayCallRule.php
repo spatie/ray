@@ -21,14 +21,14 @@ class RemainingRayCallRule implements Rule
         }
 
         // Backwards compatibility with PHPStan 1.x.
-        if (!method_exists($node->name, 'getParts')) {
-          if ($node->name->parts[0] !== 'ray') {
-            return [];
-          }
+        if (! method_exists($node->name, 'getParts')) {
+            if ($node->name->parts[0] !== 'ray') {
+                return [];
+            }
         } else {
-          if ($node->name->getParts()[0] !== 'ray') {
-            return [];
-          }
+            if ($node->name->getParts()[0] !== 'ray') {
+                return [];
+            }
         }
 
         return [
