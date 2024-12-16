@@ -30,7 +30,7 @@
         "ext-curl": "*",
         "ext-json": "*",
         "ramsey/uuid": "^3.0 || ^4.1",
-        "spatie/backtrace": "^1.1",
+        "spatie/backtrace": "^1.7.1",
         "spatie/macroable": "^1.0 || ^2.0",
         "symfony/stopwatch": "^4.2 || ^5.1 || ^6.0 || ^7.0",
         "symfony/var-dumper": "^4.2 || ^5.1 || ^6.0 || ^7.0.3"
@@ -39,9 +39,9 @@
         "illuminate/support": "^7.20 || ^8.18 || ^9.0 || ^10.0 || ^11.0",
         "nesbot/carbon": "^2.63",
         "pestphp/pest": "^1.22",
-        "phpstan/phpstan": "^1.10.57 || ^2.0.2",
+        "phpstan/phpstan": "^1.10.57 || ^2.0.3",
         "phpunit/phpunit": "^9.5",
-        "rector/rector": "dev-main",
+        "rector/rector": "^0.19.2 || ^1.0.1 || ^2.0.0",
         "spatie/phpunit-snapshot-assertions": "^4.2",
         "spatie/test-time": "^1.2"
     },

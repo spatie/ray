@@ -38,6 +38,10 @@ jobs:
         run: composer require "illuminate/support:8.*" --no-interaction --no-update
         if: matrix.php == '8.2' && matrix.dependency-version == 'prefer-lowest'
 
+      - name: Configure for PHP 8.4
+        run: composer require "rector/rector:2.*" --no-interaction --no-update
+        if: matrix.php == '8.4' && matrix.dependency-version == 'prefer-lowest'
+
       - name: Install dependencies
         run: composer update --${{ matrix.dependency-version }} --prefer-dist --no-interaction
 
