@@ -2,6 +2,18 @@
 
 All notable changes to `ray` will be documented in this file
 
+## 1.41.6 - 2025-03-21
+
+### What's Changed
+
+* Use static:: instead of self:: for late static binding by @TumTum in https://github.com/spatie/ray/pull/970
+
+### New Contributors
+
+* @TumTum made their first contribution in https://github.com/spatie/ray/pull/970
+
+**Full Changelog**: https://github.com/spatie/ray/compare/1.41.5...1.41.6
+
 ## 1.41.5 - 2025-02-14
 
 ### What's Changed
