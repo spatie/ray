@@ -51,7 +51,7 @@ abstract class Payload
     protected function getOrigin(): Origin
     {
         /** @var \Spatie\Ray\Origin\OriginFactory $originFactory */
-        $originFactory = new self::$originFactoryClass();
+        $originFactory = new static::$originFactoryClass();
 
         $origin = $originFactory->getOrigin();
 
