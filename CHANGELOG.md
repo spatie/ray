@@ -2,6 +2,18 @@
 
 All notable changes to `ray` will be documented in this file
 
+## 1.42.0 - 2025-04-18
+
+### What's Changed
+
+* Add offset and limit support to trace by @dimitri-koenig in https://github.com/spatie/ray/pull/974
+
+### New Contributors
+
+* @dimitri-koenig made their first contribution in https://github.com/spatie/ray/pull/974
+
+**Full Changelog**: https://github.com/spatie/ray/compare/1.41.6...1.42.0
+
 ## 1.41.6 - 2025-03-21
 
 ### What's Changed
