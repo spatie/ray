@@ -22,7 +22,9 @@ class Invador
     {
         $property = $this->reflected->getProperty($name);
 
-        $property->setAccessible(true);
+        if (PHP_VERSION_ID < 80100) {
+            $property->setAccessible(true);
+        }
 
         $value = $property->getValue($this->obj);
 
@@ -33,7 +35,9 @@ class Invador
     {
         $method = $this->reflected->getMethod($name);
 
-        $method->setAccessible(true);
+        if (PHP_VERSION_ID < 80100) {
+            $method->setAccessible(true);
+        }
 
         $result = $method->invoke($this->obj, ...$params);
 
