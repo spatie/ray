@@ -2,6 +2,22 @@
 
 All notable changes to `ray` will be documented in this file
 
+## 1.43.0 - 2025-10-16
+
+### What's Changed
+
+* Bump dependabot/fetch-metadata from 2.3.0 to 2.4.0 by @dependabot[bot] in https://github.com/spatie/ray/pull/979
+* Update issue template by @AlexVanderbist in https://github.com/spatie/ray/pull/986
+* Fix PHP 8.5 deprecations by @IonBazan in https://github.com/spatie/ray/pull/989
+* Bump stefanzweifel/git-auto-commit-action from 5 to 7 by @dependabot[bot] in https://github.com/spatie/ray/pull/988
+* Bump actions/checkout from 4 to 5 by @dependabot[bot] in https://github.com/spatie/ray/pull/984
+
+### New Contributors
+
+* @IonBazan made their first contribution in https://github.com/spatie/ray/pull/989
+
+**Full Changelog**: https://github.com/spatie/ray/compare/1.42.0...1.43.0
+
 ## 1.42.0 - 2025-04-18
 
 ### What's Changed
