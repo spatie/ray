@@ -19,6 +19,8 @@ class RemoveRayCallRector extends AbstractRector implements RectorInterface
         return new RuleDefinition('Remove Ray calls', [new ConfiguredCodeSample(<<<'CODE_SAMPLE'
 $x = 'something';
 ray($x);
+ray()->label('debug');
+ray($data)->red()->small();
 CODE_SAMPLE
             , <<<'CODE_SAMPLE'
 $x = 'something';
@@ -39,14 +41,23 @@ CODE_SAMPLE
             return null;
         }
 
-        if ($this->isName($expr->name, 'ray')) {
-            return NodeTraverser::REMOVE_NODE;
-        }
-
-        if ($expr->var->name->parts && in_array('ray', $expr->var->name->parts)) {
+        if ($this->isRayCall($expr)) {
             return NodeTraverser::REMOVE_NODE;
         }
 
         return null;
+    }
+
+    private function isRayCall(Node $node): bool
+    {
+        if ($node instanceof FuncCall && $this->isName($node->name, 'ray')) {
+            return true;
+        }
+
+        if ($node instanceof MethodCall) {
+            return $this->isRayCall($node->var);
+        }
+
+        return false;
     }
 }
