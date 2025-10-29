@@ -53,7 +53,7 @@ class SettingsFactory
             'ray.php',
         ];
 
-        $configDirectory = $configDirectory ?? getcwd();
+        $configDirectory = $configDirectory ?: getcwd();
 
         while (@is_dir($configDirectory)) {
             foreach ($configNames as $configName) {
