@@ -2,6 +2,18 @@
 
 All notable changes to `ray` will be documented in this file
 
+## 1.43.1 - 2025-10-29
+
+### What's Changed
+
+* Fix searchConfigFilesOnDisk to handle empty string parameter by @bjo3rnf in https://github.com/spatie/ray/pull/992
+
+### New Contributors
+
+* @bjo3rnf made their first contribution in https://github.com/spatie/ray/pull/992
+
+**Full Changelog**: https://github.com/spatie/ray/compare/1.43.0...1.43.1
+
 ## 1.43.0 - 2025-10-16
 
 ### What's Changed
