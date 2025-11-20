@@ -2,6 +2,84 @@
 
 All notable changes to `ray` will be documented in this file
 
+## 1.43.1 - 2025-10-29
+
+### What's Changed
+
+* Fix searchConfigFilesOnDisk to handle empty string parameter by @bjo3rnf in https://github.com/spatie/ray/pull/992
+
+### New Contributors
+
+* @bjo3rnf made their first contribution in https://github.com/spatie/ray/pull/992
+
+**Full Changelog**: https://github.com/spatie/ray/compare/1.43.0...1.43.1
+
+## 1.43.0 - 2025-10-16
+
+### What's Changed
+
+* Bump dependabot/fetch-metadata from 2.3.0 to 2.4.0 by @dependabot[bot] in https://github.com/spatie/ray/pull/979
+* Update issue template by @AlexVanderbist in https://github.com/spatie/ray/pull/986
+* Fix PHP 8.5 deprecations by @IonBazan in https://github.com/spatie/ray/pull/989
+* Bump stefanzweifel/git-auto-commit-action from 5 to 7 by @dependabot[bot] in https://github.com/spatie/ray/pull/988
+* Bump actions/checkout from 4 to 5 by @dependabot[bot] in https://github.com/spatie/ray/pull/984
+
+### New Contributors
+
+* @IonBazan made their first contribution in https://github.com/spatie/ray/pull/989
+
+**Full Changelog**: https://github.com/spatie/ray/compare/1.42.0...1.43.0
+
+## 1.42.0 - 2025-04-18
+
+### What's Changed
+
+* Add offset and limit support to trace by @dimitri-koenig in https://github.com/spatie/ray/pull/974
+
+### New Contributors
+
+* @dimitri-koenig made their first contribution in https://github.com/spatie/ray/pull/974
+
+**Full Changelog**: https://github.com/spatie/ray/compare/1.41.6...1.42.0
+
+## 1.41.6 - 2025-03-21
+
+### What's Changed
+
+* Use static:: instead of self:: for late static binding by @TumTum in https://github.com/spatie/ray/pull/970
+
+### New Contributors
+
+* @TumTum made their first contribution in https://github.com/spatie/ray/pull/970
+
+**Full Changelog**: https://github.com/spatie/ray/compare/1.41.5...1.41.6
+
+## 1.41.5 - 2025-02-14
+
+### What's Changed
+
+* Update Dependencies by @sweptsquash in https://github.com/spatie/ray/pull/955
+* Bump dependabot/fetch-metadata from 2.2.0 to 2.3.0 by @dependabot in https://github.com/spatie/ray/pull/961
+* Laravel 12.x Compatibility by @laravel-shift in https://github.com/spatie/ray/pull/966
+
+### New Contributors
+
+* @laravel-shift made their first contribution in https://github.com/spatie/ray/pull/966
+
+**Full Changelog**: https://github.com/spatie/ray/compare/1.41.4...1.41.5
+
+## 1.41.4 - 2024-12-09
+
+### What's Changed
+
+* Provide backwards compatibility with PHPStan 1.x. by @pfrenssen in https://github.com/spatie/ray/pull/952
+
+### New Contributors
+
+* @pfrenssen made their first contribution in https://github.com/spatie/ray/pull/952
+
+**Full Changelog**: https://github.com/spatie/ray/compare/1.41.3...1.41.4
+
 ## 1.41.3 - 2024-12-02
 
 ### What's Changed

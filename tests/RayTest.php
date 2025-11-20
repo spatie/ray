@@ -260,6 +260,33 @@ it('can send backtrace frames starting from a specific frame', function () {
     expect($firstFrame['method'])->toEqual('run');
 });
 
+it('can send backtrace frames with a max limit of frames', function () {
+    $this->ray->trace(null, null, 4);
+    $frames = getValueOfLastSentContent('frames');
+
+    expect(count($frames))->toBeLessThanOrEqual(4);
+
+    $lastFrame = $frames[count($frames) - 1];
+
+    expect($lastFrame['class'])->toEqual('P\Tests\RayTest');
+    expect($lastFrame['method'])->toContain('{closure');
+});
+
+it('can send backtrace frames skipping the first x frames', function () {
+    $this->ray->trace();
+    $allFrames = getValueOfLastSentContent('frames');
+
+    $this->ray->trace(null, 3);
+    $frames = getValueOfLastSentContent('frames');
+
+    expect(count($frames))->toBeLessThan(count($allFrames));
+
+    $firstFrame = $frames[0];
+
+    expect($firstFrame['class'])->toEqual('P\Tests\RayTest');
+    expect($firstFrame['method'])->toContain('{closure');
+});
+
 it('has a backtrace alias for trace', function () {
     $this->ray->backtrace();
     $frames = getValueOfLastSentContent('frames');

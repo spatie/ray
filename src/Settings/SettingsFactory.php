@@ -39,6 +39,7 @@ class SettingsFactory
 
     protected function searchConfigFiles(?string $configDirectory = null): string
     {
+        $configDirectory ??= '';
         if (! isset(self::$cache[$configDirectory])) {
             self::$cache[$configDirectory] = $this->searchConfigFilesOnDisk($configDirectory);
         }
@@ -52,7 +53,7 @@ class SettingsFactory
             'ray.php',
         ];
 
-        $configDirectory = $configDirectory ?? getcwd();
+        $configDirectory = $configDirectory ?: getcwd();
 
         while (@is_dir($configDirectory)) {
             foreach ($configNames as $configName) {

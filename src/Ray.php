@@ -275,7 +275,7 @@ class Ray
         return $this->sendRequest($payload);
     }
 
-    public function trace(?Closure $startingFromFrame = null): self
+    public function trace(?Closure $startingFromFrame = null, ?int $offset = null, ?int $limit = null): self
     {
         $backtrace = Backtrace::create();
 
@@ -287,14 +287,22 @@ class Ray
             $backtrace->startingFromFrame($startingFromFrame);
         }
 
+        if ($offset) {
+            $backtrace->offset($offset);
+        }
+
+        if ($limit) {
+            $backtrace->limit($limit);
+        }
+
         $payload = new TracePayload($backtrace->frames());
 
         return $this->sendRequest($payload);
     }
 
-    public function backtrace(?Closure $startingFromFrame = null): self
+    public function backtrace(?Closure $startingFromFrame = null, ?int $offset = null, ?int $limit = null): self
     {
-        return $this->trace($startingFromFrame);
+        return $this->trace($startingFromFrame, $offset, $limit);
     }
 
     public function caller(): self
