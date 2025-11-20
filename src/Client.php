@@ -34,7 +34,9 @@ class Client
     public function __destruct()
     {
         if ($this->curlHandle) {
-            curl_close($this->curlHandle);
+            if (version_compare(PHP_VERSION, '8.5.0', '<')) {
+                curl_close($this->curlHandle);
+            }
             $this->curlHandle = null;
         }
     }
