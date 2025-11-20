@@ -2,6 +2,34 @@
 
 All notable changes to `ray` will be documented in this file
 
+## 1.44.0 - 2025-11-20
+
+### What's Changed
+
+* Provide backwards compatibility with PHPStan 1.x. by @pfrenssen in https://github.com/spatie/ray/pull/952
+* Update Dependencies by @sweptsquash in https://github.com/spatie/ray/pull/955
+* Bump dependabot/fetch-metadata from 2.2.0 to 2.3.0 by @dependabot[bot] in https://github.com/spatie/ray/pull/961
+* Laravel 12.x Compatibility by @laravel-shift in https://github.com/spatie/ray/pull/966
+* Use static:: instead of self:: for late static binding by @TumTum in https://github.com/spatie/ray/pull/970
+* Add offset and limit support to trace by @dimitri-koenig in https://github.com/spatie/ray/pull/974
+* Bump dependabot/fetch-metadata from 2.3.0 to 2.4.0 by @dependabot[bot] in https://github.com/spatie/ray/pull/979
+* Update issue template by @AlexVanderbist in https://github.com/spatie/ray/pull/986
+* Fix PHP 8.5 deprecations by @IonBazan in https://github.com/spatie/ray/pull/989
+* Bump stefanzweifel/git-auto-commit-action from 5 to 7 by @dependabot[bot] in https://github.com/spatie/ray/pull/988
+* Bump actions/checkout from 4 to 5 by @dependabot[bot] in https://github.com/spatie/ray/pull/984
+* Fix searchConfigFilesOnDisk to handle empty string parameter by @bjo3rnf in https://github.com/spatie/ray/pull/992
+
+### New Contributors
+
+* @pfrenssen made their first contribution in https://github.com/spatie/ray/pull/952
+* @laravel-shift made their first contribution in https://github.com/spatie/ray/pull/966
+* @TumTum made their first contribution in https://github.com/spatie/ray/pull/970
+* @dimitri-koenig made their first contribution in https://github.com/spatie/ray/pull/974
+* @IonBazan made their first contribution in https://github.com/spatie/ray/pull/989
+* @bjo3rnf made their first contribution in https://github.com/spatie/ray/pull/992
+
+**Full Changelog**: https://github.com/spatie/ray/compare/1.41.3...1.44.0
+
 ## 1.43.1 - 2025-10-29
 
 ### What's Changed
