@@ -2,6 +2,18 @@
 
 All notable changes to `ray` will be documented in this file
 
+## 1.44.1 - 2025-11-21
+
+### What's Changed
+
+* Fix RemoveRayCallRector to remove chained method calls by @FlorianRiquelme in https://github.com/spatie/ray/pull/991
+
+### New Contributors
+
+* @FlorianRiquelme made their first contribution in https://github.com/spatie/ray/pull/991
+
+**Full Changelog**: https://github.com/spatie/ray/compare/1.44.0...1.44.1
+
 ## 1.44.0 - 2025-11-20
 
 ### What's Changed
