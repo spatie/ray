@@ -2,6 +2,17 @@
 
 All notable changes to `ray` will be documented in this file
 
+## 1.45.0 - 2026-01-26
+
+### What's Changed
+
+* Add methods to retrieve windows and theme from Ray app
+* Bump actions/checkout from 5 to 6 by @dependabot in https://github.com/spatie/ray/pull/1001
+* Bump actions/cache from 4 to 5 by @dependabot in https://github.com/spatie/ray/pull/1016
+* Bump dependabot/fetch-metadata from 2.4.0 to 2.5.0 by @dependabot in https://github.com/spatie/ray/pull/1020
+
+**Full Changelog**: https://github.com/spatie/ray/compare/1.44.1...1.45.0
+
 ## 1.44.1 - 2025-11-21
 
 ### What's Changed
