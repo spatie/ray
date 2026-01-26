@@ -77,7 +77,7 @@
     "scripts": {
         "format": "vendor/bin/php-cs-fixer fix --allow-risky=yes",
         "phpstan": "vendor/bin/phpstan analyse",
-        "test": "vendor/bin/pest",
-        "test-coverage": "vendor/bin/pest --coverage"
+        "test": "php -d error_reporting=24575 vendor/bin/pest",
+        "test-coverage": "php -d error_reporting=24575 vendor/bin/pest --coverage"
     }
 }

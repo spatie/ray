@@ -139,6 +139,40 @@ class Client
         return false;
     }
 
+    public function getWindows(): array
+    {
+        if (! $this->serverIsAvailable()) {
+            return [];
+        }
+
+        $curlHandle = $this->getCurlHandleForUrl('get', 'windows');
+
+        $curlResult = curl_exec($curlHandle);
+
+        if (curl_errno($curlHandle) || ! $curlResult) {
+            return [];
+        }
+
+        return json_decode($curlResult, true) ?? [];
+    }
+
+    public function getTheme(): ?array
+    {
+        if (! $this->serverIsAvailable()) {
+            return null;
+        }
+
+        $curlHandle = $this->getCurlHandleForUrl('get', 'theme');
+
+        $curlResult = curl_exec($curlHandle);
+
+        if (curl_errno($curlHandle) || ! $curlResult) {
+            return null;
+        }
+
+        return json_decode($curlResult, true);
+    }
+
     protected function getCurlHandleForUrl(string $method, string $url)
     {
         return $this->getCurlHandle($method, "http://{$this->host}:{$this->portNumber}/{$url}");

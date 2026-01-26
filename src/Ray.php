@@ -172,6 +172,16 @@ class Ray
         self::$client = $client;
     }
 
+    public function windows(): array
+    {
+        return self::$client->getWindows();
+    }
+
+    public function theme(): ?array
+    {
+        return self::$client->getTheme();
+    }
+
     public function newScreen(string $name = ''): self
     {
         $name = $this->sanitizeNewScreenName($name);

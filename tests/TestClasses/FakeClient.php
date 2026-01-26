@@ -76,6 +76,22 @@ class FakeClient extends Client
         return $this;
     }
 
+    public function getWindows(): array
+    {
+        return [
+            ['id' => 1, 'name' => 'Window 1'],
+            ['id' => 2, 'name' => 'Window 2'],
+        ];
+    }
+
+    public function getTheme(): ?array
+    {
+        return [
+            'name' => 'Dark',
+            'colors' => ['primary' => '#000000'],
+        ];
+    }
+
     protected function baseDirectory(): string
     {
         return str_replace("/tests/TestClasses", '', __DIR__);

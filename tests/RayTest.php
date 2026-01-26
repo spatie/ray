@@ -1213,3 +1213,21 @@ it('can add a closure for before send and actually calls it', function () {
 
     expect($this->closureCalled)->toBeTrue();
 });
+
+it('can get windows from the client', function () {
+    $windows = $this->ray->windows();
+
+    expect($windows)->toBeArray();
+    expect($windows)->toHaveCount(2);
+    expect($windows[0])->toHaveKey('id');
+    expect($windows[0])->toHaveKey('name');
+});
+
+it('can get theme from the client', function () {
+    $theme = $this->ray->theme();
+
+    expect($theme)->toBeArray();
+    expect($theme)->toHaveKey('name');
+    expect($theme)->toHaveKey('colors');
+    expect($theme['name'])->toBe('Dark');
+});
