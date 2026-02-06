@@ -1231,3 +1231,21 @@ it('can get theme from the client', function () {
     expect($theme)->toHaveKey('colors');
     expect($theme['name'])->toBe('Dark');
 });
+
+it('can use yellow as an alias for orange', function () {
+    $this->ray->send('test')->yellow();
+
+    $sentPayloads = $this->client->sentPayloads();
+
+    expect($sentPayloads[1]['payloads'][0]['type'])->toBe('color');
+    expect($sentPayloads[1]['payloads'][0]['content']['color'])->toBe('orange');
+});
+
+it('can use grey as an alias for gray', function () {
+    $this->ray->send('test')->grey();
+
+    $sentPayloads = $this->client->sentPayloads();
+
+    expect($sentPayloads[1]['payloads'][0]['type'])->toBe('color');
+    expect($sentPayloads[1]['payloads'][0]['content']['color'])->toBe('gray');
+});
