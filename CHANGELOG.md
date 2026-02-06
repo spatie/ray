@@ -2,6 +2,13 @@
 
 All notable changes to `ray` will be documented in this file
 
+## 1.46.0 - 2026-02-06
+
+### What's new
+
+- Add `yellow()` as an alias for `orange()`
+- Add `grey()` as an alias for `gray()`
+
 ## 1.45.0 - 2026-01-26
 
 ### What's Changed
