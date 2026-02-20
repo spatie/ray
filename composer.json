@@ -36,7 +36,7 @@
         "symfony/var-dumper": "^4.2|^5.1|^6.0|^7.0.3|^8.0"
     },
     "require-dev": {
-        "illuminate/support": "^7.20|^8.18|^9.0|^10.0|^11.0|^12.0",
+        "illuminate/support": "^7.20|^8.18|^9.0|^10.0|^11.0|^12.0|^13.0",
         "nesbot/carbon": "^2.63|^3.8.4",
         "pestphp/pest": "^1.22",
         "phpstan/phpstan": "^1.10.57|^2.0.3",
