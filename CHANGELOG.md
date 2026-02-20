@@ -2,6 +2,10 @@
 
 All notable changes to `ray` will be documented in this file
 
+## 1.47.0 - 2026-02-20
+
+Add Laravel 13 support
+
 ## 1.46.0 - 2026-02-06
 
 ### What's new
