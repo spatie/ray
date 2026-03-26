@@ -42,9 +42,16 @@
         "phpstan/phpstan": "^1.10.57|^2.0.3",
         "phpunit/phpunit": "^9.5",
         "rector/rector": "^0.19.2|^1.0.1|^2.0.0",
+        "spatie/our-ray": "@dev",
         "spatie/phpunit-snapshot-assertions": "^4.2",
         "spatie/test-time": "^1.2"
     },
+    "repositories": [
+        {
+            "type": "path",
+            "url": "../our-ray"
+        }
+    ],
     "minimum-stability": "dev",
     "prefer-stable": true,
     "autoload": {
