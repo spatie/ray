@@ -9,3 +9,4 @@ coverage
 phpunit.xml
 psalm.xml
 vendor
+/.claude/settings.local.json

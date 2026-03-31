@@ -107,6 +107,9 @@ class Ray
     /** @var Closure|null */
     public static $beforeSendRequest = null;
 
+    /** @var array<callable> */
+    public static $afterSendCallbacks = [];
+
     public static function create(?Client $client = null, ?string $uuid = null): self
     {
         $settings = SettingsFactory::createFromConfigFile();
@@ -848,6 +851,13 @@ class Ray
         self::$client->send($request);
 
         self::rateLimiter()->hit();
+
+        foreach (static::$afterSendCallbacks as $callback) {
+            try {
+                $callback($this, $request);
+            } catch (\Throwable $e) {
+            }
+        }
 
         return $this;
     }
