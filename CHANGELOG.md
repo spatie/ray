@@ -2,6 +2,14 @@
 
 All notable changes to `ray` will be documented in this file
 
+## 1.48.0 - 2026-03-31
+
+### What's Changed
+
+* Add afterSendCallbacks hook to sendRequest by @rubenvanassche in https://github.com/spatie/ray/pull/1063
+
+**Full Changelog**: https://github.com/spatie/ray/compare/1.47.0...1.48.0
+
 ## 1.47.0 - 2026-02-20
 
 Add Laravel 13 support
