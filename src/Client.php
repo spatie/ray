@@ -5,6 +5,7 @@ namespace Spatie\Ray;
 use Exception;
 use Spatie\Ray\Exceptions\StopExecutionRequested;
 use Spatie\Ray\Origin\Hostname;
+use Throwable;
 
 class Client
 {
@@ -67,9 +68,10 @@ class Client
             $expiresAt = microtime(true) + 30.0;
 
             static::$cache[$this->fingerprint] = [$success, $expiresAt];
-        } finally {
-            return $success ?? false;
+        } catch (Throwable $e) {
         }
+
+        return $success ?? false;
     }
 
     public function send(Request $request): void
