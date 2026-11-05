@@ -2,6 +2,17 @@
 
 All notable changes to `ray` will be documented in this file
 
+## 1.48.1 - 2026-11-05
+
+### What's Changed
+
+* Fix the PHP 8.6 deprecation caused by returning from a `finally` block in the client availability check, preserving its existing return values, exception handling, and caching behavior. Thanks to @duncanmcclean in https://github.com/spatie/ray/pull/1079.
+* Add regression coverage for loading the client without deprecations and handling availability-check exceptions and errors.
+* Add PHP 8.6 CI coverage on Linux and Windows with lowest and stable dependencies, retaining PHP 7.4–8.5 coverage.
+* Update GitHub Actions dependencies, harden the Dependabot auto-merge actor check, and use Spatie-hosted README images.
+
+**Full Changelog**: https://github.com/spatie/ray/compare/1.48.0...1.48.1
+
 ## 1.48.0 - 2026-03-31
 
 ### What's Changed
